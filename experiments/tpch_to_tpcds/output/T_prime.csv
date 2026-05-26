@@ -1,0 +1,23 @@
+query_file,query_hash,join_count,read_tables,n_tables,bytes_read,runtime_ms,rows_returned,status,error_msg,src_join_count,src_bytes_read
+q01.sql,1ece878a,0,inventory,1,35235000,6.93,1,ok,,0,108021870
+q02.sql,89c0db74,4,date_dim|item|warehouse|store_returns|inventory,5,39733706,37.22,1,ok,,4,12350145
+q03.sql,543aed52,2,date_dim|item|inventory,3,37145980,323.27,1,ok,,2,127221870
+q04.sql,1ece878a,0,inventory,1,35235000,9.8,1,ok,,0,16500000
+q05.sql,d2f989e6,5,date_dim|item|warehouse|web_sales|catalog_returns|inventory,6,48514059,60203.51,,timeout,INTERRUPT Error: Interrupted!,5,127372015
+q06.sql,1ece878a,0,inventory,1,35235000,70.54,1,ok,,0,108021870
+q07.sql,a5a2b0bd,8,date_dim|item|warehouse|store_sales|web_sales|store_returns|web_returns|catalog_returns|inventory,9,89192804,60583.89,,timeout,INTERRUPT Error: Interrupted!,8,127245995
+q08.sql,6d4876af,9,date_dim|item|warehouse|store_sales|web_sales|catalog_sales|store_returns|web_returns|catalog_returns|inventory,10,109374476,77641.41,,timeout,INTERRUPT Error: Interrupted!,9,127388015
+q09.sql,579c6d90,7,date_dim|item|warehouse|catalog_sales|store_returns|web_returns|catalog_returns|inventory,8,61857848,65060.31,,timeout,INTERRUPT Error: Interrupted!,7,134287995
+q10.sql,35884c4e,3,date_dim|item|warehouse|inventory,4,37146080,667.56,1,ok,,3,127221995
+q11.sql,2fb38c32,2,item|warehouse|inventory,3,35685100,8.42,1,ok,,2,9750125
+q12.sql,abd0c5c5,1,warehouse|inventory,2,35235100,111.66,1,ok,,1,124521870
+q13.sql,f04de396,2,date_dim|item|inventory,3,37145980,117.04,1,ok,,2,16508000
+q14.sql,b08ea5bc,1,date_dim|inventory,2,36695980,118.14,1,ok,,1,110621870
+q15.sql,1ece878a,0,inventory,1,35235000,3.52,1,ok,,0,108021870
+q16.sql,7c854b83,1,warehouse|inventory,2,35235100,4.59,1,ok,,1,12200000
+q17.sql,2f5cf20a,1,date_dim|inventory,2,36695980,63.61,1,ok,,1,110621870
+q18.sql,12f8e329,2,date_dim|item|inventory,3,37145980,182.25,1,ok,,2,127221870
+q19.sql,f8d2a5ac,1,item|inventory,2,35685000,130.24,1,ok,,1,110621870
+q20.sql,69a9086d,1,item|inventory,2,35685000,94.61,1,ok,,1,150125
+q21.sql,92a04d5a,3,date_dim|item|warehouse|inventory,4,37146080,132.01,1,ok,,3,124671995
+q22.sql,3df46f0e,1,warehouse|inventory,2,35235100,4.14,1,ok,,1,8000

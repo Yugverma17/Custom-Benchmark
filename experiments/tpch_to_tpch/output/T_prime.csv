@@ -1,0 +1,33 @@
+query_file,query_hash,join_count,read_tables,n_tables,bytes_read,runtime_ms,rows_returned,status,error_msg,src_join_count,src_bytes_read
+q01.sql,47f9dd6f,0,lineitem,1,108021870,72.81,1,ok,,0,108021870
+q02.sql,c230c0bb,4,partsupp|supplier|nation|region|part,5,12350145,114.24,1,ok,,4,12350145
+q03.sql,01c285fd,2,orders|lineitem|customer,3,127221870,302.21,1,ok,,2,127221870
+q04.sql,7f9e374e,0,orders,1,16500000,10.5,1,ok,,0,16500000
+q05.sql,fc51a460,5,orders|nation|lineitem|supplier|region|customer,6,127372015,992.27,1,ok,,5,127372015
+q06.sql,9f43aa87,0,lineitem,1,108021870,29.94,1,ok,,0,108021870
+q07.sql,f712c0ac,7,orders|part|supplier|customer|partsupp|nation|region|lineitem,8,139572015,452.16,1,ok,,8,127245995
+q08.sql,16008bf6,7,lineitem|partsupp|nation|orders|part|customer|region|supplier,8,139572015,60015.82,,timeout,INTERRUPT Error: Interrupted!,9,127388015
+q09.sql,2c26f381,7,lineitem|partsupp|nation|orders|part|customer|region|supplier,8,139572015,60032.19,,timeout,INTERRUPT Error: Interrupted!,7,134287995
+q10.sql,a6078a13,3,orders|nation|lineitem|customer,4,127221995,274.26,1,ok,,3,127221995
+q11.sql,57765533,2,supplier|nation|partsupp,3,9750125,14.93,,error,"Binder Error: Table ""p0"" does not have a column named ""l_quantity""
+
+Candidate bindings: : ""ps_availqty""
+
+LINE 1: SELECT MIN(p0.l_quantity) AS result
+                   ^",2,9750125
+q12.sql,79e69464,1,lineitem|orders,2,124521870,385.58,1,ok,,1,124521870
+q13.sql,32a0b650,2,lineitem|part|orders,3,127121870,109.52,1,ok,,2,16508000
+q14.sql,14af39f1,1,part|lineitem,2,110621870,103.66,1,ok,,1,110621870
+q15.sql,64ae6055,0,lineitem,1,108021870,26.08,1,ok,,0,108021870
+q16.sql,e9f29174,1,part|partsupp,2,12200000,1.57,,error,"Binder Error: Table ""p0"" does not have a column named ""l_quantity""
+
+Candidate bindings: : ""ps_availqty""
+
+LINE 1: SELECT MIN(p0.l_quantity) AS result
+                   ^",1,12200000
+q17.sql,bd0923ee,1,part|lineitem,2,110621870,97.66,1,ok,,1,110621870
+q18.sql,b8f31a80,2,orders|lineitem|customer,3,127221870,350.78,1,ok,,2,127221870
+q19.sql,7c20aa8a,1,part|lineitem,2,110621870,108.41,1,ok,,1,110621870
+q20.sql,07c8d896,1,nation|supplier,2,150125,10.68,1,ok,,1,150125
+q21.sql,9b5d16c6,3,lineitem|nation|orders|supplier,4,124671995,374.24,1,ok,,3,124671995
+q22.sql,c6052616,1,part|lineitem,2,110621870,65.22,1,ok,,1,8000

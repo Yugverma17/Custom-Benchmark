@@ -1,0 +1,147 @@
+query_file,source_join_count,source_bytes_read,target_tables,n_tables,query_hash,sql
+q01.sql,0,108021870,lineitem,1,47f9dd6f,"SELECT MIN(l0.l_quantity) AS result
+FROM lineitem AS l0
+WHERE l0.l_quantity >= 8 AND l0.l_quantity <= 20"
+q02.sql,4,12350145,part|supplier|partsupp|nation|region,5,c230c0bb,"SELECT MIN(p0.p_name) AS result
+FROM part AS p0
+JOIN partsupp AS p2 ON p2.ps_partkey = p0.p_partkey
+JOIN supplier AS s1 ON s1.s_suppkey = p2.ps_suppkey
+JOIN nation AS n3 ON n3.n_nationkey = s1.s_nationkey
+JOIN region AS r4 ON r4.r_regionkey = n3.n_regionkey
+WHERE p0.p_size >= 2 AND p0.p_size <= 14
+AND s1.s_nationkey >= 8 AND s1.s_nationkey <= 14
+AND p2.ps_availqty >= 2007 AND p2.ps_availqty <= 4506"
+q03.sql,2,127221870,customer|orders|lineitem,3,01c285fd,"SELECT MIN(c0.c_name) AS result
+FROM customer AS c0
+JOIN orders AS o1 ON o1.o_custkey = c0.c_custkey
+JOIN lineitem AS l2 ON l2.l_orderkey = o1.o_orderkey
+WHERE c0.c_mktsegment = 'AUTOMOBILE'
+AND o1.o_orderstatus = 'F'
+AND l2.l_quantity >= 7 AND l2.l_quantity <= 19"
+q04.sql,0,16500000,orders,1,7f9e374e,"SELECT MIN(o0.o_orderstatus) AS result
+FROM orders AS o0
+WHERE o0.o_orderstatus = 'P'"
+q05.sql,5,127372015,customer|orders|lineitem|supplier|nation|region,6,fc51a460,"SELECT MIN(c0.c_name) AS result
+FROM customer AS c0
+JOIN orders AS o1 ON o1.o_custkey = c0.c_custkey
+JOIN nation AS n4 ON n4.n_nationkey = c0.c_nationkey
+JOIN lineitem AS l2 ON l2.l_orderkey = o1.o_orderkey
+JOIN supplier AS s3 ON s3.s_nationkey = n4.n_nationkey
+JOIN region AS r5 ON r5.r_regionkey = n4.n_regionkey
+WHERE c0.c_mktsegment = 'FURNITURE'
+AND o1.o_orderstatus = 'F'
+AND l2.l_quantity >= 38 AND l2.l_quantity <= 50"
+q06.sql,0,108021870,lineitem,1,9f43aa87,"SELECT MIN(l0.l_quantity) AS result
+FROM lineitem AS l0
+WHERE l0.l_quantity >= 28 AND l0.l_quantity <= 40"
+q07.sql,8,127245995,lineitem|orders|customer|nation|partsupp|part|supplier|region,8,f712c0ac,"SELECT MIN(l0.l_quantity) AS result
+FROM lineitem AS l0
+JOIN orders AS o1 ON o1.o_orderkey = l0.l_orderkey
+JOIN part AS p5 ON p5.p_partkey = l0.l_partkey
+JOIN supplier AS s6 ON s6.s_suppkey = l0.l_suppkey
+JOIN customer AS c2 ON c2.c_custkey = o1.o_custkey
+JOIN partsupp AS p4 ON p4.ps_partkey = p5.p_partkey
+JOIN nation AS n3 ON n3.n_nationkey = s6.s_nationkey
+JOIN region AS r7 ON r7.r_regionkey = n3.n_regionkey
+WHERE l0.l_quantity >= 6 AND l0.l_quantity <= 17
+AND o1.o_orderstatus = 'F'
+AND c2.c_mktsegment = 'AUTOMOBILE'"
+q08.sql,9,127388015,supplier|lineitem|orders|customer|nation|region|partsupp|part,8,16008bf6,"SELECT MIN(s0.s_name) AS result
+FROM supplier AS s0
+JOIN lineitem AS l1 ON l1.l_suppkey = s0.s_suppkey
+JOIN partsupp AS p6 ON p6.ps_suppkey = s0.s_suppkey
+JOIN nation AS n4 ON n4.n_nationkey = s0.s_nationkey
+JOIN orders AS o2 ON o2.o_orderkey = l1.l_orderkey
+JOIN part AS p7 ON p7.p_partkey = l1.l_partkey
+JOIN customer AS c3 ON c3.c_nationkey = n4.n_nationkey
+JOIN region AS r5 ON r5.r_regionkey = n4.n_regionkey
+WHERE s0.s_nationkey >= 17 AND s0.s_nationkey <= 22
+AND l1.l_quantity >= 13 AND l1.l_quantity <= 24
+AND o2.o_orderstatus = 'P'"
+q09.sql,7,134287995,supplier|lineitem|partsupp|orders|nation|part|customer|region,8,2c26f381,"SELECT MIN(s0.s_name) AS result
+FROM supplier AS s0
+JOIN lineitem AS l1 ON l1.l_suppkey = s0.s_suppkey
+JOIN partsupp AS p2 ON p2.ps_suppkey = s0.s_suppkey
+JOIN nation AS n4 ON n4.n_nationkey = s0.s_nationkey
+JOIN orders AS o3 ON o3.o_orderkey = l1.l_orderkey
+JOIN part AS p5 ON p5.p_partkey = l1.l_partkey
+JOIN customer AS c6 ON c6.c_nationkey = n4.n_nationkey
+JOIN region AS r7 ON r7.r_regionkey = n4.n_regionkey
+WHERE s0.s_nationkey >= 7 AND s0.s_nationkey <= 12
+AND l1.l_quantity >= 29 AND l1.l_quantity <= 40
+AND p2.ps_availqty >= 4828 AND p2.ps_availqty <= 7232"
+q10.sql,3,127221995,customer|orders|lineitem|nation,4,a6078a13,"SELECT MIN(c0.c_name) AS result
+FROM customer AS c0
+JOIN orders AS o1 ON o1.o_custkey = c0.c_custkey
+JOIN nation AS n3 ON n3.n_nationkey = c0.c_nationkey
+JOIN lineitem AS l2 ON l2.l_orderkey = o1.o_orderkey
+WHERE c0.c_mktsegment = 'MACHINERY'
+AND o1.o_orderstatus = 'F'
+AND l2.l_quantity >= 11 AND l2.l_quantity <= 23"
+q11.sql,2,9750125,partsupp|supplier|nation,3,57765533,"SELECT MIN(p0.l_quantity) AS result
+FROM partsupp AS p0
+JOIN supplier AS s1 ON s1.s_suppkey = p0.ps_suppkey
+JOIN nation AS n2 ON n2.n_nationkey = s1.s_nationkey
+WHERE p0.ps_availqty >= 5720 AND p0.ps_availqty <= 8219
+AND s1.s_nationkey >= 13 AND s1.s_nationkey <= 19
+AND n2.n_regionkey >= 2 AND n2.n_regionkey <= 3"
+q12.sql,1,124521870,orders|lineitem,2,79e69464,"SELECT MIN(o0.o_orderstatus) AS result
+FROM orders AS o0
+JOIN lineitem AS l1 ON l1.l_orderkey = o0.o_orderkey
+WHERE o0.o_orderstatus = 'O'
+AND l1.l_quantity >= 10 AND l1.l_quantity <= 22"
+q13.sql,2,16508000,orders|lineitem|part,3,32a0b650,"SELECT MIN(o0.o_orderstatus) AS result
+FROM orders AS o0
+JOIN lineitem AS l1 ON l1.l_orderkey = o0.o_orderkey
+JOIN part AS p2 ON p2.p_partkey = l1.l_partkey
+WHERE o0.o_orderstatus = 'F'
+AND l1.l_quantity >= 6 AND l1.l_quantity <= 7
+AND p2.p_size >= 25 AND p2.p_size <= 26"
+q14.sql,1,110621870,lineitem|part,2,14af39f1,"SELECT MIN(l0.l_quantity) AS result
+FROM lineitem AS l0
+JOIN part AS p1 ON p1.p_partkey = l0.l_partkey
+WHERE l0.l_quantity >= 7 AND l0.l_quantity <= 19
+AND p1.p_size >= 23 AND p1.p_size <= 35"
+q15.sql,0,108021870,lineitem,1,64ae6055,"SELECT MIN(l0.l_quantity) AS result
+FROM lineitem AS l0
+WHERE l0.l_quantity >= 23 AND l0.l_quantity <= 35"
+q16.sql,1,12200000,partsupp|part,2,e9f29174,"SELECT MIN(p0.l_quantity) AS result
+FROM partsupp AS p0
+JOIN part AS p1 ON p1.p_partkey = p0.ps_partkey
+WHERE p0.ps_availqty >= 4946 AND p0.ps_availqty <= 7445
+AND p1.p_size >= 17 AND p1.p_size <= 29"
+q17.sql,1,110621870,lineitem|part,2,bd0923ee,"SELECT MIN(l0.l_quantity) AS result
+FROM lineitem AS l0
+JOIN part AS p1 ON p1.p_partkey = l0.l_partkey
+WHERE l0.l_quantity >= 3 AND l0.l_quantity <= 15
+AND p1.p_size >= 30 AND p1.p_size <= 42"
+q18.sql,2,127221870,customer|orders|lineitem,3,b8f31a80,"SELECT MIN(c0.c_name) AS result
+FROM customer AS c0
+JOIN orders AS o1 ON o1.o_custkey = c0.c_custkey
+JOIN lineitem AS l2 ON l2.l_orderkey = o1.o_orderkey
+WHERE c0.c_mktsegment = 'FURNITURE'
+AND o1.o_orderstatus = 'F'
+AND l2.l_quantity >= 25 AND l2.l_quantity <= 37"
+q19.sql,1,110621870,lineitem|part,2,7c20aa8a,"SELECT MIN(l0.l_quantity) AS result
+FROM lineitem AS l0
+JOIN part AS p1 ON p1.p_partkey = l0.l_partkey
+WHERE l0.l_quantity >= 6 AND l0.l_quantity <= 18
+AND p1.p_size >= 36 AND p1.p_size <= 48"
+q20.sql,1,150125,supplier|nation,2,07c8d896,"SELECT MIN(s0.s_name) AS result
+FROM supplier AS s0
+JOIN nation AS n1 ON n1.n_nationkey = s0.s_nationkey
+WHERE s0.s_nationkey >= 9 AND s0.s_nationkey <= 15
+AND n1.n_regionkey >= 2 AND n1.n_regionkey <= 3"
+q21.sql,3,124671995,supplier|lineitem|orders|nation,4,9b5d16c6,"SELECT MIN(s0.s_name) AS result
+FROM supplier AS s0
+JOIN lineitem AS l1 ON l1.l_suppkey = s0.s_suppkey
+JOIN nation AS n3 ON n3.n_nationkey = s0.s_nationkey
+JOIN orders AS o2 ON o2.o_orderkey = l1.l_orderkey
+WHERE s0.s_nationkey >= 18 AND s0.s_nationkey <= 24
+AND l1.l_quantity >= 13 AND l1.l_quantity <= 25
+AND o2.o_orderstatus = 'P'"
+q22.sql,1,8000,lineitem|part,2,c6052616,"SELECT MIN(l0.l_quantity) AS result
+FROM lineitem AS l0
+JOIN part AS p1 ON p1.p_partkey = l0.l_partkey
+WHERE l0.l_quantity >= 43 AND l0.l_quantity <= 44
+AND p1.p_size >= 15 AND p1.p_size <= 16"

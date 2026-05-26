@@ -1,0 +1,10 @@
+experiment,workload_query_count,workload_prime_query_count,T_success_rate_percent,T_prime_success_rate_percent,join_count_emd_W_Wprime,table_jaccard_similarity_W_Wprime,table_frequency_spearman_r_W_Wprime,table_access_entropy_bits_W,table_access_entropy_bits_Wprime,bytes_read_ratio_Wprime_over_W,runtime_median_ratio_Tprime_over_T,runtime_90th_percentile_ratio_Tprime_over_T,runtime_ks_statistic,runtime_pearson_r,runtime_spearman_r,join_count_emd_T_Tprime,table_frequency_spearman_r_T_Tprime,query_diversity_W,query_diversity_Wprime,unique_tables_accessed_W,unique_tables_accessed_Wprime
+imdb_to_imdb,115,115,94.8,98.3,0.000,1.000,0.970,4.078,4.109,1.00,0.36,2.37,0.344,-0.037,0.347,0.000,0.970,0.296,0.330,21,21
+imdb_to_tpcds,115,115,94.8,20.9,0.000,0.000,n/a,4.078,3.658,1.00,1.76,5.15,0.239,0.335,0.382,0.000,n/a,0.296,0.548,21,19
+imdb_to_tpch,115,115,94.8,100.0,0.000,0.000,n/a,4.078,2.985,1.00,3.50,1.82,0.510,0.295,0.375,1.041,n/a,0.296,0.070,21,8
+tpcds_to_imdb,99,99,100.0,100.0,0.000,0.000,n/a,4.909,3.475,1.00,2.87,3.00,0.364,-0.068,-0.097,0.000,n/a,0.747,0.444,86,21
+tpcds_to_tpcds,99,99,100.0,80.8,0.000,0.253,0.851,4.909,3.984,1.00,0.98,2.96,0.191,-0.083,0.029,0.263,0.800,0.747,0.788,86,23
+tpcds_to_tpch,99,99,100.0,100.0,0.000,0.011,n/a,4.909,2.833,1.00,1.55,0.99,0.343,-0.007,-0.012,0.310,n/a,0.747,0.141,86,8
+tpch_to_imdb,22,22,100.0,100.0,0.000,0.000,n/a,3.305,2.964,1.00,1.20,3.02,0.227,0.145,0.171,0.000,n/a,0.773,0.682,13,13
+tpch_to_tpcds,22,22,100.0,81.8,0.000,0.000,n/a,3.305,2.866,1.00,0.67,0.64,0.333,0.356,0.453,0.000,n/a,0.773,0.545,13,10
+tpch_to_tpch,22,22,100.0,81.8,0.000,0.615,0.857,3.305,2.901,1.00,0.88,1.16,0.222,0.164,0.404,0.136,0.857,0.773,0.636,13,8

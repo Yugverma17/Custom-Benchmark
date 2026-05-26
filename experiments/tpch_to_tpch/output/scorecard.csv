@@ -1,0 +1,12 @@
+metric,T,T_prime
+success_rate_T_pct,100.00,81.82
+runtime_mean_ms,157.82,215.57
+runtime_median_ms,124.16,108.97
+runtime_p90_ms,348.75,405.55
+runtime_p99_ms,427.17,900.45
+join_count_mean,2.45,2.32
+join_count_median,1.50,1.50
+join_count_emd,0.0000,0.1364
+n_tables_mean,3.14,3.32
+bytes_read_mean,85025056,96435137
+bytes_read_median,110621870,110621870
