@@ -151,9 +151,9 @@ One row per experiment, 29 columns:
 | Scan-Set Repetition Rate | `srr_W/Wprime` fraction of queries whose table-set appears in more than one query |
 | Operator counts (EXPLAIN) | `avg_scans/joins/aggregations/sorts/total_ops_W/Wprime` |
 | Plan diversity | `plan_diversity_W/Wprime`, `unique_plan_signatures_W/Wprime` |
-| Execution — success | `success_rate_percent_T/Tprime` |
-| Execution — runtime | `runtime_mean_ms_T/Tprime`, `runtime_90th_pct_ms_T/Tprime` |
-| Execution — data volume | `bytes_read_mean_T/Tprime` |
+| Execution - success | `success_rate_percent_T/Tprime` |
+| Execution - runtime | `runtime_mean_ms_T/Tprime`, `runtime_90th_pct_ms_T/Tprime` |
+| Execution - data volume | `bytes_read_mean_T/Tprime` |
 
 ---
 
