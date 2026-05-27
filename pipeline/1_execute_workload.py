@@ -96,4 +96,4 @@ err_count = sum(1 for r in rows_out if r['status'] == 'error')
 to_count  = sum(1 for r in rows_out if r['status'] == 'timeout')
 
 print(f"\nDone in {elapsed:.1f}s  |  ok={ok_count}  error={err_count}  timeout={to_count}")
-print(f"Saved → {out_csv}")
+print(f"Saved -> {out_csv}")

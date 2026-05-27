@@ -1,4 +1,6 @@
-databases/*.duckdb
+databases/
+workloads/tpch/
+workloads/tpcds/
 __pycache__/
 *.pyc
 *.pyo

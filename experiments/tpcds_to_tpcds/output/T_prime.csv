@@ -1,100 +1,100 @@
 query_file,query_hash,join_count,read_tables,n_tables,bytes_read,runtime_ms,rows_returned,status,error_msg,src_join_count,src_bytes_read
-q01.sql,ac9311ff,1,date_dim|store_returns,2,4048606,18.99,1,ok,,1,4048606
-q02.sql,523658dc,11,store_sales|web_sales|catalog_sales|store_returns|web_returns|catalog_returns|inventory|item|customer|store|warehouse|date_dim,12,110974956,60098.58,,error,Query interrupted,11,1492980
-q03.sql,214eea78,2,store_sales|item|date_dim,3,39356232,736.04,1,ok,,2,39356232
-q04.sql,33eeacbe,2,store_sales|date_dim|customer,3,40506232,186.27,1,ok,,2,40506232
-q05.sql,2e1db3bf,17,date_dim|item|customer|customer_demographics|household_demographics|customer_address|web_site|web_page|promotion|store_sales|catalog_sales|store_returns|web_returns|catalog_returns|inventory|store|catalog_page|web_sales,18,123429872,60046.3,,error,Query interrupted,17,11588836
-q06.sql,760b4789,4,store_sales|customer|date_dim|item|customer_address,5,41706232,886.38,1,ok,,4,41706232
-q07.sql,15ab391d,4,date_dim|item|customer_demographics|promotion|store_sales,5,50890032,233.91,1,ok,,4,50890032
-q08.sql,24f411c3,5,date_dim|store|web_sales|catalog_sales|inventory|store_sales,6,104394760,35.15,1,ok,,5,38906712
-q09.sql,60fb82c4,0,store_sales,1,37445252,37.01,1,ok,,0,37445252
-q10.sql,4e20a93d,2,customer_address|customer_demographics|customer,3,13874800,70.3,1,ok,,2,13874800
-q11.sql,6d1f61a0,2,store_sales|date_dim|customer,3,40506232,198.49,1,ok,,2,40506232
-q12.sql,251d7cc6,2,date_dim|item|web_sales,3,11982356,47.71,1,ok,,2,11982356
-q13.sql,5de3c129,5,date_dim|customer_demographics|household_demographics|customer_address|store|store_sales,6,51210312,292.67,1,ok,,5,51210312
-q14.sql,8ce1c762,5,store_returns|catalog_returns|inventory|date_dim|warehouse|item,6,41030309,49.61,1,ok,,5,1918980
-q15.sql,63b4b5d6,3,date_dim|customer|customer_address|catalog_sales,4,23992652,46.64,1,ok,,3,23992652
-q16.sql,192bba05,3,date_dim|customer_address|inventory|catalog_sales,4,57627652,134.57,1,ok,,3,22400652
-q17.sql,8ce28a37,7,date_dim|item|store|web_sales|catalog_sales|store_returns|inventory|store_sales,8,107432386,68020.08,,error,Query interrupted,7,62126010
-q18.sql,fb816deb,6,date_dim|item|customer|customer_demographics|customer_address|inventory|catalog_sales,7,71202452,13446.78,1,ok,,6,35967452
-q19.sql,14bbf737,5,store_sales|item|customer|customer_address|store|date_dim,6,41706712,271.21,1,ok,,5,41706712
-q20.sql,831e7207,2,date_dim|item|catalog_sales,3,22092652,23.43,1,ok,,2,22092652
-q21.sql,3daa6315,6,inventory|date_dim|item|web_sales|catalog_sales|web_returns|warehouse,7,68044995,48.55,1,ok,,6,1927080
-q22.sql,f45ef77e,2,date_dim|item|inventory,3,37145980,125.04,1,ok,,2,37145980
-q23.sql,beb3df24,5,date_dim|item|web_sales|inventory|warehouse|store_sales,6,84662708,60013.9,,error,Query interrupted,5,38906232
-q24.sql,d21378c7,5,item|customer|customer_address|store|store_returns|store_sales,6,42833358,72.69,1,ok,,5,42833358
-q25.sql,bfc3f13d,7,date_dim|item|store|web_sales|catalog_sales|store_returns|inventory|store_sales,8,107432386,60024.38,,error,Query interrupted,7,62126010
-q26.sql,b6ad755c,4,date_dim|item|customer_demographics|promotion|catalog_sales,5,33626452,1241.16,1,ok,,4,33626452
-q27.sql,6baf4f9e,4,date_dim|item|customer_demographics|store|store_sales,5,50881512,145.53,1,ok,,4,50881512
-q28.sql,3052c5ea,2,item|warehouse|inventory,3,35685100,18.77,1,ok,,2,8000
-q29.sql,c7853c7e,7,date_dim|item|store|web_sales|catalog_sales|store_returns|inventory|store_sales,8,107432386,60069.29,,error,Query interrupted,7,62126010
-q30.sql,1ea9869a,1,date_dim|web_returns,2,2106847,567.66,1,ok,,2,2856847
-q31.sql,7d90d766,2,date_dim|customer_address|store_sales,3,39656232,64.13,1,ok,,2,39656232
-q32.sql,cb4b5a40,2,date_dim|item|catalog_sales,3,22092652,45.12,1,ok,,2,22092652
-q33.sql,f0866582,3,date_dim|item|customer_address|store_sales,4,40106232,65.6,1,ok,,3,40106232
-q34.sql,e79691ca,4,store_returns|catalog_returns|inventory|store|date_dim,5,40580689,19.58,1,ok,,5,1506260
-q35.sql,e0d62472,2,customer_address|customer_demographics|customer,3,13874800,45.66,1,ok,,2,13874800
-q36.sql,3e5756e1,3,date_dim|item|store|store_sales,4,39356712,63.56,1,ok,,3,39356712
-q37.sql,254aa45d,3,catalog_sales|inventory|date_dim|item,4,57327652,926.36,1,ok,,3,57327652
-q38.sql,456049e4,4,catalog_sales|inventory|item|customer|date_dim,5,58927652,127.74,1,ok,,4,3076980
-q39.sql,dc0212eb,8,store_sales|web_sales|store_returns|web_returns|catalog_returns|inventory|date_dim|warehouse|item,9,89192804,60004.27,,error,Query interrupted,8,1951080
-q40.sql,e1cf1c11,0,catalog_returns,1,1296603,165.05,1,ok,,1,21478275
-q41.sql,01981d08,0,item,1,450000,6.96,1,ok,,0,450000
-q42.sql,621b451c,2,store_sales|item|date_dim,3,39356232,38.1,1,ok,,2,39356232
-q43.sql,877db3db,2,store_sales|store|date_dim,3,38906712,7.84,1,ok,,2,38906712
-q44.sql,c40e697d,1,item|inventory,2,35685000,60.79,1,ok,,1,8000
-q45.sql,6cc855e9,4,date_dim|item|customer|customer_address|web_sales,5,14332356,43.5,1,ok,,4,14332356
-q46.sql,647a8f48,8,store_sales|catalog_sales|store_returns|catalog_returns|inventory|household_demographics|customer_address|store|date_dim,9,98986413,60073.28,,error,Query interrupted,8,2264260
-q47.sql,c182f034,3,store_sales|date_dim|store|item,4,39356712,1139.67,1,ok,,3,39356712
-q48.sql,04081db8,4,date_dim|customer_demographics|customer_address|store|store_sales,5,51181512,203.79,1,ok,,4,51181512
-q49.sql,b6dbee21,10,date_dim|item|web_page|store_sales|web_sales|catalog_sales|store_returns|catalog_returns|inventory|warehouse|web_returns,11,109375376,60046.2,,error,Query interrupted,10,4562096
-q50.sql,dcc95e12,4,date_dim|store|store_returns|inventory|store_sales,5,76729338,1257.69,1,ok,,4,41494338
-q51.sql,b0327457,2,date_dim|inventory|web_sales,3,46767356,758.64,1,ok,,2,11540356
-q52.sql,6f448cd3,2,store_sales|item|date_dim,3,39356232,100.59,1,ok,,2,39356232
-q53.sql,3cc557fa,5,date_dim|store|store_returns|web_returns|inventory|store_sales,6,77375205,35.4,1,ok,,5,38922712
-q54.sql,83455dfa,7,web_sales|catalog_sales|store_returns|web_returns|inventory|date_dim|customer|item,8,72232521,15086.7,1,ok,,7,3542980
-q55.sql,35b40959,2,store_sales|item|date_dim,3,39356232,34.12,1,ok,,2,39356232
-q56.sql,2e3ddb0c,3,date_dim|item|customer_address|store_sales,4,40106232,87.89,1,ok,,3,40106232
-q57.sql,be8d3bf4,3,catalog_sales|inventory|date_dim|item,4,57327652,215.1,1,ok,,3,22100652
-q58.sql,9d54d5ba,2,date_dim|item|store_sales,3,39356232,38.3,1,ok,,2,39356232
-q59.sql,4b4991ab,1,date_dim|store_sales,2,38906232,24.75,1,ok,,1,38906232
-q60.sql,5fdbeade,3,date_dim|item|customer_address|store_sales,4,40106232,57.39,1,ok,,3,40106232
-q61.sql,56acdb5a,0,store,1,480,2.63,1,ok,,6,4270460
-q62.sql,0a229afa,6,date_dim|web_site|catalog_sales|store_returns|web_returns|inventory|web_sales,7,70183421,60042.29,,error,Query interrupted,7,11533416
-q63.sql,3054fdd1,5,date_dim|item|store|catalog_returns|inventory|store_sales,6,75888315,23809.12,1,ok,,5,38922712
-q64.sql,f0433674,0,catalog_sales,1,20181672,10.75,1,ok,,1,21478275
-q65.sql,d945b282,6,store_sales|store_returns|date_dim|item|catalog_sales|inventory|store,7,97361010,60001.97,,error,Query interrupted,6,1935460
-q66.sql,7e5cc217,20,inventory|date_dim|item|store_sales|web_sales|catalog_sales|store_returns|web_returns|catalog_returns|time_dim|customer|customer_demographics|household_demographics|customer_address|store|promotion|web_site|web_page|catalog_page|income_band|warehouse,21,123948432,60009.43,,error,Query interrupted,36,2043640
-q67.sql,b8d9bf37,9,date_dim|item|warehouse|store_sales|web_sales|catalog_sales|store_returns|web_returns|catalog_returns|inventory,10,109374476,60032.61,,error,Query interrupted,9,72000
-q68.sql,66fba876,9,store_sales|web_sales|catalog_sales|store_returns|catalog_returns|inventory|household_demographics|customer_address|store|date_dim,10,109057789,60001.23,,error,Query interrupted,9,2264260
-q69.sql,d58e35cc,2,customer_address|customer_demographics|customer,3,13874800,591.28,1,ok,,2,13874800
-q70.sql,26ccf97b,2,date_dim|store|store_sales,3,38906712,72.74,1,ok,,2,38906712
-q71.sql,aba6f128,5,catalog_sales|web_returns|inventory|date_dim|warehouse|item,6,57973619,238.51,1,ok,,5,1934980
-q72.sql,78b46714,10,date_dim|item|warehouse|store_sales|web_sales|catalog_sales|catalog_returns|customer_demographics|household_demographics|promotion|inventory,11,117703583,19609.94,1,ok,,10,70186955
-q73.sql,015d83f9,4,web_sales|web_returns|inventory|household_demographics|date_dim,5,47442023,965.44,1,ok,,5,1506260
-q74.sql,aa66d65b,2,store_sales|date_dim|customer,3,40506232,96.56,1,ok,,2,40506232
-q75.sql,1c275a67,17,store_sales|web_sales|catalog_sales|store_returns|web_returns|catalog_returns|inventory|date_dim|time_dim|customer|customer_demographics|household_demographics|customer_address|promotion|web_site|web_page|warehouse|item,18,123807276,60002.14,,error,Query interrupted,17,6489076
-q76.sql,b736c8f8,7,store_sales|web_sales|catalog_sales|catalog_returns|inventory|date_dim|warehouse|item,8,106140983,60013.51,,error,Query interrupted,7,1942980
-q77.sql,3fabaa60,4,date_dim|store|store_returns|inventory|store_sales,5,76729338,300.97,1,ok,,4,38922712
-q78.sql,ff164a0e,8,date_dim|item|store_sales|web_sales|catalog_sales|store_returns|catalog_returns|inventory|web_returns,9,109374376,60007.52,,error,Query interrupted,8,16078452
-q79.sql,b924f24b,7,store_sales|date_dim|household_demographics|web_sales|catalog_sales|web_returns|inventory|store,8,105069427,1278.91,1,ok,,7,1506260
-q80.sql,e5bf5357,0,store_returns,1,2587626,6.44,1,ok,,3,41975348
-q81.sql,de1c6365,1,date_dim|catalog_returns,2,2757583,11.7,1,ok,,2,3507583
-q82.sql,61fae4cc,3,store_sales|inventory|date_dim|item,4,74591232,1154.47,1,ok,,3,74591232
-q83.sql,05e5da32,2,date_dim|item|store_returns,3,4498606,19.61,1,ok,,2,4498606
-q84.sql,5e735772,5,store_returns|customer_address|customer_demographics|household_demographics|income_band|customer,6,16491286,98.94,1,ok,,5,16491286
-q85.sql,3b0a51f7,6,date_dim|customer_demographics|customer_address|web_page|web_returns|inventory|web_sales,7,59688923,24240.78,1,ok,,7,24454203
-q86.sql,412b0b7b,2,date_dim|item|web_sales,3,11982356,3342.55,1,ok,,2,11982356
-q87.sql,ae0811b6,4,catalog_returns|inventory|item|customer|date_dim,5,40042583,530.91,1,ok,,4,3076980
-q88.sql,88e6aa97,0,household_demographics,1,28800,4.51,1,ok,,3,547680
-q89.sql,be792747,13,date_dim|item|customer|customer_demographics|store|promotion|web_sales|catalog_sales|store_returns|web_returns|catalog_returns|inventory|catalog_page|store_sales,14,122649272,60050.72,,error,Query interrupted,13,38962712
-q90.sql,15b6cb54,0,household_demographics,1,28800,697.22,1,ok,,3,548100
-q91.sql,e69b34ce,6,date_dim|customer|inventory|customer_address|customer_demographics|household_demographics|catalog_returns,7,51896183,195.46,1,ok,,6,16669183
-q92.sql,bc2f78fa,2,date_dim|item|web_sales,3,11982356,52.14,1,ok,,2,11982356
-q93.sql,8aa4bd4c,4,date_dim|item|web_returns|inventory|store_returns,5,40379473,18918.25,1,ok,,4,2611626
-q94.sql,cf9b4d01,3,date_dim|customer_address|web_site|web_sales,4,12283256,36.74,1,ok,,3,12283256
-q95.sql,4d784152,0,web_sales,1,10071376,15.72,1,ok,,1,10071376
-q96.sql,bbe70653,3,time_dim|household_demographics|store|store_sales,4,37992932,14.59,1,ok,,3,37992932
-q97.sql,95166bb4,2,date_dim|inventory|store_sales,3,74141232,5499.46,1,ok,,2,38914232
-q98.sql,dda48e2f,2,date_dim|item|store_sales,3,39356232,108.3,1,ok,,2,39356232
-q99.sql,ef43304c,6,date_dim|item|web_sales|store_returns|web_returns|inventory|catalog_sales,7,70632521,60023.79,,error,Query interrupted,7,21650812
+q01.sql,17c7780e,1,date_dim|store_returns,2,4048606,5.3,1,ok,,1,4048606
+q02.sql,ea99996f,11,store_sales|web_sales|catalog_sales|catalog_returns|inventory|item|customer|household_demographics|promotion|catalog_page|income_band|date_dim,12,107919359,33378.19,,timeout,INTERRUPT Error: Interrupted!,11,1492980
+q03.sql,11b28e7a,2,time_dim|item|store_sales,3,38413652,52.48,1,ok,,2,39356232
+q04.sql,8ae00bbe,2,date_dim|catalog_sales|store_sales,3,59087904,5.86,1,ok,,2,40506232
+q05.sql,163a2cb2,17,date_dim|item|customer|customer_demographics|household_demographics|web_site|web_page|promotion|store_sales|catalog_sales|store_returns|inventory|income_band|time_dim|store|catalog_page|warehouse|web_sales,18,121255962,34116.86,,timeout,INTERRUPT Error: Interrupted!,17,11588836
+q06.sql,172f1606,4,item|customer|promotion|web_sales|store_sales,5,49575628,131.91,1,ok,,4,41706232
+q07.sql,11fe8e14,4,item|customer|customer_demographics|web_returns|store_sales,5,51665919,100.62,1,ok,,4,50890032
+q08.sql,80927354,5,date_dim|customer_address|store|catalog_sales|store_returns|store_sales,6,62426010,15.28,1,ok,,5,38906712
+q09.sql,cc0cb2d4,0,store_sales,1,37445252,26.91,1,ok,,0,37445252
+q10.sql,845b4122,2,web_sales|customer|customer_demographics,3,23196176,31.49,1,ok,,2,13874800
+q11.sql,5a60fbba,2,time_dim|item|store_sales,3,38413652,38.32,1,ok,,2,40506232
+q12.sql,ce9d3a7f,2,item|inventory|web_sales,3,45756376,371.39,1,ok,,2,11982356
+q13.sql,db04b40f,5,date_dim|store|store_returns|inventory|warehouse|store_sales,6,76729438,33206.75,,timeout,INTERRUPT Error: Interrupted!,5,51210312
+q14.sql,23e1d52d,5,store_sales|catalog_sales|store_returns|item|customer_demographics|date_dim,6,73650330,49.58,1,ok,,5,1918980
+q15.sql,44f2d9e0,3,customer|customer_demographics|web_returns|catalog_sales,4,33952339,79.45,1,ok,,3,23992652
+q16.sql,2c5aa22b,3,date_dim|customer_address|web_sales|catalog_sales,4,32464028,224.57,1,ok,,3,22400652
+q17.sql,1c8a211a,7,date_dim|item|customer|store|store_returns|catalog_returns|catalog_page|store_sales,8,44981557,31624.81,,timeout,INTERRUPT Error: Interrupted!,7,62126010
+q18.sql,defb54fd,6,web_sales|catalog_sales|customer|date_dim|customer_address|store_returns|customer_demographics,7,48176454,56.35,1,ok,,6,35967452
+q19.sql,a3d8e6f6,5,date_dim|item|catalog_sales|inventory|warehouse|store_sales,6,94773004,57.37,1,ok,,5,41706712
+q20.sql,cc3f4f85,2,date_dim|store_sales|catalog_sales,3,59087904,5.55,1,ok,,2,22092652
+q21.sql,ce93c951,6,store_sales|catalog_sales|store_returns|catalog_returns|customer_address|catalog_page|date_dim,7,63862749,112.52,1,ok,,6,1927080
+q22.sql,cdba91ca,2,item|web_returns|inventory,3,36330867,360.27,1,ok,,2,37145980
+q23.sql,45c7a232,5,date_dim|customer|customer_address|web_sales|catalog_returns|store_sales,6,52624211,10.59,1,ok,,5,38906232
+q24.sql,e844929d,5,date_dim|customer|customer_address|store|store_returns|store_sales,6,43844338,153.72,1,ok,,5,42833358
+q25.sql,25fac2f9,7,date_dim|item|customer|household_demographics|store|catalog_sales|store_returns|store_sales,8,63754810,11.77,1,ok,,7,62126010
+q26.sql,91b9408e,4,web_sales|customer|item|web_page|customer_demographics,5,23647076,25.86,1,ok,,4,33626452
+q27.sql,ce035858,4,date_dim|store|store_returns|catalog_returns|store_sales,5,42790941,31788.41,,timeout,INTERRUPT Error: Interrupted!,4,50881512
+q28.sql,16100450,2,date_dim|warehouse|inventory,3,36696080,3.67,1,ok,,2,8000
+q29.sql,a78bb701,7,date_dim|item|store|web_sales|catalog_sales|store_returns|inventory|store_sales,8,107432386,35484.81,,timeout,INTERRUPT Error: Interrupted!,7,62126010
+q30.sql,58ce0a4c,2,web_returns|item|date_dim,3,2556847,8.22,1,ok,,2,2856847
+q31.sql,e4ddaae4,2,customer_address|catalog_sales|store_sales,3,58376924,88.87,1,ok,,2,39656232
+q32.sql,f8cda48e,2,date_dim|web_returns|catalog_sales,3,22288519,47.31,1,ok,,2,22092652
+q33.sql,6ac1ca21,3,customer_demographics|household_demographics|web_sales|store_sales,4,59070228,92.9,1,ok,,3,40106232
+q34.sql,e2f81b08,5,store_returns|web_returns|customer|store|household_demographics|date_dim,6,6323753,8.92,1,ok,,5,1506260
+q35.sql,6e8376a3,2,customer|customer_address|customer_demographics,3,13874800,20.02,1,ok,,2,13874800
+q36.sql,7200a60e,3,date_dim|household_demographics|web_sales|store_sales,4,49006408,4.5,1,ok,,3,39356712
+q37.sql,44080c12,3,date_dim|item|catalog_sales|inventory,4,57327652,2140.82,1,ok,,3,57327652
+q38.sql,e6c234c3,4,catalog_sales|web_returns|catalog_returns|date_dim|customer,5,25185122,7.32,1,ok,,4,3076980
+q39.sql,460f4306,8,store_sales|catalog_sales|catalog_returns|inventory|item|customer_address|promotion|warehouse|date_dim,9,96828607,1866.67,1,ok,,8,1951080
+q40.sql,ea81f21e,1,item|catalog_sales,2,20631672,16.97,1,ok,,1,21478275
+q41.sql,62bb89e8,0,item,1,450000,2.61,1,ok,,0,450000
+q42.sql,237bd10a,2,item|catalog_sales|store_sales,3,58076924,76.85,1,ok,,2,39356232
+q43.sql,abf05d6d,2,time_dim|household_demographics|store_sales,3,37992452,35.05,1,ok,,2,38906712
+q44.sql,e5146960,1,date_dim|inventory,2,36695980,39.1,1,ok,,1,8000
+q45.sql,5dee8bee,4,item|customer|customer_address|store_sales|web_sales,5,50316628,70.65,1,ok,,4,14332356
+q46.sql,4a798f77,8,store_sales|catalog_sales|catalog_returns|item|customer|household_demographics|customer_address|income_band|date_dim,9,63213367,42.08,1,ok,,8,2264260
+q47.sql,a2a4df6b,3,item|store|store_returns|store_sales,4,40483358,88.9,1,ok,,3,39356712
+q48.sql,b663ddbe,4,date_dim|customer_demographics|customer_address|catalog_sales|store_sales,5,71362704,1095.04,1,ok,,4,51181512
+q49.sql,06581794,10,date_dim|item|customer|store_sales|web_sales|web_returns|customer_address|customer_demographics|web_site|web_page|store_returns,11,66537701,34.06,1,ok,,10,4562096
+q50.sql,8280b1f6,4,date_dim|store|store_returns|catalog_returns|store_sales,5,42790941,5.38,1,ok,,4,41494338
+q51.sql,e256bfbd,2,date_dim|web_site|web_sales,3,11533256,3.69,1,ok,,2,11540356
+q52.sql,59a94aa8,2,customer|customer_demographics|store_sales,3,50570052,75.54,1,ok,,2,39356232
+q53.sql,2701bb11,5,date_dim|item|store|store_returns|web_returns|store_sales,6,42590205,7.81,1,ok,,5,38922712
+q54.sql,11fa2e8f,7,store_sales|catalog_sales|customer_address|household_demographics|date_dim|item|inventory|customer,8,97151704,7730.19,1,ok,,7,3542980
+q55.sql,cf861823,2,date_dim|catalog_sales|store_sales,3,59087904,4.38,1,ok,,2,39356232
+q56.sql,dc0d5011,3,date_dim|customer_address|catalog_returns|store_sales,4,40952835,7.67,1,ok,,3,40106232
+q57.sql,0c85aea8,3,item|store_returns|inventory|catalog_sales,4,58454298,18363.06,1,ok,,3,22100652
+q58.sql,da67f1ce,2,item|web_sales|store_sales,3,47966628,43.69,1,ok,,2,39356232
+q59.sql,7f716fe2,1,time_dim|store_sales,2,37963652,27.36,1,ok,,1,38906232
+q60.sql,ded78f9e,3,date_dim|inventory|warehouse|store_sales,4,74141332,55.92,1,ok,,3,40106232
+q61.sql,024e1949,6,web_sales|catalog_sales|store_returns|customer_address|date_dim|web_site|customer,7,36652554,66.19,1,ok,,6,4270460
+q62.sql,e1d17647,7,date_dim|customer|web_site|web_page|catalog_sales|store_returns|web_returns|web_sales,8,36549321,14.22,1,ok,,7,11533416
+q63.sql,4ff68f66,5,date_dim|item|store_returns|inventory|warehouse|store_sales,6,77178958,955.07,1,ok,,5,38922712
+q64.sql,e2939ad0,1,item|catalog_sales,2,20631672,16.5,1,ok,,1,21478275
+q65.sql,a4aa3ed6,6,store_sales|web_sales|store_returns|item|customer|store|date_dim,7,53615714,29.42,1,ok,,6,1935460
+q66.sql,8d6d7941,20,store_sales|date_dim|item|customer|customer_demographics|household_demographics|customer_address|store|promotion|web_sales|catalog_sales|store_returns|web_returns|catalog_returns|inventory|income_band|web_site|web_page|catalog_page|warehouse|time_dim,21,123948432,35817.3,,timeout,INTERRUPT Error: Interrupted!,36,2043640
+q67.sql,3e70b79e,9,date_dim|item|warehouse|store_sales|catalog_sales|store_returns|catalog_returns|household_demographics|catalog_page|inventory,10,98826649,32836.55,,timeout,INTERRUPT Error: Interrupted!,9,72000
+q68.sql,41313368,9,store_sales|web_sales|store_returns|web_returns|item|customer|household_demographics|customer_address|store|date_dim,10,55040381,305.7,1,ok,,9,2264260
+q69.sql,7d3ee1d5,2,customer|customer_address|customer_demographics,3,13874800,26.88,1,ok,,2,13874800
+q70.sql,ded2a356,2,customer|web_sales|store_sales,3,49116628,70.19,1,ok,,2,38906712
+q71.sql,0682cdab,5,catalog_sales|store_returns|catalog_returns|item|customer|date_dim,6,27576881,10.76,1,ok,,5,1934980
+q72.sql,ff8a42d3,10,date_dim|item|warehouse|web_sales|catalog_sales|catalog_returns|customer|customer_demographics|promotion|catalog_page|inventory,11,81970147,152.12,1,ok,,10,70186955
+q73.sql,c44e5ad0,5,store_sales|store_returns|customer|household_demographics|store|date_dim,6,43123138,7.18,1,ok,,5,1506260
+q74.sql,413b94b4,2,customer|customer_address|store_sales,3,39795252,39.04,1,ok,,2,40506232
+q75.sql,31fec212,17,date_dim|item|customer|store|store_sales|web_sales|catalog_sales|web_returns|catalog_returns|inventory|customer_address|customer_demographics|household_demographics|promotion|web_page|catalog_page|income_band|store_returns,18,123429032,34404.63,,timeout,INTERRUPT Error: Interrupted!,17,6489076
+q76.sql,ee27e348,7,store_sales|web_sales|catalog_sales|store_returns|item|customer_address|store|date_dim,8,72947386,113.01,1,ok,,7,1942980
+q77.sql,f3441d04,4,date_dim|customer|customer_address|web_returns|store_sales,5,41902099,13.51,1,ok,,4,38922712
+q78.sql,2a60482d,8,date_dim|item|customer_demographics|store_sales|catalog_sales|store_returns|inventory|store|web_sales,9,118957186,417.29,1,ok,,8,16078452
+q79.sql,35aef0f5,7,store_sales|web_sales|store_returns|customer|household_demographics|store|income_band|date_dim,8,53194574,29.21,1,ok,,7,1506260
+q80.sql,9a46c4eb,3,customer|household_demographics|income_band|store_sales,4,39074112,37.78,1,ok,,3,41975348
+q81.sql,b4677a6e,2,date_dim|catalog_sales|catalog_returns,3,22939255,4.04,1,ok,,2,3507583
+q82.sql,0425c282,3,date_dim|item|store_sales|inventory,4,74591232,4.74,1,ok,,3,74591232
+q83.sql,ba37c72f,2,customer|customer_demographics|store_returns,3,15712426,29.13,1,ok,,2,4498606
+q84.sql,c3d887e5,5,web_sales|customer|household_demographics|customer_address|store_returns|customer_demographics,6,26562602,31.56,1,ok,,5,16491286
+q85.sql,5f405a7d,7,store_sales|web_sales|catalog_sales|item|customer_address|web_page|web_returns|customer_demographics,8,81069867,71.92,1,ok,,7,24454203
+q86.sql,98e0cb83,2,customer|store_returns|web_sales,3,14259002,28.17,1,ok,,2,11982356
+q87.sql,b57be6b5,4,store_sales|customer_demographics|date_dim|inventory|customer,5,87266032,39.46,1,ok,,4,3076980
+q88.sql,e4a69834,3,store_sales|household_demographics|web_sales|time_dim,4,48063828,74.41,1,ok,,3,547680
+q89.sql,3b008fc9,13,date_dim|item|customer|customer_demographics|household_demographics|customer_address|store|web_sales|catalog_sales|store_returns|web_returns|income_band|web_page|store_sales,14,86747813,178.38,1,ok,,13,38962712
+q90.sql,40f8b931,3,store_sales|household_demographics|income_band|time_dim,4,37992512,42.57,1,ok,,3,548100
+q91.sql,f4da154b,6,web_sales|customer|date_dim|item|customer_address|catalog_returns|customer_demographics,7,27153759,25.7,1,ok,,6,16669183
+q92.sql,206b4027,2,item|web_page|web_sales,3,10522276,11.91,1,ok,,2,11982356
+q93.sql,fca3f4d5,4,item|web_sales|catalog_sales|household_demographics|store_returns,5,33319474,102.57,1,ok,,4,2611626
+q94.sql,af707ab5,3,date_dim|catalog_sales|catalog_page|web_sales,4,31854644,4.96,1,ok,,3,12283256
+q95.sql,fd833f8f,1,date_dim|web_sales,2,11532356,2.46,1,ok,,1,10071376
+q96.sql,cd014775,3,time_dim|store|store_returns|store_sales,4,40551758,30021.74,,timeout,INTERRUPT Error: Interrupted!,3,37992932
+q97.sql,b4186e76,2,customer|household_demographics|store_sales,3,39074052,36.82,1,ok,,2,38914232
+q98.sql,cc07a5e8,2,date_dim|web_returns|store_sales,3,39552099,3.17,1,ok,,2,39356232
+q99.sql,1484fda4,7,date_dim|item|customer|customer_address|web_sales|store_returns|catalog_returns|catalog_sales,8,38398257,13.75,1,ok,,7,21650812

@@ -1,16 +1,73 @@
-import argparse, csv, os, sys
+import argparse, csv, os, re, sys
+import duckdb
 import numpy as np
 from collections import Counter
-from scipy import stats as sp
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE)
+from config import DB_PATHS, WORKLOAD_DIRS, DB_WORKLOAD
 
+SCAN_OPS = {'TABLE_SCAN', 'SEQ_SCAN', 'COLUMN_DATA_SCAN',
+            'EXPRESSION_SCAN', 'POSITIONAL_SCAN', 'CHUNK_SCAN'}
+JOIN_OPS  = {'HASH_JOIN', 'NESTED_LOOP_JOIN', 'MERGE_JOIN',
+             'CROSS_PRODUCT', 'IE_JOIN', 'DELIM_JOIN', 'PIECEWISE_MERGE_JOIN'}
+AGG_OPS   = {'HASH_GROUP_BY', 'UNGROUPED_AGG', 'PERFECT_HASH_GROUP_BY',
+             'STREAMING_WINDOW', 'WINDOW', 'GROUPING_SETS'}
+SORT_OPS  = {'ORDER_BY', 'TOP_N'}
+ALL_OPS   = SCAN_OPS | JOIN_OPS | AGG_OPS | SORT_OPS | {
+             'FILTER', 'PROJECTION', 'LIMIT', 'DISTINCT',
+             'UNION', 'RECURSIVE_CTE', 'CTE_SCAN', 'EMPTY_RESULT'}
+
+_db_cons = {}
+
+def get_con(db_name):
+    if db_name not in _db_cons:
+        path = DB_PATHS[db_name]
+        try:
+            con = duckdb.connect(path, read_only=False)
+        except Exception:
+            con = duckdb.connect(path, read_only=True)
+        for ext in (['tpch'] if db_name == 'tpch' else
+                    ['tpcds'] if db_name == 'tpcds' else []):
+            try:
+                con.execute(f"LOAD {ext}")
+            except Exception:
+                pass
+        _db_cons[db_name] = con
+        print(f"    [db] opened {db_name}")
+    return _db_cons[db_name]
+
+_explain_cache = {}
+
+def explain_ops(db_name, sql):
+    try:
+        rows = get_con(db_name).execute(f"EXPLAIN {sql}").fetchall()
+        text = '\n'.join(str(r[-1]) for r in rows if r[-1])
+    except Exception:
+        text = ''
+    counts = Counter()
+    for op in ALL_OPS:
+        n = len(re.findall(rf'\b{re.escape(op)}\b', text))
+        if n:
+            counts[op] = n
+    return counts, frozenset(counts.keys())
+
+def explain_W(source_db, wl_dir, query_file):
+    key = (source_db, query_file)
+    if key not in _explain_cache:
+        path = os.path.join(wl_dir, query_file)
+        if os.path.exists(path):
+            with open(path, encoding='utf-8', errors='replace') as f:
+                sql = f.read().strip()
+            _explain_cache[key] = explain_ops(source_db, sql)
+        else:
+            _explain_cache[key] = (Counter(), frozenset())
+    return _explain_cache[key]
 
 def load_csv(path):
     if not os.path.exists(path):
         return None
-    with open(path, newline='') as f:
+    with open(path, newline='', encoding='utf-8', errors='replace') as f:
         return list(csv.DictReader(f))
 
 def floats(rows, col, only_ok=False):
@@ -24,62 +81,48 @@ def floats(rows, col, only_ok=False):
             pass
     return np.array(out) if out else np.array([0.0])
 
-def table_freq(rows, col):
-    freq = Counter()
-    for r in rows:
-        for t in r.get(col, '').split('|'):
-            t = t.strip()
-            if t:
-                freq[t] += 1
-    return freq
-
-def describe(arr):
-    if len(arr) == 0:
-        return dict(mean=0.0, median=0.0, p90=0.0, p99=0.0, std=0.0)
-    return dict(
-        mean   = float(np.mean(arr)),
-        median = float(np.median(arr)),
-        p90    = float(np.percentile(arr, 90)),
-        p99    = float(np.percentile(arr, 99)),
-        std    = float(np.std(arr)),
-    )
-
 def pct_ok(rows):
     if not rows:
         return 0.0
     return 100.0 * sum(1 for r in rows if r.get('status', '') == 'ok') / len(rows)
 
-def jc_emd(a, b, bins=12):
-    edges = np.arange(0, bins + 1)
-    h1, _ = np.histogram(a, bins=edges)
-    h2, _ = np.histogram(b, bins=edges)
-    s1, s2 = h1.sum(), h2.sum()
-    h1n = h1 / s1 if s1 > 0 else h1.astype(float)
-    h2n = h2 / s2 if s2 > 0 else h2.astype(float)
-    return float(np.sum(np.abs(np.cumsum(h1n) - np.cumsum(h2n))))
-
-def entropy(freq):
-    counts = np.array(list(freq.values()), dtype=float)
-    if counts.sum() == 0:
+def query_diversity(rows, table_col):
+    if not rows:
         return 0.0
-    p = counts / counts.sum()
-    return float(-np.sum(p * np.log2(p + 1e-12)))
+    unique_sets = {frozenset(r.get(table_col, '').split('|')) for r in rows}
+    return len(unique_sets) / len(rows)
 
-def ratio(a, b):
-    return a / b if b else float('nan')
+def srr(rows, table_col):
+    if not rows:
+        return 0.0
+    sets  = [frozenset(r.get(table_col, '').split('|')) for r in rows]
+    freq  = Counter(sets)
+    return sum(1 for s in sets if freq[s] > 1) / len(sets)
 
-def spearman(x, y):
-    if len(x) < 3:
-        return float('nan'), float('nan')
-    return sp.spearmanr(x, y)
+def avg_ops(counter_list):
+    if not counter_list:
+        return {k: 0.0 for k in
+                ('avg_scans','avg_joins','avg_aggregations','avg_sorts','avg_total_ops')}
+    def mean(fn): return float(np.mean([fn(c) for c in counter_list]))
+    return {
+        'avg_scans'        : round(mean(lambda c: sum(c[o] for o in SCAN_OPS)), 2),
+        'avg_joins'        : round(mean(lambda c: sum(c[o] for o in JOIN_OPS)),  2),
+        'avg_aggregations' : round(mean(lambda c: sum(c[o] for o in AGG_OPS)),   2),
+        'avg_sorts'        : round(mean(lambda c: sum(c[o] for o in SORT_OPS)),  2),
+        'avg_total_ops'    : round(mean(lambda c: sum(c.values())),               2),
+    }
 
-def fmt(v, d=3):
-    if isinstance(v, float) and np.isnan(v):
+def plan_div(sig_list):
+    if not sig_list:
+        return 0.0, 0
+    return round(len(set(sig_list)) / len(sig_list), 3), len(set(sig_list))
+
+def fmt(v, d=2):
+    if v is None or (isinstance(v, float) and np.isnan(v)):
         return 'n/a'
     if isinstance(v, float):
         return f'{v:.{d}f}'
     return str(v)
-
 
 def evaluate(exp_name, out_dir):
     T  = load_csv(os.path.join(out_dir, 'T.csv'))
@@ -88,137 +131,101 @@ def evaluate(exp_name, out_dir):
 
     missing = [n for n, d in [('T', T), ("W'", WP), ("T'", TP)] if d is None]
     if missing:
-        print(f"SKIP {exp_name}: missing {missing}")
+        print(f"  SKIP {exp_name}: missing {missing}")
         return None
 
-    w_jc  = floats(T, 'join_count')
-    wp_jc = np.array([float(r['source_join_count']) for r in WP
-                      if r.get('source_join_count', '').strip()])
-    w_nt  = floats(T, 'n_tables')
-    wp_nt = np.array([float(r['n_tables']) for r in WP
-                      if r.get('n_tables', '').strip()])
+    src, tgt = exp_name.split('_to_') if '_to_' in exp_name else (exp_name, exp_name)
+    wl_dir   = WORKLOAD_DIRS[DB_WORKLOAD[src]]
 
-    jc_emd_ww = jc_emd(w_jc, wp_jc)
-    dw_jc = describe(w_jc);  dwp_jc = describe(wp_jc)
-    dw_nt = describe(w_nt);  dwp_nt = describe(wp_nt)
+    div_W  = query_diversity(T,  'read_tables')
+    div_Wp = query_diversity(WP, 'target_tables')
+    srr_W  = srr(T,  'read_tables')
+    srr_Wp = srr(WP, 'target_tables')
 
-    w_br  = floats(T, 'bytes_read')
-    wp_br = np.array([float(r['source_bytes_read']) for r in WP
-                      if r.get('source_bytes_read', '').strip()])
-    dw_br  = describe(w_br)
-    dwp_br = describe(wp_br)
-    bytes_ratio_ww = ratio(dwp_br['mean'], dw_br['mean'])
+    ops_W, sigs_W = [], []
+    for row in T:
+        cnts, sig = explain_W(src, wl_dir, row.get('query_file', ''))
+        ops_W.append(cnts); sigs_W.append(sig)
 
-    freq_w  = table_freq(T,  'read_tables')
-    freq_wp = table_freq(WP, 'target_tables')
-    uniq_w  = set(freq_w)
-    uniq_wp = set(freq_wp)
-    ent_w   = entropy(freq_w)
-    ent_wp  = entropy(freq_wp)
-    jaccard_ww = len(uniq_w & uniq_wp) / len(uniq_w | uniq_wp) if (uniq_w | uniq_wp) else 0.0
+    ops_Wp, sigs_Wp = [], []
+    for row in WP:
+        sql = row.get('sql', '').strip()
+        if not sql or sql == 'SELECT 1':
+            ops_Wp.append(Counter()); sigs_Wp.append(frozenset())
+            continue
+        cnts, sig = explain_ops(tgt, sql)
+        ops_Wp.append(cnts); sigs_Wp.append(sig)
 
-    div_w  = len({frozenset(r.get('read_tables',  '').split('|')) for r in T})  / len(T)
-    div_wp = len({frozenset(r.get('target_tables','').split('|')) for r in WP}) / len(WP)
-
-    common_ww = sorted(uniq_w & uniq_wp)
-    spear_ww = float('nan')
-    if len(common_ww) >= 3:
-        spear_ww, _ = spearman([freq_w[t]  for t in common_ww],
-                               [freq_wp[t] for t in common_ww])
-
-    t_ok_pct  = pct_ok(T)
-    tp_ok_pct = pct_ok(TP)
+    avg_W  = avg_ops(ops_W)
+    avg_Wp = avg_ops(ops_Wp)
+    pdiv_W,  uniq_W  = plan_div(sigs_W)
+    pdiv_Wp, uniq_Wp = plan_div(sigs_Wp)
 
     rt_T  = floats(T,  'runtime_ms', only_ok=True)
     rt_Tp = floats(TP, 'runtime_ms', only_ok=True)
-    dT  = describe(rt_T)
-    dTp = describe(rt_Tp)
+    br_T  = floats(T,  'bytes_read', only_ok=False)
+    br_Tp = floats(TP, 'bytes_read', only_ok=False)
 
-    ks_stat = float('nan')
-    if len(rt_T) > 1 and len(rt_Tp) > 1:
-        ks_stat, _ = sp.ks_2samp(rt_T, rt_Tp)
+    op_keys = ['avg_scans','avg_joins','avg_aggregations','avg_sorts','avg_total_ops']
 
-    t_map  = {r['query_file']: float(r['runtime_ms'])
-              for r in T  if r.get('status') == 'ok'}
-    tp_map = {r['query_file']: float(r['runtime_ms'])
-              for r in TP if r.get('status') == 'ok'}
-    common_q = sorted(set(t_map) & set(tp_map))
-    pearson_r = spear_tt_r = float('nan')
-    if len(common_q) >= 3:
-        rv_T  = np.array([t_map[q]  for q in common_q])
-        rv_Tp = np.array([tp_map[q] for q in common_q])
-        pearson_r,  _ = sp.pearsonr(rv_T, rv_Tp)
-        spear_tt_r, _ = spearman(rv_T, rv_Tp)
-
-    jc_T  = floats(T,  'join_count')
-    jc_Tp = floats(TP, 'join_count')
-    jc_emd_tt = jc_emd(jc_T, jc_Tp)
-
-    freq_T  = table_freq(T,  'read_tables')
-    freq_Tp = table_freq(TP, 'read_tables')
-    common_tt = sorted(set(freq_T) & set(freq_Tp))
-    spear_tt_tbl = float('nan')
-    if len(common_tt) >= 3:
-        spear_tt_tbl, _ = spearman([freq_T[t]  for t in common_tt],
-                                   [freq_Tp[t] for t in common_tt])
-
-    sc = {
-        'experiment'                                    : exp_name,
-        'workload_query_count'                          : len(T),
-        'workload_prime_query_count'                    : len(WP),
-        'T_success_rate_percent'                        : fmt(t_ok_pct,  1),
-        'T_prime_success_rate_percent'                  : fmt(tp_ok_pct, 1),
-        'join_count_emd_W_Wprime'                       : fmt(jc_emd_ww),
-        'table_jaccard_similarity_W_Wprime'             : fmt(jaccard_ww),
-        'table_frequency_spearman_r_W_Wprime'           : fmt(spear_ww),
-        'table_access_entropy_bits_W'                   : fmt(ent_w),
-        'table_access_entropy_bits_Wprime'              : fmt(ent_wp),
-        'bytes_read_ratio_Wprime_over_W'                : fmt(bytes_ratio_ww, 2),
-        'runtime_median_ratio_Tprime_over_T'            : fmt(ratio(dTp['median'], dT['median']), 2),
-        'runtime_90th_percentile_ratio_Tprime_over_T'   : fmt(ratio(dTp['p90'],    dT['p90']),    2),
-        'runtime_ks_statistic'                          : fmt(ks_stat),
-        'runtime_pearson_r'                             : fmt(pearson_r),
-        'runtime_spearman_r'                            : fmt(spear_tt_r),
-        'join_count_emd_T_Tprime'                       : fmt(jc_emd_tt),
-        'table_frequency_spearman_r_T_Tprime'           : fmt(spear_tt_tbl),
-        'query_diversity_W'                             : fmt(div_w),
-        'query_diversity_Wprime'                        : fmt(div_wp),
-        'unique_tables_accessed_W'                      : len(uniq_w),
-        'unique_tables_accessed_Wprime'                 : len(uniq_wp),
+    return {
+        'experiment'                    : exp_name,
+        'query_count_W'                 : len(T),
+        'query_count_Wprime'            : len(WP),
+        'query_diversity_W'             : fmt(div_W,  3),
+        'query_diversity_Wprime'        : fmt(div_Wp, 3),
+        'srr_W'                         : fmt(srr_W,  3),
+        'srr_Wprime'                    : fmt(srr_Wp, 3),
+        **{f'{k}_W' : fmt(avg_W[k])  for k in op_keys},
+        **{f'{k}_Wprime': fmt(avg_Wp[k]) for k in op_keys},
+        'plan_diversity_W'              : fmt(pdiv_W,  3),
+        'plan_diversity_Wprime'         : fmt(pdiv_Wp, 3),
+        'unique_plan_signatures_W'      : uniq_W,
+        'unique_plan_signatures_Wprime' : uniq_Wp,
+        'success_rate_percent_T'        : fmt(pct_ok(T),  1),
+        'success_rate_percent_Tprime'   : fmt(pct_ok(TP), 1),
+        'runtime_mean_ms_T'             : fmt(float(np.mean(rt_T))  if len(rt_T)  else 0.0, 1),
+        'runtime_mean_ms_Tprime'        : fmt(float(np.mean(rt_Tp)) if len(rt_Tp) else 0.0, 1),
+        'runtime_90th_pct_ms_T'         : fmt(float(np.percentile(rt_T,  90)) if len(rt_T)  else 0.0, 1),
+        'runtime_90th_pct_ms_Tprime'    : fmt(float(np.percentile(rt_Tp, 90)) if len(rt_Tp) else 0.0, 1),
+        'bytes_read_mean_T'             : fmt(float(np.mean(br_T))  if len(br_T)  else 0.0, 0),
+        'bytes_read_mean_Tprime'        : fmt(float(np.mean(br_Tp)) if len(br_Tp) else 0.0, 0),
     }
-
-    return sc
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--exp', default=None, help='single experiment (default: all)')
 args = parser.parse_args()
 
 exp_root = os.path.join(BASE, 'experiments')
-if args.exp:
-    experiments = [args.exp]
-else:
-    experiments = sorted(
-        d for d in os.listdir(exp_root)
-        if os.path.isdir(os.path.join(exp_root, d)) and not d.startswith('_')
-    )
+experiments = (
+    [args.exp] if args.exp else
+    sorted(d for d in os.listdir(exp_root)
+           if os.path.isdir(os.path.join(exp_root, d)) and not d.startswith('_'))
+)
 
-eval_dir = os.path.join(exp_root, '_evaluation')
-os.makedirs(eval_dir, exist_ok=True)
+print(f"\nEvaluating {len(experiments)} experiment(s) ...\n")
 
 all_sc = []
 for exp in experiments:
-    out_dir = os.path.join(exp_root, exp, 'output')
-    sc = evaluate(exp, out_dir)
-    if sc is None:
-        continue
-    all_sc.append(sc)
-    print(f"Evaluated: {exp}")
+    print(f"  {exp}")
+    sc = evaluate(exp, os.path.join(exp_root, exp, 'output'))
+    if sc:
+        all_sc.append(sc)
+
+for con in _db_cons.values():
+    try: con.close()
+    except Exception: pass
 
 if all_sc:
+    eval_dir    = os.path.join(exp_root, '_evaluation')
+    os.makedirs(eval_dir, exist_ok=True)
     summary_csv = os.path.join(eval_dir, 'summary_scorecard.csv')
     with open(summary_csv, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=list(all_sc[0].keys()))
         writer.writeheader()
         writer.writerows(all_sc)
-    print(f"\nSummary saved -> {summary_csv}")
+    print(f"\nSummary saved  ->  {summary_csv}")
+    print(f"Experiments    :  {len(all_sc)}")
+    print(f"Columns        :  {len(all_sc[0])}")
+else:
+    print("No experiments evaluated.")

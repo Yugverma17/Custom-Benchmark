@@ -34,12 +34,10 @@ def extract_tables(sql: str) -> list[str]:
     clean = re.sub(r'--[^\n]*', '', sql)
     clean = re.sub(r'/\*.*?\*/', '', clean, flags=re.DOTALL)
     seen, result = set(), []
-
     for t in re.findall(r'\bJOIN\s+([a-zA-Z_][a-zA-Z0-9_]*)', clean, re.IGNORECASE):
         tl = t.lower()
         if tl not in seen:
             seen.add(tl); result.append(tl)
-
     from_m = re.search(
         r'\bFROM\b(.*?)(?:\bWHERE\b|\bGROUP\b|\bORDER\b|\bHAVING\b|\bLIMIT\b|\bJOIN\b|$)',
         clean, re.IGNORECASE | re.DOTALL)
@@ -74,7 +72,6 @@ def bfs_join_tree(tables: list, adj: dict):
     visited   = {start: None}
     queue     = [start]
     bfs_order = [start]
-
     while queue and len(visited) < len(tables_set):
         curr = queue.pop(0)
         for neighbor, curr_col, nbr_col in adj.get(curr, []):
@@ -82,14 +79,12 @@ def bfs_join_tree(tables: list, adj: dict):
                 visited[neighbor] = (curr, curr_col, nbr_col)
                 queue.append(neighbor)
                 bfs_order.append(neighbor)
-
     return visited, start, bfs_order
 
 def select_tables_bfs(n_tables: int, schema, rng: random.Random) -> list[str]:
     adj = build_adjacency(schema.FK_EDGES)
     all_tables = sorted(schema.TABLE_SIZES, key=lambda t: -schema.TABLE_SIZES[t])
     start = all_tables[0]
-
     visited_set = {start}
     queue = [start]
     order = [start]
@@ -104,9 +99,237 @@ def select_tables_bfs(n_tables: int, schema, rng: random.Random) -> list[str]:
             visited_set.add(nb)
             queue.append(nb)
             order.append(nb)
-
     selected = order[:n_tables]
     return sorted(selected, key=lambda t: -schema.TABLE_SIZES.get(t, 0))
+
+
+def build_size_rank_mapping(source_schema, target_schema) -> dict:
+    src_ranked = sorted(source_schema.TABLE_SIZES, key=lambda t: -source_schema.TABLE_SIZES[t])
+    tgt_ranked = sorted(target_schema.TABLE_SIZES, key=lambda t: -target_schema.TABLE_SIZES[t])
+    return {src: tgt_ranked[min(i, len(tgt_ranked) - 1)] for i, src in enumerate(src_ranked)}
+
+
+def compute_relative_selectivity(tables: list, bytes_read: int, source_schema) -> float:
+    total = sum(
+        source_schema.TABLE_SIZES.get(t, 1000) * source_schema.AVG_ROW_SIZE.get(t, 80)
+        for t in tables
+    )
+    if total <= 0:
+        return 0.1
+    return min(0.99, max(0.001, bytes_read / total))
+
+
+def compute_column_stats(con, schema) -> dict:
+    stats: dict = {}
+    quantile_points = [0.0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 1.0]
+
+    for table, col_defs in schema.PRED_COLS.items():
+        stats[table] = {}
+        for col_def in col_defs:
+            col   = col_def[0]
+            dtype = col_def[1]
+            try:
+                if dtype in ('int', 'float'):
+                    try:
+                        row = con.execute(
+                            f"SELECT quantile_cont(CAST({col} AS DOUBLE), "
+                            f"{quantile_points}) "
+                            f"FROM {table} WHERE {col} IS NOT NULL"
+                        ).fetchone()
+                        vals = row[0] if row else None
+                        if vals and len(vals) == len(quantile_points):
+                            stats[table][col] = {
+                                'type': dtype,
+                                'quantiles': list(zip(quantile_points, vals))
+                            }
+                            continue
+                    except Exception:
+                        pass
+                    row = con.execute(
+                        f"SELECT MIN(CAST({col} AS DOUBLE)), MAX(CAST({col} AS DOUBLE)) "
+                        f"FROM {table} WHERE {col} IS NOT NULL"
+                    ).fetchone()
+                    lo, hi = (row[0] or 0), (row[1] or 0)
+                    stats[table][col] = {
+                        'type': dtype,
+                        'quantiles': [(0.0, lo), (0.5, (lo + hi) / 2), (1.0, hi)]
+                    }
+
+                elif dtype == 'enum':
+                    rows = con.execute(
+                        f"SELECT DISTINCT CAST({col} AS VARCHAR) "
+                        f"FROM {table} WHERE {col} IS NOT NULL LIMIT 100"
+                    ).fetchall()
+                    stats[table][col] = {
+                        'type': 'enum',
+                        'values': [r[0] for r in rows if r[0] is not None]
+                    }
+
+                elif dtype == 'like':
+                    rows = con.execute(
+                        f"SELECT DISTINCT SUBSTR(CAST({col} AS VARCHAR), 1, 1) "
+                        f"FROM {table} WHERE {col} IS NOT NULL LIMIT 26"
+                    ).fetchall()
+                    stats[table][col] = {
+                        'type': 'like',
+                        'prefixes': [r[0] for r in rows if r[0]]
+                    }
+
+            except Exception as exc:
+                stats[table][col] = {'type': dtype, 'error': str(exc)[:120]}
+
+    return stats
+
+
+def random_walk_tables(seed_tables: list, n_tables: int, schema, rng: random.Random) -> list:
+    adj      = build_adjacency(schema.FK_EDGES)
+    all_tbls = set(schema.TABLE_SIZES.keys())
+
+    valid_seeds = [t for t in seed_tables if t in all_tbls]
+    if not valid_seeds:
+        return select_tables_bfs(n_tables, schema, rng)
+
+    valid_seeds = sorted(valid_seeds, key=lambda t: -schema.TABLE_SIZES.get(t, 0))
+    start   = valid_seeds[0]
+    visited = {start}
+    path    = [start]
+    remaining_seeds = set(valid_seeds[1:])
+
+    for _ in range(n_tables * 8):
+        if len(path) >= n_tables:
+            break
+        current = path[-1] if rng.random() > 0.25 else rng.choice(path)
+        neighbors = [nb for nb, _, _ in adj.get(current, [])
+                     if nb in all_tbls and nb not in visited]
+        if not neighbors:
+            for t in rng.sample(path, len(path)):
+                neighbors = [nb for nb, _, _ in adj.get(t, [])
+                             if nb in all_tbls and nb not in visited]
+                if neighbors:
+                    break
+        if not neighbors:
+            break
+        seed_nbrs = [nb for nb in neighbors if nb in remaining_seeds]
+        if seed_nbrs and rng.random() < 0.7:
+            next_t = rng.choice(seed_nbrs)
+        else:
+            next_t = rng.choice(neighbors)
+        visited.add(next_t)
+        path.append(next_t)
+        remaining_seeds.discard(next_t)
+
+    if len(path) < n_tables:
+        for t in select_tables_bfs(n_tables * 2, schema, rng):
+            if t not in visited:
+                path.append(t)
+                visited.add(t)
+            if len(path) >= n_tables:
+                break
+
+    return path[:n_tables]
+
+
+def build_predicate_redbench(alias: str, col_def: tuple, col_stat: dict,
+                              selectivity: float, rng: random.Random) -> 'str | None':
+    if not col_stat or 'error' in col_stat:
+        return build_predicate(alias, col_def, selectivity, rng)
+
+    col   = col_def[0]
+    dtype = col_stat.get('type', col_def[1])
+
+    if dtype in ('int', 'float') and 'quantiles' in col_stat:
+        qs = col_stat['quantiles']
+        target_width = min(0.99, selectivity * 2.5)
+        max_start    = max(0.0, 1.0 - target_width)
+        start_q      = rng.uniform(0.0, max_start)
+        end_q        = min(1.0, start_q + target_width)
+        lo = hi = None
+        for q_frac, v in qs:
+            if lo is None and q_frac >= start_q and v is not None:
+                lo = v
+            if v is not None and q_frac <= end_q:
+                hi = v
+        if lo is None or hi is None:
+            lo, hi = qs[0][1], qs[-1][1]
+        if lo == hi or lo is None:
+            return None
+        if dtype == 'int':
+            return f"{alias}.{col} >= {int(lo)} AND {alias}.{col} <= {int(hi)}"
+        return f"{alias}.{col} >= {lo:.4f} AND {alias}.{col} <= {hi:.4f}"
+
+    elif dtype == 'enum' and 'values' in col_stat:
+        vals = col_stat['values']
+        if not vals:
+            return None
+        k      = max(1, int(len(vals) * selectivity * 3))
+        chosen = rng.sample(vals, min(k, len(vals)))
+        if len(chosen) == 1:
+            return f"{alias}.{col} = '{chosen[0]}'"
+        in_list = ', '.join(f"'{v}'" for v in chosen)
+        return f"{alias}.{col} IN ({in_list})"
+
+    elif dtype == 'like' and 'prefixes' in col_stat:
+        prefixes = col_stat['prefixes'] or list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+        return f"{alias}.{col} LIKE '{rng.choice(prefixes)}%'"
+
+    return build_predicate(alias, col_def, selectivity, rng)
+
+
+def build_select_sql_redbench(tables: list, selectivity: float,
+                               schema, col_stats: dict, rng: random.Random) -> str:
+    if not tables:
+        return "SELECT 1"
+
+    adj = build_adjacency(schema.FK_EDGES)
+
+    if len(tables) == 1:
+        t     = tables[0]
+        alias = f"{t[0]}0"
+        agg   = getattr(schema, 'AGG_COL', {}).get(t, getattr(schema, 'DEFAULT_AGG_COL', 'id'))
+        sql   = f"SELECT MIN({alias}.{agg}) AS result\nFROM {t} AS {alias}"
+        if t in schema.PRED_COLS:
+            col_def  = schema.PRED_COLS[t][0]
+            col_stat = col_stats.get(t, {}).get(col_def[0], {})
+            pred     = build_predicate_redbench(alias, col_def, col_stat, selectivity, rng)
+            if pred:
+                sql += f"\nWHERE {pred}"
+        return sql
+
+    aliases              = {t: f"{t[0]}{i}" for i, t in enumerate(tables)}
+    visited, root, order = bfs_join_tree(tables, adj)
+    agg                  = getattr(schema, 'AGG_COL', {}).get(root,
+                           getattr(schema, 'DEFAULT_AGG_COL', 'id'))
+
+    join_parts = []
+    for t in order[1:]:
+        if visited.get(t) is None:
+            continue
+        parent, parent_col, my_col = visited[t]
+        if parent in aliases:
+            join_parts.append(
+                f"JOIN {t} AS {aliases[t]}"
+                f" ON {aliases[t]}.{my_col} = {aliases[parent]}.{parent_col}"
+            )
+
+    where_parts = []
+    for t in order:
+        if t not in schema.PRED_COLS:
+            continue
+        col_def  = schema.PRED_COLS[t][0]
+        col_stat = col_stats.get(t, {}).get(col_def[0], {})
+        pred     = build_predicate_redbench(aliases[t], col_def, col_stat, selectivity, rng)
+        if pred:
+            where_parts.append(pred)
+        if len(where_parts) >= 3:
+            break
+
+    sql  = f"SELECT MIN({aliases[root]}.{agg}) AS result\n"
+    sql += f"FROM {root} AS {aliases[root]}"
+    for jp in join_parts:
+        sql += "\n" + jp
+    if where_parts:
+        sql += "\nWHERE " + "\nAND ".join(where_parts)
+    return sql
 
 
 def build_predicate(alias: str, col_def: tuple, sel: float, rng: random.Random) -> str | None:
@@ -143,6 +366,7 @@ def build_predicate(alias: str, col_def: tuple, sel: float, rng: random.Random) 
 
     return None
 
+
 def build_select_sql(tables: list[str], target_bytes: float, schema, rng: random.Random) -> str:
     if not tables:
         return "SELECT 1"
@@ -163,7 +387,6 @@ def build_select_sql(tables: list[str], target_bytes: float, schema, rng: random
     adj = build_adjacency(schema.FK_EDGES)
     aliases  = {t: f"{t[0]}{i}" for i, t in enumerate(tables)}
     visited, root, bfs_order = bfs_join_tree(tables, adj)
-
     agg_col = schema.AGG_COL.get(root, schema.DEFAULT_AGG_COL)
     select_clause = f"SELECT MIN({aliases[root]}.{agg_col}) AS result"
 

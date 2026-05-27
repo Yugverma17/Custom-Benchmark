@@ -1,116 +1,116 @@
 query_file,query_hash,join_count,read_tables,n_tables,bytes_read,runtime_ms,rows_returned,status,error_msg,src_join_count,src_bytes_read
-10a.sql,4819d560,6,cast_info|title|role_type|movie_companies|company_name|company_type|char_name,7,302432232,7033.34,1,ok,,6,302432232
-10b.sql,61ddf896,6,cast_info|title|role_type|movie_companies|company_name|company_type|char_name,7,302432232,17.58,1,ok,,6,302432232
-10c.sql,19926b39,6,cast_info|title|role_type|movie_companies|company_name|company_type|char_name,7,302432232,5168.57,1,ok,,6,302432232
-11a.sql,091dadb6,7,movie_companies|title|company_type|movie_keyword|movie_link|keyword|link_type|company_name,8,68327928,14.56,1,ok,,7,68327928
-11b.sql,ab984899,7,movie_companies|title|company_type|movie_keyword|movie_link|keyword|link_type|company_name,8,68327928,50.67,1,ok,,7,68327928
-11c.sql,7d9823c4,7,movie_companies|title|company_type|movie_keyword|movie_link|keyword|link_type|company_name,8,68327928,319.76,1,ok,,7,68327928
-11d.sql,6a3fd89d,7,movie_companies|title|company_type|movie_keyword|movie_link|keyword|link_type|company_name,8,68327928,85.16,1,ok,,7,68327928
-12a.sql,075839b7,7,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|info_type|company_name,8,578783837,35.79,1,ok,,7,361317773
-12b.sql,c3e54c81,7,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|info_type|company_name,8,578783837,2807.11,1,ok,,7,361317773
-12c.sql,28c67352,7,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|info_type|company_name,8,578783837,28.87,1,ok,,7,361317773
-13a.sql,80f02f54,8,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|kind_type|info_type|company_name,9,578783851,1722.06,1,ok,,8,361317787
-13b.sql,6d7e3790,8,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|kind_type|info_type|company_name,9,578783851,265.43,1,ok,,8,361317787
-13c.sql,045e6ccb,8,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|kind_type|info_type|company_name,9,578783851,21572.72,1,ok,,8,361317787
-13d.sql,30dab855,8,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|kind_type|info_type|company_name,9,578783851,56.09,1,ok,,8,361317787
-14a.sql,b53acd3a,7,movie_info|movie_info_idx|title|cast_info|movie_keyword|kind_type|keyword|info_type,8,570205991,5.18,1,ok,,7,352739927
-14b.sql,80da3212,7,movie_info|movie_info_idx|title|cast_info|movie_keyword|kind_type|keyword|info_type,8,570205991,10.36,1,ok,,7,352739927
-14c.sql,eb57b1fb,7,movie_info|movie_info_idx|title|cast_info|movie_keyword|kind_type|keyword|info_type,8,570205991,4.36,1,ok,,7,352739927
-15a.sql,7d290388,8,title|movie_companies|movie_info|movie_keyword|company_name|company_type|info_type|keyword|aka_title,9,370344723,2180.01,1,ok,,8,370344723
-15b.sql,b54bfb4f,8,title|movie_companies|movie_info|movie_keyword|company_name|company_type|info_type|keyword|aka_title,9,370344723,23.75,1,ok,,8,370344723
-15c.sql,7de5e832,8,title|movie_companies|movie_info|movie_keyword|company_name|company_type|info_type|keyword|aka_title,9,370344723,984.19,1,ok,,8,370344723
-15d.sql,d7f06be8,8,title|movie_companies|movie_info|movie_keyword|company_name|company_type|info_type|keyword|aka_title,9,370344723,28.28,1,ok,,8,370344723
-16a.sql,2a98c6c5,7,name|cast_info|title|movie_companies|movie_keyword|company_name|keyword|aka_name,8,342332477,1797.4,1,ok,,7,342332477
-16b.sql,6037eef1,7,name|cast_info|title|movie_companies|movie_keyword|company_name|keyword|aka_name,8,342332477,2041.33,1,ok,,7,342332477
-16c.sql,2d681d78,7,name|cast_info|title|movie_companies|movie_keyword|company_name|keyword|aka_name,8,342332477,16031.28,1,ok,,7,342332477
-16d.sql,2bd56a69,7,name|cast_info|title|movie_companies|movie_keyword|company_name|keyword|aka_name,8,342332477,1217.29,1,ok,,7,342332477
-17a.sql,d1c84112,6,title|name|movie_companies|movie_keyword|company_name|keyword|cast_info,7,331516361,1090.41,1,ok,,6,331516361
-17b.sql,954fbe2a,6,title|name|movie_companies|movie_keyword|company_name|keyword|cast_info,7,331516361,1259.22,1,ok,,6,331516361
-17c.sql,354a5ecd,6,title|name|movie_companies|movie_keyword|company_name|keyword|cast_info,7,331516361,2526.1,1,ok,,6,331516361
-17d.sql,3a909932,6,title|name|movie_companies|movie_keyword|company_name|keyword|cast_info,7,331516361,350.97,1,ok,,6,331516361
-17e.sql,0f2a44dc,6,title|name|movie_companies|movie_keyword|company_name|keyword|cast_info,7,331516361,5639.12,1,ok,,6,331516361
-17f.sql,f52cde8b,6,title|name|movie_companies|movie_keyword|company_name|keyword|cast_info,7,331516361,711.86,1,ok,,6,331516361
-18a.sql,bc18c9ca,6,title|name|movie_info|movie_info_idx|movie_keyword|info_type|cast_info,7,614975018,28.08,1,ok,,6,601403228
-18b.sql,e19304be,6,title|name|char_name|movie_info|movie_info_idx|info_type|cast_info,7,632806618,20.51,1,ok,,6,601403228
-18c.sql,efaf7234,6,title|name|movie_info|movie_info_idx|movie_keyword|info_type|cast_info,7,614975018,32.13,1,ok,,6,601403228
-19a.sql,83bf0d08,9,name|cast_info|title|char_name|role_type|movie_companies|movie_info|company_name|info_type|aka_name,10,655805480,822.15,1,ok,,9,655805480
-19b.sql,70b6b467,9,name|cast_info|title|char_name|role_type|movie_companies|movie_info|company_name|info_type|aka_name,10,655805480,97.27,1,ok,,9,655805480
-19c.sql,c10acfa1,9,name|cast_info|title|char_name|role_type|movie_companies|movie_info|company_name|info_type|aka_name,10,655805480,91.67,1,ok,,9,655805480
-19d.sql,8bac2656,9,name|cast_info|title|char_name|role_type|movie_companies|movie_info|company_name|info_type|aka_name,10,655805480,1192.64,1,ok,,9,655805480
-1a.sql,1cc497ee,4,movie_companies|title|movie_info_idx|info_type|company_type,5,62253403,7.6,1,ok,,4,62253403
-1b.sql,24f1bff3,4,movie_companies|title|movie_info_idx|info_type|company_type,5,62253403,452.45,1,ok,,4,62253403
-1c.sql,187d7562,4,movie_companies|title|movie_info_idx|info_type|company_type,5,62253403,8.33,1,ok,,4,62253403
-1d.sql,569dcf01,4,movie_companies|title|movie_info_idx|info_type|company_type,5,62253403,487.32,1,ok,,4,62253403
-20a.sql,0b49f5f0,9,title|comp_cast_type|cast_info|movie_keyword|kind_type|name|char_name|keyword|person_info|complete_cast,10,414328715,337.62,1,ok,,9,340237115
-20b.sql,ebf40f9d,9,title|comp_cast_type|cast_info|movie_info|movie_keyword|kind_type|name|char_name|keyword|complete_cast,10,636951515,351.42,1,ok,,9,340237115
-20c.sql,ba97b087,9,title|comp_cast_type|cast_info|movie_keyword|kind_type|name|char_name|keyword|person_info|complete_cast,10,414328715,300.19,1,ok,,9,340237115
-21a.sql,e127d9dd,8,movie_companies|title|company_type|movie_info|movie_keyword|movie_link|keyword|link_type|company_name,9,365042328,24.74,1,ok,,8,365042328
-21b.sql,ea4e0ceb,8,movie_companies|title|company_type|movie_info|movie_keyword|movie_link|keyword|link_type|company_name,9,365042328,466.77,1,ok,,8,365042328
-21c.sql,c8b2b5ab,8,movie_companies|title|company_type|movie_info|movie_keyword|movie_link|keyword|link_type|company_name,9,365042328,189.19,1,ok,,8,365042328
-22a.sql,397e466c,10,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|movie_keyword|kind_type|info_type|keyword|company_name,11,593429001,13150.76,1,ok,,10,375962937
-22b.sql,c9893114,10,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|movie_keyword|kind_type|info_type|keyword|company_name,11,593429001,74.07,1,ok,,10,375962937
-22c.sql,d8552cad,10,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|movie_keyword|kind_type|info_type|keyword|company_name,11,593429001,108.66,1,ok,,10,375962937
-22d.sql,1a6a2b48,10,movie_companies|title|company_type|cast_info|movie_info|movie_info_idx|movie_keyword|kind_type|info_type|keyword|company_name,11,593429001,87.95,1,ok,,10,375962937
-23a.sql,53b660e9,10,title|comp_cast_type|movie_companies|movie_info|movie_keyword|kind_type|company_name|company_type|info_type|keyword|complete_cast,11,365463009,1885.05,1,ok,,10,365463009
-23b.sql,2887bcb6,10,title|comp_cast_type|movie_companies|movie_info|movie_keyword|kind_type|company_name|company_type|info_type|keyword|complete_cast,11,365463009,800.19,1,ok,,10,365463009
-23c.sql,187af3dd,10,title|comp_cast_type|movie_companies|movie_info|movie_keyword|kind_type|company_name|company_type|info_type|keyword|complete_cast,11,365463009,1051.7,1,ok,,10,365463009
-24a.sql,3396c868,11,name|cast_info|title|char_name|role_type|movie_companies|movie_info|movie_keyword|company_name|info_type|keyword|aka_name,12,670450630,1686.57,1,ok,,11,670450630
-24b.sql,13758867,11,name|cast_info|title|char_name|role_type|movie_companies|movie_info|movie_keyword|company_name|info_type|keyword|aka_name,12,670450630,1209.16,1,ok,,11,670450630
-25a.sql,b66f36c8,8,title|name|char_name|movie_info|movie_info_idx|movie_keyword|info_type|keyword|cast_info,9,647451768,1058.7,1,ok,,8,616048378
-25b.sql,ad486d3a,8,title|name|char_name|movie_info|movie_info_idx|movie_keyword|info_type|keyword|cast_info,9,647451768,8284.52,1,ok,,8,616048378
-25c.sql,4ae30d2e,8,title|name|char_name|movie_info|movie_info_idx|movie_keyword|info_type|keyword|cast_info,9,647451768,1160.95,1,ok,,8,616048378
-26a.sql,f6bc5fa8,11,title|comp_cast_type|cast_info|movie_info|movie_info_idx|movie_keyword|kind_type|name|char_name|info_type|keyword|complete_cast,12,647992134,78.92,1,ok,,11,351277734
-26b.sql,b27a5f09,11,title|comp_cast_type|cast_info|movie_info|movie_info_idx|movie_keyword|kind_type|name|char_name|info_type|keyword|complete_cast,12,647992134,48.56,1,ok,,11,351277734
-26c.sql,dd2120fc,11,title|comp_cast_type|cast_info|movie_info|movie_info_idx|movie_keyword|kind_type|name|char_name|info_type|keyword|complete_cast,12,647992134,73.02,1,ok,,11,351277734
-27a.sql,e22a8e04,11,title|comp_cast_type|cast_info|movie_companies|movie_info|movie_keyword|movie_link|company_name|company_type|keyword|link_type|complete_cast,12,583048744,105.31,1,ok,,11,365582680
-27b.sql,0f1618f4,11,title|comp_cast_type|cast_info|movie_companies|movie_info|movie_keyword|movie_link|company_name|company_type|keyword|link_type|complete_cast,12,583048744,26.61,1,ok,,11,365582680
-27c.sql,23f827a7,11,title|comp_cast_type|cast_info|movie_companies|movie_info|movie_keyword|movie_link|company_name|company_type|keyword|link_type|complete_cast,12,583048744,45.48,1,ok,,11,365582680
-28a.sql,4625cafd,13,title|comp_cast_type|cast_info|movie_companies|movie_info|movie_info_idx|movie_keyword|kind_type|name|company_name|company_type|info_type|keyword|complete_cast,14,639811754,60308.83,,timeout,INTERRUPT Error: Interrupted!,13,376503289
-28b.sql,778e7768,13,title|comp_cast_type|cast_info|movie_companies|movie_info|movie_info_idx|movie_keyword|kind_type|name|company_name|company_type|info_type|keyword|complete_cast,14,639811754,60736.22,,timeout,INTERRUPT Error: Interrupted!,13,376503289
-28c.sql,683afe1f,13,title|comp_cast_type|cast_info|movie_companies|movie_info|movie_info_idx|movie_keyword|kind_type|name|company_name|company_type|info_type|keyword|complete_cast,14,639811754,35598.17,1,ok,,13,376503289
-29a.sql,3f20abe8,16,name|cast_info|person_info|title|char_name|role_type|info_type|aka_title|movie_companies|movie_info|movie_info_idx|movie_keyword|complete_cast|company_name|keyword|comp_cast_type|aka_name,17,761544942,50873.8,1,ok,,16,745082582
-29b.sql,8ca3bfd8,16,name|cast_info|person_info|title|char_name|role_type|info_type|aka_title|movie_companies|movie_info|movie_info_idx|movie_keyword|complete_cast|company_name|keyword|comp_cast_type|aka_name,17,761544942,11097.47,1,ok,,16,745082582
-29c.sql,8136ba60,16,name|cast_info|person_info|title|char_name|role_type|info_type|aka_title|movie_companies|movie_info|movie_info_idx|movie_keyword|complete_cast|company_name|keyword|comp_cast_type|aka_name,17,761544942,43595.41,1,ok,,16,745082582
-2a.sql,44787523,4,movie_companies|title|movie_keyword|keyword|company_name,5,68207896,532.53,1,ok,,4,68207896
-2b.sql,6549c57d,4,movie_companies|title|movie_keyword|keyword|company_name,5,68207896,36.05,1,ok,,4,68207896
-2c.sql,0e03b233,4,movie_companies|title|movie_keyword|keyword|company_name,5,68207896,266.27,1,ok,,4,68207896
-2d.sql,f7be1a70,4,movie_companies|title|movie_keyword|keyword|company_name,5,68207896,57.09,1,ok,,4,68207896
-30a.sql,6c1ef429,11,title|comp_cast_type|cast_info|aka_title|movie_info|movie_info_idx|movie_keyword|name|char_name|info_type|keyword|complete_cast,12,653414200,18470.34,1,ok,,11,616588730
-30b.sql,ec04b2d6,11,title|comp_cast_type|cast_info|movie_info|movie_info_idx|movie_keyword|name|char_name|info_type|keyword|person_info|complete_cast,12,722083720,59473.63,1,ok,,11,616588730
-30c.sql,72f8de84,11,title|comp_cast_type|cast_info|movie_info|movie_info_idx|movie_keyword|name|char_name|info_type|keyword|person_info|complete_cast,12,722083720,914.62,1,ok,,11,616588730
-31a.sql,4c5dcb5a,10,title|name|char_name|movie_companies|movie_info|movie_info_idx|movie_keyword|company_name|info_type|keyword|cast_info,11,670674770,461.35,1,ok,,10,639271380
-31b.sql,2b35bfa3,10,title|name|char_name|movie_companies|movie_info|movie_info_idx|movie_keyword|company_name|info_type|keyword|cast_info,11,670674770,402.48,1,ok,,10,639271380
-31c.sql,6f83b3a6,10,title|name|char_name|movie_companies|movie_info|movie_info_idx|movie_keyword|company_name|info_type|keyword|cast_info,11,670674770,780.82,1,ok,,10,639271380
-32a.sql,94af8ba2,5,movie_keyword|title|cast_info|movie_link|link_type|keyword,6,262570982,31.04,1,ok,,5,45104918
-32b.sql,eb4e83cd,5,movie_keyword|title|cast_info|movie_link|link_type|keyword,6,262570982,27.47,1,ok,,5,45104918
-33a.sql,4937b8dd,13,movie_companies|title|cast_info|movie_info|movie_info_idx|movie_keyword|movie_link|kind_type|name|char_name|info_type|link_type|aka_name|company_name,14,680537564,60.91,1,ok,,13,64723403
-33b.sql,4c23a004,13,movie_companies|title|cast_info|movie_info|movie_info_idx|movie_keyword|movie_link|kind_type|name|char_name|info_type|link_type|aka_name|company_name,14,680537564,42.14,1,ok,,13,64723403
-33c.sql,0537785a,13,movie_companies|title|cast_info|movie_info|movie_info_idx|movie_keyword|movie_link|kind_type|name|char_name|info_type|link_type|person_info|company_name,14,743813048,44.95,1,ok,,13,64723403
-3a.sql,2e58a9e3,3,movie_keyword|title|movie_info|keyword,4,341699294,141.4,1,ok,,3,341699294
-3b.sql,eb2425f7,3,movie_keyword|title|movie_info|keyword,4,341699294,74.28,1,ok,,3,341699294
-3c.sql,e5138d71,3,movie_keyword|title|movie_info|keyword,4,341699294,38.74,1,ok,,3,341699294
-4a.sql,166a82b6,4,movie_info_idx|title|movie_keyword|keyword|info_type,5,56025513,189.65,1,ok,,4,56025513
-4b.sql,ef3d0c3e,4,movie_info_idx|title|movie_keyword|keyword|info_type,5,56025513,11.74,1,ok,,4,56025513
-4c.sql,0c12aabe,4,movie_info_idx|title|movie_keyword|keyword|info_type,5,56025513,14.27,1,ok,,4,56025513
-5a.sql,c636aabf,4,movie_companies|title|movie_info|info_type|company_type,5,347927523,7.34,1,ok,,4,347927523
-5b.sql,89556f7c,4,movie_companies|title|movie_info|info_type|company_type,5,347927523,7.18,1,ok,,4,347927523
-5c.sql,4d6c3b7c,4,movie_companies|title|movie_info|info_type|company_type,5,347927523,6.19,1,ok,,4,347927523
-6a.sql,d2e10121,4,title|name|movie_keyword|keyword|cast_info,5,308293359,113.28,1,ok,,4,308293359
-6b.sql,9413678e,4,title|name|movie_keyword|keyword|cast_info,5,308293359,101.37,1,ok,,4,308293359
-6c.sql,546caf05,4,title|name|movie_keyword|keyword|cast_info,5,308293359,213.23,1,ok,,4,308293359
-6d.sql,fc3abbfe,4,title|name|movie_keyword|keyword|cast_info,5,308293359,456.48,1,ok,,4,308293359
-6e.sql,e118b342,4,title|name|movie_keyword|keyword|cast_info,5,308293359,317.6,1,ok,,4,308293359
-6f.sql,74859a0c,4,title|name|movie_keyword|keyword|cast_info,5,308293359,280.42,1,ok,,4,308293359
-7a.sql,6fd4d5b3,7,name|cast_info|person_info|title|info_type|movie_link|link_type|aka_name,8,378676288,198.67,1,ok,,7,378676288
-7b.sql,8e55bdac,7,name|cast_info|person_info|title|info_type|movie_link|link_type|aka_name,8,378676288,211.86,1,ok,,7,378676288
-7c.sql,af4b778d,7,name|cast_info|person_info|title|info_type|movie_link|link_type|aka_name,8,378676288,10.62,1,ok,,7,378676288
-8a.sql,8cd0d08e,6,name|cast_info|title|role_type|movie_companies|company_name|aka_name,7,327687351,702.45,1,ok,,6,327687351
-8b.sql,c1f088e8,6,name|cast_info|title|role_type|movie_companies|company_name|aka_name,7,327687351,28.34,1,ok,,6,327687351
-8c.sql,e463788a,6,name|cast_info|title|role_type|movie_companies|company_name|aka_name,7,327687351,225.6,1,ok,,6,327687351
-8d.sql,603bab86,6,name|cast_info|title|role_type|movie_companies|company_name|aka_name,7,327687351,244.35,1,ok,,6,327687351
-9a.sql,ae3524ac,7,name|cast_info|title|char_name|role_type|movie_companies|company_name|aka_name,8,359090741,2118.76,1,ok,,7,359090741
-9b.sql,7d0f5257,7,name|cast_info|title|char_name|role_type|movie_companies|company_name|aka_name,8,359090741,31.02,1,ok,,7,359090741
-9c.sql,cfe183e3,7,name|cast_info|title|char_name|role_type|movie_companies|company_name|aka_name,8,359090741,2192.97,1,ok,,7,359090741
-9d.sql,8c9e1f2a,7,name|cast_info|title|char_name|role_type|movie_companies|company_name|aka_name,8,359090741,158.14,1,ok,,7,359090741
-fkindexes.sql,d548c76f,0,cast_info,1,217466064,21.06,1,ok,,0,0
-schema.sql,14bfaf99,0,cast_info,1,217466064,13.08,1,ok,,0,0
+10a.sql,4bdddc09,6,title|name|char_name|role_type|aka_name|person_info|cast_info,7,409959339,509.47,1,ok,,6,302432232
+10b.sql,4abc2e7e,6,title|role_type|movie_companies|movie_link|company_type|link_type|cast_info,7,268798896,60.08,1,ok,,6,302432232
+10c.sql,db25801c,6,title|name|char_name|role_type|movie_info_idx|info_type|cast_info,7,336092242,1123.23,1,ok,,6,302432232
+11a.sql,5e67b01e,7,title|keyword|movie_info|movie_link|info_type|link_type|person_info|movie_keyword,8,415911257,266.62,1,ok,,7,68327928
+11b.sql,9d5129a3,7,title|keyword|movie_companies|movie_info|movie_info_idx|company_name|info_type|movie_keyword,8,375962915,653.64,1,ok,,7,68327928
+11c.sql,4b14d026,7,title|aka_title|movie_companies|movie_info_idx|movie_link|kind_type|info_type|movie_keyword,8,81367267,38.75,1,ok,,7,68327928
+11d.sql,f1d5102f,7,title|keyword|movie_companies|movie_link|company_name|company_type|link_type|movie_keyword,8,68327928,21.39,1,ok,,7,68327928
+12a.sql,a63e2a1f,7,title|info_type|movie_companies|movie_info_idx|person_info|name|aka_name|movie_info,8,489717912,1.42,1,ok,,7,361317773
+12b.sql,ac7b020f,7,title|info_type|movie_companies|movie_info_idx|person_info|name|aka_name|movie_info,8,489717912,1.38,1,ok,,7,361317773
+12c.sql,f662ba28,7,title|info_type|cast_info|movie_info_idx|person_info|name|char_name|movie_info,8,706898218,4.38,1,ok,,7,361317773
+13a.sql,7ce77644,8,title|info_type|cast_info|aka_title|movie_info_idx|kind_type|person_info|name|movie_info,9,680916922,37323.14,,timeout,INTERRUPT Error: Interrupted!,8,361317787
+13b.sql,afa540ae,8,title|info_type|cast_info|aka_title|movie_info_idx|kind_type|person_info|name|movie_info,9,680916922,37415.25,,timeout,INTERRUPT Error: Interrupted!,8,361317787
+13c.sql,9049d841,8,title|info_type|aka_title|movie_companies|movie_info_idx|kind_type|person_info|company_type|movie_info,9,438481497,1.58,1,ok,,8,361317787
+13d.sql,af347e64,8,title|info_type|movie_info_idx|complete_cast|person_info|comp_cast_type|name|aka_name|movie_info,9,469385232,1.64,1,ok,,8,361317787
+14a.sql,1a8e1c72,7,title|info_type|aka_title|movie_info_idx|movie_keyword|kind_type|keyword|movie_info,8,358162007,499.02,1,ok,,7,352739927
+14b.sql,d1f87b22,7,title|info_type|aka_title|movie_info_idx|movie_keyword|kind_type|person_info|movie_info,8,431180247,8.0,1,ok,,7,352739927
+14c.sql,b3fc2041,7,title|info_type|cast_info|movie_info_idx|person_info|name|char_name|movie_info,8,706898218,36441.53,,timeout,INTERRUPT Error: Interrupted!,7,352739927
+15a.sql,290c2d02,8,title|info_type|aka_title|movie_companies|movie_info_idx|kind_type|person_info|company_name|movie_info,9,440831459,12.56,1,ok,,8,370344723
+15b.sql,e2d7d302,8,title|info_type|cast_info|movie_info_idx|person_info|name|char_name|aka_name|movie_info,9,717714334,11.22,1,ok,,8,370344723
+15c.sql,e10467b5,8,title|info_type|movie_info_idx|movie_keyword|person_info|keyword|name|aka_name|movie_info,9,483490030,196.84,1,ok,,8,370344723
+15d.sql,a53b57d6,8,title|info_type|movie_companies|movie_info_idx|person_info|company_type|name|aka_name|movie_info,9,489717920,8.29,1,ok,,8,370344723
+16a.sql,b7b672e9,7,title|name|movie_keyword|complete_cast|aka_name|keyword|comp_cast_type|cast_info,8,319649827,1288.12,1,ok,,7,342332477
+16b.sql,984b293a,7,title|name|movie_info_idx|movie_keyword|person_info|info_type|keyword|cast_info,8,393425578,999.04,1,ok,,7,342332477
+16c.sql,49d24a28,7,title|name|movie_info|movie_info_idx|aka_name|person_info|info_type|cast_info,8,686310944,33835.06,,timeout,INTERRUPT Error: Interrupted!,7,342332477
+16d.sql,be83e7e0,7,title|name|movie_companies|movie_keyword|aka_name|company_name|keyword|cast_info,8,342332477,1712.74,1,ok,,7,342332477
+17a.sql,e38ba1cd,6,title|name|movie_info|movie_keyword|person_info|info_type|cast_info,7,678026338,3295.14,1,ok,,6,331516361
+17b.sql,1c6191c8,6,title|name|movie_companies|movie_info_idx|person_info|info_type|cast_info,7,399653460,390.64,1,ok,,6,331516361
+17c.sql,95662dd5,6,title|name|movie_companies|movie_keyword|aka_name|keyword|cast_info,7,339982507,3697.53,1,ok,,6,331516361
+17d.sql,ed63296e,6,title|name|movie_info_idx|aka_name|person_info|info_type|cast_info,7,389596544,4892.06,1,ok,,6,331516361
+17e.sql,2e5fd725,6,title|name|movie_companies|movie_info_idx|person_info|info_type|cast_info,7,399653460,1655.29,1,ok,,6,331516361
+17f.sql,04ab9a5b,6,title|char_name|movie_info|movie_keyword|info_type|keyword|cast_info,7,590569087,7660.26,1,ok,,6,331516361
+18a.sql,ac6dd694,6,title|name|role_type|movie_info|movie_info_idx|info_type|cast_info,7,601403252,819.62,1,ok,,6,601403228
+18b.sql,55f49436,6,title|name|char_name|movie_info_idx|person_info|info_type|cast_info,7,410183818,1932.61,1,ok,,6,601403228
+18c.sql,87536ac0,6,title|name|movie_info_idx|aka_name|person_info|info_type|cast_info,7,389596544,34267.21,,timeout,INTERRUPT Error: Interrupted!,6,601403228
+19a.sql,a31dcfb5,9,title|name|char_name|role_type|movie_info|movie_info_idx|aka_name|person_info|info_type|cast_info,10,717714358,7984.79,1,ok,,9,655805480
+19b.sql,f65b693e,9,title|name|char_name|role_type|movie_info|movie_info_idx|aka_name|person_info|info_type|cast_info,10,717714358,35452.83,,timeout,INTERRUPT Error: Interrupted!,9,655805480
+19c.sql,ddc3b896,9,title|name|char_name|movie_companies|movie_info|aka_name|person_info|company_name|info_type|cast_info,10,729897056,35468.56,,timeout,INTERRUPT Error: Interrupted!,9,655805480
+19d.sql,85699a2b,9,title|name|char_name|movie_companies|movie_info|aka_name|person_info|company_name|info_type|cast_info,10,729897056,1236.74,1,ok,,9,655805480
+1a.sql,9692fcb2,4,title|company_name|company_type|movie_info_idx|movie_companies,5,64603034,122.52,1,ok,,4,62253403
+1b.sql,38cb038a,4,title|movie_info_idx|info_type|person_info|movie_companies,5,136344995,1.3,1,ok,,4,62253403
+1c.sql,5858ce6f,4,title|movie_info|movie_info_idx|info_type|movie_companies,5,358967795,235.31,1,ok,,4,62253403
+1d.sql,ed13c3ca,4,title|company_type|movie_info_idx|info_type|movie_companies,5,62253403,94.7,1,ok,,4,62253403
+20a.sql,9fbd13f5,9,title|name|aka_title|movie_keyword|complete_cast|kind_type|person_info|keyword|comp_cast_type|cast_info,10,388347405,34939.16,,timeout,INTERRUPT Error: Interrupted!,9,340237115
+20b.sql,11b59a2a,9,title|name|char_name|movie_info|movie_keyword|complete_cast|aka_name|person_info|info_type|cast_info,10,720786188,16143.14,1,ok,,9,340237115
+20c.sql,aaab8a56,9,title|name|char_name|movie_keyword|movie_link|complete_cast|aka_name|person_info|comp_cast_type|cast_info,10,424191445,347.69,1,ok,,9,340237115
+21a.sql,b87bd6cb,8,title|info_type|cast_info|movie_companies|person_info|name|company_name|company_type|movie_info,9,687677558,1.51,1,ok,,8,365042328
+21b.sql,acb964b5,8,title|movie_companies|movie_keyword|movie_link|company_name|company_type|keyword|link_type|movie_info,9,365042328,123.54,1,ok,,8,365042328
+21c.sql,86201ed8,8,title|info_type|cast_info|movie_info_idx|movie_keyword|person_info|name|keyword|movie_info,9,690139978,9.61,1,ok,,8,365042328
+22a.sql,986af6e4,10,title|info_type|cast_info|movie_info_idx|movie_keyword|kind_type|person_info|name|char_name|keyword|movie_info,11,721543382,36462.64,,timeout,INTERRUPT Error: Interrupted!,10,375962937
+22b.sql,5dd32397,10,title|info_type|cast_info|aka_title|movie_companies|movie_info_idx|movie_keyword|kind_type|company_type|keyword|movie_info,11,596501111,36092.32,,timeout,INTERRUPT Error: Interrupted!,10,375962937
+22c.sql,4973adf3,10,title|info_type|aka_title|movie_companies|movie_info_idx|movie_keyword|kind_type|company_name|company_type|keyword|movie_info,11,381385017,36722.75,,timeout,INTERRUPT Error: Interrupted!,10,375962937
+22d.sql,96653853,10,title|info_type|cast_info|aka_title|movie_info_idx|kind_type|person_info|name|role_type|aka_name|movie_info,11,691733062,47.28,1,ok,,10,375962937
+23a.sql,e7555d51,10,title|cast_info|aka_title|movie_companies|complete_cast|kind_type|name|company_type|comp_cast_type|aka_name|movie_info,11,628014211,5354.2,1,ok,,10,365463009
+23b.sql,10fcaf53,10,title|info_type|movie_companies|movie_info_idx|movie_keyword|complete_cast|company_name|company_type|keyword|comp_cast_type|movie_info,11,376503275,3135.31,1,ok,,10,365463009
+23c.sql,464cf138,10,title|info_type|cast_info|aka_title|movie_info_idx|movie_link|kind_type|person_info|name|aka_name|movie_info,11,691853026,36732.47,,timeout,INTERRUPT Error: Interrupted!,10,365463009
+24a.sql,c29a0f6c,11,title|name|char_name|role_type|movie_companies|movie_keyword|aka_name|person_info|company_name|keyword|info_type|cast_info,12,447827830,1872.99,1,ok,,11,670450630
+24b.sql,62c816a6,11,title|name|char_name|role_type|movie_companies|movie_info|complete_cast|aka_name|person_info|company_name|info_type|cast_info,12,730437424,30167.44,,timeout,INTERRUPT Error: Interrupted!,11,670450630
+25a.sql,d1de0acf,8,title|name|char_name|movie_info_idx|movie_keyword|person_info|info_type|keyword|cast_info,9,424828968,3005.55,1,ok,,8,616048378
+25b.sql,5c46c3ff,8,title|name|movie_info|movie_info_idx|movie_keyword|person_info|info_type|keyword|cast_info,9,690139978,35494.57,,timeout,INTERRUPT Error: Interrupted!,8,616048378
+25c.sql,f2b73d5b,8,title|name|movie_info|movie_info_idx|movie_keyword|aka_name|person_info|info_type|cast_info,9,699882734,35416.25,,timeout,INTERRUPT Error: Interrupted!,8,616048378
+26a.sql,b210fec4,11,title|name|char_name|aka_title|movie_info|movie_info_idx|movie_keyword|kind_type|person_info|info_type|keyword|cast_info,12,726965462,35716.66,,timeout,INTERRUPT Error: Interrupted!,11,351277734
+26b.sql,aebc6d3a,11,title|name|aka_title|movie_info|movie_info_idx|movie_keyword|kind_type|aka_name|person_info|info_type|keyword|cast_info,12,706378188,35706.71,,timeout,INTERRUPT Error: Interrupted!,11,351277734
+26c.sql,4b472ca6,11,title|name|char_name|aka_title|movie_companies|movie_info|movie_info_idx|kind_type|aka_name|person_info|info_type|cast_info,12,744009460,36246.36,,timeout,INTERRUPT Error: Interrupted!,11,351277734
+27a.sql,4aaa5750,11,title|info_type|cast_info|movie_companies|movie_keyword|movie_link|person_info|name|company_name|keyword|link_type|movie_info,12,702442724,4.55,1,ok,,11,365582680
+27b.sql,e49d252e,11,title|info_type|movie_companies|movie_info_idx|movie_keyword|movie_link|person_info|company_name|company_type|keyword|link_type|movie_info,12,450174547,36299.99,,timeout,INTERRUPT Error: Interrupted!,11,365582680
+27c.sql,d88071c6,11,title|cast_info|movie_companies|movie_keyword|movie_link|complete_cast|company_name|company_type|keyword|link_type|comp_cast_type|movie_info,12,583048744,263.91,1,ok,,11,365582680
+28a.sql,20b94c84,13,title|info_type|cast_info|aka_title|movie_companies|movie_info_idx|complete_cast|kind_type|person_info|name|company_name|company_type|comp_cast_type|movie_info,14,704680284,7.25,1,ok,,13,376503289
+28b.sql,efbc6bb1,13,title|info_type|cast_info|aka_title|movie_info_idx|movie_keyword|kind_type|person_info|name|char_name|role_type|keyword|aka_name|movie_info,14,737781602,5.92,1,ok,,13,376503289
+28c.sql,b185d4c3,13,title|info_type|cast_info|movie_companies|movie_info_idx|complete_cast|person_info|name|char_name|role_type|company_name|comp_cast_type|aka_name|movie_info,14,741477712,6.06,1,ok,,13,376503289
+29a.sql,311fa67d,16,title|name|char_name|role_type|movie_companies|movie_info|movie_info_idx|movie_keyword|movie_link|complete_cast|aka_name|person_info|info_type|keyword|link_type|comp_cast_type|cast_info,17,753892916,1899.16,1,ok,,16,745082582
+29b.sql,e2059c09,16,title|name|char_name|role_type|aka_title|movie_companies|movie_info_idx|movie_keyword|complete_cast|kind_type|aka_name|person_info|company_name|company_type|info_type|keyword|cast_info,17,464830556,35216.31,,timeout,INTERRUPT Error: Interrupted!,16,745082582
+29c.sql,1c627bbe,16,title|name|char_name|role_type|movie_companies|movie_info|movie_info_idx|movie_keyword|complete_cast|aka_name|person_info|company_name|company_type|info_type|keyword|comp_cast_type|cast_info,17,756122870,36420.72,,timeout,INTERRUPT Error: Interrupted!,16,745082582
+2a.sql,93db1678,4,title|keyword|movie_companies|company_name|movie_keyword,5,68207896,110.53,1,ok,,4,68207896
+2b.sql,646227b3,4,title|keyword|movie_info|info_type|movie_keyword,5,341699633,188.65,1,ok,,4,68207896
+2c.sql,116933fc,4,title|movie_companies|company_name|company_type|movie_keyword,5,67134544,132.75,1,ok,,4,68207896
+2d.sql,e09ce938,4,title|keyword|movie_companies|company_name|movie_keyword,5,68207896,87.83,1,ok,,4,68207896
+30a.sql,8e60ca51,11,title|name|char_name|movie_info|movie_info_idx|movie_keyword|complete_cast|aka_name|person_info|info_type|keyword|cast_info,12,732899828,11218.26,1,ok,,11,616588730
+30b.sql,1a6a0fb1,11,title|name|char_name|role_type|movie_info|movie_info_idx|complete_cast|aka_name|person_info|info_type|comp_cast_type|cast_info,12,718254710,398.05,1,ok,,11,616588730
+30c.sql,014a2d1c,11,title|name|char_name|role_type|movie_info|movie_info_idx|complete_cast|aka_name|person_info|info_type|comp_cast_type|cast_info,12,718254710,237.05,1,ok,,11,616588730
+31a.sql,a9dacb50,10,title|name|char_name|role_type|movie_companies|movie_info|movie_info_idx|person_info|company_name|info_type|cast_info,11,730121244,34775.82,,timeout,INTERRUPT Error: Interrupted!,10,639271380
+31b.sql,c91bde9b,10,title|name|char_name|aka_title|movie_info_idx|movie_keyword|kind_type|aka_name|person_info|info_type|cast_info,11,439993818,542.79,1,ok,,10,639271380
+31c.sql,fd1339b9,10,title|name|char_name|movie_info|movie_info_idx|complete_cast|aka_name|person_info|info_type|comp_cast_type|cast_info,11,718254686,218.37,1,ok,,10,639271380
+32a.sql,ac4f76e2,5,title|movie_link|complete_cast|link_type|comp_cast_type|movie_keyword,6,44571910,17.84,1,ok,,5,45104918
+32b.sql,633db6e7,5,title|aka_title|movie_link|kind_type|link_type|movie_keyword,6,49453652,18.44,1,ok,,5,45104918
+33a.sql,31df6b0b,13,title|company_name|company_type|movie_info|movie_info_idx|movie_keyword|movie_link|complete_cast|kind_type|info_type|keyword|link_type|comp_cast_type|movie_companies,14,376623313,67.1,1,ok,,13,64723403
+33b.sql,581d6ebe,13,title|company_name|company_type|aka_title|movie_info|movie_info_idx|movie_link|kind_type|info_type|link_type|person_info|name|aka_name|movie_companies,14,497610008,30933.72,,timeout,INTERRUPT Error: Interrupted!,13,64723403
+33c.sql,ac839088,13,title|company_name|company_type|cast_info|aka_title|movie_info_idx|movie_keyword|movie_link|complete_cast|kind_type|keyword|link_type|comp_cast_type|movie_companies,14,302796718,39.41,1,ok,,13,64723403
+3a.sql,35e8beba,3,title|movie_keyword|keyword|movie_info,4,341699294,120.09,1,ok,,3,341699294
+3b.sql,2eed9b47,3,title|info_type|movie_info_idx|movie_info,4,338094763,124.79,1,ok,,3,341699294
+3c.sql,33b1b67b,3,title|movie_keyword|keyword|movie_info,4,341699294,241.92,1,ok,,3,341699294
+4a.sql,dc8ab2b4,4,title|movie_info_idx|info_type|person_info|movie_keyword,5,129043753,2.0,1,ok,,4,56025513
+4b.sql,8be0e67e,4,title|keyword|movie_info_idx|info_type|movie_keyword,5,56025513,63.51,1,ok,,4,56025513
+4c.sql,6d6ab9ef,4,title|keyword|movie_info_idx|info_type|movie_keyword,5,56025513,57.92,1,ok,,4,56025513
+5a.sql,b4ed814e,4,info_type|person_info|name|aka_name|movie_info,5,427464856,1.2,1,ok,,4,347927523
+5b.sql,442c6c55,4,title|info_type|movie_companies|movie_info_idx|movie_info,5,358967795,258.76,1,ok,,4,347927523
+5c.sql,16b95648,4,info_type|person_info|name|cast_info|movie_info,5,634114804,1289.24,1,ok,,4,347927523
+6a.sql,df20cbac,4,name|char_name|role_type|person_info|cast_info,5,368803479,2203.21,1,ok,,4,308293359
+6b.sql,d7cb4dd1,4,title|name|movie_keyword|keyword|cast_info,5,308293359,254.38,1,ok,,4,308293359
+6c.sql,0d4f7269,4,name|person_info|info_type|movie_info|cast_info,5,634114804,291.59,1,ok,,4,308293359
+6d.sql,3e8ec418,4,title|movie_companies|movie_keyword|keyword|cast_info,5,283323990,347.19,1,ok,,4,308293359
+6e.sql,180272b1,4,title|name|movie_keyword|keyword|cast_info,5,308293359,914.68,1,ok,,4,308293359
+6f.sql,410cf058,4,title|movie_link|complete_cast|link_type|cast_info,5,248466176,55.36,1,ok,,4,308293359
+7a.sql,90230c9f,7,title|role_type|aka_title|movie_keyword|movie_link|kind_type|link_type|cast_info,8,266919740,114.94,1,ok,,7,378676288
+7b.sql,ffc2bf47,7,title|name|char_name|role_type|movie_keyword|movie_link|keyword|cast_info,8,339816761,185.73,1,ok,,7,378676288
+7c.sql,51747e3a,7,title|name|char_name|aka_title|movie_link|kind_type|link_type|cast_info,8,330593717,77.2,1,ok,,7,378676288
+8a.sql,089c8089,6,title|char_name|role_type|movie_companies|movie_info_idx|company_name|cast_info,7,313472504,152.91,1,ok,,6,327687351
+8b.sql,20ea2c49,6,name|role_type|aka_name|person_info|info_type|movie_info|cast_info,7,644930944,273.47,1,ok,,6,327687351
+8c.sql,739431b6,6,title|name|char_name|role_type|aka_name|person_info|cast_info,7,409959339,36977.95,,timeout,INTERRUPT Error: Interrupted!,6,327687351
+8d.sql,52fc4c1e,6,title|name|role_type|movie_companies|aka_name|company_name|cast_info,7,327687351,309.56,1,ok,,6,327687351
+9a.sql,596a15b3,7,title|name|movie_companies|movie_info_idx|person_info|company_name|info_type|cast_info,8,402003430,887.28,1,ok,,7,359090741
+9b.sql,0c7c3f11,7,title|name|role_type|aka_title|movie_companies|person_info|company_name|cast_info,8,396384915,34616.2,,timeout,INTERRUPT Error: Interrupted!,7,359090741
+9c.sql,11d4d313,7,title|name|aka_title|movie_info_idx|aka_name|person_info|info_type|cast_info,8,395018624,783.96,1,ok,,7,359090741
+9d.sql,edbaf28f,7,title|name|char_name|movie_info_idx|aka_name|person_info|info_type|cast_info,8,420999934,37050.12,,timeout,INTERRUPT Error: Interrupted!,7,359090741
+fkindexes.sql,0d71e655,0,cast_info,1,217466064,7.28,1,ok,,0,0
+schema.sql,01193d6b,0,cast_info,1,217466064,69.6,1,ok,,0,0

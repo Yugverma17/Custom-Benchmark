@@ -1,1434 +1,1429 @@
-query_file,source_join_count,source_bytes_read,target_tables,n_tables,query_hash,sql
-10a.sql,6,302432232,inventory|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,7,e6ff5ee8,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+query_file,source_join_count,source_bytes_read,relative_selectivity,target_tables,n_tables,query_hash,gen_status,sql
+10a.sql,6,302432232,0.1,inventory|date_dim|web_sales|customer|catalog_returns|item|web_returns,7,0059bc71,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
 JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_returns AS s1 ON s1.sr_returned_date_sk = d3.d_date_sk
-JOIN web_returns AS w4 ON w4.wr_returned_date_sk = d3.d_date_sk
-JOIN catalog_returns AS c2 ON c2.cr_returned_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 1998 AND d3.d_year <= 2003
-AND i5.i_category IN ('Children', 'Books', 'Jewelry', 'Electronics', 'Sports', 'Men', 'Music', 'Home', 'Women')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-10b.sql,6,302432232,inventory|store_sales|catalog_sales|web_sales|date_dim|item|warehouse,7,9a1fcaf8,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d1.d_date_sk
+JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c3 ON c3.c_customer_sk = w2.ws_bill_customer_sk
+WHERE d1.d_year >= 1940 AND d1.d_year <= 1980
+AND i5.i_category IN ('Women', 'Children', 'Men')
+AND w2.ws_quantity >= 60 AND w2.ws_quantity <= 80"
+10b.sql,6,302432232,0.1,inventory|item|catalog_returns|web_sales|promotion|catalog_sales|catalog_page,7,5fbf891c,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 2000 AND d4.d_year <= 2003
-AND i5.i_category IN ('Jewelry', 'Sports', 'Men', 'Books', 'Electronics', 'Home', 'Music')
-AND w6.w_warehouse_sq_ft >= 131516 AND w6.w_warehouse_sq_ft <= 816604"
-10c.sql,6,302432232,inventory|catalog_sales|web_sales|date_dim|web_returns|item|warehouse,7,3bdd5059,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d3.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d3.d_date_sk
-JOIN web_returns AS w4 ON w4.wr_returned_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 1998 AND d3.d_year <= 2003
-AND i5.i_category IN ('Jewelry', 'Sports', 'Music', 'Electronics', 'Children', 'Women', 'Books', 'Men', 'Home')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-11a.sql,7,68327928,inventory|catalog_sales|web_sales|store_returns|date_dim|web_returns|item|warehouse,8,42ebd30a,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 2000 AND d4.d_year <= 2001
-AND i6.i_category IN ('Books', 'Electronics')
-AND w7.w_warehouse_sq_ft >= 155907 AND w7.w_warehouse_sq_ft <= 385657"
-11b.sql,7,68327928,inventory|store_sales|web_sales|catalog_returns|date_dim|web_returns|item|warehouse,8,f6a85fb6,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1999 AND d4.d_year <= 2000
-AND i6.i_category IN ('Jewelry', 'Books')
-AND w7.w_warehouse_sq_ft >= 688720 AND w7.w_warehouse_sq_ft <= 876097"
-11c.sql,7,68327928,inventory|store_sales|catalog_sales|store_returns|catalog_returns|date_dim|item|warehouse,8,54401029,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 2000 AND d5.d_year <= 2001
-AND i6.i_category = 'Children'
-AND w7.w_warehouse_sq_ft >= 280283 AND w7.w_warehouse_sq_ft <= 444770"
-11d.sql,7,68327928,inventory|catalog_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,8,b61f449b,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 2000 AND d4.d_year <= 2001
-AND i6.i_category IN ('Books', 'Electronics')
-AND w7.w_warehouse_sq_ft >= 644731 AND w7.w_warehouse_sq_ft <= 907072"
-12a.sql,7,361317773,inventory|store_sales|catalog_sales|catalog_returns|date_dim|web_returns|item|warehouse,8,fd28c2f7,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2002
-AND i6.i_category IN ('Jewelry', 'Home', 'Books', 'Music', 'Children', 'Women', 'Electronics', 'Men', 'Sports')
-AND w7.w_warehouse_sq_ft >= 73723 AND w7.w_warehouse_sq_ft <= 960995"
-12b.sql,7,361317773,inventory|store_sales|catalog_sales|web_sales|catalog_returns|date_dim|item|warehouse,8,4a5c4f61,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2002
-AND i6.i_category IN ('Home', 'Men', 'Jewelry', 'Sports', 'Electronics', 'Women', 'Children', 'Books', 'Music')
-AND w7.w_warehouse_sq_ft >= 53009 AND w7.w_warehouse_sq_ft <= 861490"
-12c.sql,7,361317773,inventory|store_sales|catalog_sales|web_sales|store_returns|date_dim|item|warehouse,8,aa287f00,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2002
-AND i6.i_category IN ('Jewelry', 'Men', 'Books', 'Electronics', 'Sports', 'Home', 'Music', 'Children', 'Women')
-AND w7.w_warehouse_sq_ft >= 128235 AND w7.w_warehouse_sq_ft <= 927000"
-13a.sql,8,361317787,inventory|store_sales|catalog_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,d1a5bb9b,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1999 AND d5.d_year <= 2003
-AND i7.i_category IN ('Women', 'Sports', 'Children', 'Home', 'Music', 'Books', 'Men', 'Jewelry', 'Electronics')
-AND w8.w_warehouse_sq_ft >= 61226 AND w8.w_warehouse_sq_ft <= 925378"
-13b.sql,8,361317787,inventory|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,79ecd636,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i7.i_category IN ('Jewelry', 'Men', 'Books', 'Children', 'Women', 'Home', 'Music', 'Electronics', 'Sports')
-AND w8.w_warehouse_sq_ft >= 50000 AND w8.w_warehouse_sq_ft <= 1000000"
-13c.sql,8,361317787,inventory|store_sales|catalog_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,9e11c0af,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2002
-AND i7.i_category IN ('Sports', 'Books', 'Music', 'Men', 'Children', 'Women', 'Jewelry', 'Home', 'Electronics')
-AND w8.w_warehouse_sq_ft >= 59287 AND w8.w_warehouse_sq_ft <= 923439"
-13d.sql,8,361317787,inventory|store_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,68e537f4,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i7.i_category IN ('Electronics', 'Women', 'Men', 'Children', 'Books', 'Sports', 'Music', 'Jewelry', 'Home')
-AND w8.w_warehouse_sq_ft >= 50000 AND w8.w_warehouse_sq_ft <= 1000000"
-14a.sql,7,352739927,inventory|catalog_sales|web_sales|store_returns|date_dim|web_returns|item|warehouse,8,c59c45f2,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i6.i_category IN ('Books', 'Electronics', 'Children', 'Men', 'Jewelry', 'Women', 'Sports', 'Music', 'Home')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-14b.sql,7,352739927,inventory|catalog_sales|web_sales|catalog_returns|date_dim|web_returns|item|warehouse,8,ca91ec29,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i6.i_category IN ('Electronics', 'Home', 'Children', 'Men', 'Music', 'Books', 'Jewelry', 'Sports', 'Women')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-14c.sql,7,352739927,inventory|store_sales|web_sales|catalog_returns|date_dim|web_returns|item|warehouse,8,9a9f1a4d,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i6.i_category IN ('Electronics', 'Jewelry', 'Books', 'Sports', 'Women', 'Music', 'Home', 'Men', 'Children')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-15a.sql,8,370344723,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|item|warehouse,9,446a82e6,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2002
-AND i7.i_category IN ('Books', 'Children', 'Music', 'Women', 'Electronics', 'Sports', 'Home', 'Jewelry', 'Men')
-AND w8.w_warehouse_sq_ft >= 71491 AND w8.w_warehouse_sq_ft <= 880448"
-15b.sql,8,370344723,inventory|store_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,5e77603d,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i7.i_category IN ('Home', 'Jewelry', 'Electronics', 'Children', 'Sports', 'Women', 'Books', 'Men', 'Music')
-AND w8.w_warehouse_sq_ft >= 50000 AND w8.w_warehouse_sq_ft <= 1000000"
-15c.sql,8,370344723,inventory|store_sales|catalog_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,6a639b3e,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1999 AND d5.d_year <= 2003
-AND i7.i_category IN ('Home', 'Women', 'Men', 'Jewelry', 'Children', 'Sports', 'Music', 'Books', 'Electronics')
-AND w8.w_warehouse_sq_ft >= 111533 AND w8.w_warehouse_sq_ft <= 997274"
-15d.sql,8,370344723,inventory|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,689af0a2,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i7.i_category IN ('Music', 'Electronics', 'Children', 'Men', 'Home', 'Women', 'Books', 'Sports', 'Jewelry')
-AND w8.w_warehouse_sq_ft >= 50000 AND w8.w_warehouse_sq_ft <= 1000000"
-16a.sql,7,342332477,inventory|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,8,b8fddad6,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w1 ON w1.ws_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i6.i_category IN ('Women', 'Men', 'Jewelry', 'Sports', 'Music', 'Children', 'Home', 'Electronics', 'Books')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-16b.sql,7,342332477,inventory|store_sales|catalog_sales|catalog_returns|date_dim|web_returns|item|warehouse,8,141237fe,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2002
-AND i6.i_category IN ('Music', 'Electronics', 'Children', 'Books', 'Sports', 'Home', 'Women', 'Men', 'Jewelry')
-AND w7.w_warehouse_sq_ft >= 81029 AND w7.w_warehouse_sq_ft <= 921680"
-16c.sql,7,342332477,inventory|catalog_sales|web_sales|catalog_returns|date_dim|web_returns|item|warehouse,8,f839a9dc,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i6.i_category IN ('Electronics', 'Jewelry', 'Books', 'Music', 'Sports', 'Children', 'Women', 'Men', 'Home')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-16d.sql,7,342332477,inventory|store_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,8,95755add,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i6.i_category IN ('Music', 'Jewelry', 'Men', 'Sports', 'Home', 'Women', 'Electronics', 'Books', 'Children')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-17a.sql,6,331516361,inventory|store_sales|store_returns|catalog_returns|date_dim|item|warehouse,7,3d538a0f,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i5.i_category IN ('Music', 'Children', 'Electronics', 'Jewelry', 'Women', 'Sports', 'Books', 'Men', 'Home')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-17b.sql,6,331516361,inventory|catalog_sales|store_returns|catalog_returns|date_dim|item|warehouse,7,6a380fb5,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i5.i_category IN ('Music', 'Children', 'Women', 'Sports', 'Home', 'Jewelry', 'Electronics', 'Books', 'Men')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-17c.sql,6,331516361,inventory|store_sales|catalog_sales|store_returns|date_dim|item|warehouse,7,62caa9b5,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2002
-AND i5.i_category IN ('Jewelry', 'Men', 'Children', 'Sports', 'Home', 'Women', 'Music', 'Books', 'Electronics')
-AND w6.w_warehouse_sq_ft >= 171893 AND w6.w_warehouse_sq_ft <= 980588"
-17d.sql,6,331516361,inventory|store_sales|catalog_sales|date_dim|web_returns|item|warehouse,7,16b90916,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d3.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d3.d_date_sk
-JOIN web_returns AS w4 ON w4.wr_returned_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 1998 AND d3.d_year <= 2002
-AND i5.i_category IN ('Jewelry', 'Music', 'Sports', 'Books', 'Home', 'Women', 'Men', 'Children', 'Electronics')
-AND w6.w_warehouse_sq_ft >= 56057 AND w6.w_warehouse_sq_ft <= 881209"
-17e.sql,6,331516361,inventory|catalog_sales|web_sales|catalog_returns|date_dim|item|warehouse,7,87b8377d,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i5.i_category IN ('Women', 'Men', 'Books', 'Children', 'Sports', 'Jewelry', 'Music', 'Electronics', 'Home')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-17f.sql,6,331516361,inventory|catalog_sales|catalog_returns|date_dim|web_returns|item|warehouse,7,1cf0ec72,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d3.d_date_sk
-JOIN web_returns AS w4 ON w4.wr_returned_date_sk = d3.d_date_sk
-JOIN catalog_returns AS c2 ON c2.cr_returned_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 1998 AND d3.d_year <= 2003
-AND i5.i_category IN ('Children', 'Men', 'Women', 'Jewelry', 'Electronics', 'Books', 'Home', 'Music', 'Sports')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-18a.sql,6,601403228,inventory|store_sales|catalog_sales|catalog_returns|date_dim|item|warehouse,7,c899327e,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i5.i_category IN ('Jewelry', 'Electronics', 'Home', 'Men', 'Music', 'Sports', 'Women', 'Children', 'Books')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-18b.sql,6,601403228,inventory|catalog_sales|store_returns|date_dim|web_returns|item|warehouse,7,358f245b,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d3.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d3.d_date_sk
-JOIN web_returns AS w4 ON w4.wr_returned_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 1998 AND d3.d_year <= 2003
-AND i5.i_category IN ('Children', 'Women', 'Electronics', 'Sports', 'Books', 'Men', 'Jewelry', 'Music', 'Home')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-18c.sql,6,601403228,inventory|store_sales|web_sales|catalog_returns|date_dim|item|warehouse,7,cfb571e8,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i5.i_category IN ('Electronics', 'Jewelry', 'Children', 'Men', 'Sports', 'Music', 'Books', 'Home', 'Women')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-19a.sql,9,655805480,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,10,0e01376e,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w9 ON w9.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2003
-AND i8.i_category IN ('Women', 'Home', 'Sports', 'Children', 'Electronics', 'Music', 'Men', 'Books', 'Jewelry')
-AND w9.w_warehouse_sq_ft >= 50000 AND w9.w_warehouse_sq_ft <= 1000000"
-19b.sql,9,655805480,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,10,d2e88268,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w9 ON w9.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2003
-AND i8.i_category IN ('Music', 'Electronics', 'Children', 'Sports', 'Men', 'Jewelry', 'Women', 'Home', 'Books')
-AND w9.w_warehouse_sq_ft >= 50000 AND w9.w_warehouse_sq_ft <= 1000000"
-19c.sql,9,655805480,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,10,98e0822b,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w9 ON w9.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2003
-AND i8.i_category IN ('Home', 'Books', 'Men', 'Women', 'Children', 'Sports', 'Jewelry', 'Electronics', 'Music')
-AND w9.w_warehouse_sq_ft >= 50000 AND w9.w_warehouse_sq_ft <= 1000000"
-19d.sql,9,655805480,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,10,76fe68f0,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w9 ON w9.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2003
-AND i8.i_category IN ('Sports', 'Music', 'Jewelry', 'Electronics', 'Home', 'Children', 'Men', 'Books', 'Women')
-AND w9.w_warehouse_sq_ft >= 50000 AND w9.w_warehouse_sq_ft <= 1000000"
-1a.sql,4,62253403,inventory|web_sales|date_dim|item|warehouse,5,c6a7b723,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN web_sales AS w3 ON w3.ws_item_sk = i1.i_item_sk
+JOIN catalog_sales AS c5 ON c5.cs_item_sk = i1.i_item_sk
+JOIN catalog_returns AS c2 ON c2.cr_item_sk = i1.i_item_sk
+JOIN promotion AS p4 ON p4.p_promo_sk = w3.ws_promo_sk
+JOIN catalog_page AS c6 ON c6.cp_catalog_page_sk = c5.cs_catalog_page_sk
+WHERE i1.i_category IN ('Sports', 'Home', 'Women', 'Shoes', 'Music', 'Books', 'Men', 'Children', 'Electronics', 'Jewelry')
+AND w3.ws_quantity >= 5 AND w3.ws_quantity <= 95
+AND c5.cs_quantity >= 6 AND c5.cs_quantity <= 95"
+10c.sql,6,302432232,0.1,inventory|warehouse|date_dim|item|catalog_returns|web_sales|customer,7,86d20c19,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
 JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w1 ON w1.ws_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 2001 AND d2.d_year <= 2002
-AND i3.i_category IN ('Home', 'Jewelry', 'Women')
-AND w4.w_warehouse_sq_ft >= 614315 AND w4.w_warehouse_sq_ft <= 927444"
-1b.sql,4,62253403,inventory|catalog_returns|date_dim|item|warehouse,5,76178789,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN web_sales AS w5 ON w5.ws_sold_date_sk = d2.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d2.d_date_sk
+JOIN customer AS c6 ON c6.c_customer_sk = w5.ws_bill_customer_sk
+WHERE d2.d_year >= 1980 AND d2.d_year <= 2020
+AND i3.i_category IN ('Music', 'Men', 'Women')
+AND w1.w_warehouse_sq_ft >= 231946 AND w1.w_warehouse_sq_ft <= 278668"
+11a.sql,7,68327928,0.1,customer_demographics|customer|web_returns|date_dim|catalog_returns|catalog_page|catalog_sales|item,8,3506984a,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN catalog_sales AS c6 ON c6.cs_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN date_dim AS d3 ON d3.d_date_sk = c6.cs_sold_date_sk
+JOIN item AS i7 ON i7.i_item_sk = c6.cs_item_sk
+JOIN catalog_page AS c5 ON c5.cp_catalog_page_sk = c6.cs_catalog_page_sk
+JOIN web_returns AS w2 ON w2.wr_refunded_customer_sk = c1.c_customer_sk
+JOIN catalog_returns AS c4 ON c4.cr_refunded_customer_sk = c1.c_customer_sk
+WHERE c0.cd_gender = 'F'
+AND c6.cs_quantity >= 30 AND c6.cs_quantity <= 50
+AND d3.d_year >= 1940 AND d3.d_year <= 1960"
+11b.sql,7,68327928,0.1,customer_demographics|store_sales|customer|household_demographics|web_sales|date_dim|inventory|item,8,eb487887,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN store_sales AS s1 ON s1.ss_cdemo_sk = c0.cd_demo_sk
+JOIN web_sales AS w4 ON w4.ws_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c2 ON c2.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN date_dim AS d5 ON d5.d_date_sk = s1.ss_sold_date_sk
+JOIN item AS i7 ON i7.i_item_sk = s1.ss_item_sk
+JOIN household_demographics AS h3 ON h3.hd_demo_sk = s1.ss_hdemo_sk
+JOIN inventory AS i6 ON i6.inv_date_sk = d5.d_date_sk
+WHERE c0.cd_gender = 'M'
+AND s1.ss_quantity >= 81 AND s1.ss_quantity <= 96
+AND w4.ws_quantity >= 20 AND w4.ws_quantity <= 30"
+11c.sql,7,68327928,0.1,customer_demographics|customer|store_returns|item|catalog_returns|catalog_page|date_dim|web_sales,8,95e52979,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN web_sales AS w7 ON w7.ws_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN date_dim AS d6 ON d6.d_date_sk = w7.ws_sold_date_sk
+JOIN item AS i3 ON i3.i_item_sk = w7.ws_item_sk
+JOIN store_returns AS s2 ON s2.sr_customer_sk = c1.c_customer_sk
+JOIN catalog_returns AS c4 ON c4.cr_refunded_customer_sk = c1.c_customer_sk
+JOIN catalog_page AS c5 ON c5.cp_catalog_page_sk = c4.cr_catalog_page_sk
+WHERE c0.cd_gender = 'F'
+AND w7.ws_quantity >= 5 AND w7.ws_quantity <= 20
+AND d6.d_year >= 2020 AND d6.d_year <= 2040"
+11d.sql,7,68327928,0.1,customer_demographics|catalog_sales|customer|web_sales|item|customer_address|store_sales|date_dim,8,0b032d8e,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN store_sales AS s6 ON s6.ss_cdemo_sk = c0.cd_demo_sk
+JOIN web_sales AS w3 ON w3.ws_bill_cdemo_sk = c0.cd_demo_sk
+JOIN catalog_sales AS c1 ON c1.cs_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c2 ON c2.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN date_dim AS d7 ON d7.d_date_sk = s6.ss_sold_date_sk
+JOIN item AS i4 ON i4.i_item_sk = s6.ss_item_sk
+JOIN customer_address AS c5 ON c5.ca_address_sk = s6.ss_addr_sk
+WHERE c0.cd_gender = 'F'
+AND s6.ss_quantity >= 41 AND s6.ss_quantity <= 51
+AND w3.ws_quantity >= 30 AND w3.ws_quantity <= 50"
+12a.sql,7,361317773,0.1,store_sales|customer|catalog_returns|date_dim|web_sales|web_site|customer_address|catalog_sales,8,c5308a11,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
+JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
+JOIN customer_address AS c6 ON c6.ca_address_sk = s0.ss_addr_sk
+JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d3.d_date_sk
+JOIN catalog_sales AS c7 ON c7.cs_sold_date_sk = d3.d_date_sk
+JOIN catalog_returns AS c2 ON c2.cr_returned_date_sk = d3.d_date_sk
+JOIN web_site AS w5 ON w5.web_site_sk = w4.ws_web_site_sk
+WHERE s0.ss_quantity >= 20 AND s0.ss_quantity <= 31
+AND d3.d_year >= 1910 AND d3.d_year <= 1940
+AND c6.ca_state IN ('RI', 'AZ', 'IL', 'MO', 'DC', 'SC', 'IA', 'NY', 'NC', 'VA', 'AK', 'NE', 'TX', 'ME', 'PA')"
+12b.sql,7,361317773,0.1,store_sales|promotion|web_sales|customer|time_dim|catalog_sales|customer_address|customer_demographics,8,f28ce854,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN time_dim AS t4 ON t4.t_time_sk = s0.ss_sold_time_sk
+JOIN customer AS c3 ON c3.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c7 ON c7.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c6 ON c6.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p1 ON p1.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w2 ON w2.ws_bill_customer_sk = c3.c_customer_sk
+JOIN catalog_sales AS c5 ON c5.cs_bill_customer_sk = c3.c_customer_sk
+WHERE s0.ss_quantity >= 41 AND s0.ss_quantity <= 51
+AND c7.cd_gender = 'F'
+AND c6.ca_state IN ('SD', 'IL', 'NJ', 'AL', 'NH', 'KY', 'PA', 'TX', 'MN', 'AZ', 'AR', 'CT', 'ND', 'VT', 'MA')"
+12c.sql,7,361317773,0.1,store_sales|customer_address|customer|catalog_returns|date_dim|catalog_sales|promotion|household_demographics,8,f974db65,timeout,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d4 ON d4.d_date_sk = s0.ss_sold_date_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN household_demographics AS h7 ON h7.hd_demo_sk = s0.ss_hdemo_sk
+JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p6 ON p6.p_promo_sk = s0.ss_promo_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d4.d_date_sk
+JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
+AND d4.d_year >= 1910 AND d4.d_year <= 2089
+AND h7.hd_dep_count >= 0 AND h7.hd_dep_count <= 9"
+13a.sql,8,361317787,0.1,store_sales|customer_address|customer|catalog_sales|promotion|web_sales|web_site|store_returns|date_dim,9,10c34bb6,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d8 ON d8.d_date_sk = s0.ss_sold_date_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p4 ON p4.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w5 ON w5.ws_sold_date_sk = d8.d_date_sk
+JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d8.d_date_sk
+JOIN store_returns AS s7 ON s7.sr_returned_date_sk = d8.d_date_sk
+JOIN web_site AS w6 ON w6.web_site_sk = w5.ws_web_site_sk
+WHERE s0.ss_quantity >= 61 AND s0.ss_quantity <= 71
+AND d8.d_year >= 2020 AND d8.d_year <= 2040
+AND c1.ca_state IN ('CT', 'IN', 'IA', 'OH', 'NJ', 'VA', 'VT', 'CO', 'MD', 'NE', 'CA', 'NY', 'GA', 'WY', 'SC')"
+13b.sql,8,361317787,0.1,store_sales|time_dim|customer_address|web_sales|household_demographics|customer|catalog_returns|catalog_sales|item,9,671b9fad,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
+JOIN item AS i8 ON i8.i_item_sk = s0.ss_item_sk
+JOIN customer AS c5 ON c5.c_customer_sk = s0.ss_customer_sk
+JOIN household_demographics AS h4 ON h4.hd_demo_sk = s0.ss_hdemo_sk
+JOIN customer_address AS c2 ON c2.ca_address_sk = s0.ss_addr_sk
+JOIN web_sales AS w3 ON w3.ws_item_sk = i8.i_item_sk
+JOIN catalog_sales AS c7 ON c7.cs_item_sk = i8.i_item_sk
+JOIN catalog_returns AS c6 ON c6.cr_item_sk = i8.i_item_sk
+WHERE s0.ss_quantity >= 61 AND s0.ss_quantity <= 71
+AND i8.i_category IN ('Sports', 'Books', 'Music')
+AND h4.hd_dep_count >= 2 AND h4.hd_dep_count <= 4"
+13c.sql,8,361317787,0.1,store_sales|promotion|time_dim|catalog_sales|customer_address|customer|household_demographics|web_sales|web_site,9,1b1e4493,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN time_dim AS t2 ON t2.t_time_sk = s0.ss_sold_time_sk
+JOIN customer AS c5 ON c5.c_customer_sk = s0.ss_customer_sk
+JOIN household_demographics AS h6 ON h6.hd_demo_sk = s0.ss_hdemo_sk
+JOIN customer_address AS c4 ON c4.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p1 ON p1.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w7 ON w7.ws_bill_customer_sk = c5.c_customer_sk
+JOIN catalog_sales AS c3 ON c3.cs_bill_customer_sk = c5.c_customer_sk
+JOIN web_site AS w8 ON w8.web_site_sk = w7.ws_web_site_sk
+WHERE s0.ss_quantity >= 31 AND s0.ss_quantity <= 41
+AND h6.hd_dep_count >= 1 AND h6.hd_dep_count <= 3
+AND c4.ca_state IN ('HI', 'MT', 'MI', 'WY', 'WA', 'IL', 'MS', 'SC', 'TX', 'MN', 'KS', 'CO', 'NV', 'MO', 'NE')"
+13d.sql,8,361317787,0.1,store_sales|time_dim|customer|promotion|web_sales|customer_address|catalog_sales|item|date_dim,9,dd620878,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d8 ON d8.d_date_sk = s0.ss_sold_date_sk
+JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
+JOIN item AS i7 ON i7.i_item_sk = s0.ss_item_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_address AS c5 ON c5.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p3 ON p3.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d8.d_date_sk
+JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d8.d_date_sk
+WHERE s0.ss_quantity >= 61 AND s0.ss_quantity <= 81
+AND d8.d_year >= 1940 AND d8.d_year <= 1980
+AND i7.i_category IN ('Shoes', 'Jewelry', 'Men')"
+14a.sql,7,352739927,0.1,store_sales|time_dim|promotion|catalog_sales|customer|customer_demographics|web_sales|web_site,8,f2102d7c,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
+JOIN customer AS c4 ON c4.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c5 ON c5.cd_demo_sk = s0.ss_cdemo_sk
+JOIN promotion AS p2 ON p2.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w6 ON w6.ws_bill_customer_sk = c4.c_customer_sk
+JOIN catalog_sales AS c3 ON c3.cs_bill_customer_sk = c4.c_customer_sk
+JOIN web_site AS w7 ON w7.web_site_sk = w6.ws_web_site_sk
+WHERE s0.ss_quantity >= 31 AND s0.ss_quantity <= 41
+AND c5.cd_gender = 'F'
+AND p2.p_channel_tv = 'N'"
+14b.sql,7,352739927,0.1,store_sales|time_dim|customer|customer_demographics|catalog_sales|promotion|web_sales|customer_address,8,9415e301,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c3 ON c3.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c7 ON c7.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p5 ON p5.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w6 ON w6.ws_bill_customer_sk = c2.c_customer_sk
+JOIN catalog_sales AS c4 ON c4.cs_bill_customer_sk = c2.c_customer_sk
+WHERE s0.ss_quantity >= 41 AND s0.ss_quantity <= 61
+AND c3.cd_gender = 'M'
+AND c7.ca_state IN ('OR', 'WI', 'RI', 'OH', 'PA', 'LA', 'MI', 'WV', 'NC', 'TN', 'NM', 'DC', 'NY', 'CA', 'IN')"
+14c.sql,7,352739927,0.1,store_sales|promotion|catalog_sales|household_demographics|customer|web_sales|web_site|income_band,8,8a2e25c6,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN customer AS c4 ON c4.c_customer_sk = s0.ss_customer_sk
+JOIN household_demographics AS h3 ON h3.hd_demo_sk = s0.ss_hdemo_sk
+JOIN promotion AS p1 ON p1.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w5 ON w5.ws_bill_customer_sk = c4.c_customer_sk
+JOIN catalog_sales AS c2 ON c2.cs_bill_customer_sk = c4.c_customer_sk
+JOIN income_band AS i7 ON i7.ib_income_band_sk = h3.hd_income_band_sk
+JOIN web_site AS w6 ON w6.web_site_sk = w5.ws_web_site_sk
+WHERE s0.ss_quantity >= 71 AND s0.ss_quantity <= 81
+AND h3.hd_dep_count >= 3 AND h3.hd_dep_count <= 5
+AND p1.p_channel_tv = 'N'"
+15a.sql,8,370344723,0.1,store_sales|customer|web_returns|date_dim|catalog_returns|customer_demographics|catalog_sales|promotion|web_sales,9,5baac4e6,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
+JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c5 ON c5.cd_demo_sk = s0.ss_cdemo_sk
+JOIN promotion AS p7 ON p7.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w8 ON w8.ws_sold_date_sk = d3.d_date_sk
+JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d3.d_date_sk
+JOIN web_returns AS w2 ON w2.wr_returned_date_sk = d3.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d3.d_date_sk
+WHERE s0.ss_quantity >= 61 AND s0.ss_quantity <= 81
+AND d3.d_year >= 1940 AND d3.d_year <= 1960
+AND c5.cd_gender = 'M'"
+15b.sql,8,370344723,0.1,store_sales|customer_address|web_sales|customer_demographics|web_site|promotion|catalog_sales|catalog_page|catalog_returns,9,46835d62,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN customer_demographics AS c3 ON c3.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p5 ON p5.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w2 ON w2.ws_bill_cdemo_sk = c3.cd_demo_sk
+JOIN catalog_sales AS c6 ON c6.cs_bill_cdemo_sk = c3.cd_demo_sk
+JOIN web_site AS w4 ON w4.web_site_sk = w2.ws_web_site_sk
+JOIN catalog_page AS c7 ON c7.cp_catalog_page_sk = c6.cs_catalog_page_sk
+JOIN catalog_returns AS c8 ON c8.cr_catalog_page_sk = c7.cp_catalog_page_sk
+WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 71
+AND c3.cd_gender = 'M'
+AND c1.ca_state IN ('IL', 'DC', 'LA', 'MT', 'NM', 'WA', 'VT', 'NV', 'WI', 'MS', 'SC', 'HI', 'AL', 'RI', 'GA')"
+15c.sql,8,370344723,0.1,store_sales|customer_demographics|customer|store_returns|store|customer_address|catalog_sales|promotion|item,9,d4d6f439,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN item AS i8 ON i8.i_item_sk = s0.ss_item_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c1 ON c1.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c5 ON c5.ca_address_sk = s0.ss_addr_sk
+JOIN store AS s4 ON s4.s_store_sk = s0.ss_store_sk
+JOIN promotion AS p7 ON p7.p_promo_sk = s0.ss_promo_sk
+JOIN catalog_sales AS c6 ON c6.cs_item_sk = i8.i_item_sk
+JOIN store_returns AS s3 ON s3.sr_item_sk = i8.i_item_sk
+WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 71
+AND i8.i_category IN ('Sports', 'Jewelry', 'Women')
+AND c1.cd_gender = 'M'"
+15d.sql,8,370344723,0.1,store_sales|customer_address|customer|web_returns|web_page|catalog_sales|promotion|web_sales|customer_demographics,9,b1832eed,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c8 ON c8.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p6 ON p6.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w7 ON w7.ws_bill_customer_sk = c2.c_customer_sk
+JOIN catalog_sales AS c5 ON c5.cs_bill_customer_sk = c2.c_customer_sk
+JOIN web_returns AS w3 ON w3.wr_refunded_customer_sk = c2.c_customer_sk
+JOIN web_page AS w4 ON w4.wp_web_page_sk = w7.ws_web_page_sk
+WHERE s0.ss_quantity >= 20 AND s0.ss_quantity <= 31
+AND c8.cd_gender = 'F'
+AND c1.ca_state IN ('ND', 'PA', 'AR', 'NM', 'UT', 'ME', 'IA', 'MO', 'WI', 'DE', 'NC', 'NH', 'SD', 'AL', 'TN')"
+16a.sql,7,342332477,0.1,inventory|date_dim|catalog_returns|warehouse|item|catalog_sales|customer_demographics|customer,8,ba3dd085,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_returns AS c1 ON c1.cr_returned_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1998 AND d2.d_year <= 2000
-AND i3.i_category IN ('Jewelry', 'Women', 'Books', 'Electronics')
-AND w4.w_warehouse_sq_ft >= 447399 AND w4.w_warehouse_sq_ft <= 832002"
-1c.sql,4,62253403,inventory|date_dim|web_returns|item|warehouse,5,ab4b1567,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN item AS i4 ON i4.i_item_sk = i0.inv_item_sk
+JOIN warehouse AS w3 ON w3.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c2 ON c2.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c7 ON c7.c_customer_sk = c5.cs_bill_customer_sk
+JOIN customer_demographics AS c6 ON c6.cd_demo_sk = c5.cs_bill_cdemo_sk
+WHERE d1.d_year >= 1960 AND d1.d_year <= 1980
+AND i4.i_category IN ('Women', 'Books', 'Children')
+AND w3.w_warehouse_sq_ft >= 457738 AND w3.w_warehouse_sq_ft <= 555835"
+16b.sql,7,342332477,0.1,inventory|date_dim|catalog_sales|item|catalog_returns|catalog_page|store_sales|customer_demographics,8,ae6a5ef9,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
 JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN store_sales AS s6 ON s6.ss_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d1.d_date_sk
+JOIN customer_demographics AS c7 ON c7.cd_demo_sk = s6.ss_cdemo_sk
+JOIN catalog_page AS c5 ON c5.cp_catalog_page_sk = c2.cs_catalog_page_sk
+WHERE d1.d_year >= 2040 AND d1.d_year <= 2060
+AND i3.i_category IN ('Music', 'Men', 'Home')
+AND s6.ss_quantity >= 61 AND s6.ss_quantity <= 81"
+16c.sql,7,342332477,0.1,inventory|item|catalog_returns|catalog_page|catalog_sales|customer_address|customer|customer_demographics,8,250d6172,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN catalog_sales AS c4 ON c4.cs_item_sk = i1.i_item_sk
+JOIN catalog_returns AS c2 ON c2.cr_item_sk = i1.i_item_sk
+JOIN customer AS c6 ON c6.c_customer_sk = c4.cs_bill_customer_sk
+JOIN customer_demographics AS c7 ON c7.cd_demo_sk = c4.cs_bill_cdemo_sk
+JOIN customer_address AS c5 ON c5.ca_address_sk = c4.cs_bill_addr_sk
+JOIN catalog_page AS c3 ON c3.cp_catalog_page_sk = c4.cs_catalog_page_sk
+WHERE i1.i_category IN ('Women', 'Men', 'Home')
+AND c4.cs_quantity >= 40 AND c4.cs_quantity <= 60
+AND c7.cd_gender = 'M'"
+16d.sql,7,342332477,0.1,inventory|date_dim|catalog_sales|customer_address|web_sales|customer_demographics|customer|catalog_page,8,ac03fc07,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
+JOIN customer AS c6 ON c6.c_customer_sk = w4.ws_bill_customer_sk
+JOIN customer_demographics AS c5 ON c5.cd_demo_sk = w4.ws_bill_cdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = w4.ws_bill_addr_sk
+JOIN catalog_page AS c7 ON c7.cp_catalog_page_sk = c2.cs_catalog_page_sk
+WHERE d1.d_year >= 2040 AND d1.d_year <= 2060
+AND w4.ws_quantity >= 70 AND w4.ws_quantity <= 80
+AND c2.cs_quantity >= 6 AND c2.cs_quantity <= 21"
+17a.sql,6,331516361,0.1,inventory|item|catalog_returns|catalog_page|catalog_sales|customer_address|customer,7,981ed22c,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN catalog_sales AS c4 ON c4.cs_item_sk = i1.i_item_sk
+JOIN catalog_returns AS c2 ON c2.cr_item_sk = i1.i_item_sk
+JOIN customer AS c6 ON c6.c_customer_sk = c4.cs_bill_customer_sk
+JOIN customer_address AS c5 ON c5.ca_address_sk = c4.cs_bill_addr_sk
+JOIN catalog_page AS c3 ON c3.cp_catalog_page_sk = c4.cs_catalog_page_sk
+WHERE i1.i_category IN ('Home', 'Children', 'Men')
+AND c4.cs_quantity >= 50 AND c4.cs_quantity <= 60
+AND c5.ca_state IN ('NV', 'WV', 'FL', 'IL', 'WI', 'WY', 'VA', 'NC', 'MO', 'MN', 'NM', 'OH', 'KS', 'MI', 'VT')"
+17b.sql,6,331516361,0.1,inventory|date_dim|web_returns|customer|customer_demographics|web_sales|customer_address,7,b0ec1965,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN web_sales AS w5 ON w5.ws_sold_date_sk = d1.d_date_sk
 JOIN web_returns AS w2 ON w2.wr_returned_date_sk = d1.d_date_sk
-WHERE d1.d_year >= 2000 AND d1.d_year <= 2002
-AND i3.i_category IN ('Jewelry', 'Music', 'Home', 'Children')
-AND w4.w_warehouse_sq_ft >= 339688 AND w4.w_warehouse_sq_ft <= 730913"
-1d.sql,4,62253403,inventory|catalog_sales|date_dim|item|warehouse,5,fdf5b167,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN customer AS c3 ON c3.c_customer_sk = w5.ws_bill_customer_sk
+JOIN customer_demographics AS c4 ON c4.cd_demo_sk = w5.ws_bill_cdemo_sk
+JOIN customer_address AS c6 ON c6.ca_address_sk = w5.ws_bill_addr_sk
+WHERE d1.d_year >= 2040 AND d1.d_year <= 2060
+AND w5.ws_quantity >= 50 AND w5.ws_quantity <= 60
+AND c4.cd_gender = 'M'"
+17c.sql,6,331516361,0.1,inventory|item|catalog_returns|customer|customer_address|customer_demographics|web_sales,7,81d3797b,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN web_sales AS w6 ON w6.ws_item_sk = i1.i_item_sk
+JOIN catalog_returns AS c2 ON c2.cr_item_sk = i1.i_item_sk
+JOIN customer AS c3 ON c3.c_customer_sk = w6.ws_bill_customer_sk
+JOIN customer_demographics AS c5 ON c5.cd_demo_sk = w6.ws_bill_cdemo_sk
+JOIN customer_address AS c4 ON c4.ca_address_sk = w6.ws_bill_addr_sk
+WHERE i1.i_category IN ('Home', 'Jewelry', 'Men')
+AND w6.ws_quantity >= 10 AND w6.ws_quantity <= 30
+AND c5.cd_gender = 'M'"
+17d.sql,6,331516361,0.1,inventory|item|catalog_sales|customer_demographics|catalog_page|catalog_returns|customer,7,1bb92ad6,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN catalog_sales AS c2 ON c2.cs_item_sk = i1.i_item_sk
+JOIN catalog_returns AS c5 ON c5.cr_item_sk = i1.i_item_sk
+JOIN customer AS c6 ON c6.c_customer_sk = c2.cs_bill_customer_sk
+JOIN customer_demographics AS c3 ON c3.cd_demo_sk = c2.cs_bill_cdemo_sk
+JOIN catalog_page AS c4 ON c4.cp_catalog_page_sk = c2.cs_catalog_page_sk
+WHERE i1.i_category IN ('Sports', 'Jewelry', 'Men')
+AND c2.cs_quantity >= 50 AND c2.cs_quantity <= 70
+AND c3.cd_gender = 'F'"
+17e.sql,6,331516361,0.1,inventory|item|store_returns|store|store_sales|date_dim|catalog_returns,7,16d5df36,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s4 ON s4.ss_sold_date_sk = d5.d_date_sk
+JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d5.d_date_sk
+JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d5.d_date_sk
+JOIN store AS s3 ON s3.s_store_sk = s4.ss_store_sk
+WHERE d5.d_year >= 1910 AND d5.d_year <= 2089
+AND i1.i_category IN ('Women', 'Home', 'Electronics', 'Jewelry', 'Sports', 'Shoes', 'Books', 'Music', 'Men', 'Children')
+AND s4.ss_quantity >= 5 AND s4.ss_quantity <= 96"
+17f.sql,6,331516361,0.1,inventory|date_dim|catalog_sales|customer_address|customer|customer_demographics|web_sales,7,5a222c6d,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN web_sales AS w6 ON w6.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
+JOIN customer AS c4 ON c4.c_customer_sk = w6.ws_bill_customer_sk
+JOIN customer_demographics AS c5 ON c5.cd_demo_sk = w6.ws_bill_cdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = w6.ws_bill_addr_sk
+WHERE d1.d_year >= 2060 AND d1.d_year <= 2089
+AND w6.ws_quantity >= 30 AND w6.ws_quantity <= 40
+AND c2.cs_quantity >= 80 AND c2.cs_quantity <= 95"
+18a.sql,6,601403228,0.1,inventory|item|warehouse|store_sales|promotion|catalog_sales|catalog_page,7,330a00db,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN warehouse AS w2 ON w2.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN store_sales AS s3 ON s3.ss_item_sk = i1.i_item_sk
+JOIN catalog_sales AS c5 ON c5.cs_item_sk = i1.i_item_sk
+JOIN promotion AS p4 ON p4.p_promo_sk = s3.ss_promo_sk
+JOIN catalog_page AS c6 ON c6.cp_catalog_page_sk = c5.cs_catalog_page_sk
+WHERE i1.i_category IN ('Men', 'Children', 'Jewelry')
+AND w2.w_warehouse_sq_ft >= 161864 AND w2.w_warehouse_sq_ft <= 231946
+AND s3.ss_quantity >= 31 AND s3.ss_quantity <= 51"
+18b.sql,6,601403228,0.1,inventory|item|store_sales|customer_address|web_sales|household_demographics|customer,7,74916882,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s2 ON s2.ss_item_sk = i1.i_item_sk
+JOIN web_sales AS w4 ON w4.ws_item_sk = i1.i_item_sk
+JOIN customer AS c6 ON c6.c_customer_sk = s2.ss_customer_sk
+JOIN household_demographics AS h5 ON h5.hd_demo_sk = s2.ss_hdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = s2.ss_addr_sk
+WHERE i1.i_category IN ('Music', 'Jewelry', 'Women')
+AND s2.ss_quantity >= 20 AND s2.ss_quantity <= 31
+AND w4.ws_quantity >= 80 AND w4.ws_quantity <= 95"
+18c.sql,6,601403228,0.1,inventory|warehouse|date_dim|store_sales|promotion|catalog_sales|customer,7,445c1412,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 2001 AND d2.d_year <= 2002
-AND i3.i_category IN ('Children', 'Electronics')
-AND w4.w_warehouse_sq_ft >= 549219 AND w4.w_warehouse_sq_ft <= 807125"
-20a.sql,9,340237115,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,10,c8b91e98,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN store_sales AS s3 ON s3.ss_sold_date_sk = d2.d_date_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d2.d_date_sk
+JOIN customer AS c6 ON c6.c_customer_sk = s3.ss_customer_sk
+JOIN promotion AS p4 ON p4.p_promo_sk = s3.ss_promo_sk
+WHERE d2.d_year >= 2040 AND d2.d_year <= 2080
+AND w1.w_warehouse_sq_ft >= 278668 AND w1.w_warehouse_sq_ft <= 359640
+AND s3.ss_quantity >= 41 AND s3.ss_quantity <= 51"
+19a.sql,9,655805480,0.1,inventory|date_dim|item|catalog_returns|catalog_page|catalog_sales|promotion|store_sales|customer_address|customer,10,73c35fb9,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN item AS i2 ON i2.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s7 ON s7.ss_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c9 ON c9.c_customer_sk = s7.ss_customer_sk
+JOIN customer_address AS c8 ON c8.ca_address_sk = s7.ss_addr_sk
+JOIN promotion AS p6 ON p6.p_promo_sk = s7.ss_promo_sk
+JOIN catalog_page AS c4 ON c4.cp_catalog_page_sk = c5.cs_catalog_page_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 1940
+AND i2.i_category IN ('Children', 'Electronics', 'Music')
+AND s7.ss_quantity >= 81 AND s7.ss_quantity <= 96"
+19b.sql,9,655805480,0.1,inventory|date_dim|store_sales|web_sales|promotion|store_returns|customer|web_returns|item|warehouse,10,3e04880a,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
 JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
 JOIN warehouse AS w9 ON w9.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-WHERE d6.d_year >= 1999 AND d6.d_year <= 2002
-AND i8.i_category IN ('Electronics', 'Jewelry', 'Music', 'Women', 'Home', 'Children', 'Men', 'Books')
-AND w9.w_warehouse_sq_ft >= 161543 AND w9.w_warehouse_sq_ft <= 900347"
-20b.sql,9,340237115,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,10,b9bd0e10,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN store_sales AS s2 ON s2.ss_sold_date_sk = d1.d_date_sk
+JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d1.d_date_sk
+JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d1.d_date_sk
+JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c6 ON c6.c_customer_sk = s2.ss_customer_sk
+JOIN promotion AS p4 ON p4.p_promo_sk = s2.ss_promo_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 2089
+AND i8.i_category IN ('Women', 'Music', 'Jewelry', 'Children', 'Shoes', 'Books', 'Men', 'Home', 'Sports', 'Electronics')
+AND w9.w_warehouse_sq_ft >= 161864 AND w9.w_warehouse_sq_ft <= 924304"
+19c.sql,9,655805480,0.1,inventory|item|catalog_returns|date_dim|customer|catalog_sales|customer_address|store_sales|store|store_returns,10,8e87c226,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w9 ON w9.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2001
-AND i8.i_category IN ('Books', 'Electronics', 'Home', 'Sports', 'Jewelry', 'Children', 'Music', 'Men')
-AND w9.w_warehouse_sq_ft >= 243620 AND w9.w_warehouse_sq_ft <= 982424"
-20c.sql,9,340237115,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,10,1811559f,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s7 ON s7.ss_sold_date_sk = d3.d_date_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d3.d_date_sk
+JOIN store_returns AS s9 ON s9.sr_returned_date_sk = d3.d_date_sk
+JOIN catalog_returns AS c2 ON c2.cr_returned_date_sk = d3.d_date_sk
+JOIN customer AS c4 ON c4.c_customer_sk = s7.ss_customer_sk
+JOIN customer_address AS c6 ON c6.ca_address_sk = s7.ss_addr_sk
+JOIN store AS s8 ON s8.s_store_sk = s7.ss_store_sk
+WHERE d3.d_year >= 1910 AND d3.d_year <= 2089
+AND i1.i_category IN ('Sports', 'Home', 'Men', 'Children', 'Books', 'Women', 'Shoes', 'Electronics', 'Jewelry', 'Music')
+AND s7.ss_quantity >= 5 AND s7.ss_quantity <= 96"
+19d.sql,9,655805480,0.1,inventory|warehouse|date_dim|item|catalog_returns|customer|catalog_sales|store_returns|store|web_sales,10,9e13a4bb,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w9 ON w9.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-WHERE d6.d_year >= 1999 AND d6.d_year <= 2002
-AND i8.i_category IN ('Electronics', 'Music', 'Books', 'Home', 'Sports', 'Men', 'Children', 'Jewelry')
-AND w9.w_warehouse_sq_ft >= 64293 AND w9.w_warehouse_sq_ft <= 803097"
-21a.sql,8,365042328,inventory|store_sales|catalog_sales|web_sales|store_returns|date_dim|web_returns|item|warehouse,9,8efda945,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
+JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN web_sales AS w9 ON w9.ws_sold_date_sk = d2.d_date_sk
+JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d2.d_date_sk
+JOIN store_returns AS s7 ON s7.sr_returned_date_sk = d2.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d2.d_date_sk
+JOIN customer AS c5 ON c5.c_customer_sk = w9.ws_bill_customer_sk
+JOIN store AS s8 ON s8.s_store_sk = s7.sr_store_sk
+WHERE d2.d_year >= 1920 AND d2.d_year <= 1960
+AND i3.i_category IN ('Men', 'Music', 'Electronics')
+AND w1.w_warehouse_sq_ft >= 278668 AND w1.w_warehouse_sq_ft <= 457738"
+1a.sql,4,62253403,0.1,catalog_returns|customer|web_sales|promotion|catalog_sales,5,d2d55df0,ok,"SELECT MIN(c0.cr_return_amount) AS result
+FROM catalog_returns AS c0
+JOIN customer AS c1 ON c1.c_customer_sk = c0.cr_refunded_customer_sk
+JOIN web_sales AS w2 ON w2.ws_bill_customer_sk = c1.c_customer_sk
+JOIN catalog_sales AS c4 ON c4.cs_bill_customer_sk = c1.c_customer_sk
+JOIN promotion AS p3 ON p3.p_promo_sk = w2.ws_promo_sk
+WHERE w2.ws_quantity >= 40 AND w2.ws_quantity <= 50
+AND c4.cs_quantity >= 40 AND c4.cs_quantity <= 50
+AND p3.p_channel_tv = 'N'"
+1b.sql,4,62253403,0.1,catalog_returns|customer|web_sales|promotion|catalog_sales,5,0abb78b9,ok,"SELECT MIN(c0.cr_return_amount) AS result
+FROM catalog_returns AS c0
+JOIN customer AS c1 ON c1.c_customer_sk = c0.cr_refunded_customer_sk
+JOIN web_sales AS w2 ON w2.ws_bill_customer_sk = c1.c_customer_sk
+JOIN catalog_sales AS c4 ON c4.cs_bill_customer_sk = c1.c_customer_sk
+JOIN promotion AS p3 ON p3.p_promo_sk = w2.ws_promo_sk
+WHERE w2.ws_quantity >= 5 AND w2.ws_quantity <= 20
+AND c4.cs_quantity >= 30 AND c4.cs_quantity <= 50
+AND p3.p_channel_tv = 'N'"
+1c.sql,4,62253403,0.1,catalog_returns|item|catalog_sales|promotion|store_sales,5,b7addb1f,ok,"SELECT MIN(c0.cr_return_amount) AS result
+FROM catalog_returns AS c0
+JOIN item AS i1 ON i1.i_item_sk = c0.cr_item_sk
+JOIN store_sales AS s4 ON s4.ss_item_sk = i1.i_item_sk
+JOIN catalog_sales AS c2 ON c2.cs_item_sk = i1.i_item_sk
+JOIN promotion AS p3 ON p3.p_promo_sk = s4.ss_promo_sk
+WHERE i1.i_category IN ('Shoes', 'Women', 'Sports')
+AND s4.ss_quantity >= 10 AND s4.ss_quantity <= 31
+AND c2.cs_quantity >= 70 AND c2.cs_quantity <= 80"
+1d.sql,4,62253403,0.1,catalog_returns|customer|customer_demographics|catalog_sales|promotion,5,0e8698a0,ok,"SELECT MIN(c0.cr_return_amount) AS result
+FROM catalog_returns AS c0
+JOIN customer AS c1 ON c1.c_customer_sk = c0.cr_refunded_customer_sk
+JOIN catalog_sales AS c3 ON c3.cs_bill_customer_sk = c1.c_customer_sk
+JOIN customer_demographics AS c2 ON c2.cd_demo_sk = c1.c_current_cdemo_sk
+JOIN promotion AS p4 ON p4.p_promo_sk = c3.cs_promo_sk
+WHERE c3.cs_quantity >= 6 AND c3.cs_quantity <= 21
+AND c2.cd_gender = 'M'
+AND p4.p_channel_tv = 'N'"
+20a.sql,9,340237115,0.1,inventory|item|date_dim|web_sales|customer_demographics|catalog_sales|catalog_page|catalog_returns|store_returns|store_sales,10,50a4bc73,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1999 AND d5.d_year <= 2003
-AND i7.i_category IN ('Women', 'Children', 'Electronics', 'Home', 'Books', 'Sports', 'Jewelry', 'Music', 'Men')
-AND w8.w_warehouse_sq_ft >= 67129 AND w8.w_warehouse_sq_ft <= 869305"
-21b.sql,8,365042328,inventory|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,29898d75,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s9 ON s9.ss_sold_date_sk = d2.d_date_sk
+JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d2.d_date_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d2.d_date_sk
+JOIN store_returns AS s8 ON s8.sr_returned_date_sk = d2.d_date_sk
+JOIN catalog_returns AS c7 ON c7.cr_returned_date_sk = d2.d_date_sk
+JOIN customer_demographics AS c4 ON c4.cd_demo_sk = s9.ss_cdemo_sk
+JOIN catalog_page AS c6 ON c6.cp_catalog_page_sk = c5.cs_catalog_page_sk
+WHERE d2.d_year >= 1910 AND d2.d_year <= 2089
+AND i1.i_category IN ('Children', 'Men', 'Sports', 'Women', 'Shoes', 'Home', 'Electronics', 'Music', 'Jewelry', 'Books')
+AND s9.ss_quantity >= 5 AND s9.ss_quantity <= 96"
+20b.sql,9,340237115,0.1,inventory|item|catalog_sales|catalog_page|catalog_returns|customer|web_sales|web_site|web_returns|date_dim,10,9308f78f,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i7.i_category IN ('Books', 'Electronics', 'Sports', 'Jewelry', 'Women', 'Children', 'Home', 'Music', 'Men')
-AND w8.w_warehouse_sq_ft >= 50000 AND w8.w_warehouse_sq_ft <= 1000000"
-21c.sql,8,365042328,inventory|store_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,77087cbd,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN date_dim AS d9 ON d9.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN web_sales AS w6 ON w6.ws_sold_date_sk = d9.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d9.d_date_sk
+JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d9.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d9.d_date_sk
+JOIN customer AS c5 ON c5.c_customer_sk = w6.ws_bill_customer_sk
+JOIN web_site AS w7 ON w7.web_site_sk = w6.ws_web_site_sk
+JOIN catalog_page AS c3 ON c3.cp_catalog_page_sk = c2.cs_catalog_page_sk
+WHERE d9.d_year >= 1910 AND d9.d_year <= 2089
+AND i1.i_category IN ('Women', 'Home', 'Sports', 'Men', 'Children', 'Music', 'Shoes', 'Jewelry', 'Electronics', 'Books')
+AND w6.ws_quantity >= 5 AND w6.ws_quantity <= 95"
+20c.sql,9,340237115,0.1,inventory|item|web_sales|customer|customer_demographics|web_site|catalog_sales|catalog_page|catalog_returns|date_dim,10,f70f652e,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i7.i_category IN ('Electronics', 'Jewelry', 'Music', 'Sports', 'Books', 'Women', 'Men', 'Home', 'Children')
-AND w8.w_warehouse_sq_ft >= 50000 AND w8.w_warehouse_sq_ft <= 1000000"
-22a.sql,10,375962937,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|warehouse,11,d2a036bb,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2002
-AND i9.i_category IN ('Electronics', 'Jewelry', 'Men', 'Music', 'Women', 'Books', 'Children', 'Sports', 'Home')
-AND w10.w_warehouse_sq_ft >= 89056 AND w10.w_warehouse_sq_ft <= 893666"
-22b.sql,10,375962937,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|warehouse,11,f9a165a2,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2002
-AND i9.i_category IN ('Women', 'Jewelry', 'Music', 'Electronics', 'Home', 'Men', 'Books', 'Sports', 'Children')
-AND w10.w_warehouse_sq_ft >= 163253 AND w10.w_warehouse_sq_ft <= 967863"
-22c.sql,10,375962937,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|customer_address|item|warehouse,11,ff6eb308,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-JOIN customer_address AS c8 ON c8.ca_address_sk = s1.ss_addr_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2002
-AND i9.i_category IN ('Home', 'Women', 'Jewelry', 'Music', 'Electronics', 'Children', 'Sports', 'Books', 'Men')
-AND w10.w_warehouse_sq_ft >= 73918 AND w10.w_warehouse_sq_ft <= 884738"
-22d.sql,10,375962937,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|warehouse,11,1787f7dd,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-WHERE d7.d_year >= 1999 AND d7.d_year <= 2003
-AND i9.i_category IN ('Men', 'Sports', 'Electronics', 'Women', 'Home', 'Jewelry', 'Books', 'Music', 'Children')
-AND w10.w_warehouse_sq_ft >= 184898 AND w10.w_warehouse_sq_ft <= 989508"
-23a.sql,10,365463009,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|warehouse,11,b227f33c,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-WHERE d7.d_year >= 1999 AND d7.d_year <= 2003
-AND i9.i_category IN ('Sports', 'Electronics', 'Home', 'Jewelry', 'Books', 'Men', 'Music', 'Women')
-AND w10.w_warehouse_sq_ft >= 81831 AND w10.w_warehouse_sq_ft <= 863969"
-23b.sql,10,365463009,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|warehouse,11,e004254b,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2002
-AND i9.i_category IN ('Electronics', 'Books', 'Children', 'Sports', 'Women', 'Men', 'Home', 'Jewelry')
-AND w10.w_warehouse_sq_ft >= 183397 AND w10.w_warehouse_sq_ft <= 965535"
-23c.sql,10,365463009,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|promotion|warehouse,11,1a67c743,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-JOIN promotion AS p9 ON p9.p_promo_sk = s1.ss_promo_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2002
-AND i8.i_category IN ('Jewelry', 'Men', 'Home', 'Children', 'Women', 'Sports', 'Books', 'Music', 'Electronics')
-AND w10.w_warehouse_sq_ft >= 88953 AND w10.w_warehouse_sq_ft <= 882468"
-24a.sql,11,670450630,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|customer_address|item|warehouse,12,ddadfc3b,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i10 ON i10.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d7.d_date_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN customer_address AS c9 ON c9.ca_address_sk = s1.ss_addr_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2003
-AND i10.i_category IN ('Music', 'Women', 'Children', 'Electronics', 'Men', 'Books', 'Jewelry', 'Sports', 'Home')
-AND w11.w_warehouse_sq_ft >= 50000 AND w11.w_warehouse_sq_ft <= 1000000"
-24b.sql,11,670450630,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|household_demographics|promotion|warehouse,12,9763e200,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-JOIN household_demographics AS h9 ON h9.hd_demo_sk = s1.ss_hdemo_sk
-JOIN promotion AS p10 ON p10.p_promo_sk = s1.ss_promo_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2003
-AND i8.i_category IN ('Men', 'Books', 'Children', 'Home', 'Jewelry', 'Electronics', 'Women', 'Music', 'Sports')
-AND w11.w_warehouse_sq_ft >= 50000 AND w11.w_warehouse_sq_ft <= 1000000"
-25a.sql,8,616048378,inventory|store_sales|catalog_sales|store_returns|catalog_returns|date_dim|web_returns|item|warehouse,9,de5ee081,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i7.i_category IN ('Home', 'Jewelry', 'Sports', 'Men', 'Children', 'Music', 'Books', 'Women', 'Electronics')
-AND w8.w_warehouse_sq_ft >= 50000 AND w8.w_warehouse_sq_ft <= 1000000"
-25b.sql,8,616048378,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|item|warehouse,9,3dc54d64,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2003
-AND i7.i_category IN ('Men', 'Electronics', 'Women', 'Jewelry', 'Books', 'Music', 'Children', 'Home', 'Sports')
-AND w8.w_warehouse_sq_ft >= 50000 AND w8.w_warehouse_sq_ft <= 1000000"
-25c.sql,8,616048378,inventory|store_sales|catalog_sales|web_sales|catalog_returns|date_dim|web_returns|item|warehouse,9,a381f622,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w8 ON w8.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d5.d_date_sk
+JOIN date_dim AS d9 ON d9.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d9.d_date_sk
+JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d9.d_date_sk
+JOIN catalog_returns AS c8 ON c8.cr_returned_date_sk = d9.d_date_sk
+JOIN customer AS c3 ON c3.c_customer_sk = w2.ws_bill_customer_sk
+JOIN customer_demographics AS c4 ON c4.cd_demo_sk = w2.ws_bill_cdemo_sk
+JOIN web_site AS w5 ON w5.web_site_sk = w2.ws_web_site_sk
+JOIN catalog_page AS c7 ON c7.cp_catalog_page_sk = c6.cs_catalog_page_sk
+WHERE d9.d_year >= 1940 AND d9.d_year <= 1960
+AND i1.i_category IN ('Women', 'Home', 'Jewelry')
+AND w2.ws_quantity >= 5 AND w2.ws_quantity <= 20"
+21a.sql,8,365042328,0.1,store_sales|store|store_returns|customer_address|customer|customer_demographics|catalog_sales|promotion|household_demographics,9,7cde8a13,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN customer AS c4 ON c4.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c5 ON c5.cd_demo_sk = s0.ss_cdemo_sk
+JOIN household_demographics AS h8 ON h8.hd_demo_sk = s0.ss_hdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = s0.ss_addr_sk
+JOIN store AS s1 ON s1.s_store_sk = s0.ss_store_sk
+JOIN promotion AS p7 ON p7.p_promo_sk = s0.ss_promo_sk
+JOIN catalog_sales AS c6 ON c6.cs_bill_customer_sk = c4.c_customer_sk
+JOIN store_returns AS s2 ON s2.sr_customer_sk = c4.c_customer_sk
+WHERE s0.ss_quantity >= 71 AND s0.ss_quantity <= 91
+AND c5.cd_gender = 'F'
+AND h8.hd_dep_count >= 5 AND h8.hd_dep_count <= 6"
+21b.sql,8,365042328,0.1,store_sales|customer|customer_address|web_sales|household_demographics|catalog_sales|catalog_page|customer_demographics|web_returns,9,cf84dacc,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c7 ON c7.cd_demo_sk = s0.ss_cdemo_sk
+JOIN household_demographics AS h4 ON h4.hd_demo_sk = s0.ss_hdemo_sk
+JOIN customer_address AS c2 ON c2.ca_address_sk = s0.ss_addr_sk
+JOIN web_sales AS w3 ON w3.ws_bill_customer_sk = c1.c_customer_sk
+JOIN catalog_sales AS c5 ON c5.cs_bill_customer_sk = c1.c_customer_sk
+JOIN web_returns AS w8 ON w8.wr_refunded_customer_sk = c1.c_customer_sk
+JOIN catalog_page AS c6 ON c6.cp_catalog_page_sk = c5.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 61 AND s0.ss_quantity <= 71
+AND c7.cd_gender = 'F'
+AND h4.hd_dep_count >= 5 AND h4.hd_dep_count <= 7"
+21c.sql,8,365042328,0.1,store_sales|customer|store|catalog_returns|catalog_page|date_dim|inventory|customer_address|web_sales,9,60770bed,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d5 ON d5.d_date_sk = s0.ss_sold_date_sk
+JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
+JOIN customer_address AS c7 ON c7.ca_address_sk = s0.ss_addr_sk
+JOIN store AS s2 ON s2.s_store_sk = s0.ss_store_sk
+JOIN web_sales AS w8 ON w8.ws_sold_date_sk = d5.d_date_sk
+JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d5.d_date_sk
+JOIN inventory AS i6 ON i6.inv_date_sk = d5.d_date_sk
+JOIN catalog_page AS c4 ON c4.cp_catalog_page_sk = c3.cr_catalog_page_sk
+WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 61
+AND d5.d_year >= 1940 AND d5.d_year <= 1960
+AND c7.ca_state IN ('NY', 'NV', 'ID', 'MA', 'KY', 'WI', 'PA', 'MN', 'TN', 'IA', 'CA', 'RI', 'KS', 'UT', 'NJ')"
+22a.sql,10,375962937,0.1,store_sales|time_dim|customer|customer_address|catalog_returns|catalog_page|catalog_sales|date_dim|web_sales|household_demographics|income_band,11,d504f42f,timeout,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d7 ON d7.d_date_sk = s0.ss_sold_date_sk
+JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN household_demographics AS h9 ON h9.hd_demo_sk = s0.ss_hdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = s0.ss_addr_sk
+JOIN web_sales AS w8 ON w8.ws_sold_date_sk = d7.d_date_sk
+JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d7.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d7.d_date_sk
+JOIN income_band AS i10 ON i10.ib_income_band_sk = h9.hd_income_band_sk
+JOIN catalog_page AS c5 ON c5.cp_catalog_page_sk = c6.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
+AND d7.d_year >= 1910 AND d7.d_year <= 2089
+AND h9.hd_dep_count >= 0 AND h9.hd_dep_count <= 9"
+22b.sql,10,375962937,0.1,store_sales|customer_address|catalog_sales|promotion|web_sales|date_dim|web_returns|customer|customer_demographics|web_page|time_dim,11,ed0fd528,timeout,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d5 ON d5.d_date_sk = s0.ss_sold_date_sk
+JOIN time_dim AS t10 ON t10.t_time_sk = s0.ss_sold_time_sk
+JOIN customer AS c7 ON c7.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c8 ON c8.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p3 ON p3.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d5.d_date_sk
 JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
 JOIN web_returns AS w6 ON w6.wr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i7.i_category IN ('Jewelry', 'Men', 'Music', 'Home', 'Electronics', 'Women', 'Sports', 'Books', 'Children')
-AND w8.w_warehouse_sq_ft >= 50000 AND w8.w_warehouse_sq_ft <= 1000000"
-26a.sql,11,351277734,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|customer_address|item|warehouse,12,bf70e500,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN web_page AS w9 ON w9.wp_web_page_sk = w4.ws_web_page_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
+AND d5.d_year >= 1910 AND d5.d_year <= 2089
+AND c8.cd_gender IN ('M', 'F')"
+22c.sql,10,375962937,0.1,store_sales|promotion|catalog_sales|customer|web_sales|date_dim|catalog_returns|customer_address|catalog_page|web_returns|item,11,47f7abc0,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d5 ON d5.d_date_sk = s0.ss_sold_date_sk
+JOIN item AS i10 ON i10.i_item_sk = s0.ss_item_sk
+JOIN customer AS c3 ON c3.c_customer_sk = s0.ss_customer_sk
+JOIN customer_address AS c7 ON c7.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p1 ON p1.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d5.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
+JOIN web_returns AS w9 ON w9.wr_returned_date_sk = d5.d_date_sk
+JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d5.d_date_sk
+JOIN catalog_page AS c8 ON c8.cp_catalog_page_sk = c2.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 81 AND s0.ss_quantity <= 96
+AND d5.d_year >= 2020 AND d5.d_year <= 2060
+AND i10.i_category IN ('Electronics', 'Jewelry', 'Men')"
+22d.sql,10,375962937,0.1,store_sales|customer_address|customer|catalog_sales|catalog_page|customer_demographics|web_sales|promotion|catalog_returns|date_dim|inventory,11,5d045f2d,timeout,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d9 ON d9.d_date_sk = s0.ss_sold_date_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c5 ON c5.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p7 ON p7.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w6 ON w6.ws_sold_date_sk = d9.d_date_sk
+JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d9.d_date_sk
+JOIN catalog_returns AS c8 ON c8.cr_returned_date_sk = d9.d_date_sk
+JOIN inventory AS i10 ON i10.inv_date_sk = d9.d_date_sk
+JOIN catalog_page AS c4 ON c4.cp_catalog_page_sk = c3.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
+AND d9.d_year >= 1910 AND d9.d_year <= 2089
+AND c5.cd_gender IN ('F', 'M')"
+23a.sql,10,365463009,0.1,store_sales|customer|customer_address|web_sales|item|web_returns|web_page|promotion|catalog_sales|catalog_page|catalog_returns,11,cbc5427b,timeout,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN item AS i4 ON i4.i_item_sk = s0.ss_item_sk
+JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
+JOIN customer_address AS c2 ON c2.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p7 ON p7.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w3 ON w3.ws_item_sk = i4.i_item_sk
+JOIN catalog_sales AS c8 ON c8.cs_item_sk = i4.i_item_sk
+JOIN web_returns AS w5 ON w5.wr_item_sk = i4.i_item_sk
+JOIN catalog_returns AS c10 ON c10.cr_item_sk = i4.i_item_sk
+JOIN web_page AS w6 ON w6.wp_web_page_sk = w3.ws_web_page_sk
+JOIN catalog_page AS c9 ON c9.cp_catalog_page_sk = c8.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
+AND i4.i_category IN ('Music', 'Books', 'Home', 'Jewelry', 'Sports', 'Shoes', 'Electronics', 'Women', 'Men', 'Children')
+AND c2.ca_state IN ('ME', 'AL', 'IA', 'AK', 'MA', 'WI', 'MO', 'KY', 'RI', 'MN', 'MS', 'ND', 'NM', 'FL', 'AR', 'NH', 'OK', 'LA', 'GA', 'ID', 'NY', 'TN', 'NJ', 'OR', 'AZ', 'NE', 'OH', 'CA', 'NC', 'CT', 'IL', 'CO', 'VT', 'KS', 'WV', 'WA', 'VA', 'IN', 'UT', 'NV', 'MI', 'MD', 'PA', 'DE', 'SC', 'DC', 'TX', 'MT', 'HI', 'WY', 'SD')"
+23b.sql,10,365463009,0.1,store_sales|customer_demographics|customer|household_demographics|income_band|web_sales|web_site|promotion|catalog_sales|item|inventory,11,abfb6375,timeout,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN item AS i9 ON i9.i_item_sk = s0.ss_item_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c1 ON c1.cd_demo_sk = s0.ss_cdemo_sk
+JOIN household_demographics AS h3 ON h3.hd_demo_sk = s0.ss_hdemo_sk
+JOIN promotion AS p7 ON p7.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w5 ON w5.ws_item_sk = i9.i_item_sk
+JOIN catalog_sales AS c8 ON c8.cs_item_sk = i9.i_item_sk
+JOIN inventory AS i10 ON i10.inv_item_sk = i9.i_item_sk
+JOIN income_band AS i4 ON i4.ib_income_band_sk = h3.hd_income_band_sk
+JOIN web_site AS w6 ON w6.web_site_sk = w5.ws_web_site_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
+AND i9.i_category IN ('Children', 'Women', 'Electronics', 'Sports', 'Books', 'Jewelry', 'Home', 'Music', 'Shoes', 'Men')
+AND c1.cd_gender IN ('M', 'F')"
+23c.sql,10,365463009,0.1,store_sales|customer_address|web_sales|item|catalog_returns|catalog_page|catalog_sales|date_dim|inventory|customer|promotion,11,0fb8213b,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d7 ON d7.d_date_sk = s0.ss_sold_date_sk
+JOIN item AS i3 ON i3.i_item_sk = s0.ss_item_sk
+JOIN customer AS c9 ON c9.c_customer_sk = s0.ss_customer_sk
+JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p10 ON p10.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d7.d_date_sk
+JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d7.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d7.d_date_sk
+JOIN inventory AS i8 ON i8.inv_date_sk = d7.d_date_sk
+JOIN catalog_page AS c5 ON c5.cp_catalog_page_sk = c6.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 81 AND s0.ss_quantity <= 96
+AND d7.d_year >= 1940 AND d7.d_year <= 1960
+AND i3.i_category IN ('Jewelry', 'Women', 'Electronics')"
+24a.sql,11,670450630,0.1,inventory|date_dim|store_sales|customer|catalog_sales|promotion|web_sales|customer_demographics|customer_address|catalog_page|catalog_returns|item,12,38dd3815,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i10 ON i10.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-JOIN customer_address AS c9 ON c9.ca_address_sk = s1.ss_addr_sk
-WHERE d7.d_year >= 2000 AND d7.d_year <= 2003
-AND i10.i_category IN ('Women', 'Jewelry', 'Men', 'Books', 'Children', 'Home', 'Sports', 'Electronics')
-AND w11.w_warehouse_sq_ft >= 212762 AND w11.w_warehouse_sq_ft <= 959495"
-26b.sql,11,351277734,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|store|warehouse,12,9116bcef,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-JOIN store AS s10 ON s10.s_store_sk = s1.ss_store_sk
-WHERE d7.d_year >= 2000 AND d7.d_year <= 2003
-AND i9.i_category IN ('Music', 'Home', 'Sports', 'Women', 'Children', 'Electronics', 'Men', 'Jewelry')
-AND w11.w_warehouse_sq_ft >= 84644 AND w11.w_warehouse_sq_ft <= 836421"
-26c.sql,11,351277734,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|store|warehouse,12,f8484351,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-JOIN store AS s10 ON s10.s_store_sk = s1.ss_store_sk
-WHERE d7.d_year >= 1999 AND d7.d_year <= 2002
-AND i9.i_category IN ('Music', 'Books', 'Electronics', 'Sports', 'Women', 'Jewelry', 'Home', 'Men')
-AND w11.w_warehouse_sq_ft >= 196096 AND w11.w_warehouse_sq_ft <= 947873"
-27a.sql,11,365582680,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|warehouse,12,ee30e63e,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d8 ON d8.d_date_sk = i0.inv_date_sk
-JOIN item AS i10 ON i10.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d8.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d8.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d8.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d8.d_date_sk
-JOIN web_returns AS w9 ON w9.wr_returned_date_sk = d8.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d8.d_date_sk
-JOIN customer AS c7 ON c7.c_customer_sk = s1.ss_customer_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-WHERE d8.d_year >= 1998 AND d8.d_year <= 2001
-AND i10.i_category IN ('Electronics', 'Women', 'Sports', 'Jewelry', 'Music', 'Home', 'Children', 'Men')
-AND w11.w_warehouse_sq_ft >= 219778 AND w11.w_warehouse_sq_ft <= 928564"
-27b.sql,11,365582680,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|web_site|warehouse,12,b3cd6a26,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d7.d_date_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN web_site AS w10 ON w10.web_site_sk = w4.ws_web_site_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2001
-AND i9.i_category IN ('Children', 'Home', 'Electronics', 'Men', 'Women', 'Music', 'Jewelry', 'Sports')
-AND w11.w_warehouse_sq_ft >= 158759 AND w11.w_warehouse_sq_ft <= 876920"
-27c.sql,11,365582680,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|catalog_page|warehouse,12,3bed8f36,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-JOIN catalog_page AS c10 ON c10.cp_catalog_page_sk = c2.cs_catalog_page_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2002
-AND i9.i_category IN ('Music', 'Books', 'Children', 'Home', 'Jewelry', 'Men', 'Sports', 'Women')
-AND w11.w_warehouse_sq_ft >= 122320 AND w11.w_warehouse_sq_ft <= 903724"
-28a.sql,13,376503289,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|catalog_page|household_demographics|web_page|warehouse,14,9d318adb,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w13 ON w13.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-JOIN household_demographics AS h11 ON h11.hd_demo_sk = s1.ss_hdemo_sk
-JOIN web_page AS w12 ON w12.wp_web_page_sk = w3.ws_web_page_sk
-JOIN catalog_page AS c10 ON c10.cp_catalog_page_sk = c2.cs_catalog_page_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2002
-AND i9.i_category IN ('Books', 'Electronics', 'Jewelry', 'Children', 'Music', 'Home', 'Sports', 'Women', 'Men')
-AND w13.w_warehouse_sq_ft >= 87929 AND w13.w_warehouse_sq_ft <= 892460"
-28b.sql,13,376503289,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|catalog_page|promotion|warehouse,14,88019cb1,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d8 ON d8.d_date_sk = i0.inv_date_sk
-JOIN item AS i10 ON i10.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w13 ON w13.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d8.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d8.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d8.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d8.d_date_sk
-JOIN web_returns AS w9 ON w9.wr_returned_date_sk = d8.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d8.d_date_sk
-JOIN customer AS c7 ON c7.c_customer_sk = s1.ss_customer_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN promotion AS p12 ON p12.p_promo_sk = s1.ss_promo_sk
-JOIN catalog_page AS c11 ON c11.cp_catalog_page_sk = c3.cs_catalog_page_sk
-WHERE d8.d_year >= 1998 AND d8.d_year <= 2001
-AND i10.i_category IN ('Home', 'Jewelry', 'Sports', 'Books', 'Electronics', 'Men', 'Children', 'Women')
-AND w13.w_warehouse_sq_ft >= 174845 AND w13.w_warehouse_sq_ft <= 903914"
-28c.sql,13,376503289,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|customer_address|item|household_demographics|promotion|warehouse,14,a0110d32,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i10 ON i10.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w13 ON w13.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d7.d_date_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN household_demographics AS h11 ON h11.hd_demo_sk = s1.ss_hdemo_sk
-JOIN customer_address AS c9 ON c9.ca_address_sk = s1.ss_addr_sk
-JOIN promotion AS p12 ON p12.p_promo_sk = s1.ss_promo_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2001
-AND i10.i_category IN ('Women', 'Men', 'Electronics', 'Music', 'Sports', 'Children', 'Home', 'Books')
-AND w13.w_warehouse_sq_ft >= 69265 AND w13.w_warehouse_sq_ft <= 804096"
-29a.sql,16,745082582,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|customer_address|item|catalog_page|household_demographics|promotion|store|warehouse,17,ff187f28,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d8 ON d8.d_date_sk = i0.inv_date_sk
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
 JOIN item AS i11 ON i11.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w16 ON w16.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d8.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d8.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d8.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d8.d_date_sk
-JOIN web_returns AS w9 ON w9.wr_returned_date_sk = d8.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d8.d_date_sk
-JOIN customer AS c7 ON c7.c_customer_sk = s1.ss_customer_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN household_demographics AS h13 ON h13.hd_demo_sk = s1.ss_hdemo_sk
-JOIN customer_address AS c10 ON c10.ca_address_sk = s1.ss_addr_sk
-JOIN store AS s15 ON s15.s_store_sk = s1.ss_store_sk
-JOIN promotion AS p14 ON p14.p_promo_sk = s1.ss_promo_sk
-JOIN catalog_page AS c12 ON c12.cp_catalog_page_sk = c3.cs_catalog_page_sk
-WHERE d8.d_year >= 1998 AND d8.d_year <= 2003
-AND i11.i_category IN ('Children', 'Men', 'Sports', 'Music', 'Women', 'Books', 'Electronics', 'Home', 'Jewelry')
-AND w16.w_warehouse_sq_ft >= 50000 AND w16.w_warehouse_sq_ft <= 1000000"
-29b.sql,16,745082582,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|customer_address|item|catalog_page|household_demographics|promotion|web_page|warehouse,17,a43c0ec2,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN store_sales AS s2 ON s2.ss_sold_date_sk = d1.d_date_sk
+JOIN web_sales AS w6 ON w6.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c4 ON c4.cs_sold_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c10 ON c10.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c3 ON c3.c_customer_sk = s2.ss_customer_sk
+JOIN customer_demographics AS c7 ON c7.cd_demo_sk = s2.ss_cdemo_sk
+JOIN customer_address AS c8 ON c8.ca_address_sk = s2.ss_addr_sk
+JOIN promotion AS p5 ON p5.p_promo_sk = s2.ss_promo_sk
+JOIN catalog_page AS c9 ON c9.cp_catalog_page_sk = c4.cs_catalog_page_sk
+WHERE d1.d_year >= 1940 AND d1.d_year <= 1960
+AND i11.i_category IN ('Home', 'Jewelry', 'Sports')
+AND s2.ss_quantity >= 81 AND s2.ss_quantity <= 96"
+24b.sql,11,670450630,0.1,inventory|date_dim|store_sales|customer_demographics|warehouse|web_sales|catalog_returns|catalog_page|catalog_sales|promotion|store_returns|customer,12,a3ee014f,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d8 ON d8.d_date_sk = i0.inv_date_sk
-JOIN item AS i11 ON i11.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w16 ON w16.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d8.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d8.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d8.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d8.d_date_sk
-JOIN web_returns AS w9 ON w9.wr_returned_date_sk = d8.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d8.d_date_sk
-JOIN customer AS c7 ON c7.c_customer_sk = s1.ss_customer_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN household_demographics AS h13 ON h13.hd_demo_sk = s1.ss_hdemo_sk
-JOIN customer_address AS c10 ON c10.ca_address_sk = s1.ss_addr_sk
-JOIN promotion AS p14 ON p14.p_promo_sk = s1.ss_promo_sk
-JOIN web_page AS w15 ON w15.wp_web_page_sk = w4.ws_web_page_sk
-JOIN catalog_page AS c12 ON c12.cp_catalog_page_sk = c3.cs_catalog_page_sk
-WHERE d8.d_year >= 1998 AND d8.d_year <= 2003
-AND i11.i_category IN ('Books', 'Children', 'Sports', 'Electronics', 'Men', 'Home', 'Jewelry', 'Music', 'Women')
-AND w16.w_warehouse_sq_ft >= 50000 AND w16.w_warehouse_sq_ft <= 1000000"
-29c.sql,16,745082582,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|customer_address|item|catalog_page|household_demographics|promotion|web_page|warehouse,17,e9f5fb45,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN store_sales AS s2 ON s2.ss_sold_date_sk = d1.d_date_sk
+JOIN web_sales AS w5 ON w5.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c8 ON c8.cs_sold_date_sk = d1.d_date_sk
+JOIN store_returns AS s10 ON s10.sr_returned_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c11 ON c11.c_customer_sk = s2.ss_customer_sk
+JOIN customer_demographics AS c3 ON c3.cd_demo_sk = s2.ss_cdemo_sk
+JOIN promotion AS p9 ON p9.p_promo_sk = s2.ss_promo_sk
+JOIN catalog_page AS c7 ON c7.cp_catalog_page_sk = c8.cs_catalog_page_sk
+WHERE d1.d_year >= 2040 AND d1.d_year <= 2060
+AND w4.w_warehouse_sq_ft >= 359640 AND w4.w_warehouse_sq_ft <= 457738
+AND s2.ss_quantity >= 61 AND s2.ss_quantity <= 71"
+25a.sql,8,616048378,0.1,inventory|item|store_returns|store_sales|customer_demographics|catalog_sales|customer|web_sales|promotion,9,5cf12096,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d8 ON d8.d_date_sk = i0.inv_date_sk
-JOIN item AS i11 ON i11.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w16 ON w16.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d8.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d8.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d8.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d8.d_date_sk
-JOIN web_returns AS w9 ON w9.wr_returned_date_sk = d8.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d8.d_date_sk
-JOIN customer AS c7 ON c7.c_customer_sk = s1.ss_customer_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN household_demographics AS h13 ON h13.hd_demo_sk = s1.ss_hdemo_sk
-JOIN customer_address AS c10 ON c10.ca_address_sk = s1.ss_addr_sk
-JOIN promotion AS p14 ON p14.p_promo_sk = s1.ss_promo_sk
-JOIN web_page AS w15 ON w15.wp_web_page_sk = w4.ws_web_page_sk
-JOIN catalog_page AS c12 ON c12.cp_catalog_page_sk = c3.cs_catalog_page_sk
-WHERE d8.d_year >= 1998 AND d8.d_year <= 2003
-AND i11.i_category IN ('Books', 'Music', 'Men', 'Jewelry', 'Home', 'Sports', 'Children', 'Electronics', 'Women')
-AND w16.w_warehouse_sq_ft >= 50000 AND w16.w_warehouse_sq_ft <= 1000000"
-2a.sql,4,68207896,inventory|catalog_returns|date_dim|item|warehouse,5,84a75f25,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s3 ON s3.ss_item_sk = i1.i_item_sk
+JOIN web_sales AS w7 ON w7.ws_item_sk = i1.i_item_sk
+JOIN catalog_sales AS c5 ON c5.cs_item_sk = i1.i_item_sk
+JOIN store_returns AS s2 ON s2.sr_item_sk = i1.i_item_sk
+JOIN customer AS c6 ON c6.c_customer_sk = s3.ss_customer_sk
+JOIN customer_demographics AS c4 ON c4.cd_demo_sk = s3.ss_cdemo_sk
+JOIN promotion AS p8 ON p8.p_promo_sk = s3.ss_promo_sk
+WHERE i1.i_category IN ('Shoes', 'Home', 'Sports', 'Men', 'Music', 'Children', 'Electronics', 'Women', 'Books', 'Jewelry')
+AND s3.ss_quantity >= 5 AND s3.ss_quantity <= 96
+AND w7.ws_quantity >= 5 AND w7.ws_quantity <= 95"
+25b.sql,8,616048378,0.1,inventory|item|catalog_sales|catalog_page|store_sales|catalog_returns|date_dim|store_returns|customer,9,95043c0a,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s4 ON s4.ss_sold_date_sk = d6.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
+JOIN store_returns AS s7 ON s7.sr_returned_date_sk = d6.d_date_sk
+JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
+JOIN customer AS c8 ON c8.c_customer_sk = s4.ss_customer_sk
+JOIN catalog_page AS c3 ON c3.cp_catalog_page_sk = c2.cs_catalog_page_sk
+WHERE d6.d_year >= 1940 AND d6.d_year <= 1980
+AND i1.i_category IN ('Men', 'Books', 'Jewelry')
+AND s4.ss_quantity >= 20 AND s4.ss_quantity <= 41"
+25c.sql,8,616048378,0.1,inventory|date_dim|catalog_sales|promotion|store_sales|customer|customer_demographics|web_sales|item,9,60c64916,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s4 ON s4.ss_sold_date_sk = d1.d_date_sk
+JOIN web_sales AS w7 ON w7.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
+JOIN customer AS c5 ON c5.c_customer_sk = s4.ss_customer_sk
+JOIN customer_demographics AS c6 ON c6.cd_demo_sk = s4.ss_cdemo_sk
+JOIN promotion AS p3 ON p3.p_promo_sk = s4.ss_promo_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 2089
+AND i8.i_category IN ('Home', 'Jewelry', 'Men', 'Children', 'Electronics', 'Sports', 'Music', 'Books', 'Shoes', 'Women')
+AND s4.ss_quantity >= 5 AND s4.ss_quantity <= 96"
+26a.sql,11,351277734,0.1,inventory|item|date_dim|web_sales|customer_demographics|catalog_sales|household_demographics|store_sales|customer|web_returns|web_page|income_band,12,a30fda69,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_returns AS c1 ON c1.cr_returned_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 2000 AND d2.d_year <= 2002
-AND i3.i_category IN ('Music', 'Sports', 'Books', 'Men')
-AND w4.w_warehouse_sq_ft >= 470252 AND w4.w_warehouse_sq_ft <= 891642"
-2b.sql,4,68207896,inventory|web_sales|date_dim|item|warehouse,5,a55de321,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w1 ON w1.ws_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 2001 AND d2.d_year <= 2002
-AND i3.i_category IN ('Men', 'Women', 'Home')
-AND w4.w_warehouse_sq_ft >= 215055 AND w4.w_warehouse_sq_ft <= 558135"
-2c.sql,4,68207896,inventory|web_sales|date_dim|item|warehouse,5,4698925d,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w1 ON w1.ws_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1999 AND d2.d_year <= 2000
-AND i3.i_category IN ('Sports', 'Books', 'Home')
-AND w4.w_warehouse_sq_ft >= 514637 AND w4.w_warehouse_sq_ft <= 857717"
-2d.sql,4,68207896,inventory|store_sales|date_dim|item|warehouse,5,4100f276,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1999 AND d2.d_year <= 2000
-AND i3.i_category IN ('Children', 'Books')
-AND w4.w_warehouse_sq_ft >= 411939 AND w4.w_warehouse_sq_ft <= 629114"
-30a.sql,11,616588730,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|store|warehouse,12,90ffd21e,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d7.d_date_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN store AS s10 ON s10.s_store_sk = s1.ss_store_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2003
-AND i9.i_category IN ('Electronics', 'Home', 'Men', 'Women', 'Music', 'Jewelry', 'Sports', 'Children', 'Books')
-AND w11.w_warehouse_sq_ft >= 50000 AND w11.w_warehouse_sq_ft <= 1000000"
-30b.sql,11,616588730,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|warehouse,12,674381ec,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d8 ON d8.d_date_sk = i0.inv_date_sk
-JOIN item AS i10 ON i10.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d8.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d8.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d8.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d8.d_date_sk
-JOIN web_returns AS w9 ON w9.wr_returned_date_sk = d8.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d8.d_date_sk
-JOIN customer AS c7 ON c7.c_customer_sk = s1.ss_customer_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-WHERE d8.d_year >= 1998 AND d8.d_year <= 2003
-AND i10.i_category IN ('Music', 'Men', 'Jewelry', 'Electronics', 'Children', 'Home', 'Sports', 'Books', 'Women')
-AND w11.w_warehouse_sq_ft >= 50000 AND w11.w_warehouse_sq_ft <= 1000000"
-30c.sql,11,616588730,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|web_page|warehouse,12,9e0b3c27,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w11 ON w11.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s7 ON s7.ss_sold_date_sk = d2.d_date_sk
+JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d2.d_date_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d2.d_date_sk
+JOIN web_returns AS w9 ON w9.wr_returned_date_sk = d2.d_date_sk
+JOIN customer AS c8 ON c8.c_customer_sk = s7.ss_customer_sk
+JOIN customer_demographics AS c4 ON c4.cd_demo_sk = s7.ss_cdemo_sk
+JOIN household_demographics AS h6 ON h6.hd_demo_sk = s7.ss_hdemo_sk
 JOIN web_page AS w10 ON w10.wp_web_page_sk = w3.ws_web_page_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2003
-AND i9.i_category IN ('Men', 'Books', 'Electronics', 'Home', 'Music', 'Women', 'Children', 'Sports', 'Jewelry')
-AND w11.w_warehouse_sq_ft >= 50000 AND w11.w_warehouse_sq_ft <= 1000000"
-31a.sql,10,639271380,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|item|store|warehouse,11,64dbc1d8,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN income_band AS i11 ON i11.ib_income_band_sk = h6.hd_income_band_sk
+WHERE d2.d_year >= 2040 AND d2.d_year <= 2080
+AND i1.i_category IN ('Sports', 'Women', 'Books')
+AND s7.ss_quantity >= 5 AND s7.ss_quantity <= 20"
+26b.sql,11,351277734,0.1,inventory|date_dim|web_returns|item|web_sales|web_site|catalog_sales|customer|store_sales|time_dim|catalog_returns|customer_demographics,12,98a47a0c,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d6 ON d6.d_date_sk = i0.inv_date_sk
-JOIN item AS i8 ON i8.i_item_sk = i0.inv_item_sk
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s8 ON s8.ss_sold_date_sk = d1.d_date_sk
+JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d1.d_date_sk
+JOIN web_returns AS w2 ON w2.wr_returned_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c10 ON c10.cr_returned_date_sk = d1.d_date_sk
+JOIN time_dim AS t9 ON t9.t_time_sk = s8.ss_sold_time_sk
+JOIN customer AS c7 ON c7.c_customer_sk = s8.ss_customer_sk
+JOIN customer_demographics AS c11 ON c11.cd_demo_sk = s8.ss_cdemo_sk
+JOIN web_site AS w5 ON w5.web_site_sk = w4.ws_web_site_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 1940
+AND i3.i_category IN ('Children', 'Shoes', 'Women')
+AND s8.ss_quantity >= 5 AND s8.ss_quantity <= 20"
+26c.sql,11,351277734,0.1,inventory|item|date_dim|catalog_sales|catalog_page|catalog_returns|customer|store_sales|time_dim|customer_demographics|warehouse|web_sales,12,eab3ecf9,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
 JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d6.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d6.d_date_sk
-JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d6.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d6.d_date_sk
-JOIN store AS s9 ON s9.s_store_sk = s1.ss_store_sk
-WHERE d6.d_year >= 1998 AND d6.d_year <= 2003
-AND i8.i_category IN ('Electronics', 'Home', 'Jewelry', 'Books', 'Sports', 'Music', 'Women', 'Children', 'Men')
-AND w10.w_warehouse_sq_ft >= 50000 AND w10.w_warehouse_sq_ft <= 1000000"
-31b.sql,10,639271380,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|warehouse,11,b6f78ef4,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN store_sales AS s7 ON s7.ss_sold_date_sk = d2.d_date_sk
+JOIN web_sales AS w11 ON w11.ws_sold_date_sk = d2.d_date_sk
+JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d2.d_date_sk
+JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d2.d_date_sk
+JOIN time_dim AS t8 ON t8.t_time_sk = s7.ss_sold_time_sk
+JOIN customer AS c6 ON c6.c_customer_sk = s7.ss_customer_sk
+JOIN customer_demographics AS c9 ON c9.cd_demo_sk = s7.ss_cdemo_sk
+JOIN catalog_page AS c4 ON c4.cp_catalog_page_sk = c3.cs_catalog_page_sk
+WHERE d2.d_year >= 1910 AND d2.d_year <= 2089
+AND i1.i_category IN ('Men', 'Home', 'Sports', 'Women', 'Music', 'Children', 'Jewelry', 'Shoes', 'Electronics', 'Books')
+AND w10.w_warehouse_sq_ft >= 161864 AND w10.w_warehouse_sq_ft <= 924304"
+27a.sql,11,365582680,0.1,store_sales|household_demographics|income_band|customer_address|customer_demographics|customer|web_sales|item|catalog_returns|catalog_page|catalog_sales|promotion,12,f3d05b40,timeout,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN item AS i7 ON i7.i_item_sk = s0.ss_item_sk
+JOIN customer AS c5 ON c5.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c4 ON c4.cd_demo_sk = s0.ss_cdemo_sk
+JOIN household_demographics AS h1 ON h1.hd_demo_sk = s0.ss_hdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p11 ON p11.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w6 ON w6.ws_item_sk = i7.i_item_sk
+JOIN catalog_sales AS c10 ON c10.cs_item_sk = i7.i_item_sk
+JOIN catalog_returns AS c8 ON c8.cr_item_sk = i7.i_item_sk
+JOIN income_band AS i2 ON i2.ib_income_band_sk = h1.hd_income_band_sk
+JOIN catalog_page AS c9 ON c9.cp_catalog_page_sk = c10.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
+AND i7.i_category IN ('Shoes', 'Books', 'Music', 'Men', 'Women', 'Home', 'Sports', 'Children', 'Jewelry', 'Electronics')
+AND c4.cd_gender IN ('F', 'M')"
+27b.sql,11,365582680,0.1,store_sales|promotion|web_sales|household_demographics|customer_address|catalog_sales|item|inventory|date_dim|catalog_returns|catalog_page|customer,12,a5ebe22e,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d8 ON d8.d_date_sk = s0.ss_sold_date_sk
+JOIN item AS i6 ON i6.i_item_sk = s0.ss_item_sk
+JOIN customer AS c11 ON c11.c_customer_sk = s0.ss_customer_sk
+JOIN household_demographics AS h3 ON h3.hd_demo_sk = s0.ss_hdemo_sk
+JOIN customer_address AS c4 ON c4.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p1 ON p1.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d8.d_date_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d8.d_date_sk
+JOIN catalog_returns AS c9 ON c9.cr_returned_date_sk = d8.d_date_sk
+JOIN inventory AS i7 ON i7.inv_date_sk = d8.d_date_sk
+JOIN catalog_page AS c10 ON c10.cp_catalog_page_sk = c5.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 81 AND s0.ss_quantity <= 96
+AND d8.d_year >= 2060 AND d8.d_year <= 2089
+AND i6.i_category IN ('Children', 'Jewelry', 'Electronics')"
+27c.sql,11,365582680,0.1,store_sales|household_demographics|catalog_sales|catalog_page|catalog_returns|item|inventory|date_dim|web_sales|web_page|web_returns|customer,12,ecf1f7f8,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d7 ON d7.d_date_sk = s0.ss_sold_date_sk
+JOIN item AS i5 ON i5.i_item_sk = s0.ss_item_sk
+JOIN customer AS c11 ON c11.c_customer_sk = s0.ss_customer_sk
+JOIN household_demographics AS h1 ON h1.hd_demo_sk = s0.ss_hdemo_sk
+JOIN web_sales AS w8 ON w8.ws_sold_date_sk = d7.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
+JOIN web_returns AS w10 ON w10.wr_returned_date_sk = d7.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d7.d_date_sk
+JOIN inventory AS i6 ON i6.inv_date_sk = d7.d_date_sk
+JOIN web_page AS w9 ON w9.wp_web_page_sk = w8.ws_web_page_sk
+JOIN catalog_page AS c3 ON c3.cp_catalog_page_sk = c2.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 61
+AND d7.d_year >= 2040 AND d7.d_year <= 2080
+AND i5.i_category IN ('Books', 'Shoes', 'Men')"
+28a.sql,13,376503289,0.1,store_sales|customer_address|web_sales|customer_demographics|promotion|catalog_sales|item|customer|catalog_returns|catalog_page|web_site|household_demographics|date_dim|web_returns,14,6b0c82eb,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d12 ON d12.d_date_sk = s0.ss_sold_date_sk
+JOIN item AS i6 ON i6.i_item_sk = s0.ss_item_sk
+JOIN customer AS c7 ON c7.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c3 ON c3.cd_demo_sk = s0.ss_cdemo_sk
+JOIN household_demographics AS h11 ON h11.hd_demo_sk = s0.ss_hdemo_sk
+JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
+JOIN promotion AS p4 ON p4.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d12.d_date_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d12.d_date_sk
+JOIN web_returns AS w13 ON w13.wr_returned_date_sk = d12.d_date_sk
+JOIN catalog_returns AS c8 ON c8.cr_returned_date_sk = d12.d_date_sk
+JOIN web_site AS w10 ON w10.web_site_sk = w2.ws_web_site_sk
+JOIN catalog_page AS c9 ON c9.cp_catalog_page_sk = c5.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 81 AND s0.ss_quantity <= 96
+AND d12.d_year >= 1940 AND d12.d_year <= 1980
+AND i6.i_category IN ('Books', 'Home', 'Shoes')"
+28b.sql,13,376503289,0.1,store_sales|time_dim|customer_address|item|catalog_returns|customer|customer_demographics|catalog_sales|catalog_page|promotion|store_returns|store|web_sales|web_site,14,45b1783a,timeout,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
+JOIN item AS i3 ON i3.i_item_sk = s0.ss_item_sk
+JOIN customer AS c5 ON c5.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c6 ON c6.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c2 ON c2.ca_address_sk = s0.ss_addr_sk
+JOIN store AS s11 ON s11.s_store_sk = s0.ss_store_sk
+JOIN promotion AS p9 ON p9.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w12 ON w12.ws_item_sk = i3.i_item_sk
+JOIN catalog_sales AS c7 ON c7.cs_item_sk = i3.i_item_sk
+JOIN store_returns AS s10 ON s10.sr_item_sk = i3.i_item_sk
+JOIN catalog_returns AS c4 ON c4.cr_item_sk = i3.i_item_sk
+JOIN web_site AS w13 ON w13.web_site_sk = w12.ws_web_site_sk
+JOIN catalog_page AS c8 ON c8.cp_catalog_page_sk = c7.cs_catalog_page_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
+AND i3.i_category IN ('Jewelry', 'Women', 'Home', 'Men', 'Children', 'Books', 'Music', 'Electronics', 'Sports', 'Shoes')
+AND c6.cd_gender IN ('F', 'M')"
+28c.sql,13,376503289,0.1,store_sales|customer_demographics|customer|customer_address|web_sales|item|catalog_returns|catalog_page|catalog_sales|date_dim|inventory|warehouse|store_returns|store,14,c5894158,timeout,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN date_dim AS d9 ON d9.d_date_sk = s0.ss_sold_date_sk
+JOIN item AS i5 ON i5.i_item_sk = s0.ss_item_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c1 ON c1.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = s0.ss_addr_sk
+JOIN store AS s13 ON s13.s_store_sk = s0.ss_store_sk
+JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d9.d_date_sk
+JOIN catalog_sales AS c8 ON c8.cs_sold_date_sk = d9.d_date_sk
+JOIN store_returns AS s12 ON s12.sr_returned_date_sk = d9.d_date_sk
+JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d9.d_date_sk
+JOIN inventory AS i10 ON i10.inv_date_sk = d9.d_date_sk
+JOIN catalog_page AS c7 ON c7.cp_catalog_page_sk = c8.cs_catalog_page_sk
+JOIN warehouse AS w11 ON w11.w_warehouse_sk = i10.inv_warehouse_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
+AND d9.d_year >= 1910 AND d9.d_year <= 2089
+AND i5.i_category IN ('Home', 'Women', 'Electronics', 'Music', 'Sports', 'Shoes', 'Books', 'Children', 'Jewelry', 'Men')"
+29a.sql,16,745082582,0.1,inventory|item|store_sales|customer_address|customer|warehouse|time_dim|date_dim|catalog_sales|catalog_page|store|catalog_returns|store_returns|web_sales|web_returns|web_page|customer_demographics,17,4647a1c9,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2003
-AND i9.i_category IN ('Jewelry', 'Children', 'Women', 'Sports', 'Home', 'Music', 'Books', 'Men', 'Electronics')
-AND w10.w_warehouse_sq_ft >= 50000 AND w10.w_warehouse_sq_ft <= 1000000"
-31c.sql,10,639271380,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|warehouse,11,5a938a4a,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-WHERE d7.d_year >= 1998 AND d7.d_year <= 2003
-AND i9.i_category IN ('Women', 'Electronics', 'Home', 'Jewelry', 'Children', 'Books', 'Sports', 'Music', 'Men')
-AND w10.w_warehouse_sq_ft >= 50000 AND w10.w_warehouse_sq_ft <= 1000000"
-32a.sql,5,45104918,inventory|catalog_sales|catalog_returns|date_dim|item|warehouse,6,a664e33c,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i4 ON i4.i_item_sk = i0.inv_item_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
 JOIN warehouse AS w5 ON w5.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d3.d_date_sk
-JOIN catalog_returns AS c2 ON c2.cr_returned_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 2001 AND d3.d_year <= 2002
-AND i4.i_category IN ('Children', 'Home')
-AND w5.w_warehouse_sq_ft >= 431574 AND w5.w_warehouse_sq_ft <= 614303"
-32b.sql,5,45104918,inventory|store_sales|web_sales|date_dim|item|warehouse,6,3c337416,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i4 ON i4.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w5 ON w5.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d3.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 2000 AND d3.d_year <= 2001
-AND i4.i_category = 'Books'
-AND w5.w_warehouse_sq_ft >= 395705 AND w5.w_warehouse_sq_ft <= 522235"
-33a.sql,13,64723403,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|web_page|store|warehouse,14,7db9696a,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN store_sales AS s2 ON s2.ss_sold_date_sk = d7.d_date_sk
+JOIN web_sales AS w13 ON w13.ws_sold_date_sk = d7.d_date_sk
+JOIN catalog_sales AS c8 ON c8.cs_sold_date_sk = d7.d_date_sk
+JOIN store_returns AS s12 ON s12.sr_returned_date_sk = d7.d_date_sk
+JOIN web_returns AS w14 ON w14.wr_returned_date_sk = d7.d_date_sk
+JOIN catalog_returns AS c11 ON c11.cr_returned_date_sk = d7.d_date_sk
+JOIN time_dim AS t6 ON t6.t_time_sk = s2.ss_sold_time_sk
+JOIN customer AS c4 ON c4.c_customer_sk = s2.ss_customer_sk
+JOIN customer_demographics AS c16 ON c16.cd_demo_sk = s2.ss_cdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = s2.ss_addr_sk
+JOIN store AS s10 ON s10.s_store_sk = s2.ss_store_sk
+JOIN web_page AS w15 ON w15.wp_web_page_sk = w13.ws_web_page_sk
+JOIN catalog_page AS c9 ON c9.cp_catalog_page_sk = c8.cs_catalog_page_sk
+WHERE d7.d_year >= 1960 AND d7.d_year <= 1980
+AND i1.i_category IN ('Music', 'Electronics', 'Children')
+AND w5.w_warehouse_sq_ft >= 555835 AND w5.w_warehouse_sq_ft <= 763855"
+29b.sql,16,745082582,0.1,inventory|warehouse|item|web_sales|customer_address|store_sales|time_dim|catalog_sales|date_dim|store_returns|customer|customer_demographics|catalog_returns|catalog_page|web_returns|web_page|store,17,f2359cd6,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d8 ON d8.d_date_sk = i0.inv_date_sk
-JOIN item AS i10 ON i10.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w13 ON w13.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d8.d_date_sk
+JOIN item AS i2 ON i2.i_item_sk = i0.inv_item_sk
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN store_sales AS s5 ON s5.ss_sold_date_sk = d8.d_date_sk
+JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d8.d_date_sk
+JOIN catalog_sales AS c7 ON c7.cs_sold_date_sk = d8.d_date_sk
+JOIN store_returns AS s9 ON s9.sr_returned_date_sk = d8.d_date_sk
+JOIN web_returns AS w14 ON w14.wr_returned_date_sk = d8.d_date_sk
+JOIN catalog_returns AS c12 ON c12.cr_returned_date_sk = d8.d_date_sk
+JOIN time_dim AS t6 ON t6.t_time_sk = s5.ss_sold_time_sk
+JOIN customer AS c10 ON c10.c_customer_sk = s5.ss_customer_sk
+JOIN customer_demographics AS c11 ON c11.cd_demo_sk = s5.ss_cdemo_sk
+JOIN customer_address AS c4 ON c4.ca_address_sk = s5.ss_addr_sk
+JOIN store AS s16 ON s16.s_store_sk = s5.ss_store_sk
+JOIN web_page AS w15 ON w15.wp_web_page_sk = w3.ws_web_page_sk
+JOIN catalog_page AS c13 ON c13.cp_catalog_page_sk = c7.cs_catalog_page_sk
+WHERE d8.d_year >= 2040 AND d8.d_year <= 2080
+AND i2.i_category IN ('Music', 'Electronics', 'Men')
+AND w1.w_warehouse_sq_ft >= 161864 AND w1.w_warehouse_sq_ft <= 231946"
+29c.sql,16,745082582,0.1,inventory|item|web_sales|web_page|store_returns|customer|catalog_sales|store|store_sales|date_dim|catalog_returns|catalog_page|web_returns|customer_demographics|customer_address|household_demographics|promotion,17,31f73a63,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d9 ON d9.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s8 ON s8.ss_sold_date_sk = d9.d_date_sk
+JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d9.d_date_sk
+JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d9.d_date_sk
+JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d9.d_date_sk
+JOIN web_returns AS w12 ON w12.wr_returned_date_sk = d9.d_date_sk
+JOIN catalog_returns AS c10 ON c10.cr_returned_date_sk = d9.d_date_sk
+JOIN customer AS c5 ON c5.c_customer_sk = s8.ss_customer_sk
+JOIN customer_demographics AS c13 ON c13.cd_demo_sk = s8.ss_cdemo_sk
+JOIN household_demographics AS h15 ON h15.hd_demo_sk = s8.ss_hdemo_sk
+JOIN customer_address AS c14 ON c14.ca_address_sk = s8.ss_addr_sk
+JOIN store AS s7 ON s7.s_store_sk = s8.ss_store_sk
+JOIN promotion AS p16 ON p16.p_promo_sk = s8.ss_promo_sk
+JOIN web_page AS w3 ON w3.wp_web_page_sk = w2.ws_web_page_sk
+JOIN catalog_page AS c11 ON c11.cp_catalog_page_sk = c6.cs_catalog_page_sk
+WHERE d9.d_year >= 1940 AND d9.d_year <= 1960
+AND i1.i_category IN ('Electronics', 'Sports', 'Books')
+AND s8.ss_quantity >= 41 AND s8.ss_quantity <= 61"
+2a.sql,4,68207896,0.1,customer_demographics|customer|store_returns|store_sales|web_sales,5,c1f6b338,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN store_sales AS s3 ON s3.ss_cdemo_sk = c0.cd_demo_sk
+JOIN web_sales AS w4 ON w4.ws_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN store_returns AS s2 ON s2.sr_customer_sk = c1.c_customer_sk
+WHERE c0.cd_gender = 'F'
+AND s3.ss_quantity >= 20 AND s3.ss_quantity <= 31
+AND w4.ws_quantity >= 40 AND w4.ws_quantity <= 50"
+2b.sql,4,68207896,0.1,customer_demographics|store_sales|customer|web_sales|customer_address,5,25d9d0e0,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN store_sales AS s1 ON s1.ss_cdemo_sk = c0.cd_demo_sk
+JOIN web_sales AS w3 ON w3.ws_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c2 ON c2.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN customer_address AS c4 ON c4.ca_address_sk = s1.ss_addr_sk
+WHERE c0.cd_gender = 'F'
+AND s1.ss_quantity >= 71 AND s1.ss_quantity <= 91
+AND w3.ws_quantity >= 70 AND w3.ws_quantity <= 80"
+2c.sql,4,68207896,0.1,customer_demographics|customer|customer_address|web_sales|item,5,118d1a0a,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN web_sales AS w3 ON w3.ws_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN item AS i4 ON i4.i_item_sk = w3.ws_item_sk
+JOIN customer_address AS c2 ON c2.ca_address_sk = w3.ws_bill_addr_sk
+WHERE c0.cd_gender = 'M'
+AND w3.ws_quantity >= 20 AND w3.ws_quantity <= 40
+AND i4.i_category IN ('Home', 'Children', 'Shoes')"
+2d.sql,4,68207896,0.1,customer_demographics|customer|customer_address|catalog_returns|household_demographics,5,c2bee38d,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN catalog_returns AS c3 ON c3.cr_refunded_customer_sk = c1.c_customer_sk
+JOIN customer_address AS c2 ON c2.ca_address_sk = c1.c_current_addr_sk
+JOIN household_demographics AS h4 ON h4.hd_demo_sk = c1.c_current_hdemo_sk
+WHERE c0.cd_gender = 'F'
+AND c2.ca_state IN ('RI', 'ND', 'CT', 'KS', 'PA', 'NC', 'WI', 'AL', 'MN', 'WA', 'HI', 'NM', 'MD', 'CA', 'WY')
+AND h4.hd_dep_count >= 4 AND h4.hd_dep_count <= 5"
+30a.sql,11,616588730,0.1,inventory|item|web_sales|promotion|date_dim|web_returns|customer|catalog_sales|catalog_page|catalog_returns|store_sales|customer_address,12,98cadfab,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s10 ON s10.ss_sold_date_sk = d4.d_date_sk
+JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
+JOIN catalog_sales AS c7 ON c7.cs_sold_date_sk = d4.d_date_sk
+JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
+JOIN catalog_returns AS c9 ON c9.cr_returned_date_sk = d4.d_date_sk
+JOIN customer AS c6 ON c6.c_customer_sk = s10.ss_customer_sk
+JOIN customer_address AS c11 ON c11.ca_address_sk = s10.ss_addr_sk
+JOIN promotion AS p3 ON p3.p_promo_sk = s10.ss_promo_sk
+JOIN catalog_page AS c8 ON c8.cp_catalog_page_sk = c7.cs_catalog_page_sk
+WHERE d4.d_year >= 2060 AND d4.d_year <= 2089
+AND i1.i_category IN ('Sports', 'Books', 'Music')
+AND s10.ss_quantity >= 31 AND s10.ss_quantity <= 51"
+30b.sql,11,616588730,0.1,inventory|warehouse|item|store_returns|customer|date_dim|catalog_returns|customer_demographics|store_sales|promotion|catalog_sales|catalog_page,12,8e053bce,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
+JOIN item AS i2 ON i2.i_item_sk = i0.inv_item_sk
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN store_sales AS s8 ON s8.ss_sold_date_sk = d5.d_date_sk
+JOIN catalog_sales AS c10 ON c10.cs_sold_date_sk = d5.d_date_sk
+JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
+JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d5.d_date_sk
+JOIN customer AS c4 ON c4.c_customer_sk = s8.ss_customer_sk
+JOIN customer_demographics AS c7 ON c7.cd_demo_sk = s8.ss_cdemo_sk
+JOIN promotion AS p9 ON p9.p_promo_sk = s8.ss_promo_sk
+JOIN catalog_page AS c11 ON c11.cp_catalog_page_sk = c10.cs_catalog_page_sk
+WHERE d5.d_year >= 2020 AND d5.d_year <= 2040
+AND i2.i_category IN ('Men', 'Books', 'Jewelry')
+AND w1.w_warehouse_sq_ft >= 555835 AND w1.w_warehouse_sq_ft <= 656889"
+30c.sql,11,616588730,0.1,inventory|item|catalog_sales|catalog_returns|customer|store_sales|time_dim|store_returns|web_sales|customer_address|promotion|customer_demographics,12,8d6ebfc7,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s5 ON s5.ss_item_sk = i1.i_item_sk
+JOIN web_sales AS w8 ON w8.ws_item_sk = i1.i_item_sk
+JOIN catalog_sales AS c2 ON c2.cs_item_sk = i1.i_item_sk
+JOIN store_returns AS s7 ON s7.sr_item_sk = i1.i_item_sk
+JOIN catalog_returns AS c3 ON c3.cr_item_sk = i1.i_item_sk
+JOIN time_dim AS t6 ON t6.t_time_sk = s5.ss_sold_time_sk
+JOIN customer AS c4 ON c4.c_customer_sk = s5.ss_customer_sk
+JOIN customer_demographics AS c11 ON c11.cd_demo_sk = s5.ss_cdemo_sk
+JOIN customer_address AS c9 ON c9.ca_address_sk = s5.ss_addr_sk
+JOIN promotion AS p10 ON p10.p_promo_sk = s5.ss_promo_sk
+WHERE i1.i_category IN ('Jewelry', 'Music', 'Children', 'Books', 'Electronics', 'Sports', 'Women', 'Home', 'Shoes', 'Men')
+AND s5.ss_quantity >= 5 AND s5.ss_quantity <= 96
+AND w8.ws_quantity >= 5 AND w8.ws_quantity <= 95"
+31a.sql,10,639271380,0.1,inventory|item|catalog_sales|customer_address|store_sales|household_demographics|customer|catalog_returns|catalog_page|web_sales|date_dim,11,4a459d2c,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d10 ON d10.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s4 ON s4.ss_sold_date_sk = d10.d_date_sk
+JOIN web_sales AS w9 ON w9.ws_sold_date_sk = d10.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d10.d_date_sk
+JOIN catalog_returns AS c7 ON c7.cr_returned_date_sk = d10.d_date_sk
+JOIN customer AS c6 ON c6.c_customer_sk = s4.ss_customer_sk
+JOIN household_demographics AS h5 ON h5.hd_demo_sk = s4.ss_hdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = s4.ss_addr_sk
+JOIN catalog_page AS c8 ON c8.cp_catalog_page_sk = c2.cs_catalog_page_sk
+WHERE d10.d_year >= 1920 AND d10.d_year <= 1960
+AND i1.i_category IN ('Books', 'Music', 'Women')
+AND s4.ss_quantity >= 20 AND s4.ss_quantity <= 41"
+31b.sql,10,639271380,0.1,inventory|date_dim|catalog_returns|catalog_page|catalog_sales|item|store_sales|web_sales|customer|customer_address|customer_demographics,11,120d7e5f,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
+JOIN store_sales AS s6 ON s6.ss_sold_date_sk = d1.d_date_sk
+JOIN web_sales AS w7 ON w7.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c4 ON c4.cs_sold_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c2 ON c2.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c8 ON c8.c_customer_sk = s6.ss_customer_sk
+JOIN customer_demographics AS c10 ON c10.cd_demo_sk = s6.ss_cdemo_sk
+JOIN customer_address AS c9 ON c9.ca_address_sk = s6.ss_addr_sk
+JOIN catalog_page AS c3 ON c3.cp_catalog_page_sk = c4.cs_catalog_page_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 1940
+AND i5.i_category IN ('Sports', 'Electronics', 'Men')
+AND s6.ss_quantity >= 61 AND s6.ss_quantity <= 81"
+31c.sql,10,639271380,0.1,inventory|item|catalog_sales|customer_demographics|web_sales|promotion|customer|web_returns|date_dim|store_sales|warehouse,11,73850b82,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d8 ON d8.d_date_sk = i0.inv_date_sk
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN warehouse AS w10 ON w10.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN store_sales AS s9 ON s9.ss_sold_date_sk = d8.d_date_sk
 JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d8.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d8.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d8.d_date_sk
-JOIN web_returns AS w9 ON w9.wr_returned_date_sk = d8.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d8.d_date_sk
-JOIN customer AS c7 ON c7.c_customer_sk = s1.ss_customer_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN store AS s12 ON s12.s_store_sk = s1.ss_store_sk
-JOIN web_page AS w11 ON w11.wp_web_page_sk = w4.ws_web_page_sk
-WHERE d8.d_year >= 2000 AND d8.d_year <= 2001
-AND i10.i_category = 'Children'
-AND w13.w_warehouse_sq_ft >= 444976 AND w13.w_warehouse_sq_ft <= 570459"
-33b.sql,13,64723403,inventory|store_sales|catalog_sales|web_sales|store_returns|catalog_returns|customer|date_dim|web_returns|item|catalog_page|promotion|store|warehouse,14,decbce39,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d8.d_date_sk
+JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d8.d_date_sk
+JOIN customer AS c6 ON c6.c_customer_sk = s9.ss_customer_sk
+JOIN customer_demographics AS c3 ON c3.cd_demo_sk = s9.ss_cdemo_sk
+JOIN promotion AS p5 ON p5.p_promo_sk = s9.ss_promo_sk
+WHERE d8.d_year >= 1910 AND d8.d_year <= 2089
+AND i1.i_category IN ('Children', 'Men', 'Books', 'Shoes', 'Music', 'Women', 'Sports', 'Jewelry', 'Home', 'Electronics')
+AND w10.w_warehouse_sq_ft >= 161864 AND w10.w_warehouse_sq_ft <= 924304"
+32a.sql,5,45104918,0.1,customer_demographics|customer|household_demographics|store_sales|income_band|catalog_sales,6,25ecf029,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN store_sales AS s3 ON s3.ss_cdemo_sk = c0.cd_demo_sk
+JOIN catalog_sales AS c5 ON c5.cs_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN household_demographics AS h2 ON h2.hd_demo_sk = s3.ss_hdemo_sk
+JOIN income_band AS i4 ON i4.ib_income_band_sk = h2.hd_income_band_sk
+WHERE c0.cd_gender = 'F'
+AND s3.ss_quantity >= 41 AND s3.ss_quantity <= 61
+AND c5.cs_quantity >= 60 AND c5.cs_quantity <= 70"
+32b.sql,5,45104918,0.1,customer_demographics|customer|household_demographics|store_sales|item|inventory,6,d36be749,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN store_sales AS s3 ON s3.ss_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN item AS i4 ON i4.i_item_sk = s3.ss_item_sk
+JOIN household_demographics AS h2 ON h2.hd_demo_sk = s3.ss_hdemo_sk
+JOIN inventory AS i5 ON i5.inv_item_sk = i4.i_item_sk
+WHERE c0.cd_gender = 'M'
+AND s3.ss_quantity >= 71 AND s3.ss_quantity <= 81
+AND i4.i_category IN ('Children', 'Women', 'Electronics')"
+33a.sql,13,64723403,0.1,catalog_returns|catalog_page|catalog_sales|customer_address|customer|household_demographics|income_band|web_returns|web_page|web_sales|promotion|store_sales|date_dim|time_dim,14,71b528a3,timeout,"SELECT MIN(c0.cr_return_amount) AS result
+FROM catalog_returns AS c0
+JOIN date_dim AS d12 ON d12.d_date_sk = c0.cr_returned_date_sk
+JOIN customer AS c4 ON c4.c_customer_sk = c0.cr_refunded_customer_sk
+JOIN catalog_page AS c1 ON c1.cp_catalog_page_sk = c0.cr_catalog_page_sk
+JOIN store_sales AS s11 ON s11.ss_sold_date_sk = d12.d_date_sk
+JOIN web_sales AS w9 ON w9.ws_sold_date_sk = d12.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d12.d_date_sk
+JOIN web_returns AS w7 ON w7.wr_returned_date_sk = d12.d_date_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = c4.c_current_addr_sk
+JOIN household_demographics AS h5 ON h5.hd_demo_sk = c4.c_current_hdemo_sk
+JOIN time_dim AS t13 ON t13.t_time_sk = s11.ss_sold_time_sk
+JOIN promotion AS p10 ON p10.p_promo_sk = s11.ss_promo_sk
+JOIN web_page AS w8 ON w8.wp_web_page_sk = w9.ws_web_page_sk
+JOIN income_band AS i6 ON i6.ib_income_band_sk = h5.hd_income_band_sk
+WHERE d12.d_year >= 1910 AND d12.d_year <= 2089
+AND s11.ss_quantity >= 5 AND s11.ss_quantity <= 96
+AND w9.ws_quantity >= 5 AND w9.ws_quantity <= 95"
+33b.sql,13,64723403,0.1,catalog_returns|catalog_page|item|web_sales|web_site|catalog_sales|promotion|store_sales|date_dim|inventory|customer|household_demographics|income_band|customer_address,14,cd6f2aef,ok,"SELECT MIN(c0.cr_return_amount) AS result
+FROM catalog_returns AS c0
+JOIN date_dim AS d8 ON d8.d_date_sk = c0.cr_returned_date_sk
+JOIN item AS i2 ON i2.i_item_sk = c0.cr_item_sk
+JOIN customer AS c10 ON c10.c_customer_sk = c0.cr_refunded_customer_sk
+JOIN catalog_page AS c1 ON c1.cp_catalog_page_sk = c0.cr_catalog_page_sk
+JOIN store_sales AS s7 ON s7.ss_sold_date_sk = d8.d_date_sk
+JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d8.d_date_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d8.d_date_sk
+JOIN inventory AS i9 ON i9.inv_date_sk = d8.d_date_sk
+JOIN customer_address AS c13 ON c13.ca_address_sk = c10.c_current_addr_sk
+JOIN household_demographics AS h11 ON h11.hd_demo_sk = c10.c_current_hdemo_sk
+JOIN promotion AS p6 ON p6.p_promo_sk = s7.ss_promo_sk
+JOIN web_site AS w4 ON w4.web_site_sk = w3.ws_web_site_sk
+JOIN income_band AS i12 ON i12.ib_income_band_sk = h11.hd_income_band_sk
+WHERE d8.d_year >= 1910 AND d8.d_year <= 1940
+AND i2.i_category IN ('Electronics', 'Home', 'Women')
+AND s7.ss_quantity >= 61 AND s7.ss_quantity <= 81"
+33c.sql,13,64723403,0.1,catalog_returns|customer|customer_demographics|web_sales|promotion|store_sales|customer_address|web_page|web_returns|item|catalog_sales|household_demographics|income_band|inventory,14,2bbe5ff0,timeout,"SELECT MIN(c0.cr_return_amount) AS result
+FROM catalog_returns AS c0
+JOIN item AS i9 ON i9.i_item_sk = c0.cr_item_sk
+JOIN customer AS c1 ON c1.c_customer_sk = c0.cr_refunded_customer_sk
+JOIN store_sales AS s5 ON s5.ss_item_sk = i9.i_item_sk
+JOIN web_sales AS w3 ON w3.ws_item_sk = i9.i_item_sk
+JOIN catalog_sales AS c10 ON c10.cs_item_sk = i9.i_item_sk
+JOIN web_returns AS w8 ON w8.wr_item_sk = i9.i_item_sk
+JOIN inventory AS i13 ON i13.inv_item_sk = i9.i_item_sk
+JOIN customer_address AS c6 ON c6.ca_address_sk = c1.c_current_addr_sk
+JOIN customer_demographics AS c2 ON c2.cd_demo_sk = c1.c_current_cdemo_sk
+JOIN household_demographics AS h11 ON h11.hd_demo_sk = c1.c_current_hdemo_sk
+JOIN promotion AS p4 ON p4.p_promo_sk = s5.ss_promo_sk
+JOIN web_page AS w7 ON w7.wp_web_page_sk = w3.ws_web_page_sk
+JOIN income_band AS i12 ON i12.ib_income_band_sk = h11.hd_income_band_sk
+WHERE i9.i_category IN ('Jewelry', 'Home', 'Music', 'Books', 'Children', 'Men', 'Sports', 'Women', 'Electronics', 'Shoes')
+AND s5.ss_quantity >= 5 AND s5.ss_quantity <= 96
+AND w3.ws_quantity >= 5 AND w3.ws_quantity <= 95"
+3a.sql,3,341699294,0.1,store_sales|customer|customer_address|catalog_sales,4,53a187ee,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
+JOIN customer_address AS c2 ON c2.ca_address_sk = s0.ss_addr_sk
+JOIN catalog_sales AS c3 ON c3.cs_bill_customer_sk = c1.c_customer_sk
+WHERE s0.ss_quantity >= 41 AND s0.ss_quantity <= 51
+AND c2.ca_state IN ('FL', 'NH', 'WI', 'UT', 'SD', 'AR', 'NY', 'WY', 'CO', 'GA', 'CT', 'MS', 'NM', 'NV', 'MA')
+AND c3.cs_quantity >= 70 AND c3.cs_quantity <= 80"
+3b.sql,3,341699294,0.1,store_sales|customer_demographics|customer|customer_address,4,ba7e1e3e,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c1 ON c1.cd_demo_sk = s0.ss_cdemo_sk
+JOIN customer_address AS c3 ON c3.ca_address_sk = s0.ss_addr_sk
+WHERE s0.ss_quantity >= 71 AND s0.ss_quantity <= 91
+AND c1.cd_gender = 'F'
+AND c3.ca_state IN ('FL', 'AR', 'SC', 'LA', 'ME', 'CO', 'NH', 'OH', 'MT', 'KS', 'AL', 'MS', 'MD', 'RI', 'CT')"
+3c.sql,3,341699294,0.1,store_sales|item|web_returns|catalog_returns,4,68f73162,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN item AS i1 ON i1.i_item_sk = s0.ss_item_sk
+JOIN web_returns AS w2 ON w2.wr_item_sk = i1.i_item_sk
+JOIN catalog_returns AS c3 ON c3.cr_item_sk = i1.i_item_sk
+WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 20
+AND i1.i_category IN ('Children', 'Sports', 'Men')"
+4a.sql,4,56025513,0.1,customer_demographics|customer|catalog_returns|catalog_page|catalog_sales,5,c9a8c546,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN catalog_sales AS c4 ON c4.cs_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN catalog_page AS c3 ON c3.cp_catalog_page_sk = c4.cs_catalog_page_sk
+JOIN catalog_returns AS c2 ON c2.cr_refunded_customer_sk = c1.c_customer_sk
+WHERE c0.cd_gender = 'M'
+AND c4.cs_quantity >= 30 AND c4.cs_quantity <= 50"
+4b.sql,4,56025513,0.1,customer_demographics|customer|catalog_sales|item|store_returns,5,8b4a888b,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN catalog_sales AS c2 ON c2.cs_bill_cdemo_sk = c0.cd_demo_sk
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN item AS i3 ON i3.i_item_sk = c2.cs_item_sk
+JOIN store_returns AS s4 ON s4.sr_customer_sk = c1.c_customer_sk
+WHERE c0.cd_gender = 'F'
+AND c2.cs_quantity >= 30 AND c2.cs_quantity <= 40
+AND i3.i_category IN ('Children', 'Men', 'Electronics')"
+4c.sql,4,56025513,0.1,customer_demographics|customer|household_demographics|store_returns|item,5,275040ba,ok,"SELECT MIN(c0.cd_demo_sk) AS result
+FROM customer_demographics AS c0
+JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
+JOIN store_returns AS s3 ON s3.sr_customer_sk = c1.c_customer_sk
+JOIN household_demographics AS h2 ON h2.hd_demo_sk = c1.c_current_hdemo_sk
+JOIN item AS i4 ON i4.i_item_sk = s3.sr_item_sk
+WHERE c0.cd_gender = 'F'
+AND h2.hd_dep_count >= 0 AND h2.hd_dep_count <= 2
+AND i4.i_category IN ('Books', 'Men', 'Shoes')"
+5a.sql,4,347927523,0.1,store_sales|customer_demographics|customer|catalog_returns|item,5,cbd5b113,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN item AS i4 ON i4.i_item_sk = s0.ss_item_sk
+JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
+JOIN customer_demographics AS c1 ON c1.cd_demo_sk = s0.ss_cdemo_sk
+JOIN catalog_returns AS c3 ON c3.cr_item_sk = i4.i_item_sk
+WHERE s0.ss_quantity >= 31 AND s0.ss_quantity <= 41
+AND i4.i_category IN ('Women', 'Jewelry', 'Sports')
+AND c1.cd_gender = 'M'"
+5b.sql,4,347927523,0.1,store_sales|promotion|catalog_sales|customer|web_sales,5,2766dfdb,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN customer AS c3 ON c3.c_customer_sk = s0.ss_customer_sk
+JOIN promotion AS p1 ON p1.p_promo_sk = s0.ss_promo_sk
+JOIN web_sales AS w4 ON w4.ws_bill_customer_sk = c3.c_customer_sk
+JOIN catalog_sales AS c2 ON c2.cs_bill_customer_sk = c3.c_customer_sk
+WHERE s0.ss_quantity >= 20 AND s0.ss_quantity <= 31
+AND p1.p_channel_tv = 'N'
+AND w4.ws_quantity >= 10 AND w4.ws_quantity <= 30"
+5c.sql,4,347927523,0.1,store_sales|promotion|time_dim|customer|catalog_returns,5,19ef2d90,ok,"SELECT MIN(s0.ss_quantity) AS result
+FROM store_sales AS s0
+JOIN time_dim AS t2 ON t2.t_time_sk = s0.ss_sold_time_sk
+JOIN customer AS c3 ON c3.c_customer_sk = s0.ss_customer_sk
+JOIN promotion AS p1 ON p1.p_promo_sk = s0.ss_promo_sk
+JOIN catalog_returns AS c4 ON c4.cr_refunded_customer_sk = c3.c_customer_sk
+WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 61
+AND p1.p_channel_tv = 'N'"
+6a.sql,4,308293359,0.1,inventory|item|web_sales|customer|customer_demographics,5,06803323,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i9 ON i9.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w13 ON w13.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d7.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s1.ss_customer_sk
-JOIN store AS s12 ON s12.s_store_sk = s1.ss_store_sk
-JOIN promotion AS p11 ON p11.p_promo_sk = s1.ss_promo_sk
-JOIN catalog_page AS c10 ON c10.cp_catalog_page_sk = c2.cs_catalog_page_sk
-WHERE d7.d_year >= 1999 AND d7.d_year <= 2000
-AND i9.i_category = 'Electronics'
-AND w13.w_warehouse_sq_ft >= 408332 AND w13.w_warehouse_sq_ft <= 546661"
-33c.sql,13,64723403,inventory|store_sales|customer_demographics|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|web_returns|customer_address|item|household_demographics|promotion|warehouse,14,a2fbd6d6,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN web_sales AS w2 ON w2.ws_item_sk = i1.i_item_sk
+JOIN customer AS c3 ON c3.c_customer_sk = w2.ws_bill_customer_sk
+JOIN customer_demographics AS c4 ON c4.cd_demo_sk = w2.ws_bill_cdemo_sk
+WHERE i1.i_category IN ('Books', 'Electronics', 'Children')
+AND w2.ws_quantity >= 30 AND w2.ws_quantity <= 50
+AND c4.cd_gender = 'M'"
+6b.sql,4,308293359,0.1,inventory|item|catalog_sales|customer_demographics|customer,5,7767278c,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
-JOIN date_dim AS d7 ON d7.d_date_sk = i0.inv_date_sk
-JOIN item AS i10 ON i10.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w13 ON w13.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d7.d_date_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d7.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d7.d_date_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d7.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d7.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d7.d_date_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = s1.ss_cdemo_sk
-JOIN household_demographics AS h11 ON h11.hd_demo_sk = s1.ss_hdemo_sk
-JOIN customer_address AS c9 ON c9.ca_address_sk = s1.ss_addr_sk
-JOIN promotion AS p12 ON p12.p_promo_sk = s1.ss_promo_sk
-WHERE d7.d_year >= 2002 AND d7.d_year <= 2003
-AND i10.i_category = 'Home'
-AND w13.w_warehouse_sq_ft >= 676258 AND w13.w_warehouse_sq_ft <= 802580"
-3a.sql,3,341699294,inventory|date_dim|item|warehouse,4,829f756f,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN catalog_sales AS c2 ON c2.cs_item_sk = i1.i_item_sk
+JOIN customer AS c4 ON c4.c_customer_sk = c2.cs_bill_customer_sk
+JOIN customer_demographics AS c3 ON c3.cd_demo_sk = c2.cs_bill_cdemo_sk
+WHERE i1.i_category IN ('Electronics', 'Women', 'Shoes')
+AND c2.cs_quantity >= 50 AND c2.cs_quantity <= 70
+AND c3.cd_gender = 'M'"
+6c.sql,4,308293359,0.1,inventory|warehouse|item|web_returns|customer,5,d22a870f,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN item AS i2 ON i2.i_item_sk = i0.inv_item_sk
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN web_returns AS w3 ON w3.wr_item_sk = i2.i_item_sk
+JOIN customer AS c4 ON c4.c_customer_sk = w3.wr_refunded_customer_sk
+WHERE i2.i_category IN ('Shoes', 'Children', 'Books')
+AND w1.w_warehouse_sq_ft >= 656889 AND w1.w_warehouse_sq_ft <= 763855"
+6d.sql,4,308293359,0.1,inventory|date_dim|catalog_sales|warehouse|catalog_returns,5,8063c838,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN warehouse AS w3 ON w3.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d1.d_date_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 1940
+AND w3.w_warehouse_sq_ft >= 656889 AND w3.w_warehouse_sq_ft <= 763855
+AND c2.cs_quantity >= 11 AND c2.cs_quantity <= 30"
+6e.sql,4,308293359,0.1,inventory|warehouse|date_dim|catalog_returns|catalog_page,5,e1964086,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d2.d_date_sk
+JOIN catalog_page AS c4 ON c4.cp_catalog_page_sk = c3.cr_catalog_page_sk
+WHERE d2.d_year >= 1960 AND d2.d_year <= 2000
+AND w1.w_warehouse_sq_ft >= 763855 AND w1.w_warehouse_sq_ft <= 924304"
+6f.sql,4,308293359,0.1,inventory|item|catalog_sales|web_sales|web_site,5,4fb4f611,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
+JOIN web_sales AS w3 ON w3.ws_item_sk = i1.i_item_sk
+JOIN catalog_sales AS c2 ON c2.cs_item_sk = i1.i_item_sk
+JOIN web_site AS w4 ON w4.web_site_sk = w3.ws_web_site_sk
+WHERE i1.i_category IN ('Women', 'Shoes', 'Electronics')
+AND w3.ws_quantity >= 60 AND w3.ws_quantity <= 80
+AND c2.cs_quantity >= 80 AND c2.cs_quantity <= 95"
+7a.sql,7,378676288,0.1,inventory|date_dim|item|store_returns|catalog_sales|customer|household_demographics|income_band,8,27ceb8cf,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
 JOIN item AS i2 ON i2.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w3 ON w3.w_warehouse_sk = i0.inv_warehouse_sk
-WHERE d1.d_year >= 1998 AND d1.d_year <= 2003
-AND i2.i_category IN ('Home', 'Children', 'Music', 'Electronics', 'Sports', 'Men', 'Books', 'Jewelry', 'Women')
-AND w3.w_warehouse_sq_ft >= 50000 AND w3.w_warehouse_sq_ft <= 1000000"
-3b.sql,3,341699294,inventory|date_dim|item|warehouse,4,68be05be,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN catalog_sales AS c4 ON c4.cs_sold_date_sk = d1.d_date_sk
+JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c5 ON c5.c_customer_sk = c4.cs_bill_customer_sk
+JOIN household_demographics AS h6 ON h6.hd_demo_sk = c4.cs_bill_hdemo_sk
+JOIN income_band AS i7 ON i7.ib_income_band_sk = h6.hd_income_band_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 2089
+AND i2.i_category IN ('Electronics', 'Sports', 'Shoes', 'Home', 'Books', 'Music', 'Women', 'Jewelry', 'Men', 'Children')
+AND c4.cs_quantity >= 6 AND c4.cs_quantity <= 95"
+7b.sql,7,378676288,0.1,inventory|warehouse|date_dim|store_sales|household_demographics|customer|store_returns|catalog_sales,8,257b3d93,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN store_sales AS s3 ON s3.ss_sold_date_sk = d2.d_date_sk
+JOIN catalog_sales AS c7 ON c7.cs_sold_date_sk = d2.d_date_sk
+JOIN store_returns AS s6 ON s6.sr_returned_date_sk = d2.d_date_sk
+JOIN customer AS c5 ON c5.c_customer_sk = s3.ss_customer_sk
+JOIN household_demographics AS h4 ON h4.hd_demo_sk = s3.ss_hdemo_sk
+WHERE d2.d_year >= 1910 AND d2.d_year <= 2089
+AND w1.w_warehouse_sq_ft >= 161864 AND w1.w_warehouse_sq_ft <= 924304
+AND s3.ss_quantity >= 5 AND s3.ss_quantity <= 96"
+7c.sql,7,378676288,0.1,inventory|date_dim|catalog_returns|customer|item|catalog_page|catalog_sales|promotion,8,35f55f5d,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
-JOIN item AS i2 ON i2.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w3 ON w3.w_warehouse_sk = i0.inv_warehouse_sk
-WHERE d1.d_year >= 1998 AND d1.d_year <= 2003
-AND i2.i_category IN ('Children', 'Electronics', 'Home', 'Women', 'Books', 'Men', 'Music', 'Jewelry', 'Sports')
-AND w3.w_warehouse_sq_ft >= 50000 AND w3.w_warehouse_sq_ft <= 1000000"
-3c.sql,3,341699294,inventory|date_dim|item|warehouse,4,f6046fb5,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
-JOIN item AS i2 ON i2.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w3 ON w3.w_warehouse_sk = i0.inv_warehouse_sk
-WHERE d1.d_year >= 1998 AND d1.d_year <= 2003
-AND i2.i_category IN ('Electronics', 'Home', 'Men', 'Women', 'Sports', 'Children', 'Books', 'Jewelry', 'Music')
-AND w3.w_warehouse_sq_ft >= 50000 AND w3.w_warehouse_sq_ft <= 1000000"
-4a.sql,4,56025513,inventory|catalog_returns|date_dim|item|warehouse,5,5747fa92,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN item AS i4 ON i4.i_item_sk = i0.inv_item_sk
+JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c2 ON c2.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c3 ON c3.c_customer_sk = c6.cs_bill_customer_sk
+JOIN catalog_page AS c5 ON c5.cp_catalog_page_sk = c6.cs_catalog_page_sk
+JOIN promotion AS p7 ON p7.p_promo_sk = c6.cs_promo_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 2089
+AND i4.i_category IN ('Children', 'Music', 'Women', 'Books', 'Electronics', 'Sports', 'Jewelry', 'Home', 'Men', 'Shoes')
+AND c6.cs_quantity >= 6 AND c6.cs_quantity <= 95"
+8a.sql,6,327687351,0.1,inventory|warehouse|date_dim|catalog_sales|item|store_returns|store,7,0f1c3708,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_returns AS c1 ON c1.cr_returned_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1999 AND d2.d_year <= 2000
-AND i3.i_category IN ('Women', 'Music', 'Sports')
-AND w4.w_warehouse_sq_ft >= 485050 AND w4.w_warehouse_sq_ft <= 831177"
-4b.sql,4,56025513,inventory|catalog_returns|date_dim|item|warehouse,5,5452b386,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_returns AS c1 ON c1.cr_returned_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 2000 AND d2.d_year <= 2001
-AND i3.i_category IN ('Electronics', 'Sports', 'Home')
-AND w4.w_warehouse_sq_ft >= 153896 AND w4.w_warehouse_sq_ft <= 500023"
-4c.sql,4,56025513,inventory|store_returns|date_dim|item|warehouse,5,65bd5f59,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_returns AS s1 ON s1.sr_returned_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1999 AND d2.d_year <= 2000
-AND i3.i_category IN ('Women', 'Children', 'Jewelry')
-AND w4.w_warehouse_sq_ft >= 55506 AND w4.w_warehouse_sq_ft <= 390386"
-5a.sql,4,347927523,inventory|store_sales|date_dim|item|warehouse,5,e4806dd6,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1998 AND d2.d_year <= 2003
-AND i3.i_category IN ('Jewelry', 'Electronics', 'Home', 'Sports', 'Music', 'Books', 'Women', 'Men', 'Children')
-AND w4.w_warehouse_sq_ft >= 50000 AND w4.w_warehouse_sq_ft <= 1000000"
-5b.sql,4,347927523,inventory|store_returns|date_dim|item|warehouse,5,0e411856,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_returns AS s1 ON s1.sr_returned_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1998 AND d2.d_year <= 2003
-AND i3.i_category IN ('Men', 'Sports', 'Jewelry', 'Home', 'Books', 'Electronics', 'Women', 'Music', 'Children')
-AND w4.w_warehouse_sq_ft >= 50000 AND w4.w_warehouse_sq_ft <= 1000000"
-5c.sql,4,347927523,inventory|date_dim|web_returns|item|warehouse,5,382f3574,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN item AS i4 ON i4.i_item_sk = i0.inv_item_sk
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d2.d_date_sk
+JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d2.d_date_sk
+JOIN store AS s6 ON s6.s_store_sk = s5.sr_store_sk
+WHERE d2.d_year >= 1940 AND d2.d_year <= 1980
+AND i4.i_category IN ('Shoes', 'Home', 'Women')
+AND w1.w_warehouse_sq_ft >= 231946 AND w1.w_warehouse_sq_ft <= 278668"
+8b.sql,6,327687351,0.1,inventory|date_dim|warehouse|item|catalog_sales|catalog_returns|customer,7,c49a8395,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
 JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN warehouse AS w2 ON w2.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN catalog_sales AS c4 ON c4.cs_sold_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c6 ON c6.c_customer_sk = c4.cs_bill_customer_sk
+WHERE d1.d_year >= 1960 AND d1.d_year <= 1980
+AND i3.i_category IN ('Children', 'Home', 'Sports')
+AND w2.w_warehouse_sq_ft >= 656889 AND w2.w_warehouse_sq_ft <= 763855"
+8c.sql,6,327687351,0.1,inventory|date_dim|warehouse|store_returns|customer|customer_address|catalog_returns,7,1fa01b09,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN warehouse AS w2 ON w2.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c4 ON c4.c_customer_sk = s3.sr_customer_sk
+JOIN customer_address AS c5 ON c5.ca_address_sk = c4.c_current_addr_sk
+WHERE d1.d_year >= 2000 AND d1.d_year <= 2040
+AND w2.w_warehouse_sq_ft >= 656889 AND w2.w_warehouse_sq_ft <= 763855
+AND c5.ca_state IN ('MT', 'OK', 'HI', 'TX', 'UT', 'IA', 'AZ', 'PA', 'TN', 'KS', 'VA', 'MA', 'IN', 'WV', 'MO')"
+8d.sql,6,327687351,0.1,inventory|date_dim|web_returns|item|catalog_sales|customer_address|catalog_returns,7,7de9b2f8,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
+JOIN catalog_sales AS c4 ON c4.cs_sold_date_sk = d1.d_date_sk
 JOIN web_returns AS w2 ON w2.wr_returned_date_sk = d1.d_date_sk
-WHERE d1.d_year >= 1998 AND d1.d_year <= 2003
-AND i3.i_category IN ('Jewelry', 'Sports', 'Home', 'Women', 'Men', 'Books', 'Children', 'Music', 'Electronics')
-AND w4.w_warehouse_sq_ft >= 50000 AND w4.w_warehouse_sq_ft <= 1000000"
-6a.sql,4,308293359,inventory|store_sales|date_dim|item|warehouse,5,197ae8f7,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1998 AND d2.d_year <= 2003
-AND i3.i_category IN ('Home', 'Children', 'Sports', 'Music', 'Electronics', 'Men', 'Books', 'Jewelry', 'Women')
-AND w4.w_warehouse_sq_ft >= 50000 AND w4.w_warehouse_sq_ft <= 1000000"
-6b.sql,4,308293359,inventory|store_sales|date_dim|item|warehouse,5,434dc280,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1998 AND d2.d_year <= 2003
-AND i3.i_category IN ('Sports', 'Electronics', 'Home', 'Men', 'Children', 'Music', 'Books', 'Jewelry', 'Women')
-AND w4.w_warehouse_sq_ft >= 50000 AND w4.w_warehouse_sq_ft <= 1000000"
-6c.sql,4,308293359,inventory|store_sales|date_dim|item|warehouse,5,fa07dfec,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1998 AND d2.d_year <= 2003
-AND i3.i_category IN ('Children', 'Jewelry', 'Men', 'Sports', 'Electronics', 'Music', 'Books', 'Women', 'Home')
-AND w4.w_warehouse_sq_ft >= 50000 AND w4.w_warehouse_sq_ft <= 1000000"
-6d.sql,4,308293359,inventory|store_sales|date_dim|item|warehouse,5,f97a9189,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1998 AND d2.d_year <= 2003
-AND i3.i_category IN ('Women', 'Music', 'Electronics', 'Sports', 'Home', 'Men', 'Books', 'Children', 'Jewelry')
-AND w4.w_warehouse_sq_ft >= 50000 AND w4.w_warehouse_sq_ft <= 1000000"
-6e.sql,4,308293359,inventory|date_dim|web_returns|item|warehouse,5,760e4d5e,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d1.d_date_sk
+JOIN customer_address AS c5 ON c5.ca_address_sk = c4.cs_bill_addr_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 2089
+AND i3.i_category IN ('Children', 'Shoes', 'Home', 'Electronics', 'Sports', 'Books', 'Jewelry', 'Women', 'Men', 'Music')
+AND c4.cs_quantity >= 6 AND c4.cs_quantity <= 95"
+9a.sql,7,359090741,0.1,inventory|date_dim|catalog_sales|customer|customer_address|web_sales|store_sales|household_demographics,8,eaa64b6f,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_returns AS w2 ON w2.wr_returned_date_sk = d1.d_date_sk
-WHERE d1.d_year >= 1998 AND d1.d_year <= 2003
-AND i3.i_category IN ('Electronics', 'Music', 'Home', 'Children', 'Jewelry', 'Sports', 'Men', 'Women', 'Books')
-AND w4.w_warehouse_sq_ft >= 50000 AND w4.w_warehouse_sq_ft <= 1000000"
-6f.sql,4,308293359,inventory|catalog_returns|date_dim|item|warehouse,5,7754954b,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN store_sales AS s6 ON s6.ss_sold_date_sk = d1.d_date_sk
+JOIN web_sales AS w5 ON w5.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
+JOIN customer AS c3 ON c3.c_customer_sk = s6.ss_customer_sk
+JOIN household_demographics AS h7 ON h7.hd_demo_sk = s6.ss_hdemo_sk
+JOIN customer_address AS c4 ON c4.ca_address_sk = s6.ss_addr_sk
+WHERE d1.d_year >= 2040 AND d1.d_year <= 2060
+AND s6.ss_quantity >= 61 AND s6.ss_quantity <= 71
+AND w5.ws_quantity >= 40 AND w5.ws_quantity <= 60"
+9b.sql,7,359090741,0.1,inventory|date_dim|web_sales|customer|customer_address|catalog_sales|catalog_page|catalog_returns,8,3a6792fd,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d1.d_date_sk
+JOIN catalog_returns AS c7 ON c7.cr_returned_date_sk = d1.d_date_sk
+JOIN customer AS c3 ON c3.c_customer_sk = w2.ws_bill_customer_sk
+JOIN customer_address AS c4 ON c4.ca_address_sk = w2.ws_bill_addr_sk
+JOIN catalog_page AS c6 ON c6.cp_catalog_page_sk = c5.cs_catalog_page_sk
+WHERE d1.d_year >= 2040 AND d1.d_year <= 2080
+AND w2.ws_quantity >= 60 AND w2.ws_quantity <= 70
+AND c5.cs_quantity >= 70 AND c5.cs_quantity <= 80"
+9c.sql,7,359090741,0.1,inventory|date_dim|catalog_sales|promotion|web_sales|customer_address|customer|item,8,40c3ee54,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+FROM inventory AS i0
+JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
+JOIN item AS i7 ON i7.i_item_sk = i0.inv_item_sk
+JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d1.d_date_sk
+JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
+JOIN customer AS c6 ON c6.c_customer_sk = w4.ws_bill_customer_sk
+JOIN customer_address AS c5 ON c5.ca_address_sk = w4.ws_bill_addr_sk
+JOIN promotion AS p3 ON p3.p_promo_sk = w4.ws_promo_sk
+WHERE d1.d_year >= 1910 AND d1.d_year <= 2089
+AND i7.i_category IN ('Men', 'Books', 'Shoes', 'Home', 'Women', 'Children', 'Electronics', 'Sports', 'Music', 'Jewelry')
+AND w4.ws_quantity >= 5 AND w4.ws_quantity <= 95"
+9d.sql,7,359090741,0.1,inventory|warehouse|date_dim|catalog_returns|customer|item|web_sales|customer_address,8,c0b9c7ce,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0
 JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i3 ON i3.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w4 ON w4.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_returns AS c1 ON c1.cr_returned_date_sk = d2.d_date_sk
-WHERE d2.d_year >= 1998 AND d2.d_year <= 2003
-AND i3.i_category IN ('Music', 'Jewelry', 'Books', 'Sports', 'Children', 'Men', 'Electronics', 'Home', 'Women')
-AND w4.w_warehouse_sq_ft >= 50000 AND w4.w_warehouse_sq_ft <= 1000000"
-7a.sql,7,378676288,inventory|store_sales|catalog_sales|store_returns|catalog_returns|date_dim|item|warehouse,8,82b81860,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2002
-AND i6.i_category IN ('Books', 'Home', 'Men', 'Sports', 'Electronics', 'Children', 'Women', 'Jewelry', 'Music')
-AND w7.w_warehouse_sq_ft >= 70944 AND w7.w_warehouse_sq_ft <= 982540"
-7b.sql,7,378676288,inventory|catalog_sales|web_sales|store_returns|date_dim|web_returns|item|warehouse,8,cca9418c,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i6.i_category IN ('Music', 'Electronics', 'Sports', 'Books', 'Children', 'Jewelry', 'Women', 'Men', 'Home')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-7c.sql,7,378676288,inventory|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|item|warehouse,8,20af8dac,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i6.i_category IN ('Children', 'Men', 'Women', 'Electronics', 'Jewelry', 'Sports', 'Music', 'Books', 'Home')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-8a.sql,6,327687351,inventory|store_sales|catalog_sales|store_returns|date_dim|item|warehouse,7,f0d87cde,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
 JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2002
-AND i5.i_category IN ('Books', 'Home', 'Women', 'Children', 'Music', 'Men', 'Electronics', 'Sports', 'Jewelry')
-AND w6.w_warehouse_sq_ft >= 186025 AND w6.w_warehouse_sq_ft <= 985380"
-8b.sql,6,327687351,inventory|store_sales|store_returns|date_dim|web_returns|item|warehouse,7,8505881f,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d3.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d3.d_date_sk
-JOIN web_returns AS w4 ON w4.wr_returned_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 1998 AND d3.d_year <= 2003
-AND i5.i_category IN ('Children', 'Home', 'Jewelry', 'Men', 'Books', 'Music', 'Women', 'Electronics', 'Sports')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-8c.sql,6,327687351,inventory|store_sales|web_sales|store_returns|date_dim|item|warehouse,7,674e765f,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d4.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1999 AND d4.d_year <= 2003
-AND i5.i_category IN ('Sports', 'Women', 'Music', 'Jewelry', 'Home', 'Men', 'Books', 'Children', 'Electronics')
-AND w6.w_warehouse_sq_ft >= 69492 AND w6.w_warehouse_sq_ft <= 961474"
-8d.sql,6,327687351,inventory|catalog_sales|store_returns|date_dim|web_returns|item|warehouse,7,8cb14169,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i5 ON i5.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w6 ON w6.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d3.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d3.d_date_sk
-JOIN web_returns AS w4 ON w4.wr_returned_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 1998 AND d3.d_year <= 2003
-AND i5.i_category IN ('Women', 'Electronics', 'Home', 'Jewelry', 'Books', 'Men', 'Children', 'Music', 'Sports')
-AND w6.w_warehouse_sq_ft >= 50000 AND w6.w_warehouse_sq_ft <= 1000000"
-9a.sql,7,359090741,inventory|store_sales|catalog_sales|web_sales|store_returns|date_dim|item|warehouse,8,5c007285,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1999 AND d5.d_year <= 2003
-AND i6.i_category IN ('Books', 'Jewelry', 'Electronics', 'Children', 'Music', 'Sports', 'Men', 'Women', 'Home')
-AND w7.w_warehouse_sq_ft >= 159611 AND w7.w_warehouse_sq_ft <= 953453"
-9b.sql,7,359090741,inventory|store_sales|web_sales|store_returns|catalog_returns|date_dim|item|warehouse,8,928de7e4,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d5.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i6.i_category IN ('Children', 'Women', 'Electronics', 'Home', 'Men', 'Sports', 'Jewelry', 'Books', 'Music')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-9c.sql,7,359090741,inventory|catalog_sales|web_sales|store_returns|date_dim|web_returns|item|warehouse,8,728bf851,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d4.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-WHERE d4.d_year >= 1998 AND d4.d_year <= 2003
-AND i6.i_category IN ('Children', 'Sports', 'Men', 'Women', 'Electronics', 'Books', 'Jewelry', 'Home', 'Music')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-9d.sql,7,359090741,inventory|catalog_sales|web_sales|store_returns|catalog_returns|date_dim|item|warehouse,8,bb3ddde8,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d5 ON d5.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w7 ON w7.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d5.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE d5.d_year >= 1998 AND d5.d_year <= 2003
-AND i6.i_category IN ('Men', 'Women', 'Children', 'Jewelry', 'Home', 'Sports', 'Electronics', 'Music', 'Books')
-AND w7.w_warehouse_sq_ft >= 50000 AND w7.w_warehouse_sq_ft <= 1000000"
-fkindexes.sql,0,0,inventory,1,1ece878a,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
+JOIN web_sales AS w6 ON w6.ws_sold_date_sk = d2.d_date_sk
+JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d2.d_date_sk
+JOIN customer AS c4 ON c4.c_customer_sk = w6.ws_bill_customer_sk
+JOIN customer_address AS c7 ON c7.ca_address_sk = w6.ws_bill_addr_sk
+WHERE d2.d_year >= 1920 AND d2.d_year <= 1960
+AND i5.i_category IN ('Books', 'Children', 'Shoes')
+AND w1.w_warehouse_sq_ft >= 656889 AND w1.w_warehouse_sq_ft <= 763855"
+fkindexes.sql,0,0,0.1,inventory,1,1ece878a,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0"
-schema.sql,0,0,inventory,1,1ece878a,"SELECT MIN(i0.inv_quantity_on_hand) AS result
+schema.sql,0,0,0.1,inventory,1,1ece878a,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
 FROM inventory AS i0"
