@@ -2,7 +2,7 @@
 
 This project synthesises a workload W' for a target database D' given a source database D, its workload W, and the execution trace T from running W on D. The synthesised workload is then evaluated for structural and execution fidelity against the original.
 
-The experiments use three databases — IMDB (JOB workload), TPC-H, and TPC-DS — to run all 9 source→target combinations as a proof of concept.
+The experiments use three databases IMDB (JOB workload), TPC-H, and TPC-DS to run all 9 source→target combinations as a proof of concept.
 
 ---
 
