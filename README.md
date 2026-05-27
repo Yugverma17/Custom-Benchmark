@@ -147,8 +147,8 @@ One row per experiment, 29 columns:
 | Column group | Columns |
 |---|---|
 | Query counts | `query_count_W`, `query_count_Wprime` |
-| Query diversity | `query_diversity_W/Wprime` — fraction of queries with a unique table-set |
-| Scan-Set Repetition Rate | `srr_W/Wprime` — fraction of queries whose table-set appears in more than one query |
+| Query diversity | `query_diversity_W/Wprime` fraction of queries with a unique table-set |
+| Scan-Set Repetition Rate | `srr_W/Wprime` fraction of queries whose table-set appears in more than one query |
 | Operator counts (EXPLAIN) | `avg_scans/joins/aggregations/sorts/total_ops_W/Wprime` |
 | Plan diversity | `plan_diversity_W/Wprime`, `unique_plan_signatures_W/Wprime` |
 | Execution — success | `success_rate_percent_T/Tprime` |
