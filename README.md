@@ -42,15 +42,6 @@ The experiments use three databases IMDB (JOB workload), TPC-H, and TPC-DS to ru
 
 ---
 
-## What is Not on GitHub
-
-The following are excluded from version control because of size:
-
- Path 
-| `databases/*.duckdb` 
-| `workloads/job/*.sql` 
-| `databases/imdb_csvs/` 
-
 ## Setup
 
 ### 1. Install dependencies
