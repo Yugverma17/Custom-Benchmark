@@ -1,0 +1,1422 @@
+query_file,source_join_count,source_bytes_read,relative_selectivity,target_tables,n_tables,query_hash,gen_status,sql
+10a.sql,6,302432232,0.1,cast_info|char_name|role_type|title|name|person_info|aka_name,7,4bdddc09,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t3 ON t3.id = c0.movie_id
+JOIN name AS n4 ON n4.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN role_type AS r2 ON r2.id = c0.role_id
+JOIN aka_name AS a6 ON a6.person_id = n4.id
+JOIN person_info AS p5 ON p5.person_id = n4.id
+WHERE c0.role_id >= 4 AND c0.role_id <= 8
+AND t3.production_year >= 1932 AND t3.production_year <= 1978
+AND n4.gender = 'f'"
+10b.sql,6,302432232,0.1,cast_info|title|movie_companies|movie_link|link_type|role_type|company_type,7,4abc2e7e,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN role_type AS r5 ON r5.id = c0.role_id
+JOIN movie_companies AS m2 ON m2.movie_id = t1.id
+JOIN movie_link AS m3 ON m3.movie_id = t1.id
+JOIN company_type AS c6 ON c6.id = m2.company_type_id
+JOIN link_type AS l4 ON l4.id = m3.link_type_id
+WHERE c0.role_id >= 8 AND c0.role_id <= 10
+AND t1.production_year >= 2008 AND t1.production_year <= 2010"
+10c.sql,6,302432232,0.1,cast_info|char_name|role_type|title|movie_info_idx|info_type|name,7,db25801c,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t3 ON t3.id = c0.movie_id
+JOIN name AS n6 ON n6.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN role_type AS r2 ON r2.id = c0.role_id
+JOIN movie_info_idx AS m4 ON m4.movie_id = t3.id
+JOIN info_type AS i5 ON i5.id = m4.info_type_id
+WHERE t3.production_year >= 1932 AND t3.production_year <= 1978
+AND n6.gender = 'm'
+AND m4.info_type_id >= 99 AND m4.info_type_id <= 100"
+11a.sql,7,68327928,0.1,movie_keyword|keyword|title|movie_link|link_type|movie_info|info_type|person_info,8,5e67b01e,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t2 ON t2.id = m0.movie_id
+JOIN keyword AS k1 ON k1.id = m0.keyword_id
+JOIN movie_info AS m5 ON m5.movie_id = t2.id
+JOIN movie_link AS m3 ON m3.movie_id = t2.id
+JOIN info_type AS i6 ON i6.id = m5.info_type_id
+JOIN link_type AS l4 ON l4.id = m3.link_type_id
+JOIN person_info AS p7 ON p7.info_type_id = i6.id
+WHERE m0.keyword_id >= 2935 AND m0.keyword_id <= 7670
+AND t2.production_year >= 2010 AND t2.production_year <= 2012
+AND k1.phonetic_code LIKE 'F%'"
+11b.sql,7,68327928,0.1,movie_keyword|keyword|title|movie_info_idx|info_type|movie_info|movie_companies|company_name,8,105d6e68,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t2 ON t2.id = m0.movie_id
+JOIN keyword AS k1 ON k1.id = m0.keyword_id
+JOIN movie_companies AS m6 ON m6.movie_id = t2.id
+JOIN movie_info AS m5 ON m5.movie_id = t2.id
+JOIN movie_info_idx AS m3 ON m3.movie_id = t2.id
+JOIN company_name AS c7 ON c7.id = m6.company_id
+JOIN info_type AS i4 ON i4.id = m5.info_type_id
+WHERE m0.keyword_id >= 12374 AND m0.keyword_id <= 39136
+AND t2.production_year >= 2008 AND t2.production_year <= 2011
+AND k1.phonetic_code LIKE 'J%'"
+11c.sql,7,68327928,0.1,movie_keyword|title|movie_companies|aka_title|kind_type|movie_info_idx|info_type|movie_link,8,4b14d026,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN aka_title AS a3 ON a3.movie_id = t1.id
+JOIN movie_companies AS m2 ON m2.movie_id = t1.id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t1.id
+JOIN movie_link AS m7 ON m7.movie_id = t1.id
+JOIN kind_type AS k4 ON k4.id = t1.kind_id
+JOIN info_type AS i6 ON i6.id = m5.info_type_id
+WHERE m0.keyword_id >= 4703 AND m0.keyword_id <= 7670
+AND t1.production_year >= 1978 AND t1.production_year <= 1999"
+11d.sql,7,68327928,0.1,movie_keyword|title|movie_companies|company_name|keyword|company_type|movie_link|link_type,8,03eb91ab,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN keyword AS k4 ON k4.id = m0.keyword_id
+JOIN movie_companies AS m2 ON m2.movie_id = t1.id
+JOIN movie_link AS m6 ON m6.movie_id = t1.id
+JOIN company_name AS c3 ON c3.id = m2.company_id
+JOIN company_type AS c5 ON c5.id = m2.company_type_id
+JOIN link_type AS l7 ON l7.id = m6.link_type_id
+WHERE m0.keyword_id >= 2935 AND m0.keyword_id <= 4703
+AND t1.production_year >= 2008 AND t1.production_year <= 2010
+AND k4.phonetic_code LIKE 'Z%'"
+12a.sql,7,361317773,0.1,movie_info|title|movie_info_idx|info_type|person_info|name|aka_name|movie_companies,8,a63e2a1f,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i3 ON i3.id = m0.info_type_id
+JOIN movie_companies AS m7 ON m7.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN person_info AS p4 ON p4.info_type_id = i3.id
+JOIN name AS n5 ON n5.id = p4.person_id
+JOIN aka_name AS a6 ON a6.person_id = n5.id
+WHERE m0.info_type_id >= 7 AND m0.info_type_id <= 13
+AND t1.production_year >= 2008 AND t1.production_year <= 2010
+AND p4.info_type_id >= 17 AND p4.info_type_id <= 20"
+12b.sql,7,361317773,0.1,movie_info|title|movie_info_idx|info_type|person_info|name|aka_name|movie_companies,8,ac7b020f,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i3 ON i3.id = m0.info_type_id
+JOIN movie_companies AS m7 ON m7.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN person_info AS p4 ON p4.info_type_id = i3.id
+JOIN name AS n5 ON n5.id = p4.person_id
+JOIN aka_name AS a6 ON a6.person_id = n5.id
+WHERE m0.info_type_id >= 2 AND m0.info_type_id <= 4
+AND t1.production_year >= 1978 AND t1.production_year <= 1999
+AND p4.info_type_id >= 25 AND p4.info_type_id <= 36"
+12c.sql,7,361317773,0.1,movie_info|title|movie_info_idx|info_type|person_info|name|cast_info|char_name,8,f662ba28,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i3 ON i3.id = m0.info_type_id
+JOIN cast_info AS c6 ON c6.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN person_info AS p4 ON p4.info_type_id = i3.id
+JOIN name AS n5 ON n5.id = c6.person_id
+JOIN char_name AS c7 ON c7.id = c6.person_role_id
+WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 13
+AND t1.production_year >= 1978 AND t1.production_year <= 2006
+AND c6.role_id >= 2 AND c6.role_id <= 8"
+13a.sql,8,361317787,0.1,movie_info|info_type|movie_info_idx|title|person_info|kind_type|aka_title|name|cast_info,9,7ce77644,timeout,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t3 ON t3.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN cast_info AS c8 ON c8.movie_id = t3.id
+JOIN aka_title AS a6 ON a6.movie_id = t3.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
+JOIN kind_type AS k5 ON k5.id = t3.kind_id
+JOIN person_info AS p4 ON p4.info_type_id = i1.id
+JOIN name AS n7 ON n7.id = c8.person_id
+WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 98
+AND t3.production_year >= 1932 AND t3.production_year <= 2012
+AND c8.role_id >= 1 AND c8.role_id <= 10"
+13b.sql,8,361317787,0.1,movie_info|title|movie_info_idx|info_type|kind_type|aka_title|person_info|name|cast_info,9,afa540ae,timeout,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i3 ON i3.id = m0.info_type_id
+JOIN cast_info AS c8 ON c8.movie_id = t1.id
+JOIN aka_title AS a5 ON a5.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN kind_type AS k4 ON k4.id = t1.kind_id
+JOIN person_info AS p6 ON p6.info_type_id = i3.id
+JOIN name AS n7 ON n7.id = c8.person_id
+WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 98
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND c8.role_id >= 1 AND c8.role_id <= 10"
+13c.sql,8,361317787,0.1,movie_info|info_type|movie_info_idx|title|movie_companies|kind_type|aka_title|company_type|person_info,9,9049d841,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t3 ON t3.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN aka_title AS a6 ON a6.movie_id = t3.id
+JOIN movie_companies AS m4 ON m4.movie_id = t3.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
+JOIN kind_type AS k5 ON k5.id = t3.kind_id
+JOIN person_info AS p8 ON p8.info_type_id = i1.id
+JOIN company_type AS c7 ON c7.id = m4.company_type_id
+WHERE m0.info_type_id >= 13 AND m0.info_type_id <= 16
+AND t3.production_year >= 1978 AND t3.production_year <= 1999
+AND p8.info_type_id >= 17 AND p8.info_type_id <= 21"
+13d.sql,8,361317787,0.1,movie_info|title|movie_info_idx|info_type|complete_cast|comp_cast_type|person_info|name|aka_name,9,af347e64,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i3 ON i3.id = m0.info_type_id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN complete_cast AS c4 ON c4.movie_id = t1.id
+JOIN person_info AS p6 ON p6.info_type_id = i3.id
+JOIN comp_cast_type AS c5 ON c5.id = c4.subject_id
+JOIN name AS n7 ON n7.id = p6.person_id
+JOIN aka_name AS a8 ON a8.person_id = n7.id
+WHERE m0.info_type_id >= 7 AND m0.info_type_id <= 8
+AND t1.production_year >= 2006 AND t1.production_year <= 2010
+AND p6.info_type_id >= 20 AND p6.info_type_id <= 21"
+14a.sql,7,352739927,0.1,movie_info|title|movie_keyword|movie_info_idx|kind_type|aka_title|keyword|info_type,8,be51f0ff,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i7 ON i7.id = m0.info_type_id
+JOIN aka_title AS a5 ON a5.movie_id = t1.id
+JOIN movie_info_idx AS m3 ON m3.movie_id = t1.id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN kind_type AS k4 ON k4.id = t1.kind_id
+JOIN keyword AS k6 ON k6.id = m2.keyword_id
+WHERE t1.production_year >= 2010 AND t1.production_year <= 2012
+AND m2.keyword_id >= 7670 AND m2.keyword_id <= 20373
+AND k6.phonetic_code LIKE 'Z%'"
+14b.sql,7,352739927,0.1,movie_info|info_type|movie_info_idx|title|aka_title|kind_type|person_info|movie_keyword,8,d1f87b22,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t3 ON t3.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN aka_title AS a4 ON a4.movie_id = t3.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
+JOIN movie_keyword AS m7 ON m7.movie_id = t3.id
+JOIN kind_type AS k5 ON k5.id = t3.kind_id
+JOIN person_info AS p6 ON p6.info_type_id = i1.id
+WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 7
+AND t3.production_year >= 1960 AND t3.production_year <= 1992
+AND m7.keyword_id >= 4703 AND m7.keyword_id <= 7670"
+14c.sql,7,352739927,0.1,movie_info|title|movie_info_idx|info_type|person_info|name|cast_info|char_name,8,b3fc2041,timeout,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i3 ON i3.id = m0.info_type_id
+JOIN cast_info AS c6 ON c6.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN person_info AS p4 ON p4.info_type_id = i3.id
+JOIN name AS n5 ON n5.id = c6.person_id
+JOIN char_name AS c7 ON c7.id = c6.person_role_id
+WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 98
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND c6.role_id >= 1 AND c6.role_id <= 10"
+15a.sql,8,370344723,0.1,movie_info|info_type|movie_info_idx|title|movie_companies|kind_type|aka_title|company_name|person_info,9,290c2d02,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t3 ON t3.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN aka_title AS a6 ON a6.movie_id = t3.id
+JOIN movie_companies AS m4 ON m4.movie_id = t3.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
+JOIN kind_type AS k5 ON k5.id = t3.kind_id
+JOIN person_info AS p8 ON p8.info_type_id = i1.id
+JOIN company_name AS c7 ON c7.id = m4.company_id
+WHERE m0.info_type_id >= 7 AND m0.info_type_id <= 13
+AND t3.production_year >= 1992 AND t3.production_year <= 1999
+AND m4.company_type_id >= 1 AND m4.company_type_id <= 2"
+15b.sql,8,370344723,0.1,movie_info|info_type|person_info|name|aka_name|movie_info_idx|cast_info|char_name|title,9,e2d7d302,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t8 ON t8.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN cast_info AS c6 ON c6.movie_id = t8.id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t8.id
+JOIN person_info AS p2 ON p2.info_type_id = i1.id
+JOIN name AS n3 ON n3.id = c6.person_id
+JOIN char_name AS c7 ON c7.id = c6.person_role_id
+JOIN aka_name AS a4 ON a4.person_id = n3.id
+WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 4
+AND t8.production_year >= 2006 AND t8.production_year <= 2010
+AND c6.role_id >= 1 AND c6.role_id <= 2"
+15c.sql,8,370344723,0.1,movie_info|info_type|movie_info_idx|title|person_info|name|aka_name|movie_keyword|keyword,9,e10467b5,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t3 ON t3.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
+JOIN movie_keyword AS m7 ON m7.movie_id = t3.id
+JOIN person_info AS p4 ON p4.info_type_id = i1.id
+JOIN keyword AS k8 ON k8.id = m7.keyword_id
+JOIN name AS n5 ON n5.id = p4.person_id
+JOIN aka_name AS a6 ON a6.person_id = n5.id
+WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 4
+AND t3.production_year >= 2008 AND t3.production_year <= 2010
+AND m7.keyword_id >= 347 AND m7.keyword_id <= 1768"
+15d.sql,8,370344723,0.1,movie_info|title|movie_companies|company_type|info_type|movie_info_idx|person_info|name|aka_name,9,a53b57d6,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i4 ON i4.id = m0.info_type_id
+JOIN movie_companies AS m2 ON m2.movie_id = t1.id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t1.id
+JOIN person_info AS p6 ON p6.info_type_id = i4.id
+JOIN company_type AS c3 ON c3.id = m2.company_type_id
+JOIN name AS n7 ON n7.id = p6.person_id
+JOIN aka_name AS a8 ON a8.person_id = n7.id
+WHERE m0.info_type_id >= 2 AND m0.info_type_id <= 4
+AND t1.production_year >= 1978 AND t1.production_year <= 1999
+AND m5.info_type_id >= 100 AND m5.info_type_id <= 101"
+16a.sql,7,342332477,0.1,cast_info|name|aka_name|title|movie_keyword|keyword|complete_cast|comp_cast_type,8,b7b672e9,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t3 ON t3.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN movie_keyword AS m4 ON m4.movie_id = t3.id
+JOIN complete_cast AS c6 ON c6.movie_id = t3.id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN keyword AS k5 ON k5.id = m4.keyword_id
+JOIN comp_cast_type AS c7 ON c7.id = c6.subject_id
+WHERE t3.production_year >= 1978 AND t3.production_year <= 1999
+AND n1.gender = 'f'
+AND m4.keyword_id >= 20373 AND m4.keyword_id <= 63880"
+16b.sql,7,342332477,0.1,cast_info|title|movie_keyword|keyword|name|person_info|info_type|movie_info_idx,8,984b293a,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n4 ON n4.id = c0.person_id
+JOIN movie_info_idx AS m7 ON m7.movie_id = t1.id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN person_info AS p5 ON p5.person_id = n4.id
+JOIN info_type AS i6 ON i6.id = m7.info_type_id
+JOIN keyword AS k3 ON k3.id = m2.keyword_id
+WHERE c0.role_id >= 4 AND c0.role_id <= 8
+AND t1.production_year >= 2003 AND t1.production_year <= 2006
+AND n4.gender = 'm'"
+16c.sql,7,342332477,0.1,cast_info|name|aka_name|person_info|info_type|movie_info|title|movie_info_idx,8,49d24a28,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t6 ON t6.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN movie_info AS m5 ON m5.movie_id = t6.id
+JOIN movie_info_idx AS m7 ON m7.movie_id = t6.id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN person_info AS p3 ON p3.person_id = n1.id
+JOIN info_type AS i4 ON i4.id = m5.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t6.production_year >= 1932 AND t6.production_year <= 2012
+AND n1.gender IN ('m', 'f')"
+16d.sql,7,342332477,0.1,cast_info|name|aka_name|title|movie_keyword|keyword|movie_companies|company_name,8,be83e7e0,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t3 ON t3.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN movie_companies AS m6 ON m6.movie_id = t3.id
+JOIN movie_keyword AS m4 ON m4.movie_id = t3.id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN company_name AS c7 ON c7.id = m6.company_id
+JOIN keyword AS k5 ON k5.id = m4.keyword_id
+WHERE c0.role_id >= 8 AND c0.role_id <= 10
+AND t3.production_year >= 1978 AND t3.production_year <= 1999
+AND n1.gender = 'm'"
+17a.sql,6,331516361,0.1,cast_info|name|person_info|info_type|movie_info|title|movie_keyword,7,e38ba1cd,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t5 ON t5.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN movie_info AS m4 ON m4.movie_id = t5.id
+JOIN movie_keyword AS m6 ON m6.movie_id = t5.id
+JOIN person_info AS p2 ON p2.person_id = n1.id
+JOIN info_type AS i3 ON i3.id = m4.info_type_id
+WHERE t5.production_year >= 1978 AND t5.production_year <= 1992
+AND n1.gender = 'f'
+AND m4.info_type_id >= 2 AND m4.info_type_id <= 4"
+17b.sql,6,331516361,0.1,cast_info|name|person_info|info_type|movie_info_idx|title|movie_companies,7,1c6191c8,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t5 ON t5.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN movie_companies AS m6 ON m6.movie_id = t5.id
+JOIN movie_info_idx AS m4 ON m4.movie_id = t5.id
+JOIN person_info AS p2 ON p2.person_id = n1.id
+JOIN info_type AS i3 ON i3.id = m4.info_type_id
+WHERE c0.role_id >= 3 AND c0.role_id <= 8
+AND t5.production_year >= 1999 AND t5.production_year <= 2003
+AND n1.gender = 'f'"
+17c.sql,6,331516361,0.1,cast_info|title|movie_companies|name|aka_name|movie_keyword|keyword,7,95662dd5,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n3 ON n3.id = c0.person_id
+JOIN movie_companies AS m2 ON m2.movie_id = t1.id
+JOIN movie_keyword AS m5 ON m5.movie_id = t1.id
+JOIN aka_name AS a4 ON a4.person_id = n3.id
+JOIN keyword AS k6 ON k6.id = m5.keyword_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 2
+AND t1.production_year >= 2003 AND t1.production_year <= 2008
+AND n3.gender = 'm'"
+17d.sql,6,331516361,0.1,cast_info|name|aka_name|person_info|info_type|movie_info_idx|title,7,ed63296e,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t6 ON t6.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t6.id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN person_info AS p3 ON p3.person_id = n1.id
+JOIN info_type AS i4 ON i4.id = m5.info_type_id
+WHERE c0.role_id >= 4 AND c0.role_id <= 8
+AND t6.production_year >= 1960 AND t6.production_year <= 1992
+AND n1.gender = 'm'"
+17e.sql,6,331516361,0.1,cast_info|name|person_info|info_type|movie_info_idx|title|movie_companies,7,2e5fd725,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t5 ON t5.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN movie_companies AS m6 ON m6.movie_id = t5.id
+JOIN movie_info_idx AS m4 ON m4.movie_id = t5.id
+JOIN person_info AS p2 ON p2.person_id = n1.id
+JOIN info_type AS i3 ON i3.id = m4.info_type_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 4
+AND t5.production_year >= 2006 AND t5.production_year <= 2008
+AND n1.gender = 'f'"
+17f.sql,6,331516361,0.1,cast_info|title|movie_keyword|keyword|char_name|movie_info|info_type,7,04ab9a5b,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN char_name AS c4 ON c4.id = c0.person_role_id
+JOIN movie_info AS m5 ON m5.movie_id = t1.id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN info_type AS i6 ON i6.id = m5.info_type_id
+JOIN keyword AS k3 ON k3.id = m2.keyword_id
+WHERE c0.role_id >= 8 AND c0.role_id <= 10
+AND t1.production_year >= 1978 AND t1.production_year <= 1992
+AND m5.info_type_id >= 16 AND m5.info_type_id <= 98"
+18a.sql,6,601403228,0.1,cast_info|role_type|title|movie_info_idx|info_type|movie_info|name,7,ac6dd694,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t2 ON t2.id = c0.movie_id
+JOIN name AS n6 ON n6.id = c0.person_id
+JOIN role_type AS r1 ON r1.id = c0.role_id
+JOIN movie_info AS m5 ON m5.movie_id = t2.id
+JOIN movie_info_idx AS m3 ON m3.movie_id = t2.id
+JOIN info_type AS i4 ON i4.id = m5.info_type_id
+WHERE c0.role_id >= 4 AND c0.role_id <= 10
+AND t2.production_year >= 1992 AND t2.production_year <= 1999
+AND n6.gender = 'm'"
+18b.sql,6,601403228,0.1,cast_info|char_name|title|movie_info_idx|info_type|person_info|name,7,55f49436,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t2 ON t2.id = c0.movie_id
+JOIN name AS n6 ON n6.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN movie_info_idx AS m3 ON m3.movie_id = t2.id
+JOIN person_info AS p5 ON p5.person_id = n6.id
+JOIN info_type AS i4 ON i4.id = m3.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 2
+AND t2.production_year >= 1999 AND t2.production_year <= 2003
+AND n6.gender = 'f'"
+18c.sql,6,601403228,0.1,cast_info|name|person_info|aka_name|title|movie_info_idx|info_type,7,87536ac0,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t4 ON t4.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t4.id
+JOIN aka_name AS a3 ON a3.person_id = n1.id
+JOIN person_info AS p2 ON p2.person_id = n1.id
+JOIN info_type AS i6 ON i6.id = m5.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t4.production_year >= 1932 AND t4.production_year <= 2012
+AND n1.gender IN ('f', 'm')"
+19a.sql,9,655805480,0.1,cast_info|char_name|role_type|name|aka_name|title|movie_info|person_info|info_type|movie_info_idx,10,a31dcfb5,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t5 ON t5.id = c0.movie_id
+JOIN name AS n3 ON n3.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN role_type AS r2 ON r2.id = c0.role_id
+JOIN movie_info AS m6 ON m6.movie_id = t5.id
+JOIN movie_info_idx AS m9 ON m9.movie_id = t5.id
+JOIN aka_name AS a4 ON a4.person_id = n3.id
+JOIN person_info AS p7 ON p7.person_id = n3.id
+JOIN info_type AS i8 ON i8.id = m6.info_type_id
+WHERE t5.production_year >= 2006 AND t5.production_year <= 2008
+AND n3.gender = 'f'
+AND m6.info_type_id >= 7 AND m6.info_type_id <= 8"
+19b.sql,9,655805480,0.1,cast_info|role_type|char_name|title|name|aka_name|movie_info|person_info|info_type|movie_info_idx,10,f65b693e,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t3 ON t3.id = c0.movie_id
+JOIN name AS n4 ON n4.id = c0.person_id
+JOIN char_name AS c2 ON c2.id = c0.person_role_id
+JOIN role_type AS r1 ON r1.id = c0.role_id
+JOIN movie_info AS m6 ON m6.movie_id = t3.id
+JOIN movie_info_idx AS m9 ON m9.movie_id = t3.id
+JOIN aka_name AS a5 ON a5.person_id = n4.id
+JOIN person_info AS p7 ON p7.person_id = n4.id
+JOIN info_type AS i8 ON i8.id = m6.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t3.production_year >= 1932 AND t3.production_year <= 2012
+AND n4.gender IN ('m', 'f')"
+19c.sql,9,655805480,0.1,cast_info|char_name|name|aka_name|person_info|info_type|movie_info|title|movie_companies|company_name,10,ddc3b896,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t7 ON t7.id = c0.movie_id
+JOIN name AS n2 ON n2.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN movie_companies AS m8 ON m8.movie_id = t7.id
+JOIN movie_info AS m6 ON m6.movie_id = t7.id
+JOIN aka_name AS a3 ON a3.person_id = n2.id
+JOIN person_info AS p4 ON p4.person_id = n2.id
+JOIN company_name AS c9 ON c9.id = m8.company_id
+JOIN info_type AS i5 ON i5.id = m6.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t7.production_year >= 1932 AND t7.production_year <= 2012
+AND n2.gender IN ('f', 'm')"
+19d.sql,9,655805480,0.1,cast_info|title|movie_info|info_type|char_name|person_info|name|aka_name|movie_companies|company_name,10,85699a2b,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n6 ON n6.id = c0.person_id
+JOIN char_name AS c4 ON c4.id = c0.person_role_id
+JOIN movie_companies AS m8 ON m8.movie_id = t1.id
+JOIN movie_info AS m2 ON m2.movie_id = t1.id
+JOIN aka_name AS a7 ON a7.person_id = n6.id
+JOIN person_info AS p5 ON p5.person_id = n6.id
+JOIN company_name AS c9 ON c9.id = m8.company_id
+JOIN info_type AS i3 ON i3.id = m2.info_type_id
+WHERE c0.role_id >= 3 AND c0.role_id <= 8
+AND t1.production_year >= 1978 AND t1.production_year <= 1999
+AND n6.gender = 'f'"
+1a.sql,4,62253403,0.1,movie_companies|title|movie_info_idx|company_type|company_name,5,8ffc5ce0,ok,"SELECT MIN(m0.id) AS result
+FROM movie_companies AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN company_name AS c4 ON c4.id = m0.company_id
+JOIN company_type AS c3 ON c3.id = m0.company_type_id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+WHERE t1.production_year >= 2008 AND t1.production_year <= 2011
+AND c4.country_code IN ('[pm]', '[ye]', '[tt]', '[sm]', '[bf]', '[kg]', '[mk]', '[bj]', '[sz]', '[pt]', '[ai]', '[hr]', '[jm]', '[kh]', '[xyu]', '[bz]', '[tk]', '[gh]', '[mz]', '[uz]', '[ve]', '[fj]', '[vn]', '[bg]', '[lb]', '[np]', '[ng]', '[me]', '[am]', '[na]')"
+1b.sql,4,62253403,0.1,movie_companies|title|movie_info_idx|info_type|person_info,5,38cb038a,ok,"SELECT MIN(m0.id) AS result
+FROM movie_companies AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN info_type AS i3 ON i3.id = m2.info_type_id
+JOIN person_info AS p4 ON p4.info_type_id = i3.id
+WHERE t1.production_year >= 2008 AND t1.production_year <= 2011
+AND m2.info_type_id >= 99 AND m2.info_type_id <= 100
+AND p4.info_type_id >= 24 AND p4.info_type_id <= 25"
+1c.sql,4,62253403,0.1,movie_companies|title|movie_info|info_type|movie_info_idx,5,5858ce6f,ok,"SELECT MIN(m0.id) AS result
+FROM movie_companies AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN movie_info AS m2 ON m2.movie_id = t1.id
+JOIN movie_info_idx AS m4 ON m4.movie_id = t1.id
+JOIN info_type AS i3 ON i3.id = m2.info_type_id
+WHERE t1.production_year >= 2003 AND t1.production_year <= 2008
+AND m2.info_type_id >= 1 AND m2.info_type_id <= 3"
+1d.sql,4,62253403,0.1,movie_companies|title|movie_info_idx|info_type|company_type,5,ed13c3ca,ok,"SELECT MIN(m0.id) AS result
+FROM movie_companies AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN company_type AS c4 ON c4.id = m0.company_type_id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN info_type AS i3 ON i3.id = m2.info_type_id
+WHERE t1.production_year >= 1992 AND t1.production_year <= 1999"
+20a.sql,9,340237115,0.1,cast_info|title|complete_cast|movie_keyword|keyword|kind_type|aka_title|name|comp_cast_type|person_info,10,9fbd13f5,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n7 ON n7.id = c0.person_id
+JOIN aka_title AS a6 ON a6.movie_id = t1.id
+JOIN movie_keyword AS m3 ON m3.movie_id = t1.id
+JOIN complete_cast AS c2 ON c2.movie_id = t1.id
+JOIN kind_type AS k5 ON k5.id = t1.kind_id
+JOIN person_info AS p9 ON p9.person_id = n7.id
+JOIN keyword AS k4 ON k4.id = m3.keyword_id
+JOIN comp_cast_type AS c8 ON c8.id = c2.subject_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND n7.gender IN ('f', 'm')"
+20b.sql,9,340237115,0.1,cast_info|name|person_info|info_type|movie_info|title|complete_cast|aka_name|char_name|movie_keyword,10,11b59a2a,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t5 ON t5.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN char_name AS c8 ON c8.id = c0.person_role_id
+JOIN movie_info AS m4 ON m4.movie_id = t5.id
+JOIN movie_keyword AS m9 ON m9.movie_id = t5.id
+JOIN complete_cast AS c6 ON c6.movie_id = t5.id
+JOIN aka_name AS a7 ON a7.person_id = n1.id
+JOIN person_info AS p2 ON p2.person_id = n1.id
+JOIN info_type AS i3 ON i3.id = m4.info_type_id
+WHERE t5.production_year >= 1932 AND t5.production_year <= 1978
+AND n1.gender = 'f'
+AND m4.info_type_id >= 1 AND m4.info_type_id <= 3"
+20c.sql,9,340237115,0.1,cast_info|char_name|title|complete_cast|comp_cast_type|name|aka_name|person_info|movie_link|movie_keyword,10,aaab8a56,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t2 ON t2.id = c0.movie_id
+JOIN name AS n5 ON n5.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN movie_keyword AS m9 ON m9.movie_id = t2.id
+JOIN movie_link AS m8 ON m8.movie_id = t2.id
+JOIN complete_cast AS c3 ON c3.movie_id = t2.id
+JOIN aka_name AS a6 ON a6.person_id = n5.id
+JOIN person_info AS p7 ON p7.person_id = n5.id
+JOIN comp_cast_type AS c4 ON c4.id = c3.subject_id
+WHERE t2.production_year >= 2006 AND t2.production_year <= 2010
+AND n5.gender = 'm'
+AND m9.keyword_id >= 181 AND m9.keyword_id <= 858"
+21a.sql,8,365042328,0.1,movie_info|info_type|person_info|name|cast_info|title|movie_companies|company_type|company_name,9,b87bd6cb,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t5 ON t5.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN cast_info AS c4 ON c4.movie_id = t5.id
+JOIN movie_companies AS m6 ON m6.movie_id = t5.id
+JOIN person_info AS p2 ON p2.info_type_id = i1.id
+JOIN name AS n3 ON n3.id = c4.person_id
+JOIN company_name AS c8 ON c8.id = m6.company_id
+JOIN company_type AS c7 ON c7.id = m6.company_type_id
+WHERE m0.info_type_id >= 7 AND m0.info_type_id <= 8
+AND t5.production_year >= 2010 AND t5.production_year <= 2012
+AND p2.info_type_id >= 17 AND p2.info_type_id <= 20"
+21b.sql,8,365042328,0.1,movie_info|title|movie_link|link_type|movie_keyword|keyword|movie_companies|company_name|company_type,9,acb964b5,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN movie_companies AS m6 ON m6.movie_id = t1.id
+JOIN movie_keyword AS m4 ON m4.movie_id = t1.id
+JOIN movie_link AS m2 ON m2.movie_id = t1.id
+JOIN company_name AS c7 ON c7.id = m6.company_id
+JOIN company_type AS c8 ON c8.id = m6.company_type_id
+JOIN keyword AS k5 ON k5.id = m4.keyword_id
+JOIN link_type AS l3 ON l3.id = m2.link_type_id
+WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 7
+AND t1.production_year >= 1960 AND t1.production_year <= 1992
+AND m4.keyword_id >= 2935 AND m4.keyword_id <= 7670"
+21c.sql,8,365042328,0.1,movie_info|title|movie_info_idx|info_type|person_info|movie_keyword|keyword|name|cast_info,9,86201ed8,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i3 ON i3.id = m0.info_type_id
+JOIN cast_info AS c8 ON c8.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN movie_keyword AS m5 ON m5.movie_id = t1.id
+JOIN person_info AS p4 ON p4.info_type_id = i3.id
+JOIN name AS n7 ON n7.id = c8.person_id
+JOIN keyword AS k6 ON k6.id = m5.keyword_id
+WHERE m0.info_type_id >= 2 AND m0.info_type_id <= 8
+AND t1.production_year >= 1999 AND t1.production_year <= 2010
+AND c8.role_id >= 1 AND c8.role_id <= 2"
+22a.sql,10,375962937,0.1,movie_info|title|movie_keyword|keyword|info_type|movie_info_idx|person_info|name|cast_info|char_name|kind_type,11,986af6e4,timeout,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i4 ON i4.id = m0.info_type_id
+JOIN cast_info AS c8 ON c8.movie_id = t1.id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t1.id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN kind_type AS k10 ON k10.id = t1.kind_id
+JOIN person_info AS p6 ON p6.info_type_id = i4.id
+JOIN name AS n7 ON n7.id = c8.person_id
+JOIN char_name AS c9 ON c9.id = c8.person_role_id
+JOIN keyword AS k3 ON k3.id = m2.keyword_id
+WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 98
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND c8.role_id >= 1 AND c8.role_id <= 10"
+22b.sql,10,375962937,0.1,movie_info|title|kind_type|aka_title|movie_keyword|keyword|movie_info_idx|info_type|movie_companies|company_type|cast_info,11,5dd32397,timeout,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i7 ON i7.id = m0.info_type_id
+JOIN cast_info AS c10 ON c10.movie_id = t1.id
+JOIN aka_title AS a3 ON a3.movie_id = t1.id
+JOIN movie_companies AS m8 ON m8.movie_id = t1.id
+JOIN movie_info_idx AS m6 ON m6.movie_id = t1.id
+JOIN movie_keyword AS m4 ON m4.movie_id = t1.id
+JOIN kind_type AS k2 ON k2.id = t1.kind_id
+JOIN company_type AS c9 ON c9.id = m8.company_type_id
+JOIN keyword AS k5 ON k5.id = m4.keyword_id
+WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 98
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND c10.role_id >= 1 AND c10.role_id <= 10"
+22c.sql,10,375962937,0.1,movie_info|info_type|movie_info_idx|title|movie_companies|company_name|kind_type|aka_title|company_type|movie_keyword|keyword,11,4973adf3,timeout,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t3 ON t3.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN aka_title AS a7 ON a7.movie_id = t3.id
+JOIN movie_companies AS m4 ON m4.movie_id = t3.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
+JOIN movie_keyword AS m9 ON m9.movie_id = t3.id
+JOIN kind_type AS k6 ON k6.id = t3.kind_id
+JOIN company_name AS c5 ON c5.id = m4.company_id
+JOIN company_type AS c8 ON c8.id = m4.company_type_id
+JOIN keyword AS k10 ON k10.id = m9.keyword_id
+WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 98
+AND t3.production_year >= 1932 AND t3.production_year <= 2012
+AND m4.company_type_id >= 1 AND m4.company_type_id <= 2"
+22d.sql,10,375962937,0.1,movie_info|title|info_type|movie_info_idx|person_info|name|aka_name|cast_info|role_type|kind_type|aka_title,11,96653853,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i2 ON i2.id = m0.info_type_id
+JOIN cast_info AS c7 ON c7.movie_id = t1.id
+JOIN aka_title AS a10 ON a10.movie_id = t1.id
+JOIN movie_info_idx AS m3 ON m3.movie_id = t1.id
+JOIN kind_type AS k9 ON k9.id = t1.kind_id
+JOIN person_info AS p4 ON p4.info_type_id = i2.id
+JOIN name AS n5 ON n5.id = c7.person_id
+JOIN role_type AS r8 ON r8.id = c7.role_id
+JOIN aka_name AS a6 ON a6.person_id = n5.id
+WHERE m0.info_type_id >= 8 AND m0.info_type_id <= 13
+AND t1.production_year >= 2003 AND t1.production_year <= 2006
+AND c7.role_id >= 4 AND c7.role_id <= 10"
+23a.sql,10,365463009,0.1,movie_info|title|movie_companies|company_type|kind_type|aka_title|complete_cast|comp_cast_type|cast_info|name|aka_name,11,e7555d51,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN cast_info AS c8 ON c8.movie_id = t1.id
+JOIN aka_title AS a5 ON a5.movie_id = t1.id
+JOIN movie_companies AS m2 ON m2.movie_id = t1.id
+JOIN complete_cast AS c6 ON c6.movie_id = t1.id
+JOIN kind_type AS k4 ON k4.id = t1.kind_id
+JOIN name AS n9 ON n9.id = c8.person_id
+JOIN company_type AS c3 ON c3.id = m2.company_type_id
+JOIN comp_cast_type AS c7 ON c7.id = c6.subject_id
+JOIN aka_name AS a10 ON a10.person_id = n9.id
+WHERE m0.info_type_id >= 16 AND m0.info_type_id <= 18
+AND t1.production_year >= 1978 AND t1.production_year <= 1992
+AND c8.role_id >= 4 AND c8.role_id <= 10"
+23b.sql,10,365463009,0.1,movie_info|info_type|movie_info_idx|title|movie_companies|company_type|company_name|movie_keyword|complete_cast|comp_cast_type|keyword,11,10fcaf53,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t3 ON t3.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN movie_companies AS m4 ON m4.movie_id = t3.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
+JOIN movie_keyword AS m7 ON m7.movie_id = t3.id
+JOIN complete_cast AS c8 ON c8.movie_id = t3.id
+JOIN company_name AS c6 ON c6.id = m4.company_id
+JOIN company_type AS c5 ON c5.id = m4.company_type_id
+JOIN keyword AS k10 ON k10.id = m7.keyword_id
+JOIN comp_cast_type AS c9 ON c9.id = c8.subject_id
+WHERE m0.info_type_id >= 7 AND m0.info_type_id <= 8
+AND t3.production_year >= 1978 AND t3.production_year <= 1992
+AND m7.keyword_id >= 12374 AND m7.keyword_id <= 39136"
+23c.sql,10,365463009,0.1,movie_info|info_type|movie_info_idx|title|kind_type|aka_title|person_info|name|aka_name|movie_link|cast_info,11,464cf138,timeout,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t3 ON t3.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN cast_info AS c10 ON c10.movie_id = t3.id
+JOIN aka_title AS a5 ON a5.movie_id = t3.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
+JOIN movie_link AS m9 ON m9.movie_id = t3.id
+JOIN kind_type AS k4 ON k4.id = t3.kind_id
+JOIN person_info AS p6 ON p6.info_type_id = i1.id
+JOIN name AS n7 ON n7.id = c10.person_id
+JOIN aka_name AS a8 ON a8.person_id = n7.id
+WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 98
+AND t3.production_year >= 1932 AND t3.production_year <= 2012
+AND c10.role_id >= 1 AND c10.role_id <= 10"
+24a.sql,11,670450630,0.1,cast_info|role_type|char_name|name|aka_name|title|movie_keyword|keyword|person_info|info_type|movie_companies|company_name,12,c29a0f6c,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t5 ON t5.id = c0.movie_id
+JOIN name AS n3 ON n3.id = c0.person_id
+JOIN char_name AS c2 ON c2.id = c0.person_role_id
+JOIN role_type AS r1 ON r1.id = c0.role_id
+JOIN movie_companies AS m10 ON m10.movie_id = t5.id
+JOIN movie_keyword AS m6 ON m6.movie_id = t5.id
+JOIN aka_name AS a4 ON a4.person_id = n3.id
+JOIN person_info AS p8 ON p8.person_id = n3.id
+JOIN company_name AS c11 ON c11.id = m10.company_id
+JOIN keyword AS k7 ON k7.id = m6.keyword_id
+JOIN info_type AS i9 ON i9.id = p8.info_type_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 3
+AND t5.production_year >= 1992 AND t5.production_year <= 1999
+AND n3.gender = 'm'"
+24b.sql,11,670450630,0.1,cast_info|char_name|role_type|name|aka_name|person_info|info_type|title|movie_info|movie_companies|company_name|complete_cast,12,62c816a6,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t7 ON t7.id = c0.movie_id
+JOIN name AS n3 ON n3.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN role_type AS r2 ON r2.id = c0.role_id
+JOIN movie_companies AS m9 ON m9.movie_id = t7.id
+JOIN movie_info AS m8 ON m8.movie_id = t7.id
+JOIN complete_cast AS c11 ON c11.movie_id = t7.id
+JOIN aka_name AS a4 ON a4.person_id = n3.id
+JOIN person_info AS p5 ON p5.person_id = n3.id
+JOIN company_name AS c10 ON c10.id = m9.company_id
+JOIN info_type AS i6 ON i6.id = m8.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t7.production_year >= 1932 AND t7.production_year <= 2012
+AND n3.gender IN ('m', 'f')"
+25a.sql,8,616048378,0.1,cast_info|char_name|title|movie_keyword|keyword|movie_info_idx|info_type|person_info|name,9,d1de0acf,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t2 ON t2.id = c0.movie_id
+JOIN name AS n8 ON n8.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t2.id
+JOIN movie_keyword AS m3 ON m3.movie_id = t2.id
+JOIN person_info AS p7 ON p7.person_id = n8.id
+JOIN info_type AS i6 ON i6.id = m5.info_type_id
+JOIN keyword AS k4 ON k4.id = m3.keyword_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 3
+AND t2.production_year >= 2008 AND t2.production_year <= 2010
+AND n8.gender = 'f'"
+25b.sql,8,616048378,0.1,cast_info|title|movie_info_idx|name|person_info|info_type|movie_info|movie_keyword|keyword,9,5c46c3ff,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n3 ON n3.id = c0.person_id
+JOIN movie_info AS m6 ON m6.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN movie_keyword AS m7 ON m7.movie_id = t1.id
+JOIN person_info AS p4 ON p4.person_id = n3.id
+JOIN info_type AS i5 ON i5.id = m6.info_type_id
+JOIN keyword AS k8 ON k8.id = m7.keyword_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND n3.gender IN ('m', 'f')"
+25c.sql,8,616048378,0.1,cast_info|title|movie_info_idx|info_type|movie_info|person_info|name|aka_name|movie_keyword,9,f2b73d5b,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n6 ON n6.id = c0.person_id
+JOIN movie_info AS m4 ON m4.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN movie_keyword AS m8 ON m8.movie_id = t1.id
+JOIN aka_name AS a7 ON a7.person_id = n6.id
+JOIN person_info AS p5 ON p5.person_id = n6.id
+JOIN info_type AS i3 ON i3.id = m4.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND n6.gender IN ('f', 'm')"
+26a.sql,11,351277734,0.1,cast_info|title|movie_info_idx|info_type|movie_info|person_info|char_name|name|movie_keyword|keyword|kind_type|aka_title,12,b210fec4,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n7 ON n7.id = c0.person_id
+JOIN char_name AS c6 ON c6.id = c0.person_role_id
+JOIN aka_title AS a11 ON a11.movie_id = t1.id
+JOIN movie_info AS m4 ON m4.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN movie_keyword AS m8 ON m8.movie_id = t1.id
+JOIN kind_type AS k10 ON k10.id = t1.kind_id
+JOIN person_info AS p5 ON p5.person_id = n7.id
+JOIN info_type AS i3 ON i3.id = m4.info_type_id
+JOIN keyword AS k9 ON k9.id = m8.keyword_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND n7.gender IN ('f', 'm')"
+26b.sql,11,351277734,0.1,cast_info|name|aka_name|person_info|info_type|movie_info|title|movie_keyword|keyword|aka_title|kind_type|movie_info_idx,12,aebc6d3a,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t6 ON t6.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN aka_title AS a9 ON a9.movie_id = t6.id
+JOIN movie_info AS m5 ON m5.movie_id = t6.id
+JOIN movie_info_idx AS m11 ON m11.movie_id = t6.id
+JOIN movie_keyword AS m7 ON m7.movie_id = t6.id
+JOIN kind_type AS k10 ON k10.id = t6.kind_id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN person_info AS p3 ON p3.person_id = n1.id
+JOIN info_type AS i4 ON i4.id = m5.info_type_id
+JOIN keyword AS k8 ON k8.id = m7.keyword_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t6.production_year >= 1932 AND t6.production_year <= 2012
+AND n1.gender IN ('f', 'm')"
+26c.sql,11,351277734,0.1,cast_info|char_name|name|title|kind_type|aka_title|movie_companies|aka_name|person_info|info_type|movie_info_idx|movie_info,12,4b472ca6,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t3 ON t3.id = c0.movie_id
+JOIN name AS n2 ON n2.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN aka_title AS a5 ON a5.movie_id = t3.id
+JOIN movie_companies AS m6 ON m6.movie_id = t3.id
+JOIN movie_info AS m11 ON m11.movie_id = t3.id
+JOIN movie_info_idx AS m10 ON m10.movie_id = t3.id
+JOIN kind_type AS k4 ON k4.id = t3.kind_id
+JOIN aka_name AS a7 ON a7.person_id = n2.id
+JOIN person_info AS p8 ON p8.person_id = n2.id
+JOIN info_type AS i9 ON i9.id = m11.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t3.production_year >= 1932 AND t3.production_year <= 2012
+AND n2.gender IN ('f', 'm')"
+27a.sql,11,365582680,0.1,movie_info|title|movie_keyword|keyword|movie_companies|company_name|movie_link|link_type|info_type|person_info|name|cast_info,12,4aaa5750,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i8 ON i8.id = m0.info_type_id
+JOIN cast_info AS c11 ON c11.movie_id = t1.id
+JOIN movie_companies AS m4 ON m4.movie_id = t1.id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN movie_link AS m6 ON m6.movie_id = t1.id
+JOIN person_info AS p9 ON p9.info_type_id = i8.id
+JOIN name AS n10 ON n10.id = c11.person_id
+JOIN company_name AS c5 ON c5.id = m4.company_id
+JOIN keyword AS k3 ON k3.id = m2.keyword_id
+JOIN link_type AS l7 ON l7.id = m6.link_type_id
+WHERE m0.info_type_id >= 4 AND m0.info_type_id <= 7
+AND t1.production_year >= 1992 AND t1.production_year <= 1999
+AND c11.role_id >= 2 AND c11.role_id <= 3"
+27b.sql,11,365582680,0.1,movie_info|title|movie_companies|company_type|info_type|movie_keyword|keyword|movie_link|link_type|company_name|movie_info_idx|person_info,12,e49d252e,timeout,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i4 ON i4.id = m0.info_type_id
+JOIN movie_companies AS m2 ON m2.movie_id = t1.id
+JOIN movie_info_idx AS m10 ON m10.movie_id = t1.id
+JOIN movie_keyword AS m5 ON m5.movie_id = t1.id
+JOIN movie_link AS m7 ON m7.movie_id = t1.id
+JOIN person_info AS p11 ON p11.info_type_id = i4.id
+JOIN company_name AS c9 ON c9.id = m2.company_id
+JOIN company_type AS c3 ON c3.id = m2.company_type_id
+JOIN keyword AS k6 ON k6.id = m5.keyword_id
+JOIN link_type AS l8 ON l8.id = m7.link_type_id
+WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 98
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND m2.company_type_id >= 1 AND m2.company_type_id <= 2"
+27c.sql,11,365582680,0.1,movie_info|title|movie_link|link_type|movie_keyword|movie_companies|company_name|complete_cast|keyword|cast_info|company_type|comp_cast_type,12,d88071c6,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN cast_info AS c9 ON c9.movie_id = t1.id
+JOIN movie_companies AS m5 ON m5.movie_id = t1.id
+JOIN movie_keyword AS m4 ON m4.movie_id = t1.id
+JOIN movie_link AS m2 ON m2.movie_id = t1.id
+JOIN complete_cast AS c7 ON c7.movie_id = t1.id
+JOIN company_name AS c6 ON c6.id = m5.company_id
+JOIN company_type AS c10 ON c10.id = m5.company_type_id
+JOIN keyword AS k8 ON k8.id = m4.keyword_id
+JOIN link_type AS l3 ON l3.id = m2.link_type_id
+JOIN comp_cast_type AS c11 ON c11.id = c7.subject_id
+WHERE m0.info_type_id >= 8 AND m0.info_type_id <= 16
+AND t1.production_year >= 2006 AND t1.production_year <= 2008
+AND m4.keyword_id >= 4703 AND m4.keyword_id <= 12374"
+28a.sql,13,376503289,0.1,movie_info|title|complete_cast|comp_cast_type|info_type|movie_info_idx|kind_type|aka_title|movie_companies|company_type|company_name|person_info|name|cast_info,14,20b94c84,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i4 ON i4.id = m0.info_type_id
+JOIN cast_info AS c13 ON c13.movie_id = t1.id
+JOIN aka_title AS a7 ON a7.movie_id = t1.id
+JOIN movie_companies AS m8 ON m8.movie_id = t1.id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t1.id
+JOIN complete_cast AS c2 ON c2.movie_id = t1.id
+JOIN kind_type AS k6 ON k6.id = t1.kind_id
+JOIN person_info AS p11 ON p11.info_type_id = i4.id
+JOIN name AS n12 ON n12.id = c13.person_id
+JOIN company_name AS c10 ON c10.id = m8.company_id
+JOIN company_type AS c9 ON c9.id = m8.company_type_id
+JOIN comp_cast_type AS c3 ON c3.id = c2.subject_id
+WHERE m0.info_type_id >= 8 AND m0.info_type_id <= 13
+AND t1.production_year >= 1992 AND t1.production_year <= 2003
+AND c13.role_id >= 2 AND c13.role_id <= 4"
+28b.sql,13,376503289,0.1,movie_info|title|movie_info_idx|info_type|person_info|name|cast_info|char_name|aka_name|role_type|aka_title|kind_type|movie_keyword|keyword,14,efbc6bb1,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i3 ON i3.id = m0.info_type_id
+JOIN cast_info AS c6 ON c6.movie_id = t1.id
+JOIN aka_title AS a10 ON a10.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN movie_keyword AS m12 ON m12.movie_id = t1.id
+JOIN kind_type AS k11 ON k11.id = t1.kind_id
+JOIN person_info AS p4 ON p4.info_type_id = i3.id
+JOIN name AS n5 ON n5.id = c6.person_id
+JOIN char_name AS c7 ON c7.id = c6.person_role_id
+JOIN role_type AS r9 ON r9.id = c6.role_id
+JOIN keyword AS k13 ON k13.id = m12.keyword_id
+JOIN aka_name AS a8 ON a8.person_id = n5.id
+WHERE m0.info_type_id >= 4 AND m0.info_type_id <= 7
+AND t1.production_year >= 2003 AND t1.production_year <= 2006
+AND m2.info_type_id >= 99 AND m2.info_type_id <= 100"
+28c.sql,13,376503289,0.1,movie_info|title|complete_cast|comp_cast_type|info_type|movie_info_idx|person_info|name|cast_info|char_name|role_type|aka_name|movie_companies|company_name,14,b185d4c3,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i4 ON i4.id = m0.info_type_id
+JOIN cast_info AS c8 ON c8.movie_id = t1.id
+JOIN movie_companies AS m12 ON m12.movie_id = t1.id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t1.id
+JOIN complete_cast AS c2 ON c2.movie_id = t1.id
+JOIN person_info AS p6 ON p6.info_type_id = i4.id
+JOIN name AS n7 ON n7.id = c8.person_id
+JOIN char_name AS c9 ON c9.id = c8.person_role_id
+JOIN role_type AS r10 ON r10.id = c8.role_id
+JOIN company_name AS c13 ON c13.id = m12.company_id
+JOIN comp_cast_type AS c3 ON c3.id = c2.subject_id
+JOIN aka_name AS a11 ON a11.person_id = n7.id
+WHERE m0.info_type_id >= 2 AND m0.info_type_id <= 4
+AND t1.production_year >= 2008 AND t1.production_year <= 2010
+AND c8.role_id >= 1 AND c8.role_id <= 2"
+29a.sql,16,745082582,0.1,cast_info|name|aka_name|person_info|info_type|movie_info|title|char_name|complete_cast|comp_cast_type|role_type|movie_keyword|keyword|movie_info_idx|movie_link|link_type|movie_companies,17,311fa67d,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t6 ON t6.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN char_name AS c7 ON c7.id = c0.person_role_id
+JOIN role_type AS r10 ON r10.id = c0.role_id
+JOIN movie_companies AS m16 ON m16.movie_id = t6.id
+JOIN movie_info AS m5 ON m5.movie_id = t6.id
+JOIN movie_info_idx AS m13 ON m13.movie_id = t6.id
+JOIN movie_keyword AS m11 ON m11.movie_id = t6.id
+JOIN movie_link AS m14 ON m14.movie_id = t6.id
+JOIN complete_cast AS c8 ON c8.movie_id = t6.id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN person_info AS p3 ON p3.person_id = n1.id
+JOIN info_type AS i4 ON i4.id = m5.info_type_id
+JOIN keyword AS k12 ON k12.id = m11.keyword_id
+JOIN link_type AS l15 ON l15.id = m14.link_type_id
+JOIN comp_cast_type AS c9 ON c9.id = c8.subject_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 4
+AND t6.production_year >= 1932 AND t6.production_year <= 1978
+AND n1.gender = 'm'"
+29b.sql,16,745082582,0.1,cast_info|char_name|role_type|name|aka_name|title|movie_keyword|keyword|person_info|info_type|movie_companies|company_name|company_type|aka_title|kind_type|movie_info_idx|complete_cast,17,e2059c09,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t5 ON t5.id = c0.movie_id
+JOIN name AS n3 ON n3.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN role_type AS r2 ON r2.id = c0.role_id
+JOIN aka_title AS a13 ON a13.movie_id = t5.id
+JOIN movie_companies AS m10 ON m10.movie_id = t5.id
+JOIN movie_info_idx AS m15 ON m15.movie_id = t5.id
+JOIN movie_keyword AS m6 ON m6.movie_id = t5.id
+JOIN complete_cast AS c16 ON c16.movie_id = t5.id
+JOIN kind_type AS k14 ON k14.id = t5.kind_id
+JOIN aka_name AS a4 ON a4.person_id = n3.id
+JOIN person_info AS p8 ON p8.person_id = n3.id
+JOIN company_name AS c11 ON c11.id = m10.company_id
+JOIN company_type AS c12 ON c12.id = m10.company_type_id
+JOIN info_type AS i9 ON i9.id = m15.info_type_id
+JOIN keyword AS k7 ON k7.id = m6.keyword_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t5.production_year >= 1932 AND t5.production_year <= 2012
+AND n3.gender IN ('f', 'm')"
+29c.sql,16,745082582,0.1,cast_info|role_type|name|char_name|title|person_info|info_type|movie_info_idx|movie_info|aka_name|movie_companies|company_name|company_type|complete_cast|comp_cast_type|movie_keyword|keyword,17,1c627bbe,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t4 ON t4.id = c0.movie_id
+JOIN name AS n2 ON n2.id = c0.person_id
+JOIN char_name AS c3 ON c3.id = c0.person_role_id
+JOIN role_type AS r1 ON r1.id = c0.role_id
+JOIN movie_companies AS m10 ON m10.movie_id = t4.id
+JOIN movie_info AS m8 ON m8.movie_id = t4.id
+JOIN movie_info_idx AS m7 ON m7.movie_id = t4.id
+JOIN movie_keyword AS m15 ON m15.movie_id = t4.id
+JOIN complete_cast AS c13 ON c13.movie_id = t4.id
+JOIN aka_name AS a9 ON a9.person_id = n2.id
+JOIN person_info AS p5 ON p5.person_id = n2.id
+JOIN company_name AS c11 ON c11.id = m10.company_id
+JOIN company_type AS c12 ON c12.id = m10.company_type_id
+JOIN info_type AS i6 ON i6.id = m8.info_type_id
+JOIN keyword AS k16 ON k16.id = m15.keyword_id
+JOIN comp_cast_type AS c14 ON c14.id = c13.subject_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t4.production_year >= 1932 AND t4.production_year <= 2012
+AND n2.gender IN ('f', 'm')"
+2a.sql,4,68207896,0.1,movie_keyword|title|keyword|movie_companies|company_name,5,2ceab5a3,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN keyword AS k2 ON k2.id = m0.keyword_id
+JOIN movie_companies AS m3 ON m3.movie_id = t1.id
+JOIN company_name AS c4 ON c4.id = m3.company_id
+WHERE m0.keyword_id >= 20373 AND m0.keyword_id <= 63880
+AND t1.production_year >= 1999 AND t1.production_year <= 2006
+AND k2.phonetic_code LIKE 'Z%'"
+2b.sql,4,68207896,0.1,movie_keyword|keyword|title|movie_info|info_type,5,677528d1,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t2 ON t2.id = m0.movie_id
+JOIN keyword AS k1 ON k1.id = m0.keyword_id
+JOIN movie_info AS m3 ON m3.movie_id = t2.id
+JOIN info_type AS i4 ON i4.id = m3.info_type_id
+WHERE m0.keyword_id >= 7670 AND m0.keyword_id <= 12374
+AND t2.production_year >= 1992 AND t2.production_year <= 1999
+AND k1.phonetic_code LIKE 'N%'"
+2c.sql,4,68207896,0.1,movie_keyword|title|movie_companies|company_name|company_type,5,132ba551,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN movie_companies AS m2 ON m2.movie_id = t1.id
+JOIN company_name AS c3 ON c3.id = m2.company_id
+JOIN company_type AS c4 ON c4.id = m2.company_type_id
+WHERE m0.keyword_id >= 12374 AND m0.keyword_id <= 20373
+AND t1.production_year >= 1999 AND t1.production_year <= 2003
+AND c3.country_code IN ('[jm]', '[do]', '[zw]', '[tt]', '[dm]', '[ir]', '[za]', '[hu]', '[um]', '[bg]', '[lb]', '[mv]', '[pm]', '[tw]', '[ma]', '[np]', '[am]', '[gb]', '[ec]', '[sz]', '[er]', '[kh]', '[sm]', '[bh]', '[tj]', '[nr]', '[tl]', '[mk]', '[kz]', '[my]')"
+2d.sql,4,68207896,0.1,movie_keyword|keyword|title|movie_companies|company_name,5,4c10727e,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t2 ON t2.id = m0.movie_id
+JOIN keyword AS k1 ON k1.id = m0.keyword_id
+JOIN movie_companies AS m3 ON m3.movie_id = t2.id
+JOIN company_name AS c4 ON c4.id = m3.company_id
+WHERE m0.keyword_id >= 1768 AND m0.keyword_id <= 4703
+AND t2.production_year >= 2006 AND t2.production_year <= 2008
+AND k1.phonetic_code LIKE 'S%'"
+30a.sql,11,616588730,0.1,cast_info|char_name|name|aka_name|person_info|info_type|movie_info|title|movie_keyword|keyword|movie_info_idx|complete_cast,12,8e60ca51,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t7 ON t7.id = c0.movie_id
+JOIN name AS n2 ON n2.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN movie_info AS m6 ON m6.movie_id = t7.id
+JOIN movie_info_idx AS m10 ON m10.movie_id = t7.id
+JOIN movie_keyword AS m8 ON m8.movie_id = t7.id
+JOIN complete_cast AS c11 ON c11.movie_id = t7.id
+JOIN aka_name AS a3 ON a3.person_id = n2.id
+JOIN person_info AS p4 ON p4.person_id = n2.id
+JOIN info_type AS i5 ON i5.id = m6.info_type_id
+JOIN keyword AS k9 ON k9.id = m8.keyword_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 8
+AND t7.production_year >= 2003 AND t7.production_year <= 2012
+AND n2.gender = 'm'"
+30b.sql,11,616588730,0.1,cast_info|title|movie_info_idx|movie_info|info_type|name|person_info|aka_name|complete_cast|comp_cast_type|char_name|role_type,12,1a6a0fb1,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n5 ON n5.id = c0.person_id
+JOIN char_name AS c10 ON c10.id = c0.person_role_id
+JOIN role_type AS r11 ON r11.id = c0.role_id
+JOIN movie_info AS m3 ON m3.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN complete_cast AS c8 ON c8.movie_id = t1.id
+JOIN aka_name AS a7 ON a7.person_id = n5.id
+JOIN person_info AS p6 ON p6.person_id = n5.id
+JOIN info_type AS i4 ON i4.id = m3.info_type_id
+JOIN comp_cast_type AS c9 ON c9.id = c8.subject_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 3
+AND t1.production_year >= 2003 AND t1.production_year <= 2008
+AND n5.gender = 'm'"
+30c.sql,11,616588730,0.1,cast_info|title|movie_info_idx|info_type|person_info|name|aka_name|char_name|movie_info|role_type|complete_cast|comp_cast_type,12,014a2d1c,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n5 ON n5.id = c0.person_id
+JOIN char_name AS c7 ON c7.id = c0.person_role_id
+JOIN role_type AS r9 ON r9.id = c0.role_id
+JOIN movie_info AS m8 ON m8.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN complete_cast AS c10 ON c10.movie_id = t1.id
+JOIN aka_name AS a6 ON a6.person_id = n5.id
+JOIN person_info AS p4 ON p4.person_id = n5.id
+JOIN info_type AS i3 ON i3.id = m8.info_type_id
+JOIN comp_cast_type AS c11 ON c11.id = c10.subject_id
+WHERE c0.role_id >= 3 AND c0.role_id <= 4
+AND t1.production_year >= 1999 AND t1.production_year <= 2006
+AND n5.gender = 'm'"
+31a.sql,10,639271380,0.1,cast_info|title|name|person_info|info_type|movie_info|movie_companies|company_name|movie_info_idx|role_type|char_name,11,a9dacb50,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n2 ON n2.id = c0.person_id
+JOIN char_name AS c10 ON c10.id = c0.person_role_id
+JOIN role_type AS r9 ON r9.id = c0.role_id
+JOIN movie_companies AS m6 ON m6.movie_id = t1.id
+JOIN movie_info AS m5 ON m5.movie_id = t1.id
+JOIN movie_info_idx AS m8 ON m8.movie_id = t1.id
+JOIN person_info AS p3 ON p3.person_id = n2.id
+JOIN company_name AS c7 ON c7.id = m6.company_id
+JOIN info_type AS i4 ON i4.id = m5.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t1.production_year >= 1932 AND t1.production_year <= 2012
+AND n2.gender IN ('f', 'm')"
+31b.sql,10,639271380,0.1,cast_info|char_name|name|aka_name|person_info|title|movie_keyword|info_type|movie_info_idx|aka_title|kind_type,11,c91bde9b,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t5 ON t5.id = c0.movie_id
+JOIN name AS n2 ON n2.id = c0.person_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN aka_title AS a9 ON a9.movie_id = t5.id
+JOIN movie_info_idx AS m8 ON m8.movie_id = t5.id
+JOIN movie_keyword AS m6 ON m6.movie_id = t5.id
+JOIN kind_type AS k10 ON k10.id = t5.kind_id
+JOIN aka_name AS a3 ON a3.person_id = n2.id
+JOIN person_info AS p4 ON p4.person_id = n2.id
+JOIN info_type AS i7 ON i7.id = m8.info_type_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 3
+AND t5.production_year >= 1999 AND t5.production_year <= 2003
+AND n2.gender = 'm'"
+31c.sql,10,639271380,0.1,cast_info|name|aka_name|title|movie_info|info_type|movie_info_idx|person_info|complete_cast|comp_cast_type|char_name,11,fd1339b9,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t3 ON t3.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN char_name AS c10 ON c10.id = c0.person_role_id
+JOIN movie_info AS m4 ON m4.movie_id = t3.id
+JOIN movie_info_idx AS m6 ON m6.movie_id = t3.id
+JOIN complete_cast AS c8 ON c8.movie_id = t3.id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN person_info AS p7 ON p7.person_id = n1.id
+JOIN info_type AS i5 ON i5.id = m4.info_type_id
+JOIN comp_cast_type AS c9 ON c9.id = c8.subject_id
+WHERE c0.role_id >= 3 AND c0.role_id <= 4
+AND t3.production_year >= 1978 AND t3.production_year <= 1992
+AND n1.gender = 'f'"
+32a.sql,5,45104918,0.1,movie_keyword|title|movie_link|link_type|complete_cast|comp_cast_type,6,ac4f76e2,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN movie_link AS m2 ON m2.movie_id = t1.id
+JOIN complete_cast AS c4 ON c4.movie_id = t1.id
+JOIN link_type AS l3 ON l3.id = m2.link_type_id
+JOIN comp_cast_type AS c5 ON c5.id = c4.subject_id
+WHERE m0.keyword_id >= 858 AND m0.keyword_id <= 2935
+AND t1.production_year >= 2006 AND t1.production_year <= 2010"
+32b.sql,5,45104918,0.1,movie_keyword|title|movie_link|link_type|kind_type|aka_title,6,633db6e7,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN aka_title AS a5 ON a5.movie_id = t1.id
+JOIN movie_link AS m2 ON m2.movie_id = t1.id
+JOIN kind_type AS k4 ON k4.id = t1.kind_id
+JOIN link_type AS l3 ON l3.id = m2.link_type_id
+WHERE m0.keyword_id >= 1768 AND m0.keyword_id <= 2935
+AND t1.production_year >= 1978 AND t1.production_year <= 1992"
+33a.sql,13,64723403,0.1,movie_companies|title|movie_info_idx|info_type|company_name|movie_info|kind_type|movie_keyword|keyword|company_type|movie_link|link_type|complete_cast|comp_cast_type,14,28d9eb1b,ok,"SELECT MIN(m0.id) AS result
+FROM movie_companies AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN company_name AS c4 ON c4.id = m0.company_id
+JOIN company_type AS c9 ON c9.id = m0.company_type_id
+JOIN movie_info AS m5 ON m5.movie_id = t1.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN movie_keyword AS m7 ON m7.movie_id = t1.id
+JOIN movie_link AS m10 ON m10.movie_id = t1.id
+JOIN complete_cast AS c12 ON c12.movie_id = t1.id
+JOIN kind_type AS k6 ON k6.id = t1.kind_id
+JOIN info_type AS i3 ON i3.id = m5.info_type_id
+JOIN keyword AS k8 ON k8.id = m7.keyword_id
+JOIN link_type AS l11 ON l11.id = m10.link_type_id
+JOIN comp_cast_type AS c13 ON c13.id = c12.subject_id
+WHERE t1.production_year >= 1978 AND t1.production_year <= 1992
+AND c4.country_code IN ('[il]', '[lr]', '[mm]', '[vn]', '[me]', '[mz]', '[ad]', '[om]', '[mo]', '[mv]', '[ro]', '[fi]', '[ru]', '[tj]', '[aw]', '[na]', '[fj]', '[bf]', '[kp]', '[as]', '[kg]', '[dk]', '[bg]', '[se]', '[yucs]', '[hu]', '[sz]', '[az]', '[ag]', '[tk]')
+AND m5.info_type_id >= 16 AND m5.info_type_id <= 18"
+33b.sql,13,64723403,0.1,movie_companies|company_name|title|movie_info_idx|info_type|movie_info|kind_type|aka_title|person_info|movie_link|link_type|company_type|name|aka_name,14,94955b2f,timeout,"SELECT MIN(m0.id) AS result
+FROM movie_companies AS m0
+JOIN title AS t2 ON t2.id = m0.movie_id
+JOIN company_name AS c1 ON c1.id = m0.company_id
+JOIN company_type AS c11 ON c11.id = m0.company_type_id
+JOIN aka_title AS a7 ON a7.movie_id = t2.id
+JOIN movie_info AS m5 ON m5.movie_id = t2.id
+JOIN movie_info_idx AS m3 ON m3.movie_id = t2.id
+JOIN movie_link AS m9 ON m9.movie_id = t2.id
+JOIN kind_type AS k6 ON k6.id = t2.kind_id
+JOIN info_type AS i4 ON i4.id = m5.info_type_id
+JOIN link_type AS l10 ON l10.id = m9.link_type_id
+JOIN person_info AS p8 ON p8.info_type_id = i4.id
+JOIN name AS n12 ON n12.id = p8.person_id
+JOIN aka_name AS a13 ON a13.person_id = n12.id
+WHERE m0.company_type_id >= 1 AND m0.company_type_id <= 2
+AND t2.production_year >= 1932 AND t2.production_year <= 2012
+AND c1.country_code IN ('[al]', '[mx]', '[zw]', '[kp]', '[tk]', '[sj]', '[sr]', '[ec]', '[ma]', '[hu]', '[gh]', '[th]', '[bj]', '[bo]', '[ru]', '[mz]', '[um]', '[pm]', '[kh]', '[jp]', '[mk]', '[fo]', '[si]', '[suhh]', '[se]', '[pe]', '[sn]', '[mm]', '[ie]', '[ai]', '[tv]', '[ly]', '[gg]', '[lr]', '[aw]', '[dk]', '[ph]', '[ag]', '[sz]', '[np]', '[gp]', '[vi]', '[yucs]', '[kg]', '[mo]', '[gb]', '[pt]', '[bg]', '[pl]', '[il]', '[eg]', '[me]', '[tj]', '[to]', '[jm]', '[fi]', '[bl]', '[at]', '[ni]', '[az]', '[za]', '[ng]', '[my]', '[ve]', '[dm]', '[mv]', '[ug]', '[nr]', '[am]', '[tt]', '[do]', '[na]', '[fj]', '[er]', '[bh]', '[ir]', '[ye]', '[co]', '[ro]', '[sm]', '[li]', '[bz]', '[us]', '[hn]', '[vn]', '[gy]', '[im]', '[lt]', '[bf]', '[ao]', '[ad]', '[tl]', '[om]', '[kz]', '[hr]', '[xyu]', '[uz]', '[tw]', '[lb]', '[as]')"
+33c.sql,13,64723403,0.1,movie_companies|title|complete_cast|comp_cast_type|company_name|company_type|kind_type|aka_title|movie_link|link_type|movie_keyword|keyword|movie_info_idx|cast_info,14,19abac21,ok,"SELECT MIN(m0.id) AS result
+FROM movie_companies AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN company_name AS c4 ON c4.id = m0.company_id
+JOIN company_type AS c5 ON c5.id = m0.company_type_id
+JOIN cast_info AS c13 ON c13.movie_id = t1.id
+JOIN aka_title AS a7 ON a7.movie_id = t1.id
+JOIN movie_info_idx AS m12 ON m12.movie_id = t1.id
+JOIN movie_keyword AS m10 ON m10.movie_id = t1.id
+JOIN movie_link AS m8 ON m8.movie_id = t1.id
+JOIN complete_cast AS c2 ON c2.movie_id = t1.id
+JOIN kind_type AS k6 ON k6.id = t1.kind_id
+JOIN keyword AS k11 ON k11.id = m10.keyword_id
+JOIN link_type AS l9 ON l9.id = m8.link_type_id
+JOIN comp_cast_type AS c3 ON c3.id = c2.subject_id
+WHERE t1.production_year >= 2008 AND t1.production_year <= 2011
+AND c4.country_code IN ('[kp]', '[bh]', '[nr]', '[zw]', '[np]', '[lr]', '[tw]', '[bz]', '[om]', '[ye]', '[ao]', '[bj]', '[at]', '[to]', '[bg]', '[lt]', '[hr]', '[tl]', '[vn]', '[gb]', '[um]', '[pe]', '[ru]', '[bo]', '[im]', '[suhh]', '[my]', '[hu]', '[si]', '[me]')
+AND c13.role_id >= 8 AND c13.role_id <= 10"
+3a.sql,3,341699294,0.1,movie_info|title|movie_keyword|keyword,4,35e8beba,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN keyword AS k3 ON k3.id = m2.keyword_id
+WHERE m0.info_type_id >= 8 AND m0.info_type_id <= 13
+AND t1.production_year >= 2006 AND t1.production_year <= 2008
+AND m2.keyword_id >= 4703 AND m2.keyword_id <= 7670"
+3b.sql,3,341699294,0.1,movie_info|title|info_type|movie_info_idx,4,2eed9b47,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN info_type AS i2 ON i2.id = m0.info_type_id
+JOIN movie_info_idx AS m3 ON m3.movie_id = t1.id
+WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 7
+AND t1.production_year >= 1999 AND t1.production_year <= 2003"
+3c.sql,3,341699294,0.1,movie_info|title|movie_keyword|keyword,4,33b1b67b,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN keyword AS k3 ON k3.id = m2.keyword_id
+WHERE m0.info_type_id >= 13 AND m0.info_type_id <= 16
+AND t1.production_year >= 2006 AND t1.production_year <= 2010
+AND m2.keyword_id >= 20373 AND m2.keyword_id <= 63880"
+4a.sql,4,56025513,0.1,movie_keyword|title|movie_info_idx|info_type|person_info,5,dc8ab2b4,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t1 ON t1.id = m0.movie_id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
+JOIN info_type AS i3 ON i3.id = m2.info_type_id
+JOIN person_info AS p4 ON p4.info_type_id = i3.id
+WHERE m0.keyword_id >= 20373 AND m0.keyword_id <= 63880
+AND t1.production_year >= 1999 AND t1.production_year <= 2006
+AND p4.info_type_id >= 25 AND p4.info_type_id <= 26"
+4b.sql,4,56025513,0.1,movie_keyword|keyword|title|movie_info_idx|info_type,5,f8577f41,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t2 ON t2.id = m0.movie_id
+JOIN keyword AS k1 ON k1.id = m0.keyword_id
+JOIN movie_info_idx AS m3 ON m3.movie_id = t2.id
+JOIN info_type AS i4 ON i4.id = m3.info_type_id
+WHERE m0.keyword_id >= 12374 AND m0.keyword_id <= 39136
+AND t2.production_year >= 1978 AND t2.production_year <= 1999
+AND k1.phonetic_code LIKE 'W%'"
+4c.sql,4,56025513,0.1,movie_keyword|keyword|title|movie_info_idx|info_type,5,e1a1eeb1,ok,"SELECT MIN(m0.id) AS result
+FROM movie_keyword AS m0
+JOIN title AS t2 ON t2.id = m0.movie_id
+JOIN keyword AS k1 ON k1.id = m0.keyword_id
+JOIN movie_info_idx AS m3 ON m3.movie_id = t2.id
+JOIN info_type AS i4 ON i4.id = m3.info_type_id
+WHERE m0.keyword_id >= 12374 AND m0.keyword_id <= 20373
+AND t2.production_year >= 1992 AND t2.production_year <= 2003
+AND k1.phonetic_code LIKE 'C%'"
+5a.sql,4,347927523,0.1,movie_info|info_type|person_info|name|aka_name,5,b4ed814e,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN person_info AS p2 ON p2.info_type_id = i1.id
+JOIN name AS n3 ON n3.id = p2.person_id
+JOIN aka_name AS a4 ON a4.person_id = n3.id
+WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 13
+AND p2.info_type_id >= 21 AND p2.info_type_id <= 26
+AND n3.gender = 'f'"
+5b.sql,4,347927523,0.1,movie_info|info_type|movie_info_idx|title|movie_companies,5,442c6c55,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN title AS t3 ON t3.id = m0.movie_id
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN movie_companies AS m4 ON m4.movie_id = t3.id
+JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
+WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 4
+AND t3.production_year >= 1978 AND t3.production_year <= 1999"
+5c.sql,4,347927523,0.1,movie_info|info_type|person_info|name|cast_info,5,16b95648,ok,"SELECT MIN(m0.info) AS result
+FROM movie_info AS m0
+JOIN info_type AS i1 ON i1.id = m0.info_type_id
+JOIN person_info AS p2 ON p2.info_type_id = i1.id
+JOIN name AS n3 ON n3.id = p2.person_id
+JOIN cast_info AS c4 ON c4.person_id = n3.id
+WHERE m0.info_type_id >= 16 AND m0.info_type_id <= 98
+AND p2.info_type_id >= 24 AND p2.info_type_id <= 25
+AND n3.gender = 'f'"
+6a.sql,4,308293359,0.1,cast_info|role_type|char_name|name|person_info,5,df20cbac,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN name AS n3 ON n3.id = c0.person_id
+JOIN char_name AS c2 ON c2.id = c0.person_role_id
+JOIN role_type AS r1 ON r1.id = c0.role_id
+JOIN person_info AS p4 ON p4.person_id = n3.id
+WHERE n3.gender = 'f'"
+6b.sql,4,308293359,0.1,cast_info|title|movie_keyword|keyword|name,5,d7cb4dd1,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n4 ON n4.id = c0.person_id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN keyword AS k3 ON k3.id = m2.keyword_id
+WHERE c0.role_id >= 8 AND c0.role_id <= 10
+AND t1.production_year >= 1992 AND t1.production_year <= 1999
+AND n4.gender = 'm'"
+6c.sql,4,308293359,0.1,cast_info|name|person_info|info_type|movie_info,5,0d4f7269,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN person_info AS p2 ON p2.person_id = n1.id
+JOIN info_type AS i3 ON i3.id = p2.info_type_id
+JOIN movie_info AS m4 ON m4.info_type_id = i3.id
+WHERE c0.role_id >= 4 AND c0.role_id <= 10
+AND n1.gender = 'm'
+AND p2.info_type_id >= 21 AND p2.info_type_id <= 22"
+6d.sql,4,308293359,0.1,cast_info|title|movie_keyword|keyword|movie_companies,5,3e8ec418,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN movie_companies AS m4 ON m4.movie_id = t1.id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN keyword AS k3 ON k3.id = m2.keyword_id
+WHERE t1.production_year >= 1932 AND t1.production_year <= 1978
+AND m2.keyword_id >= 4703 AND m2.keyword_id <= 12374
+AND k3.phonetic_code LIKE 'I%'"
+6e.sql,4,308293359,0.1,cast_info|title|movie_keyword|keyword|name,5,180272b1,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n4 ON n4.id = c0.person_id
+JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
+JOIN keyword AS k3 ON k3.id = m2.keyword_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 2
+AND t1.production_year >= 1978 AND t1.production_year <= 1999
+AND n4.gender = 'm'"
+6f.sql,4,308293359,0.1,cast_info|title|movie_link|link_type|complete_cast,5,410cf058,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN movie_link AS m2 ON m2.movie_id = t1.id
+JOIN complete_cast AS c4 ON c4.movie_id = t1.id
+JOIN link_type AS l3 ON l3.id = m2.link_type_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 3
+AND t1.production_year >= 2003 AND t1.production_year <= 2006"
+7a.sql,7,378676288,0.1,cast_info|role_type|title|movie_link|link_type|kind_type|aka_title|movie_keyword,8,90230c9f,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t2 ON t2.id = c0.movie_id
+JOIN role_type AS r1 ON r1.id = c0.role_id
+JOIN aka_title AS a6 ON a6.movie_id = t2.id
+JOIN movie_keyword AS m7 ON m7.movie_id = t2.id
+JOIN movie_link AS m3 ON m3.movie_id = t2.id
+JOIN kind_type AS k5 ON k5.id = t2.kind_id
+JOIN link_type AS l4 ON l4.id = m3.link_type_id
+WHERE c0.role_id >= 4 AND c0.role_id <= 10
+AND t2.production_year >= 1999 AND t2.production_year <= 2003
+AND m7.keyword_id >= 858 AND m7.keyword_id <= 2935"
+7b.sql,7,378676288,0.1,cast_info|name|title|movie_keyword|keyword|role_type|movie_link|char_name,8,ffc2bf47,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t2 ON t2.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN char_name AS c7 ON c7.id = c0.person_role_id
+JOIN role_type AS r5 ON r5.id = c0.role_id
+JOIN movie_keyword AS m3 ON m3.movie_id = t2.id
+JOIN movie_link AS m6 ON m6.movie_id = t2.id
+JOIN keyword AS k4 ON k4.id = m3.keyword_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 2
+AND t2.production_year >= 2006 AND t2.production_year <= 2008
+AND n1.gender = 'f'"
+7c.sql,7,378676288,0.1,cast_info|title|movie_link|link_type|aka_title|kind_type|char_name|name,8,51747e3a,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t1 ON t1.id = c0.movie_id
+JOIN name AS n7 ON n7.id = c0.person_id
+JOIN char_name AS c6 ON c6.id = c0.person_role_id
+JOIN aka_title AS a4 ON a4.movie_id = t1.id
+JOIN movie_link AS m2 ON m2.movie_id = t1.id
+JOIN kind_type AS k5 ON k5.id = t1.kind_id
+JOIN link_type AS l3 ON l3.id = m2.link_type_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 3
+AND t1.production_year >= 2010 AND t1.production_year <= 2012
+AND n7.gender = 'm'"
+8a.sql,6,327687351,0.1,cast_info|char_name|role_type|title|movie_companies|movie_info_idx|company_name,7,089c8089,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t3 ON t3.id = c0.movie_id
+JOIN char_name AS c1 ON c1.id = c0.person_role_id
+JOIN role_type AS r2 ON r2.id = c0.role_id
+JOIN movie_companies AS m4 ON m4.movie_id = t3.id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t3.id
+JOIN company_name AS c6 ON c6.id = m4.company_id
+WHERE c0.role_id >= 3 AND c0.role_id <= 4
+AND t3.production_year >= 1978 AND t3.production_year <= 1992
+AND m5.info_type_id >= 99 AND m5.info_type_id <= 100"
+8b.sql,6,327687351,0.1,cast_info|name|aka_name|role_type|person_info|info_type|movie_info,7,20ea2c49,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN role_type AS r3 ON r3.id = c0.role_id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN person_info AS p4 ON p4.person_id = n1.id
+JOIN info_type AS i5 ON i5.id = p4.info_type_id
+JOIN movie_info AS m6 ON m6.info_type_id = i5.id
+WHERE c0.role_id >= 2 AND c0.role_id <= 3
+AND n1.gender = 'm'
+AND p4.info_type_id >= 22 AND p4.info_type_id <= 24"
+8c.sql,6,327687351,0.1,cast_info|role_type|title|name|aka_name|char_name|person_info,7,739431b6,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t2 ON t2.id = c0.movie_id
+JOIN name AS n3 ON n3.id = c0.person_id
+JOIN char_name AS c5 ON c5.id = c0.person_role_id
+JOIN role_type AS r1 ON r1.id = c0.role_id
+JOIN aka_name AS a4 ON a4.person_id = n3.id
+JOIN person_info AS p6 ON p6.person_id = n3.id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t2.production_year >= 1932 AND t2.production_year <= 2012
+AND n3.gender IN ('f', 'm')"
+8d.sql,6,327687351,0.1,cast_info|role_type|name|title|movie_companies|company_name|aka_name,7,52fc4c1e,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t3 ON t3.id = c0.movie_id
+JOIN name AS n2 ON n2.id = c0.person_id
+JOIN role_type AS r1 ON r1.id = c0.role_id
+JOIN movie_companies AS m4 ON m4.movie_id = t3.id
+JOIN aka_name AS a6 ON a6.person_id = n2.id
+JOIN company_name AS c5 ON c5.id = m4.company_id
+WHERE c0.role_id >= 8 AND c0.role_id <= 10
+AND t3.production_year >= 1960 AND t3.production_year <= 1992
+AND n2.gender = 'f'"
+9a.sql,7,359090741,0.1,cast_info|name|person_info|info_type|movie_info_idx|title|movie_companies|company_name,8,596a15b3,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t5 ON t5.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN movie_companies AS m6 ON m6.movie_id = t5.id
+JOIN movie_info_idx AS m4 ON m4.movie_id = t5.id
+JOIN person_info AS p2 ON p2.person_id = n1.id
+JOIN company_name AS c7 ON c7.id = m6.company_id
+JOIN info_type AS i3 ON i3.id = m4.info_type_id
+WHERE c0.role_id >= 4 AND c0.role_id <= 10
+AND t5.production_year >= 2003 AND t5.production_year <= 2006
+AND n1.gender = 'm'"
+9b.sql,7,359090741,0.1,cast_info|role_type|title|movie_companies|company_name|name|person_info|aka_title,8,0c7c3f11,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t2 ON t2.id = c0.movie_id
+JOIN name AS n5 ON n5.id = c0.person_id
+JOIN role_type AS r1 ON r1.id = c0.role_id
+JOIN aka_title AS a7 ON a7.movie_id = t2.id
+JOIN movie_companies AS m3 ON m3.movie_id = t2.id
+JOIN person_info AS p6 ON p6.person_id = n5.id
+JOIN company_name AS c4 ON c4.id = m3.company_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t2.production_year >= 1932 AND t2.production_year <= 2012
+AND n5.gender IN ('f', 'm')"
+9c.sql,7,359090741,0.1,cast_info|name|aka_name|person_info|info_type|movie_info_idx|title|aka_title,8,11d4d313,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t6 ON t6.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN aka_title AS a7 ON a7.movie_id = t6.id
+JOIN movie_info_idx AS m5 ON m5.movie_id = t6.id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN person_info AS p3 ON p3.person_id = n1.id
+JOIN info_type AS i4 ON i4.id = m5.info_type_id
+WHERE c0.role_id >= 2 AND c0.role_id <= 4
+AND t6.production_year >= 2003 AND t6.production_year <= 2008
+AND n1.gender = 'f'"
+9d.sql,7,359090741,0.1,cast_info|name|aka_name|person_info|info_type|char_name|movie_info_idx|title,8,edbaf28f,timeout,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+JOIN title AS t7 ON t7.id = c0.movie_id
+JOIN name AS n1 ON n1.id = c0.person_id
+JOIN char_name AS c5 ON c5.id = c0.person_role_id
+JOIN movie_info_idx AS m6 ON m6.movie_id = t7.id
+JOIN aka_name AS a2 ON a2.person_id = n1.id
+JOIN person_info AS p3 ON p3.person_id = n1.id
+JOIN info_type AS i4 ON i4.id = m6.info_type_id
+WHERE c0.role_id >= 1 AND c0.role_id <= 10
+AND t7.production_year >= 1932 AND t7.production_year <= 2012
+AND n1.gender IN ('m', 'f')"
+fkindexes.sql,0,0,0.1,cast_info,1,0d71e655,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0"
+schema.sql,0,0,0.1,cast_info,1,01193d6b,ok,"SELECT MIN(c0.id) AS result
+FROM cast_info AS c0
+WHERE c0.role_id >= 1 AND c0.role_id <= 2"

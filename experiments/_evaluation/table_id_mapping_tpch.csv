@@ -1,0 +1,9 @@
+table_id,table_name,row_count
+1,lineitem,6001215
+2,orders,1500000
+3,partsupp,800000
+4,part,200000
+5,customer,150000
+6,supplier,10000
+7,nation,25
+8,region,5

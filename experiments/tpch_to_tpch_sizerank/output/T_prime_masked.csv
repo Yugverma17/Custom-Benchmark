@@ -1,0 +1,38 @@
+query_id,query_hash,num_permanent_tables_accessed,read_table_ids,num_joins,mbytes_scanned,execution_duration_ms,rows_returned,status,error_msg,source_num_joins,source_mbytes_scanned
+q01.sql,bdc6a8cc,1,1,0,108.022,252.03,1,ok,,0,108.022
+q02.sql,e63148b9,5,"1,2,3,4,6",4,136.872,6.73,,error,"Binder Error: Table ""p0"" does not have a column named ""l_quantity""
+
+Candidate bindings: : ""ps_availqty""
+
+LINE 1: SELECT MIN(p0.l_quantity) AS result
+                   ^",4,12.35
+q03.sql,347038df,3,"1,2,5",2,127.222,367.36,1,ok,,2,127.222
+q04.sql,dc86ea11,1,2,0,16.5,16.6,1,ok,,0,16.5
+q05.sql,aceaf3c9,6,"1,2,3,5,6,7",5,136.972,480.53,1,ok,,5,127.372
+q06.sql,70abb366,1,1,0,108.022,26.9,1,ok,,0,108.022
+q07.sql,bf2f5195,8,"1,2,3,4,5,6,7,8",7,139.572,359.5,1,ok,,8,127.246
+q08.sql,8a308cfb,8,"1,2,3,4,5,6,7,8",7,139.572,140.1,1,ok,,9,127.388
+q09.sql,dfe5eb36,8,"1,2,3,4,5,6,7,8",7,139.572,170.62,1,ok,,7,134.288
+q10.sql,2318475d,4,"1,2,4,6",3,127.272,122.16,1,ok,,3,127.222
+q11.sql,28293328,3,"1,3,6",2,117.772,1.16,,error,"Binder Error: Table ""p0"" does not have a column named ""l_quantity""
+
+Candidate bindings: : ""ps_availqty""
+
+LINE 1: SELECT MIN(p0.l_quantity) AS result
+                   ^",2,9.75
+q12.sql,8a71e6e8,2,"1,2",1,124.522,63.8,1,ok,,1,124.522
+q13.sql,3e7c1e01,3,"2,5,7",2,19.2,37.34,1,ok,,2,16.508
+q14.sql,5e3e435b,2,"1,4",1,110.622,57.11,1,ok,,1,110.622
+q15.sql,0242f360,1,1,0,108.022,28.78,1,ok,,0,108.022
+q16.sql,8fa30bd7,2,"3,4",1,12.2,0.99,,error,"Binder Error: Table ""p0"" does not have a column named ""l_quantity""
+
+Candidate bindings: : ""ps_availqty""
+
+LINE 1: SELECT MIN(p0.l_quantity) AS result
+                   ^",1,12.2
+q17.sql,ee419295,2,"1,2",1,124.522,146.23,1,ok,,1,110.622
+q18.sql,14a04e6d,3,"1,2,6",2,124.672,92.58,1,ok,,2,127.222
+q19.sql,acb54fe1,2,"1,6",1,108.172,47.27,1,ok,,1,110.622
+q20.sql,efd3e67c,2,"6,7",1,0.15,2.57,1,ok,,1,0.15
+q21.sql,d8797246,4,"1,3,4,6",3,120.372,83.7,1,ok,,3,124.672
+q22.sql,e36cd18e,2,"1,6",1,108.172,47.89,1,ok,,1,0.008

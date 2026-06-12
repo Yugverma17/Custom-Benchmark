@@ -1,0 +1,38 @@
+query_file,query_hash,join_count,read_tables,n_tables,bytes_read,runtime_ms,rows_returned,status,error_msg,src_join_count,src_bytes_read
+q01.sql,bdc6a8cc,0,lineitem,1,108021870,252.03,1,ok,,0,108021870
+q02.sql,e63148b9,4,part|supplier|lineitem|orders|partsupp,5,136871870,6.73,,error,"Binder Error: Table ""p0"" does not have a column named ""l_quantity""
+
+Candidate bindings: : ""ps_availqty""
+
+LINE 1: SELECT MIN(p0.l_quantity) AS result
+                   ^",4,12350145
+q03.sql,347038df,2,orders|customer|lineitem,3,127221870,367.36,1,ok,,2,127221870
+q04.sql,dc86ea11,0,orders,1,16500000,16.6,1,ok,,0,16500000
+q05.sql,aceaf3c9,5,orders|supplier|customer|partsupp|nation|lineitem,6,136971995,480.53,1,ok,,5,127372015
+q06.sql,70abb366,0,lineitem,1,108021870,26.9,1,ok,,0,108021870
+q07.sql,bf2f5195,7,orders|part|supplier|customer|partsupp|nation|region|lineitem,8,139572015,359.5,1,ok,,8,127245995
+q08.sql,8a308cfb,7,orders|part|supplier|customer|partsupp|nation|region|lineitem,8,139572015,140.1,1,ok,,9,127388015
+q09.sql,dfe5eb36,7,orders|part|supplier|customer|partsupp|nation|region|lineitem,8,139572015,170.62,1,ok,,7,134287995
+q10.sql,2318475d,3,orders|part|supplier|lineitem,4,127271870,122.16,1,ok,,3,127221995
+q11.sql,28293328,2,supplier|lineitem|partsupp,3,117771870,1.16,,error,"Binder Error: Table ""p0"" does not have a column named ""l_quantity""
+
+Candidate bindings: : ""ps_availqty""
+
+LINE 1: SELECT MIN(p0.l_quantity) AS result
+                   ^",2,9750125
+q12.sql,8a71e6e8,1,orders|lineitem,2,124521870,63.8,1,ok,,1,124521870
+q13.sql,3e7c1e01,2,customer|nation|orders,3,19200125,37.34,1,ok,,2,16508000
+q14.sql,5e3e435b,1,part|lineitem,2,110621870,57.11,1,ok,,1,110621870
+q15.sql,0242f360,0,lineitem,1,108021870,28.78,1,ok,,0,108021870
+q16.sql,8fa30bd7,1,part|partsupp,2,12200000,0.99,,error,"Binder Error: Table ""p0"" does not have a column named ""l_quantity""
+
+Candidate bindings: : ""ps_availqty""
+
+LINE 1: SELECT MIN(p0.l_quantity) AS result
+                   ^",1,12200000
+q17.sql,ee419295,1,orders|lineitem,2,124521870,146.23,1,ok,,1,110621870
+q18.sql,14a04e6d,2,orders|supplier|lineitem,3,124671870,92.58,1,ok,,2,127221870
+q19.sql,acb54fe1,1,supplier|lineitem,2,108171870,47.27,1,ok,,1,110621870
+q20.sql,efd3e67c,1,nation|supplier,2,150125,2.57,1,ok,,1,150125
+q21.sql,d8797246,3,part|supplier|partsupp|lineitem,4,120371870,83.7,1,ok,,3,124671995
+q22.sql,e36cd18e,1,supplier|lineitem,2,108171870,47.89,1,ok,,1,8000
