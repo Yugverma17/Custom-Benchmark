@@ -1,0 +1,13 @@
+experiment,n_queries,exact_table_match_count,exact_table_match_pct,avg_jaccard_similarity
+imdb_to_imdb,115,13,11.3,0.576
+imdb_to_imdb_sizerank,115,13,11.3,0.576
+imdb_to_tpcds,115,0,0.0,0.0
+imdb_to_tpch,115,0,0.0,0.0
+tpcds_to_imdb,99,0,0.0,0.0
+tpcds_to_tpcds,99,7,7.1,0.415
+tpcds_to_tpcds_sizerank,99,7,7.1,0.415
+tpcds_to_tpch,99,0,0.0,0.013
+tpch_to_imdb,22,0,0.0,0.0
+tpch_to_tpcds,22,0,0.0,0.01
+tpch_to_tpch,22,9,40.9,0.645
+tpch_to_tpch_sizerank,22,9,40.9,0.645
