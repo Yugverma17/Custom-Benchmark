@@ -194,14 +194,19 @@ def evaluate(exp_name, out_dir):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--exp', default=None, help='single experiment (default: all)')
+parser.add_argument('--exps', default=None, help='comma-separated list of experiments')
+parser.add_argument('--out', default='summary_scorecard.csv', help='output filename')
 args = parser.parse_args()
 
 exp_root = os.path.join(BASE, 'experiments')
-experiments = (
-    [args.exp] if args.exp else
-    sorted(d for d in os.listdir(exp_root)
-           if os.path.isdir(os.path.join(exp_root, d)) and not d.startswith('_'))
-)
+if args.exps:
+    experiments = [e.strip() for e in args.exps.split(',') if e.strip()]
+elif args.exp:
+    experiments = [args.exp]
+else:
+    experiments = sorted(d for d in os.listdir(exp_root)
+           if os.path.isdir(os.path.join(exp_root, d)) and not d.startswith('_')
+           and not d.endswith('_sizerank'))
 
 print(f"\nEvaluating {len(experiments)} experiment(s) ...\n")
 
@@ -219,7 +224,7 @@ for con in _db_cons.values():
 if all_sc:
     eval_dir    = os.path.join(exp_root, '_evaluation')
     os.makedirs(eval_dir, exist_ok=True)
-    summary_csv = os.path.join(eval_dir, 'summary_scorecard.csv')
+    summary_csv = os.path.join(eval_dir, args.out)
     with open(summary_csv, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=list(all_sc[0].keys()))
         writer.writeheader()
