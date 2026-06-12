@@ -1,0 +1,5 @@
+experiment,n_queries,cpu_time_qerror_mean,cpu_time_qerror_median,cpu_time_qerror_p90,cpu_time_qerror_max,bytes_qerror_mean,bytes_qerror_median,bytes_qerror_p90,bytes_qerror_max
+tpch_to_imdb,22,18.31,3.82,9.77,314.92,1448.71,2.99,20.23,30975.73
+tpch_to_tpcds,20,16.44,6.99,37.32,84.61,226.58,3.07,6.25,4460.62
+tpch_to_tpch,19,6.72,2.44,11.75,50.14,712.64,1.02,1.13,13521.48
+tpch_to_tpch_sizerank,19,5.12,2.47,8.21,40.39,712.64,1.02,1.13,13521.48
