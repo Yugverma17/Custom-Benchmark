@@ -160,6 +160,34 @@ def compute_column_stats(con, schema) -> dict:
                         'quantiles': q_vals
                     }
 
+                elif dtype == 'varchar':
+                    try:
+                        row = con.execute(
+                            f"SELECT quantile_disc(CAST({col} AS VARCHAR), "
+                            f"{_QUANTILE_PTS}) "
+                            f"FROM {table} WHERE {col} IS NOT NULL"
+                        ).fetchone()
+                        vals = row[0] if row else None
+                        if vals and len(vals) == _N_QUANTILES:
+                            stats[table][col] = {
+                                'type': 'varchar',
+                                'quantiles': list(vals)
+                            }
+                            continue
+                    except Exception:
+                        pass
+                    rows = con.execute(
+                        f"SELECT DISTINCT CAST({col} AS VARCHAR) "
+                        f"FROM {table} WHERE {col} IS NOT NULL LIMIT 200"
+                    ).fetchall()
+                    vals_list = sorted(r[0] for r in rows if r[0] is not None)
+                    n = len(vals_list)
+                    q_vals = [vals_list[min(int(i/100*(n-1)), n-1)] for i in range(_N_QUANTILES)]
+                    stats[table][col] = {
+                        'type': 'varchar',
+                        'quantiles': q_vals
+                    }
+
                 elif dtype == 'enum':
                     rows = con.execute(
                         f"SELECT DISTINCT CAST({col} AS VARCHAR) "
@@ -242,7 +270,7 @@ def build_predicate_redbench(alias: str, col_def: tuple, col_stat: dict,
     col   = col_def[0]
     dtype = col_stat.get('type', col_def[1])
 
-    if dtype in ('int', 'float') and 'quantiles' in col_stat:
+    if dtype in ('int', 'float', 'varchar') and 'quantiles' in col_stat:
         quantiles    = col_stat['quantiles']
         sigma_scaled = _MIN_SEL + (1 - _MIN_SEL) * min(1.0, sigma)
         range_size   = max(0, min(100, int(sigma_scaled * 100)))
@@ -250,11 +278,15 @@ def build_predicate_redbench(alias: str, col_def: tuple, col_stat: dict,
         start_idx    = rng.randint(0, max_start)
         lo           = quantiles[start_idx]
         hi           = quantiles[start_idx + range_size]
-        if lo is None or hi is None or lo == hi:
+        if lo is None or hi is None:
             return None
         if dtype == 'int':
             return f"{alias}.{col} BETWEEN {int(lo)} AND {int(hi)}"
-        return f"{alias}.{col} BETWEEN {lo:.4f} AND {hi:.4f}"
+        if dtype == 'float':
+            return f"{alias}.{col} BETWEEN {lo:.4f} AND {hi:.4f}"
+        lo_s = str(lo).replace("'", "''")
+        hi_s = str(hi).replace("'", "''")
+        return f"{alias}.{col} BETWEEN '{lo_s}' AND '{hi_s}'"
 
     elif dtype == 'enum' and 'values' in col_stat:
         vals = col_stat['values']

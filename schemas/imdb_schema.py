@@ -73,19 +73,18 @@ AVG_ROW_SIZE = {
 }
 
 PRED_COLS = {
-    'title'          : [('production_year', 'int',  1880, 2019),
-                        ('kind_id',         'int',  1,    7)],
-    'movie_info'     : [('info_type_id',    'int',  1,    110)],
-    'movie_info_idx' : [('info_type_id',    'int',  1,    110)],
-    'cast_info'      : [('role_id',         'int',  1,    11)],
-    'movie_companies': [('company_type_id', 'int',  1,    4)],
-    'company_name'   : [('country_code',    'enum', ['[us]','[gb]','[fr]','[ca]','[de]',
-                                                     '[jp]','[it]','[es]','[in]','[au]',
-                                                     '[ru]','[br]','[se]','[nl]','[dk]'])],
-    'name'           : [('gender',          'enum', ['m', 'f'])],
-    'keyword'        : [('phonetic_code',   'like', None)],
-    'movie_keyword'  : [('keyword_id',      'int',  1,    134170)],
-    'person_info'    : [('info_type_id',    'int',  1,    110)],
+    'title'          : [('production_year', 'int',     1880, 2019)],
+    'movie_info'     : [('info_type_id',    'int',     1,    110)],
+    'movie_info_idx' : [('info_type_id',    'int',     1,    110)],
+    'cast_info'      : [('nr_order',        'int',     0,    1000)],
+    'movie_companies': [('note',            'varchar', None, None)],
+    'company_name'   : [('country_code',    'enum',    ['[us]','[gb]','[fr]','[ca]','[de]',
+                                                        '[jp]','[it]','[es]','[in]','[au]',
+                                                        '[ru]','[br]','[se]','[nl]','[dk]'])],
+    'name'           : [('gender',          'enum',    ['m', 'f'])],
+    'keyword'        : [('keyword',         'varchar', None, None)],
+    'movie_keyword'  : [('keyword_id',      'int',     1,    134170)],
+    'person_info'    : [('info_type_id',    'int',     1,    110)],
 }
 
 AGG_COL = {
