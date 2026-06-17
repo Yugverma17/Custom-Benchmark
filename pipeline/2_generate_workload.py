@@ -25,9 +25,9 @@ parser.add_argument('--source-db', required=True, help='imdb | tpch | tpcds')
 parser.add_argument('--target-db', required=True, help='imdb | tpch | tpcds')
 parser.add_argument('--exp',       required=True, help='experiment name')
 parser.add_argument('--seed',      type=int, default=42)
+parser.add_argument('--mapping',   default='sizerank', choices=['identity', 'sizerank'],
+                    help='table mapping strategy: identity (original tables) or sizerank (default)')
 args = parser.parse_args()
-
-same_db    = (args.source_db == args.target_db)
 schema_dir = os.path.join(BASE, 'schemas')
 out_dir    = os.path.join(BASE, 'experiments', args.exp, 'output')
 t_csv      = os.path.join(out_dir, 'T.csv')
@@ -42,7 +42,7 @@ source_schema = load_schema(args.source_db, schema_dir)
 target_schema = load_schema(args.target_db, schema_dir)
 rng           = random.Random(args.seed)
 
-print(f"\nRedBench Generation: {args.source_db} -> {args.target_db}  (same_db={same_db})")
+print(f"\nRedBench Generation: {args.source_db} -> {args.target_db}  (mapping={args.mapping})")
 print(f"T.csv  : {t_csv}")
 print(f"Output : {wp_csv}\n")
 
@@ -69,15 +69,15 @@ col_stats = compute_column_stats(con_target, target_schema)
 n_stat_cols = sum(len(v) for v in col_stats.values())
 print(f"  Stats collected for {n_stat_cols} predicate columns across {len(col_stats)} tables")
 
-print(f"\n[2/4] Building size-rank table mapping ({args.source_db} -> {args.target_db}) ...")
+print(f"\n[2/4] Building table mapping ({args.source_db} -> {args.target_db}, strategy={args.mapping}) ...")
 
-if same_db:
-    rank_map = {t: t for t in source_schema.TABLE_SIZES}
-    print(f"  Same DB: identity mapping ({len(rank_map)} tables)")
+rank_map   = build_size_rank_mapping(source_schema, target_schema)
+src_ranked = sorted(source_schema.TABLE_SIZES, key=lambda t: -source_schema.TABLE_SIZES[t])
+
+if args.mapping == 'identity':
+    print(f"  Identity mapping ({len(rank_map)} tables)")
 else:
-    rank_map = build_size_rank_mapping(source_schema, target_schema)
-    src_ranked = sorted(source_schema.TABLE_SIZES, key=lambda t: -source_schema.TABLE_SIZES[t])
-    print(f"  Top mappings (source rank -> target rank):")
+    print(f"  Top size-rank mappings:")
     for i, src in enumerate(src_ranked[:6]):
         tgt = rank_map[src]
         print(f"    [{i+1:2d}] {src:<25} ({source_schema.TABLE_SIZES[src]:>10,} rows)  ->  "
@@ -108,10 +108,13 @@ for i, tr in enumerate(t_rows, 1):
 
     rel_sel = compute_relative_selectivity(src_tables, bytes_read, source_schema)
 
-    if same_db:
-        seed_tables = [t for t in src_tables if t in target_tables_set]
+    seen, seed_tables = set(), []
+    if args.mapping == 'identity':
+        for t in src_tables:
+            if t in target_tables_set and t not in seen:
+                seen.add(t)
+                seed_tables.append(t)
     else:
-        seen, seed_tables = set(), []
         for t in src_tables:
             mapped = rank_map.get(t)
             if mapped and mapped not in seen:
