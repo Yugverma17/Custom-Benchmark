@@ -119,9 +119,13 @@ def compute_relative_selectivity(tables: list, bytes_read: int, source_schema) -
     return min(0.99, max(0.001, bytes_read / total))
 
 
+_N_QUANTILES   = 101
+_QUANTILE_PTS  = [i / 100.0 for i in range(_N_QUANTILES)]
+_MIN_SEL       = 0.05
+
+
 def compute_column_stats(con, schema) -> dict:
     stats: dict = {}
-    quantile_points = [0.0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 1.0]
 
     for table, col_defs in schema.PRED_COLS.items():
         stats[table] = {}
@@ -133,14 +137,14 @@ def compute_column_stats(con, schema) -> dict:
                     try:
                         row = con.execute(
                             f"SELECT quantile_cont(CAST({col} AS DOUBLE), "
-                            f"{quantile_points}) "
+                            f"{_QUANTILE_PTS}) "
                             f"FROM {table} WHERE {col} IS NOT NULL"
                         ).fetchone()
                         vals = row[0] if row else None
-                        if vals and len(vals) == len(quantile_points):
+                        if vals and len(vals) == _N_QUANTILES:
                             stats[table][col] = {
                                 'type': dtype,
-                                'quantiles': list(zip(quantile_points, vals))
+                                'quantiles': list(vals)
                             }
                             continue
                     except Exception:
@@ -150,9 +154,10 @@ def compute_column_stats(con, schema) -> dict:
                         f"FROM {table} WHERE {col} IS NOT NULL"
                     ).fetchone()
                     lo, hi = (row[0] or 0), (row[1] or 0)
+                    q_vals = [lo + (hi - lo) * i / 100 for i in range(_N_QUANTILES)]
                     stats[table][col] = {
                         'type': dtype,
-                        'quantiles': [(0.0, lo), (0.5, (lo + hi) / 2), (1.0, hi)]
+                        'quantiles': q_vals
                     }
 
                 elif dtype == 'enum':
@@ -230,38 +235,32 @@ def random_walk_tables(seed_tables: list, n_tables: int, schema, rng: random.Ran
 
 
 def build_predicate_redbench(alias: str, col_def: tuple, col_stat: dict,
-                              selectivity: float, rng: random.Random) -> 'str | None':
+                              sigma: float, rng: random.Random) -> 'str | None':
     if not col_stat or 'error' in col_stat:
-        return build_predicate(alias, col_def, selectivity, rng)
+        return build_predicate(alias, col_def, sigma, rng)
 
     col   = col_def[0]
     dtype = col_stat.get('type', col_def[1])
 
     if dtype in ('int', 'float') and 'quantiles' in col_stat:
-        qs = col_stat['quantiles']
-        target_width = min(0.99, selectivity * 2.5)
-        max_start    = max(0.0, 1.0 - target_width)
-        start_q      = rng.uniform(0.0, max_start)
-        end_q        = min(1.0, start_q + target_width)
-        lo = hi = None
-        for q_frac, v in qs:
-            if lo is None and q_frac >= start_q and v is not None:
-                lo = v
-            if v is not None and q_frac <= end_q:
-                hi = v
-        if lo is None or hi is None:
-            lo, hi = qs[0][1], qs[-1][1]
-        if lo == hi or lo is None:
+        quantiles    = col_stat['quantiles']
+        sigma_scaled = _MIN_SEL + (1 - _MIN_SEL) * min(1.0, sigma)
+        range_size   = max(0, min(100, int(sigma_scaled * 100)))
+        max_start    = max(0, 100 - range_size)
+        start_idx    = rng.randint(0, max_start)
+        lo           = quantiles[start_idx]
+        hi           = quantiles[start_idx + range_size]
+        if lo is None or hi is None or lo == hi:
             return None
         if dtype == 'int':
-            return f"{alias}.{col} >= {int(lo)} AND {alias}.{col} <= {int(hi)}"
-        return f"{alias}.{col} >= {lo:.4f} AND {alias}.{col} <= {hi:.4f}"
+            return f"{alias}.{col} BETWEEN {int(lo)} AND {int(hi)}"
+        return f"{alias}.{col} BETWEEN {lo:.4f} AND {hi:.4f}"
 
     elif dtype == 'enum' and 'values' in col_stat:
         vals = col_stat['values']
         if not vals:
             return None
-        k      = max(1, int(len(vals) * selectivity * 3))
+        k      = max(1, int(len(vals) * sigma * 3))
         chosen = rng.sample(vals, min(k, len(vals)))
         if len(chosen) == 1:
             return f"{alias}.{col} = '{chosen[0]}'"
@@ -272,7 +271,7 @@ def build_predicate_redbench(alias: str, col_def: tuple, col_stat: dict,
         prefixes = col_stat['prefixes'] or list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
         return f"{alias}.{col} LIKE '{rng.choice(prefixes)}%'"
 
-    return build_predicate(alias, col_def, selectivity, rng)
+    return build_predicate(alias, col_def, sigma, rng)
 
 
 def build_select_sql_redbench(tables: list, selectivity: float,
@@ -320,8 +319,6 @@ def build_select_sql_redbench(tables: list, selectivity: float,
         pred     = build_predicate_redbench(aliases[t], col_def, col_stat, selectivity, rng)
         if pred:
             where_parts.append(pred)
-        if len(where_parts) >= 3:
-            break
 
     sql  = f"SELECT MIN({aliases[root]}.{agg}) AS result\n"
     sql += f"FROM {root} AS {aliases[root]}"
