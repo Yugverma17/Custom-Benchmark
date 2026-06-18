@@ -1,871 +1,100 @@
-query_file,source_join_count,source_bytes_read,relative_selectivity,target_tables,n_tables,query_hash,gen_status,sql
-q01.sql,1,4048606,0.1,person_info|name,2,1c267055,ok,"SELECT MIN(p0.id) AS result
-FROM person_info AS p0
-JOIN name AS n1 ON n1.id = p0.person_id
-WHERE p0.info_type_id >= 24 AND p0.info_type_id <= 26
-AND n1.gender = 'f'"
-q02.sql,11,1492980,0.1,aka_name|name|cast_info|role_type|person_info|info_type|movie_info_idx|title|movie_info|char_name|aka_title|kind_type,12,3aaa8941,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c2 ON c2.person_id = n1.id
-JOIN person_info AS p4 ON p4.person_id = n1.id
-JOIN title AS t7 ON t7.id = c2.movie_id
-JOIN char_name AS c9 ON c9.id = c2.person_role_id
-JOIN role_type AS r3 ON r3.id = c2.role_id
-JOIN info_type AS i5 ON i5.id = p4.info_type_id
-JOIN aka_title AS a10 ON a10.movie_id = t7.id
-JOIN movie_info AS m8 ON m8.movie_id = t7.id
-JOIN movie_info_idx AS m6 ON m6.movie_id = t7.id
-JOIN kind_type AS k11 ON k11.id = t7.kind_id
-WHERE n1.gender = 'm'
-AND p4.info_type_id >= 20 AND p4.info_type_id <= 22
-AND t7.production_year >= 2006 AND t7.production_year <= 2008"
-q03.sql,2,39356232,0.1,movie_info|title|complete_cast,3,df177135,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN complete_cast AS c2 ON c2.movie_id = t1.id
-WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 4
-AND t1.production_year >= 1992 AND t1.production_year <= 2003"
-q04.sql,2,40506232,0.1,movie_info|title|cast_info,3,370060c3,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN cast_info AS c2 ON c2.movie_id = t1.id
-WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 7
-AND t1.production_year >= 1932 AND t1.production_year <= 1978
-AND c2.role_id >= 1 AND c2.role_id <= 2"
-q05.sql,17,11588836,0.1,char_name|cast_info|role_type|name|aka_name|title|person_info|info_type|movie_info_idx|movie_info|movie_companies|company_type|kind_type|aka_title|complete_cast|comp_cast_type|company_name|movie_keyword,18,7c28ed87,timeout,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-JOIN title AS t5 ON t5.id = c1.movie_id
-JOIN name AS n3 ON n3.id = c1.person_id
-JOIN role_type AS r2 ON r2.id = c1.role_id
-JOIN aka_title AS a13 ON a13.movie_id = t5.id
-JOIN movie_companies AS m10 ON m10.movie_id = t5.id
-JOIN movie_info AS m9 ON m9.movie_id = t5.id
-JOIN movie_info_idx AS m8 ON m8.movie_id = t5.id
-JOIN movie_keyword AS m17 ON m17.movie_id = t5.id
-JOIN complete_cast AS c14 ON c14.movie_id = t5.id
-JOIN kind_type AS k12 ON k12.id = t5.kind_id
-JOIN aka_name AS a4 ON a4.person_id = n3.id
-JOIN person_info AS p6 ON p6.person_id = n3.id
-JOIN company_name AS c16 ON c16.id = m10.company_id
-JOIN company_type AS c11 ON c11.id = m10.company_type_id
-JOIN info_type AS i7 ON i7.id = m9.info_type_id
-JOIN comp_cast_type AS c15 ON c15.id = c14.subject_id
-WHERE c1.role_id >= 1 AND c1.role_id <= 10
-AND t5.production_year >= 1932 AND t5.production_year <= 2012
-AND n3.gender IN ('m', 'f')"
-q06.sql,4,41706232,0.1,movie_info|title|aka_title|kind_type|info_type,5,ae2eba1d,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN info_type AS i4 ON i4.id = m0.info_type_id
-JOIN aka_title AS a2 ON a2.movie_id = t1.id
-JOIN kind_type AS k3 ON k3.id = t1.kind_id
-WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 4
-AND t1.production_year >= 1978 AND t1.production_year <= 1992"
-q07.sql,4,50890032,0.1,movie_info|title|aka_title|kind_type|complete_cast,5,ff6b0c30,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN aka_title AS a2 ON a2.movie_id = t1.id
-JOIN complete_cast AS c4 ON c4.movie_id = t1.id
-JOIN kind_type AS k3 ON k3.id = t1.kind_id
-WHERE m0.info_type_id >= 16 AND m0.info_type_id <= 18
-AND t1.production_year >= 1978 AND t1.production_year <= 1992"
-q08.sql,5,38906712,0.1,movie_info|info_type|person_info|name|movie_info_idx|aka_name,6,e8680143,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info_idx AS m4 ON m4.info_type_id = i1.id
-JOIN person_info AS p2 ON p2.info_type_id = i1.id
-JOIN name AS n3 ON n3.id = p2.person_id
-JOIN aka_name AS a5 ON a5.person_id = n3.id
-WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 3
-AND p2.info_type_id >= 25 AND p2.info_type_id <= 26
-AND n3.gender = 'f'"
-q09.sql,0,37445252,0.1,movie_info,1,3ff0e3f8,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-WHERE m0.info_type_id >= 8 AND m0.info_type_id <= 13"
-q10.sql,2,13874800,0.1,movie_keyword|title|movie_info,3,50ca0c1a,ok,"SELECT MIN(m0.id) AS result
-FROM movie_keyword AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_info AS m2 ON m2.movie_id = t1.id
-WHERE m0.keyword_id >= 4703 AND m0.keyword_id <= 7670
-AND t1.production_year >= 1932 AND t1.production_year <= 1978
-AND m2.info_type_id >= 2 AND m2.info_type_id <= 4"
-q11.sql,2,40506232,0.1,movie_info|title|movie_info_idx,3,d6db2364,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
-WHERE m0.info_type_id >= 13 AND m0.info_type_id <= 16
-AND t1.production_year >= 1992 AND t1.production_year <= 1999
-AND m2.info_type_id >= 99 AND m2.info_type_id <= 100"
-q12.sql,2,11982356,0.1,char_name|cast_info|title,3,52e9b572,ok,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-JOIN title AS t2 ON t2.id = c1.movie_id
-WHERE t2.production_year >= 2003 AND t2.production_year <= 2008"
-q13.sql,5,51210312,0.1,movie_info|title|info_type|movie_info_idx|movie_link|link_type,6,e492e11b,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN info_type AS i2 ON i2.id = m0.info_type_id
-JOIN movie_info_idx AS m3 ON m3.movie_id = t1.id
-JOIN movie_link AS m4 ON m4.movie_id = t1.id
-JOIN link_type AS l5 ON l5.id = m4.link_type_id
-WHERE m0.info_type_id >= 16 AND m0.info_type_id <= 98
-AND t1.production_year >= 1978 AND t1.production_year <= 1992"
-q14.sql,5,1918980,0.1,aka_name|name|cast_info|title|kind_type|aka_title,6,3b553020,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c2 ON c2.person_id = n1.id
-JOIN title AS t3 ON t3.id = c2.movie_id
-JOIN aka_title AS a5 ON a5.movie_id = t3.id
-JOIN kind_type AS k4 ON k4.id = t3.kind_id
-WHERE n1.gender = 'f'
-AND c2.role_id >= 2 AND c2.role_id <= 4
-AND t3.production_year >= 2008 AND t3.production_year <= 2010"
-q15.sql,3,23992652,0.1,name|person_info|info_type|movie_info_idx,4,070816e4,ok,"SELECT MIN(n0.name) AS result
-FROM name AS n0
-JOIN person_info AS p1 ON p1.person_id = n0.id
-JOIN info_type AS i2 ON i2.id = p1.info_type_id
-JOIN movie_info_idx AS m3 ON m3.info_type_id = i2.id
-WHERE n0.gender = 'f'
-AND p1.info_type_id >= 17 AND p1.info_type_id <= 20"
-q16.sql,3,22400652,0.1,name|aka_name|cast_info|person_info,4,12733516,ok,"SELECT MIN(n0.name) AS result
-FROM name AS n0
-JOIN cast_info AS c2 ON c2.person_id = n0.id
-JOIN aka_name AS a1 ON a1.person_id = n0.id
-JOIN person_info AS p3 ON p3.person_id = n0.id
-WHERE n0.gender = 'f'
-AND c2.role_id >= 1 AND c2.role_id <= 2
-AND p3.info_type_id >= 22 AND p3.info_type_id <= 24"
-q17.sql,7,62126010,0.1,movie_info|title|complete_cast|comp_cast_type|info_type|movie_info_idx|movie_companies|company_name,8,19174eef,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN info_type AS i4 ON i4.id = m0.info_type_id
-JOIN movie_companies AS m6 ON m6.movie_id = t1.id
-JOIN movie_info_idx AS m5 ON m5.movie_id = t1.id
-JOIN complete_cast AS c2 ON c2.movie_id = t1.id
-JOIN company_name AS c7 ON c7.id = m6.company_id
-JOIN comp_cast_type AS c3 ON c3.id = c2.subject_id
-WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 3
-AND t1.production_year >= 1978 AND t1.production_year <= 1992
-AND c7.country_code IN ('[ua]', '[uz]', '[tk]', '[pl]', '[be]', '[cshh]', '[vn]', '[cz]', '[sj]', '[mh]', '[mq]', '[my]', '[iq]', '[sv]', '[mz]', '[pf]', '[tz]', '[mt]', '[pr]', '[pk]', '[jm]', '[hu]', '[va]', '[br]', '[vi]', '[cn]', '[cd]', '[mr]', '[ru]', '[mc]')"
-q18.sql,6,35967452,0.1,movie_keyword|title|complete_cast|comp_cast_type|movie_companies|company_name|movie_info,7,5e298f89,ok,"SELECT MIN(m0.id) AS result
-FROM movie_keyword AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_companies AS m4 ON m4.movie_id = t1.id
-JOIN movie_info AS m6 ON m6.movie_id = t1.id
-JOIN complete_cast AS c2 ON c2.movie_id = t1.id
-JOIN company_name AS c5 ON c5.id = m4.company_id
-JOIN comp_cast_type AS c3 ON c3.id = c2.subject_id
-WHERE m0.keyword_id >= 858 AND m0.keyword_id <= 2935
-AND t1.production_year >= 2006 AND t1.production_year <= 2010
-AND m6.info_type_id >= 4 AND m6.info_type_id <= 7"
-q19.sql,5,41706712,0.1,movie_info|title|movie_companies|company_type|complete_cast|comp_cast_type,6,06953b06,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_companies AS m2 ON m2.movie_id = t1.id
-JOIN complete_cast AS c4 ON c4.movie_id = t1.id
-JOIN company_type AS c3 ON c3.id = m2.company_type_id
-JOIN comp_cast_type AS c5 ON c5.id = c4.subject_id
-WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 3
-AND t1.production_year >= 1978 AND t1.production_year <= 1999
-AND m2.company_type_id >= 1 AND m2.company_type_id <= 2"
-q20.sql,2,22092652,0.1,name|aka_name|person_info,3,caeb7e4f,ok,"SELECT MIN(n0.name) AS result
-FROM name AS n0
-JOIN aka_name AS a1 ON a1.person_id = n0.id
-JOIN person_info AS p2 ON p2.person_id = n0.id
-WHERE n0.gender = 'm'
-AND p2.info_type_id >= 17 AND p2.info_type_id <= 21"
-q21.sql,6,1927080,0.1,aka_name|name|cast_info|title|complete_cast|comp_cast_type|movie_companies,7,2ce9b5e3,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c2 ON c2.person_id = n1.id
-JOIN title AS t3 ON t3.id = c2.movie_id
-JOIN movie_companies AS m6 ON m6.movie_id = t3.id
-JOIN complete_cast AS c4 ON c4.movie_id = t3.id
-JOIN comp_cast_type AS c5 ON c5.id = c4.subject_id
-WHERE n1.gender = 'm'
-AND t3.production_year >= 2006 AND t3.production_year <= 2010"
-q22.sql,2,37145980,0.1,cast_info|role_type|title,3,f56de7a6,ok,"SELECT MIN(c0.id) AS result
-FROM cast_info AS c0
-JOIN title AS t2 ON t2.id = c0.movie_id
-JOIN role_type AS r1 ON r1.id = c0.role_id
-WHERE c0.role_id >= 3 AND c0.role_id <= 4
-AND t2.production_year >= 1978 AND t2.production_year <= 1999"
-q23.sql,5,38906232,0.1,movie_info|title|info_type|movie_info_idx|person_info|cast_info,6,05e4f927,timeout,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN info_type AS i2 ON i2.id = m0.info_type_id
-JOIN cast_info AS c5 ON c5.movie_id = t1.id
-JOIN movie_info_idx AS m3 ON m3.movie_id = t1.id
-JOIN person_info AS p4 ON p4.info_type_id = i2.id
-WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 98
-AND t1.production_year >= 1932 AND t1.production_year <= 2012
-AND c5.role_id >= 1 AND c5.role_id <= 10"
-q24.sql,5,42833358,0.1,movie_info|title|complete_cast|comp_cast_type|info_type|aka_title,6,dd9a2502,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN info_type AS i4 ON i4.id = m0.info_type_id
-JOIN aka_title AS a5 ON a5.movie_id = t1.id
-JOIN complete_cast AS c2 ON c2.movie_id = t1.id
-JOIN comp_cast_type AS c3 ON c3.id = c2.subject_id
-WHERE m0.info_type_id >= 7 AND m0.info_type_id <= 8
-AND t1.production_year >= 1992 AND t1.production_year <= 2003"
-q25.sql,7,62126010,0.1,movie_info|info_type|person_info|name|aka_name|title|cast_info|char_name,8,04f2e57c,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t5 ON t5.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN cast_info AS c6 ON c6.movie_id = t5.id
-JOIN person_info AS p2 ON p2.info_type_id = i1.id
-JOIN name AS n3 ON n3.id = c6.person_id
-JOIN char_name AS c7 ON c7.id = c6.person_role_id
-JOIN aka_name AS a4 ON a4.person_id = n3.id
-WHERE m0.info_type_id >= 7 AND m0.info_type_id <= 8
-AND t5.production_year >= 1978 AND t5.production_year <= 1999
-AND c6.role_id >= 1 AND c6.role_id <= 2"
-q26.sql,4,33626452,0.1,movie_keyword|title|complete_cast|keyword|movie_info_idx,5,d0faccba,ok,"SELECT MIN(m0.id) AS result
-FROM movie_keyword AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN keyword AS k3 ON k3.id = m0.keyword_id
-JOIN movie_info_idx AS m4 ON m4.movie_id = t1.id
-JOIN complete_cast AS c2 ON c2.movie_id = t1.id
-WHERE m0.keyword_id >= 7670 AND m0.keyword_id <= 12374
-AND t1.production_year >= 2003 AND t1.production_year <= 2008
-AND k3.phonetic_code LIKE 'L%'"
-q27.sql,4,50881512,0.1,movie_info|info_type|movie_info_idx|title|complete_cast,5,6b38707d,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t3 ON t3.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
-JOIN complete_cast AS c4 ON c4.movie_id = t3.id
-WHERE m0.info_type_id >= 2 AND m0.info_type_id <= 4
-AND t3.production_year >= 2003 AND t3.production_year <= 2008"
-q28.sql,2,8000,0.1,cast_info|char_name|role_type,3,803ec7f8,ok,"SELECT MIN(c0.id) AS result
-FROM cast_info AS c0
-JOIN char_name AS c1 ON c1.id = c0.person_role_id
-JOIN role_type AS r2 ON r2.id = c0.role_id
-WHERE c0.role_id >= 1 AND c0.role_id <= 2"
-q29.sql,7,62126010,0.1,movie_info|info_type|person_info|name|aka_name|cast_info|char_name|title,8,ab377712,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t7 ON t7.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN cast_info AS c5 ON c5.movie_id = t7.id
-JOIN person_info AS p2 ON p2.info_type_id = i1.id
-JOIN name AS n3 ON n3.id = c5.person_id
-JOIN char_name AS c6 ON c6.id = c5.person_role_id
-JOIN aka_name AS a4 ON a4.person_id = n3.id
-WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 7
-AND t7.production_year >= 1999 AND t7.production_year <= 2003
-AND c5.role_id >= 2 AND c5.role_id <= 3"
-q30.sql,2,2856847,0.1,aka_name|name|cast_info,3,2f6e11d2,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c2 ON c2.person_id = n1.id
-WHERE n1.gender = 'f'
-AND c2.role_id >= 1 AND c2.role_id <= 2"
-q31.sql,2,39656232,0.1,movie_info|title|movie_link,3,6f782ca2,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_link AS m2 ON m2.movie_id = t1.id
-WHERE m0.info_type_id >= 7 AND m0.info_type_id <= 13
-AND t1.production_year >= 1999 AND t1.production_year <= 2006"
-q32.sql,2,22092652,0.1,name|aka_name|person_info,3,caeb7e4f,ok,"SELECT MIN(n0.name) AS result
-FROM name AS n0
-JOIN aka_name AS a1 ON a1.person_id = n0.id
-JOIN person_info AS p2 ON p2.person_id = n0.id
-WHERE n0.gender = 'm'
-AND p2.info_type_id >= 17 AND p2.info_type_id <= 21"
-q33.sql,3,40106232,0.1,movie_info|info_type|title|person_info,4,1cdbe490,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t2 ON t2.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN person_info AS p3 ON p3.info_type_id = i1.id
-WHERE m0.info_type_id >= 13 AND m0.info_type_id <= 16
-AND t2.production_year >= 2010 AND t2.production_year <= 2012
-AND p3.info_type_id >= 21 AND p3.info_type_id <= 24"
-q34.sql,5,1506260,0.1,aka_name|name|person_info|cast_info|info_type|movie_info_idx,6,b59321b9,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c3 ON c3.person_id = n1.id
-JOIN person_info AS p2 ON p2.person_id = n1.id
-JOIN info_type AS i4 ON i4.id = p2.info_type_id
-JOIN movie_info_idx AS m5 ON m5.info_type_id = i4.id
-WHERE n1.gender = 'm'
-AND c3.role_id >= 2 AND c3.role_id <= 3
-AND p2.info_type_id >= 20 AND p2.info_type_id <= 22"
-q35.sql,2,13874800,0.1,movie_keyword|title|keyword,3,6ca61507,ok,"SELECT MIN(m0.id) AS result
-FROM movie_keyword AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN keyword AS k2 ON k2.id = m0.keyword_id
-WHERE m0.keyword_id >= 2935 AND m0.keyword_id <= 7670
-AND t1.production_year >= 2003 AND t1.production_year <= 2006
-AND k2.phonetic_code LIKE 'H%'"
-q36.sql,3,39356712,0.1,movie_info|info_type|title|complete_cast,4,d156f0de,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t2 ON t2.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN complete_cast AS c3 ON c3.movie_id = t2.id
-WHERE m0.info_type_id >= 13 AND m0.info_type_id <= 16
-AND t2.production_year >= 1992 AND t2.production_year <= 2003"
-q37.sql,3,57327652,0.1,cast_info|name|aka_name|role_type,4,0cada3d4,ok,"SELECT MIN(c0.id) AS result
-FROM cast_info AS c0
-JOIN name AS n1 ON n1.id = c0.person_id
-JOIN role_type AS r3 ON r3.id = c0.role_id
-JOIN aka_name AS a2 ON a2.person_id = n1.id
-WHERE n1.gender = 'f'"
-q38.sql,4,3076980,0.1,title|movie_companies|company_type|kind_type|company_name,5,7d190a24,ok,"SELECT MIN(t0.title) AS result
-FROM title AS t0
-JOIN movie_companies AS m1 ON m1.movie_id = t0.id
-JOIN kind_type AS k3 ON k3.id = t0.kind_id
-JOIN company_name AS c4 ON c4.id = m1.company_id
-JOIN company_type AS c2 ON c2.id = m1.company_type_id
-WHERE t0.production_year >= 2006 AND t0.production_year <= 2010
-AND c4.country_code IN ('[at]', '[af]', '[ge]', '[mq]', '[sk]', '[mx]', '[pl]', '[ba]', '[np]', '[is]', '[in]', '[kn]', '[ee]', '[kg]', '[mt]', '[ke]', '[mm]', '[et]', '[bw]', '[jo]', '[kh]', '[cshh]', '[bz]', '[gr]', '[br]', '[tr]', '[au]', '[ar]', '[mc]', '[pr]')"
-q39.sql,8,1951080,0.1,aka_name|name|cast_info|title|complete_cast|comp_cast_type|movie_info|info_type|person_info,9,617fb161,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c2 ON c2.person_id = n1.id
-JOIN person_info AS p8 ON p8.person_id = n1.id
-JOIN title AS t3 ON t3.id = c2.movie_id
-JOIN info_type AS i7 ON i7.id = p8.info_type_id
-JOIN movie_info AS m6 ON m6.movie_id = t3.id
-JOIN complete_cast AS c4 ON c4.movie_id = t3.id
-JOIN comp_cast_type AS c5 ON c5.id = c4.subject_id
-WHERE n1.gender = 'm'
-AND c2.role_id >= 2 AND c2.role_id <= 4
-AND p8.info_type_id >= 21 AND p8.info_type_id <= 22"
-q40.sql,1,21478275,0.1,name|cast_info,2,4dd6a5f2,ok,"SELECT MIN(n0.name) AS result
-FROM name AS n0
-JOIN cast_info AS c1 ON c1.person_id = n0.id
-WHERE n0.gender = 'm'"
-q41.sql,0,450000,0.1,complete_cast,1,b20227db,ok,"SELECT MIN(c0.id) AS result
-FROM complete_cast AS c0"
-q42.sql,2,39356232,0.1,movie_info|title|complete_cast,3,bcb0c9d7,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN complete_cast AS c2 ON c2.movie_id = t1.id
-WHERE m0.info_type_id >= 8 AND m0.info_type_id <= 16
-AND t1.production_year >= 2003 AND t1.production_year <= 2006"
-q43.sql,2,38906712,0.1,movie_info|title|kind_type,3,37b420d5,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN kind_type AS k2 ON k2.id = t1.kind_id
-WHERE m0.info_type_id >= 8 AND m0.info_type_id <= 16
-AND t1.production_year >= 2006 AND t1.production_year <= 2010"
-q44.sql,1,8000,0.1,cast_info|char_name,2,34b317ab,ok,"SELECT MIN(c0.id) AS result
-FROM cast_info AS c0
-JOIN char_name AS c1 ON c1.id = c0.person_role_id"
-q45.sql,4,14332356,0.1,char_name|cast_info|title|complete_cast|comp_cast_type,5,0cc323f3,ok,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-JOIN title AS t2 ON t2.id = c1.movie_id
-JOIN complete_cast AS c3 ON c3.movie_id = t2.id
-JOIN comp_cast_type AS c4 ON c4.id = c3.subject_id
-WHERE c1.role_id >= 2 AND c1.role_id <= 4
-AND t2.production_year >= 1978 AND t2.production_year <= 1992"
-q46.sql,8,2264260,0.1,aka_name|name|person_info|info_type|movie_info|title|movie_companies|company_type|company_name,9,575b9c85,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN person_info AS p2 ON p2.person_id = n1.id
-JOIN info_type AS i3 ON i3.id = p2.info_type_id
-JOIN movie_info AS m4 ON m4.info_type_id = i3.id
-JOIN title AS t5 ON t5.id = m4.movie_id
-JOIN movie_companies AS m6 ON m6.movie_id = t5.id
-JOIN company_name AS c8 ON c8.id = m6.company_id
-JOIN company_type AS c7 ON c7.id = m6.company_type_id
-WHERE n1.gender = 'm'
-AND p2.info_type_id >= 20 AND p2.info_type_id <= 21
-AND m4.info_type_id >= 13 AND m4.info_type_id <= 16"
-q47.sql,3,39356712,0.1,movie_info|info_type|movie_info_idx|title,4,7badb473,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t3 ON t3.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
-WHERE t3.production_year >= 1999 AND t3.production_year <= 2003
-AND m2.info_type_id >= 99 AND m2.info_type_id <= 100"
-q48.sql,4,51181512,0.1,movie_info|info_type|movie_info_idx|title|person_info,5,1688ffdb,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t3 ON t3.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
-JOIN person_info AS p4 ON p4.info_type_id = i1.id
-WHERE m0.info_type_id >= 2 AND m0.info_type_id <= 8
-AND t3.production_year >= 1992 AND t3.production_year <= 2008
-AND m2.info_type_id >= 100 AND m2.info_type_id <= 101"
-q49.sql,10,4562096,0.1,person_info|info_type|movie_info_idx|title|movie_companies|company_name|movie_info|name|cast_info|role_type|aka_title,11,63949d9a,ok,"SELECT MIN(p0.id) AS result
-FROM person_info AS p0
-JOIN name AS n7 ON n7.id = p0.person_id
-JOIN info_type AS i1 ON i1.id = p0.info_type_id
-JOIN cast_info AS c8 ON c8.person_id = n7.id
-JOIN movie_info AS m6 ON m6.info_type_id = i1.id
-JOIN movie_info_idx AS m2 ON m2.info_type_id = i1.id
-JOIN title AS t3 ON t3.id = c8.movie_id
-JOIN role_type AS r9 ON r9.id = c8.role_id
-JOIN aka_title AS a10 ON a10.movie_id = t3.id
-JOIN movie_companies AS m4 ON m4.movie_id = t3.id
-JOIN company_name AS c5 ON c5.id = m4.company_id
-WHERE p0.info_type_id >= 21 AND p0.info_type_id <= 24
-AND n7.gender = 'f'
-AND c8.role_id >= 1 AND c8.role_id <= 2"
-q50.sql,4,41494338,0.1,movie_info|info_type|person_info|name|aka_name,5,c2474c06,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN person_info AS p2 ON p2.info_type_id = i1.id
-JOIN name AS n3 ON n3.id = p2.person_id
-JOIN aka_name AS a4 ON a4.person_id = n3.id
-WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 4
-AND p2.info_type_id >= 20 AND p2.info_type_id <= 22
-AND n3.gender = 'm'"
-q51.sql,2,11540356,0.1,char_name|cast_info|role_type,3,9997ed31,ok,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-JOIN role_type AS r2 ON r2.id = c1.role_id
-WHERE c1.role_id >= 1 AND c1.role_id <= 2"
-q52.sql,2,39356232,0.1,movie_info|info_type|movie_info_idx,3,98ba226e,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info_idx AS m2 ON m2.info_type_id = i1.id
-WHERE m0.info_type_id >= 16 AND m0.info_type_id <= 18
-AND m2.info_type_id >= 100 AND m2.info_type_id <= 101"
-q53.sql,5,38922712,0.1,movie_info|info_type|movie_info_idx|title|person_info|name,6,6248ee49,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t3 ON t3.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
-JOIN person_info AS p4 ON p4.info_type_id = i1.id
-JOIN name AS n5 ON n5.id = p4.person_id
-WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 13
-AND t3.production_year >= 1992 AND t3.production_year <= 2008
-AND m2.info_type_id >= 99 AND m2.info_type_id <= 101"
-q54.sql,7,3542980,0.1,title|complete_cast|comp_cast_type|movie_keyword|keyword|movie_info|info_type|movie_info_idx,8,c34694c5,ok,"SELECT MIN(t0.title) AS result
-FROM title AS t0
-JOIN movie_info AS m5 ON m5.movie_id = t0.id
-JOIN movie_info_idx AS m7 ON m7.movie_id = t0.id
-JOIN movie_keyword AS m3 ON m3.movie_id = t0.id
-JOIN complete_cast AS c1 ON c1.movie_id = t0.id
-JOIN info_type AS i6 ON i6.id = m5.info_type_id
-JOIN keyword AS k4 ON k4.id = m3.keyword_id
-JOIN comp_cast_type AS c2 ON c2.id = c1.subject_id
-WHERE t0.production_year >= 2008 AND t0.production_year <= 2010
-AND m5.info_type_id >= 13 AND m5.info_type_id <= 16
-AND m3.keyword_id >= 20373 AND m3.keyword_id <= 63880"
-q55.sql,2,39356232,0.1,movie_info|info_type|movie_info_idx,3,33e53e55,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info_idx AS m2 ON m2.info_type_id = i1.id
-WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 7"
-q56.sql,3,40106232,0.1,movie_info|info_type|person_info|title,4,09cba970,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t3 ON t3.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN person_info AS p2 ON p2.info_type_id = i1.id
-WHERE m0.info_type_id >= 1 AND m0.info_type_id <= 3
-AND t3.production_year >= 2008 AND t3.production_year <= 2011
-AND p2.info_type_id >= 22 AND p2.info_type_id <= 24"
-q57.sql,3,22100652,0.1,name|aka_name|person_info|cast_info,4,313fdb1f,ok,"SELECT MIN(n0.name) AS result
-FROM name AS n0
-JOIN cast_info AS c3 ON c3.person_id = n0.id
-JOIN aka_name AS a1 ON a1.person_id = n0.id
-JOIN person_info AS p2 ON p2.person_id = n0.id
-WHERE n0.gender = 'm'
-AND c3.role_id >= 8 AND c3.role_id <= 10
-AND p2.info_type_id >= 17 AND p2.info_type_id <= 20"
-q58.sql,2,39356232,0.1,movie_info|info_type|person_info,3,093b0611,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN person_info AS p2 ON p2.info_type_id = i1.id
-WHERE m0.info_type_id >= 8 AND m0.info_type_id <= 13
-AND p2.info_type_id >= 24 AND p2.info_type_id <= 25"
-q59.sql,1,38906232,0.1,movie_info|title,2,c9a2cab1,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-WHERE t1.production_year >= 2003 AND t1.production_year <= 2008"
-q60.sql,3,40106232,0.1,movie_info|info_type|movie_info_idx|title,4,2bc9a2e0,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t3 ON t3.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
-WHERE t3.production_year >= 1960 AND t3.production_year <= 1992
-AND m2.info_type_id >= 100 AND m2.info_type_id <= 101"
-q61.sql,6,4270460,0.1,title|movie_keyword|keyword|complete_cast|kind_type|aka_title|movie_companies,7,f6ef2b67,ok,"SELECT MIN(t0.title) AS result
-FROM title AS t0
-JOIN aka_title AS a5 ON a5.movie_id = t0.id
-JOIN movie_companies AS m6 ON m6.movie_id = t0.id
-JOIN movie_keyword AS m1 ON m1.movie_id = t0.id
-JOIN complete_cast AS c3 ON c3.movie_id = t0.id
-JOIN kind_type AS k4 ON k4.id = t0.kind_id
-JOIN keyword AS k2 ON k2.id = m1.keyword_id
-WHERE t0.production_year >= 2010 AND t0.production_year <= 2012
-AND m1.keyword_id >= 7670 AND m1.keyword_id <= 20373
-AND k2.phonetic_code LIKE 'L%'"
-q62.sql,7,11533416,0.1,char_name|cast_info|title|kind_type|aka_title|name|aka_name|role_type,8,fd091e1a,ok,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-JOIN title AS t2 ON t2.id = c1.movie_id
-JOIN name AS n5 ON n5.id = c1.person_id
-JOIN role_type AS r7 ON r7.id = c1.role_id
-JOIN aka_title AS a4 ON a4.movie_id = t2.id
-JOIN kind_type AS k3 ON k3.id = t2.kind_id
-JOIN aka_name AS a6 ON a6.person_id = n5.id
-WHERE t2.production_year >= 1960 AND t2.production_year <= 1992
-AND n5.gender = 'f'"
-q63.sql,5,38922712,0.1,movie_info|info_type|person_info|name|title|movie_info_idx,6,eee4c869,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t4 ON t4.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info_idx AS m5 ON m5.movie_id = t4.id
-JOIN person_info AS p2 ON p2.info_type_id = i1.id
-JOIN name AS n3 ON n3.id = p2.person_id
-WHERE m0.info_type_id >= 7 AND m0.info_type_id <= 8
-AND t4.production_year >= 2008 AND t4.production_year <= 2010
-AND m5.info_type_id >= 99 AND m5.info_type_id <= 100"
-q64.sql,1,21478275,0.1,name|aka_name,2,5b7fe55c,ok,"SELECT MIN(n0.name) AS result
-FROM name AS n0
-JOIN aka_name AS a1 ON a1.person_id = n0.id
-WHERE n0.gender = 'm'"
-q65.sql,6,1935460,0.1,aka_name|name|cast_info|char_name|person_info|info_type|movie_info_idx,7,d7a65abf,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c2 ON c2.person_id = n1.id
-JOIN person_info AS p4 ON p4.person_id = n1.id
-JOIN char_name AS c3 ON c3.id = c2.person_role_id
-JOIN info_type AS i5 ON i5.id = p4.info_type_id
-JOIN movie_info_idx AS m6 ON m6.info_type_id = i5.id
-WHERE n1.gender = 'm'
-AND c2.role_id >= 4 AND c2.role_id <= 10
-AND p4.info_type_id >= 26 AND p4.info_type_id <= 38"
-q66.sql,36,2043640,0.1,movie_info_idx|title|movie_keyword|keyword|cast_info|role_type|name|person_info|info_type|movie_info|movie_link|link_type|complete_cast|aka_title|comp_cast_type|kind_type|movie_companies|aka_name|char_name|company_type|company_name,21,63d08255,ok,"SELECT MIN(m0.id) AS result
-FROM movie_info_idx AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN info_type AS i8 ON i8.id = m0.info_type_id
-JOIN cast_info AS c4 ON c4.movie_id = t1.id
-JOIN aka_title AS a13 ON a13.movie_id = t1.id
-JOIN movie_companies AS m16 ON m16.movie_id = t1.id
-JOIN movie_info AS m9 ON m9.movie_id = t1.id
-JOIN movie_keyword AS m2 ON m2.movie_id = t1.id
-JOIN movie_link AS m10 ON m10.movie_id = t1.id
-JOIN complete_cast AS c12 ON c12.movie_id = t1.id
-JOIN kind_type AS k15 ON k15.id = t1.kind_id
-JOIN person_info AS p7 ON p7.info_type_id = i8.id
-JOIN name AS n6 ON n6.id = c4.person_id
-JOIN char_name AS c18 ON c18.id = c4.person_role_id
-JOIN role_type AS r5 ON r5.id = c4.role_id
-JOIN company_name AS c20 ON c20.id = m16.company_id
-JOIN company_type AS c19 ON c19.id = m16.company_type_id
-JOIN keyword AS k3 ON k3.id = m2.keyword_id
-JOIN link_type AS l11 ON l11.id = m10.link_type_id
-JOIN comp_cast_type AS c14 ON c14.id = c12.subject_id
-JOIN aka_name AS a17 ON a17.person_id = n6.id
-WHERE t1.production_year >= 1992 AND t1.production_year <= 1999
-AND c4.role_id >= 2 AND c4.role_id <= 4
-AND m9.info_type_id >= 2 AND m9.info_type_id <= 4"
-q67.sql,9,72000,0.1,cast_info|char_name|name|role_type|title|movie_companies|company_name|aka_name|person_info|info_type,10,00bcd5ff,ok,"SELECT MIN(c0.id) AS result
-FROM cast_info AS c0
-JOIN title AS t4 ON t4.id = c0.movie_id
-JOIN name AS n2 ON n2.id = c0.person_id
-JOIN char_name AS c1 ON c1.id = c0.person_role_id
-JOIN role_type AS r3 ON r3.id = c0.role_id
-JOIN movie_companies AS m5 ON m5.movie_id = t4.id
-JOIN aka_name AS a7 ON a7.person_id = n2.id
-JOIN person_info AS p8 ON p8.person_id = n2.id
-JOIN company_name AS c6 ON c6.id = m5.company_id
-JOIN info_type AS i9 ON i9.id = p8.info_type_id
-WHERE c0.role_id >= 4 AND c0.role_id <= 8
-AND t4.production_year >= 1978 AND t4.production_year <= 1992
-AND n2.gender = 'm'"
-q68.sql,9,2264260,0.1,aka_name|name|cast_info|role_type|char_name|person_info|info_type|title|movie_link|link_type,10,7b7a447f,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c2 ON c2.person_id = n1.id
-JOIN person_info AS p5 ON p5.person_id = n1.id
-JOIN title AS t7 ON t7.id = c2.movie_id
-JOIN char_name AS c4 ON c4.id = c2.person_role_id
-JOIN role_type AS r3 ON r3.id = c2.role_id
-JOIN info_type AS i6 ON i6.id = p5.info_type_id
-JOIN movie_link AS m8 ON m8.movie_id = t7.id
-JOIN link_type AS l9 ON l9.id = m8.link_type_id
-WHERE n1.gender = 'f'
-AND c2.role_id >= 1 AND c2.role_id <= 2
-AND p5.info_type_id >= 25 AND p5.info_type_id <= 26"
-q69.sql,2,13874800,0.1,movie_keyword|title|cast_info,3,91750231,ok,"SELECT MIN(m0.id) AS result
-FROM movie_keyword AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN cast_info AS c2 ON c2.movie_id = t1.id
-WHERE m0.keyword_id >= 12374 AND m0.keyword_id <= 39136
-AND t1.production_year >= 1932 AND t1.production_year <= 1978
-AND c2.role_id >= 1 AND c2.role_id <= 2"
-q70.sql,2,38906712,0.1,movie_info|title|movie_info_idx,3,6c522525,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
-WHERE m0.info_type_id >= 4 AND m0.info_type_id <= 7
-AND t1.production_year >= 1932 AND t1.production_year <= 1978"
-q71.sql,5,1934980,0.1,aka_name|name|cast_info|role_type|person_info|info_type,6,0fb48ba7,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c2 ON c2.person_id = n1.id
-JOIN person_info AS p4 ON p4.person_id = n1.id
-JOIN role_type AS r3 ON r3.id = c2.role_id
-JOIN info_type AS i5 ON i5.id = p4.info_type_id
-WHERE n1.gender = 'f'
-AND c2.role_id >= 2 AND c2.role_id <= 3
-AND p4.info_type_id >= 17 AND p4.info_type_id <= 20"
-q72.sql,10,70186955,0.1,cast_info|name|char_name|role_type|title|movie_link|movie_companies|company_name|company_type|link_type|movie_keyword,11,62c8def0,ok,"SELECT MIN(c0.id) AS result
-FROM cast_info AS c0
-JOIN title AS t4 ON t4.id = c0.movie_id
-JOIN name AS n1 ON n1.id = c0.person_id
-JOIN char_name AS c2 ON c2.id = c0.person_role_id
-JOIN role_type AS r3 ON r3.id = c0.role_id
-JOIN movie_companies AS m6 ON m6.movie_id = t4.id
-JOIN movie_keyword AS m10 ON m10.movie_id = t4.id
-JOIN movie_link AS m5 ON m5.movie_id = t4.id
-JOIN company_name AS c7 ON c7.id = m6.company_id
-JOIN company_type AS c8 ON c8.id = m6.company_type_id
-JOIN link_type AS l9 ON l9.id = m5.link_type_id
-WHERE c0.role_id >= 2 AND c0.role_id <= 3
-AND t4.production_year >= 1992 AND t4.production_year <= 1999
-AND n1.gender = 'f'"
-q73.sql,5,1506260,0.1,aka_name|name|person_info|cast_info|role_type|info_type,6,29bd6108,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c3 ON c3.person_id = n1.id
-JOIN person_info AS p2 ON p2.person_id = n1.id
-JOIN role_type AS r4 ON r4.id = c3.role_id
-JOIN info_type AS i5 ON i5.id = p2.info_type_id
-WHERE n1.gender = 'm'
-AND c3.role_id >= 2 AND c3.role_id <= 3
-AND p2.info_type_id >= 24 AND p2.info_type_id <= 26"
-q74.sql,2,40506232,0.1,movie_info|title|info_type,3,4803781a,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN info_type AS i2 ON i2.id = m0.info_type_id
-WHERE m0.info_type_id >= 13 AND m0.info_type_id <= 16
-AND t1.production_year >= 1992 AND t1.production_year <= 2003"
-q75.sql,17,6489076,0.1,person_info|name|aka_name|info_type|movie_info_idx|cast_info|role_type|title|kind_type|aka_title|char_name|movie_info|complete_cast|comp_cast_type|movie_link|link_type|movie_companies|movie_keyword,18,23792dea,ok,"SELECT MIN(p0.id) AS result
-FROM person_info AS p0
-JOIN name AS n1 ON n1.id = p0.person_id
-JOIN info_type AS i3 ON i3.id = p0.info_type_id
-JOIN cast_info AS c5 ON c5.person_id = n1.id
-JOIN aka_name AS a2 ON a2.person_id = n1.id
-JOIN movie_info AS m11 ON m11.info_type_id = i3.id
-JOIN movie_info_idx AS m4 ON m4.info_type_id = i3.id
-JOIN title AS t7 ON t7.id = c5.movie_id
-JOIN char_name AS c10 ON c10.id = c5.person_role_id
-JOIN role_type AS r6 ON r6.id = c5.role_id
-JOIN aka_title AS a9 ON a9.movie_id = t7.id
-JOIN movie_companies AS m16 ON m16.movie_id = t7.id
-JOIN movie_keyword AS m17 ON m17.movie_id = t7.id
-JOIN movie_link AS m14 ON m14.movie_id = t7.id
-JOIN complete_cast AS c12 ON c12.movie_id = t7.id
-JOIN kind_type AS k8 ON k8.id = t7.kind_id
-JOIN link_type AS l15 ON l15.id = m14.link_type_id
-JOIN comp_cast_type AS c13 ON c13.id = c12.subject_id
-WHERE p0.info_type_id >= 21 AND p0.info_type_id <= 22
-AND n1.gender = 'm'
-AND m11.info_type_id >= 4 AND m11.info_type_id <= 8"
-q76.sql,7,1942980,0.1,aka_name|name|cast_info|role_type|char_name|person_info|title|complete_cast,8,bd5516dd,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN cast_info AS c2 ON c2.person_id = n1.id
-JOIN person_info AS p5 ON p5.person_id = n1.id
-JOIN title AS t6 ON t6.id = c2.movie_id
-JOIN char_name AS c4 ON c4.id = c2.person_role_id
-JOIN role_type AS r3 ON r3.id = c2.role_id
-JOIN complete_cast AS c7 ON c7.movie_id = t6.id
-WHERE n1.gender = 'f'
-AND c2.role_id >= 8 AND c2.role_id <= 10
-AND p5.info_type_id >= 21 AND p5.info_type_id <= 24"
-q77.sql,4,38922712,0.1,movie_info|title|cast_info|movie_link|link_type,5,f5fa6141,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN cast_info AS c2 ON c2.movie_id = t1.id
-JOIN movie_link AS m3 ON m3.movie_id = t1.id
-JOIN link_type AS l4 ON l4.id = m3.link_type_id
-WHERE m0.info_type_id >= 4 AND m0.info_type_id <= 7
-AND t1.production_year >= 1932 AND t1.production_year <= 1978"
-q78.sql,8,16078452,0.1,char_name|cast_info|name|aka_name|person_info|info_type|movie_info_idx|title|aka_title,9,545843b0,ok,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-JOIN title AS t7 ON t7.id = c1.movie_id
-JOIN name AS n2 ON n2.id = c1.person_id
-JOIN aka_title AS a8 ON a8.movie_id = t7.id
-JOIN movie_info_idx AS m6 ON m6.movie_id = t7.id
-JOIN aka_name AS a3 ON a3.person_id = n2.id
-JOIN person_info AS p4 ON p4.person_id = n2.id
-JOIN info_type AS i5 ON i5.id = m6.info_type_id
-WHERE t7.production_year >= 1978 AND t7.production_year <= 1992
-AND n2.gender = 'm'
-AND p4.info_type_id >= 21 AND p4.info_type_id <= 24"
-q79.sql,7,1506260,0.1,aka_name|name|person_info|info_type|movie_info_idx|title|movie_link|link_type,8,26a154fd,ok,"SELECT MIN(a0.id) AS result
-FROM aka_name AS a0
-JOIN name AS n1 ON n1.id = a0.person_id
-JOIN person_info AS p2 ON p2.person_id = n1.id
-JOIN info_type AS i3 ON i3.id = p2.info_type_id
-JOIN movie_info_idx AS m4 ON m4.info_type_id = i3.id
-JOIN title AS t5 ON t5.id = m4.movie_id
-JOIN movie_link AS m6 ON m6.movie_id = t5.id
-JOIN link_type AS l7 ON l7.id = m6.link_type_id
-WHERE n1.gender = 'm'
-AND p2.info_type_id >= 24 AND p2.info_type_id <= 26
-AND m4.info_type_id >= 100 AND m4.info_type_id <= 101"
-q80.sql,3,41975348,0.1,movie_info|title|aka_title|kind_type,4,3952a30a,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN aka_title AS a2 ON a2.movie_id = t1.id
-JOIN kind_type AS k3 ON k3.id = t1.kind_id
-WHERE m0.info_type_id >= 3 AND m0.info_type_id <= 4
-AND t1.production_year >= 2003 AND t1.production_year <= 2008"
-q81.sql,2,3507583,0.1,movie_companies|title|movie_info_idx,3,0aa8cac0,ok,"SELECT MIN(m0.id) AS result
-FROM movie_companies AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_info_idx AS m2 ON m2.movie_id = t1.id
-WHERE t1.production_year >= 2010 AND t1.production_year <= 2012"
-q82.sql,3,74591232,0.1,cast_info|role_type|name|aka_name,4,4c41ba08,ok,"SELECT MIN(c0.id) AS result
-FROM cast_info AS c0
-JOIN name AS n2 ON n2.id = c0.person_id
-JOIN role_type AS r1 ON r1.id = c0.role_id
-JOIN aka_name AS a3 ON a3.person_id = n2.id
-WHERE c0.role_id >= 4 AND c0.role_id <= 10
-AND n2.gender = 'f'"
-q83.sql,2,4498606,0.1,person_info|name|aka_name,3,1d393e87,ok,"SELECT MIN(p0.id) AS result
-FROM person_info AS p0
-JOIN name AS n1 ON n1.id = p0.person_id
-JOIN aka_name AS a2 ON a2.person_id = n1.id
-WHERE p0.info_type_id >= 21 AND p0.info_type_id <= 24
-AND n1.gender = 'm'"
-q84.sql,5,16491286,0.1,movie_keyword|title|movie_link|link_type|movie_companies|company_type,6,0356d69e,ok,"SELECT MIN(m0.id) AS result
-FROM movie_keyword AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_companies AS m4 ON m4.movie_id = t1.id
-JOIN movie_link AS m2 ON m2.movie_id = t1.id
-JOIN company_type AS c5 ON c5.id = m4.company_type_id
-JOIN link_type AS l3 ON l3.id = m2.link_type_id
-WHERE m0.keyword_id >= 1768 AND m0.keyword_id <= 2935
-AND t1.production_year >= 1992 AND t1.production_year <= 2003"
-q85.sql,7,24454203,0.1,movie_keyword|keyword|title|movie_info_idx|aka_title|kind_type|movie_companies|info_type,8,656031bd,ok,"SELECT MIN(m0.id) AS result
-FROM movie_keyword AS m0
-JOIN title AS t2 ON t2.id = m0.movie_id
-JOIN keyword AS k1 ON k1.id = m0.keyword_id
-JOIN aka_title AS a4 ON a4.movie_id = t2.id
-JOIN movie_companies AS m6 ON m6.movie_id = t2.id
-JOIN movie_info_idx AS m3 ON m3.movie_id = t2.id
-JOIN kind_type AS k5 ON k5.id = t2.kind_id
-JOIN info_type AS i7 ON i7.id = m3.info_type_id
-WHERE m0.keyword_id >= 7670 AND m0.keyword_id <= 12374
-AND t2.production_year >= 1960 AND t2.production_year <= 1992
-AND k1.phonetic_code LIKE 'A%'"
-q86.sql,2,11982356,0.1,char_name|cast_info|name,3,a2079aec,ok,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-JOIN name AS n2 ON n2.id = c1.person_id
-WHERE c1.role_id >= 2 AND c1.role_id <= 3
-AND n2.gender = 'f'"
-q87.sql,4,3076980,0.1,title|movie_info_idx|info_type|movie_info|person_info,5,4f94d2e5,ok,"SELECT MIN(t0.title) AS result
-FROM title AS t0
-JOIN movie_info AS m3 ON m3.movie_id = t0.id
-JOIN movie_info_idx AS m1 ON m1.movie_id = t0.id
-JOIN info_type AS i2 ON i2.id = m3.info_type_id
-JOIN person_info AS p4 ON p4.info_type_id = i2.id
-WHERE t0.production_year >= 2008 AND t0.production_year <= 2011
-AND m3.info_type_id >= 3 AND m3.info_type_id <= 4
-AND p4.info_type_id >= 26 AND p4.info_type_id <= 38"
-q88.sql,3,547680,0.1,movie_info_idx|info_type|movie_info|title,4,9449bcd7,ok,"SELECT MIN(m0.id) AS result
-FROM movie_info_idx AS m0
-JOIN title AS t3 ON t3.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN movie_info AS m2 ON m2.movie_id = t3.id
-WHERE t3.production_year >= 1992 AND t3.production_year <= 2003
-AND m2.info_type_id >= 7 AND m2.info_type_id <= 8"
-q89.sql,13,38962712,0.1,movie_info|info_type|movie_info_idx|title|kind_type|person_info|name|aka_name|cast_info|aka_title|role_type|char_name|movie_link|movie_companies,14,98dc9285,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t3 ON t3.id = m0.movie_id
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN cast_info AS c8 ON c8.movie_id = t3.id
-JOIN aka_title AS a9 ON a9.movie_id = t3.id
-JOIN movie_companies AS m13 ON m13.movie_id = t3.id
-JOIN movie_info_idx AS m2 ON m2.movie_id = t3.id
-JOIN movie_link AS m12 ON m12.movie_id = t3.id
-JOIN kind_type AS k4 ON k4.id = t3.kind_id
-JOIN person_info AS p5 ON p5.info_type_id = i1.id
-JOIN name AS n6 ON n6.id = c8.person_id
-JOIN char_name AS c11 ON c11.id = c8.person_role_id
-JOIN role_type AS r10 ON r10.id = c8.role_id
-JOIN aka_name AS a7 ON a7.person_id = n6.id
-WHERE m0.info_type_id >= 16 AND m0.info_type_id <= 18
-AND t3.production_year >= 1999 AND t3.production_year <= 2003
-AND p5.info_type_id >= 22 AND p5.info_type_id <= 24"
-q90.sql,3,548100,0.1,movie_info_idx|info_type|person_info|name,4,4cdfa7f7,ok,"SELECT MIN(m0.id) AS result
-FROM movie_info_idx AS m0
-JOIN info_type AS i1 ON i1.id = m0.info_type_id
-JOIN person_info AS p2 ON p2.info_type_id = i1.id
-JOIN name AS n3 ON n3.id = p2.person_id
-WHERE m0.info_type_id >= 100 AND m0.info_type_id <= 101
-AND p2.info_type_id >= 22 AND p2.info_type_id <= 24
-AND n3.gender = 'f'"
-q91.sql,6,16669183,0.1,movie_keyword|title|movie_link|movie_companies|company_type|company_name|link_type,7,53752b09,ok,"SELECT MIN(m0.id) AS result
-FROM movie_keyword AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_companies AS m3 ON m3.movie_id = t1.id
-JOIN movie_link AS m2 ON m2.movie_id = t1.id
-JOIN company_name AS c5 ON c5.id = m3.company_id
-JOIN company_type AS c4 ON c4.id = m3.company_type_id
-JOIN link_type AS l6 ON l6.id = m2.link_type_id
-WHERE m0.keyword_id >= 12374 AND m0.keyword_id <= 20373
-AND t1.production_year >= 2006 AND t1.production_year <= 2010
-AND c5.country_code IN ('[jo]', '[vn]', '[ad]', '[sk]', '[ge]', '[cz]', '[rs]', '[ph]', '[co]', '[gi]', '[tk]', '[ba]', '[uz]', '[mr]', '[mq]', '[pf]', '[ht]', '[so]', '[ps]', '[jp]', '[bi]', '[nl]', '[sd]', '[mt]', '[at]', '[ne]', '[by]', '[bz]', '[mc]', '[cshh]')"
-q92.sql,2,11982356,0.1,char_name|cast_info|title,3,10afe9af,ok,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-JOIN title AS t2 ON t2.id = c1.movie_id
-WHERE t2.production_year >= 2010 AND t2.production_year <= 2012"
-q93.sql,4,2611626,0.1,person_info|info_type|name|aka_name|movie_info_idx,5,4728b92e,ok,"SELECT MIN(p0.id) AS result
-FROM person_info AS p0
-JOIN name AS n2 ON n2.id = p0.person_id
-JOIN info_type AS i1 ON i1.id = p0.info_type_id
-JOIN aka_name AS a3 ON a3.person_id = n2.id
-JOIN movie_info_idx AS m4 ON m4.info_type_id = i1.id
-WHERE p0.info_type_id >= 22 AND p0.info_type_id <= 24
-AND n2.gender = 'f'"
-q94.sql,3,12283256,0.1,char_name|cast_info|name|aka_name,4,9c0a0724,ok,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-JOIN name AS n2 ON n2.id = c1.person_id
-JOIN aka_name AS a3 ON a3.person_id = n2.id
-WHERE c1.role_id >= 1 AND c1.role_id <= 2
-AND n2.gender = 'm'"
-q95.sql,1,10071376,0.1,char_name|cast_info,2,c3bd51fc,ok,"SELECT MIN(c0.name) AS result
-FROM char_name AS c0
-JOIN cast_info AS c1 ON c1.person_role_id = c0.id
-WHERE c1.role_id >= 4 AND c1.role_id <= 8"
-q96.sql,3,37992932,0.1,movie_info|title|movie_companies|company_type,4,8fab9b88,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_companies AS m2 ON m2.movie_id = t1.id
-JOIN company_type AS c3 ON c3.id = m2.company_type_id
-WHERE m0.info_type_id >= 8 AND m0.info_type_id <= 16
-AND t1.production_year >= 2008 AND t1.production_year <= 2011"
-q97.sql,2,38914232,0.1,movie_info|title|cast_info,3,82bfd5c2,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN cast_info AS c2 ON c2.movie_id = t1.id
-WHERE m0.info_type_id >= 16 AND m0.info_type_id <= 18
-AND t1.production_year >= 1978 AND t1.production_year <= 1992
-AND c2.role_id >= 3 AND c2.role_id <= 8"
-q98.sql,2,39356232,0.1,movie_info|title|movie_link,3,9f7be45d,ok,"SELECT MIN(m0.info) AS result
-FROM movie_info AS m0
-JOIN title AS t1 ON t1.id = m0.movie_id
-JOIN movie_link AS m2 ON m2.movie_id = t1.id
-WHERE m0.info_type_id >= 4 AND m0.info_type_id <= 7
-AND t1.production_year >= 2008 AND t1.production_year <= 2011"
-q99.sql,7,21650812,0.1,name|cast_info|char_name|person_info|info_type|movie_info_idx|title|movie_keyword,8,72f0ca54,ok,"SELECT MIN(n0.name) AS result
-FROM name AS n0
-JOIN cast_info AS c1 ON c1.person_id = n0.id
-JOIN person_info AS p3 ON p3.person_id = n0.id
-JOIN title AS t6 ON t6.id = c1.movie_id
-JOIN char_name AS c2 ON c2.id = c1.person_role_id
-JOIN info_type AS i4 ON i4.id = p3.info_type_id
-JOIN movie_info_idx AS m5 ON m5.movie_id = t6.id
-JOIN movie_keyword AS m7 ON m7.movie_id = t6.id
-WHERE n0.gender = 'm'
-AND p3.info_type_id >= 26 AND p3.info_type_id <= 38
-AND t6.production_year >= 1999 AND t6.production_year <= 2006"
+query_file,join_count,bytes_read,target_tables,n_tables,query_hash,gen_status,sql
+q01.sql,1,4048606,info_type|person_info,2,5c4e77ae,ok,"SELECT DISTINCT ON(""person_info"".""id"") ""person_info"".""person_id"" FROM ""person_info"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" WHERE ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q02.sql,11,1492980,aka_name|aka_title|cast_info|info_type|kind_type|movie_info|movie_info_idx|movie_keyword|movie_link|name|person_info|title,12,05ee37bf,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""id"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""title"" ON ""movie_info_idx"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""kind_type"" ON ""aka_title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" WHERE ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""aka_title"".""production_year"" BETWEEN 1905 AND 2016 AND ""name"".""surname_pcode"" BETWEEN 'A32' AND 'Z656' AND ""title"".""md5sum"" BETWEEN '0296d2b20235be36849d015e34d80f2c' AND 'fffffec1b13bc6af69f56864884364e4' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""aka_name"".""md5sum"" BETWEEN '0292cac958e7ccf97eb657f38ec21ee0' AND 'ffffe722e6e7c1a8ba1f66032fef9762' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q03.sql,2,39356232,aka_name|cast_info|name,3,992d40b6,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""surname_pcode"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" WHERE ""aka_name"".""imdb_index"" BETWEEN 'IV' AND 'IV' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565';"
+q04.sql,2,40506232,movie_companies|movie_link|title,3,129e8fc6,ok,"SELECT DISTINCT ON(""title"".""id"") ""title"".""id"" FROM ""title"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" WHERE ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994 AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""title"".""phonetic_code"" BETWEEN 'A2352' AND 'Z6565';"
+q05.sql,17,11588836,aka_name|aka_title|cast_info|char_name|comp_cast_type|company_name|company_type|complete_cast|info_type|keyword|kind_type|movie_companies|movie_info_idx|movie_keyword|movie_link|name|person_info|title,18,e29e9b56,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""surname_pcode"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" LEFT JOIN ""name"" ON ""cast_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" LEFT JOIN ""keyword"" ON ""movie_keyword"".""keyword_id"" = ""keyword"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""company_type"" ON ""movie_companies"".""company_type_id"" = ""company_type"".""id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" WHERE ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""company_name"".""name_pcode_sf"" BETWEEN 'A2145' AND 'Z6543' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""keyword"".""phonetic_code"" BETWEEN 'A2364' AND 'Z653' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""aka_title"".""md5sum"" BETWEEN '0295f180951ddef467f872957d8b8705' AND 'ffffed51d8d1764c844259b95f49853e' AND ""char_name"".""name"" BETWEEN 'Abe Tyson' AND 'üzletember' AND ""aka_name"".""name_pcode_nf"" BETWEEN 'A3415' AND 'Z6565' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565' AND ""title"".""imdb_index"" BETWEEN 'IV' AND 'XXIV' AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q06.sql,4,41706232,company_name|company_type|movie_companies|movie_keyword|title,5,a878aafd,ok,"SELECT DISTINCT ON(""company_name"".""id"") ""company_name"".""imdb_id"" FROM ""company_name"" LEFT JOIN ""movie_companies"" ON ""company_name"".""id"" = ""movie_companies"".""company_id"" LEFT JOIN ""title"" ON ""movie_companies"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""company_type"" ON ""movie_companies"".""company_type_id"" = ""company_type"".""id"" WHERE ""company_name"".""name_pcode_sf"" BETWEEN 'A2145' AND 'Z6543' AND ""title"".""imdb_index"" BETWEEN 'IV' AND 'XXIV' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies';"
+q07.sql,4,50890032,aka_name|info_type|movie_info|name|person_info,5,3e97198d,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""person_info"" ON ""info_type"".""id"" = ""person_info"".""info_type_id"" LEFT JOIN ""name"" ON ""person_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""aka_name"".""name_pcode_nf"" BETWEEN 'A3415' AND 'Z6565' AND ""name"".""name"" BETWEEN 'Akhurst, Veronica' AND 'þórhallsson, Þórhallur' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q08.sql,5,38906712,cast_info|movie_companies|movie_info|movie_keyword|name|title,6,7cfcd7cc,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""id"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""name"" ON ""cast_info"".""person_id"" = ""name"".""id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""title"".""series_years"" BETWEEN '1991-????' AND '????' AND ""name"".""name_pcode_nf"" BETWEEN 'A2621' AND 'Z6565' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"
+q09.sql,0,37445252,movie_info,1,a67b03bb,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info_type_id"" FROM ""movie_info"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)';"
+q10.sql,2,13874800,movie_keyword|movie_link|title,3,8e43453a,ok,"SELECT DISTINCT ON(""title"".""id"") ""title"".""imdb_index"" FROM ""title"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" WHERE ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994 AND ""title"".""series_years"" BETWEEN '1991-????' AND '????';"
+q11.sql,2,40506232,aka_title|kind_type|title,3,f2dda4b1,ok,"SELECT DISTINCT ON(""title"".""id"") ""title"".""imdb_index"" FROM ""title"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""aka_title"" ON ""kind_type"".""id"" = ""aka_title"".""kind_id"" WHERE ""title"".""md5sum"" BETWEEN '0296d2b20235be36849d015e34d80f2c' AND 'fffffec1b13bc6af69f56864884364e4' AND ""aka_title"".""episode_of_id"" BETWEEN 465 AND 25391 AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie';"
+q12.sql,2,11982356,cast_info|char_name|role_type,3,e158b0bd,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""id"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" WHERE ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""char_name"".""surname_pcode"" BETWEEN 'A2514' AND 'Z6562';"
+q13.sql,5,51210312,cast_info|info_type|movie_info|movie_info_idx|movie_keyword|title,6,bf494b25,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""title"" ON ""movie_info_idx"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""title"".""season_nr"" BETWEEN 1 AND 2013 AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q14.sql,5,1918980,cast_info|complete_cast|kind_type|movie_info_idx|movie_keyword|title,6,bd9cd598,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""id"" FROM ""complete_cast"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" WHERE ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""title"".""phonetic_code"" BETWEEN 'A2352' AND 'Z6565' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997';"
+q15.sql,3,23992652,cast_info|char_name|name|person_info,4,3006d95e,ok,"SELECT DISTINCT ON(""name"".""id"") ""name"".""id"" FROM ""name"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""char_name"" ON ""cast_info"".""person_role_id"" = ""char_name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" WHERE ""char_name"".""md5sum"" BETWEEN '02915d50d5e08da33b86102ae812b444' AND 'fffffa526fd5c372942d57a412a9a4fe' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""name"".""md5sum"" BETWEEN '028f683477b8a4c79a33ff63cdc44581' AND 'fffff98a09c03b80a33d5f7ebc83006e';"
+q16.sql,3,22400652,aka_name|info_type|name|person_info,4,ff6a2d9e,ok,"SELECT DISTINCT ON(""name"".""id"") ""name"".""name_pcode_nf"" FROM ""name"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" WHERE ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""aka_name"".""md5sum"" BETWEEN '0292cac958e7ccf97eb657f38ec21ee0' AND 'ffffe722e6e7c1a8ba1f66032fef9762' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565';"
+q17.sql,7,62126010,cast_info|info_type|movie_companies|movie_info|movie_info_idx|name|role_type|title,8,198ac70c,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""movie_id"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""name"" ON ""cast_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565' AND ""title"".""production_year"" BETWEEN 1910 AND 2019 AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q18.sql,6,35967452,aka_name|cast_info|info_type|movie_info_idx|name|person_info|title,7,422e921e,ok,"SELECT DISTINCT ON(""name"".""id"") ""name"".""surname_pcode"" FROM ""name"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" WHERE ""name"".""name_pcode_nf"" BETWEEN 'A2621' AND 'Z6565' AND ""title"".""production_year"" BETWEEN 1910 AND 2019 AND ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""aka_name"".""surname_pcode"" BETWEEN 'A362' AND 'Z656' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997';"
+q19.sql,5,41706712,aka_name|info_type|movie_info_idx|name|person_info|title,6,49720ab5,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""md5sum"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""title"" ON ""movie_info_idx"".""movie_id"" = ""title"".""id"" WHERE ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""aka_name"".""imdb_index"" BETWEEN 'IV' AND 'IV' AND ""name"".""imdb_index"" BETWEEN 'I' AND 'XXXVIII' AND ""title"".""production_year"" BETWEEN 1910 AND 2019 AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q20.sql,2,22092652,aka_name|name|person_info,3,7766a5b3,ok,"SELECT DISTINCT ON(""name"".""id"") ""name"".""imdb_id"" FROM ""name"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" WHERE ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""aka_name"".""surname_pcode"" BETWEEN 'A362' AND 'Z656' AND ""name"".""name"" BETWEEN 'Akhurst, Veronica' AND 'þórhallsson, Þórhallur';"
+q21.sql,6,1927080,comp_cast_type|company_name|company_type|complete_cast|movie_companies|movie_keyword|title,7,52672286,ok,"SELECT DISTINCT ON(""company_type"".""id"") ""company_type"".""id"" FROM ""company_type"" LEFT JOIN ""movie_companies"" ON ""company_type"".""id"" = ""movie_companies"".""company_type_id"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" LEFT JOIN ""title"" ON ""movie_companies"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" WHERE ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""company_name"".""country_code"" BETWEEN '[at]' AND '[zw]' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""title"".""md5sum"" BETWEEN '0296d2b20235be36849d015e34d80f2c' AND 'fffffec1b13bc6af69f56864884364e4' AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"
+q22.sql,2,37145980,cast_info|name|title,3,00db3c39,ok,"SELECT DISTINCT ON(""cast_info"".""id"") ""cast_info"".""id"" FROM ""cast_info"" LEFT JOIN ""name"" ON ""cast_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" WHERE ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""name"".""name"" BETWEEN 'Akhurst, Veronica' AND 'þórhallsson, Þórhallur' AND ""title"".""season_nr"" BETWEEN 1 AND 2013;"
+q23.sql,5,38906232,info_type|movie_info|movie_info_idx|movie_keyword|person_info|title,6,4d876096,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""note"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""person_info"" ON ""info_type"".""id"" = ""person_info"".""info_type_id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""title"".""phonetic_code"" BETWEEN 'A2352' AND 'Z6565' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q24.sql,5,42833358,complete_cast|info_type|movie_companies|movie_info|movie_info_idx|title,6,20688ffe,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997';"
+q25.sql,7,62126010,aka_title|complete_cast|kind_type|movie_companies|movie_info|movie_info_idx|movie_link|title,8,6088f912,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""note"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""kind_type"" ON ""aka_title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""aka_title"".""imdb_index"" BETWEEN 'XII' AND 'XII' AND ""title"".""season_nr"" BETWEEN 1 AND 2013 AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q26.sql,4,33626452,aka_name|cast_info|name|person_info|role_type,5,6f47261e,ok,"SELECT DISTINCT ON(""name"".""id"") ""name"".""surname_pcode"" FROM ""name"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" WHERE ""name"".""surname_pcode"" BETWEEN 'A32' AND 'Z656' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""aka_name"".""surname_pcode"" BETWEEN 'A362' AND 'Z656' AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer';"
+q27.sql,4,50881512,info_type|movie_companies|movie_info|person_info|title,5,66ca0871,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info_type_id"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""person_info"" ON ""info_type"".""id"" = ""person_info"".""info_type_id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q28.sql,2,8000,aka_name|name|person_info,3,eadfc92b,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""name"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" WHERE ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""aka_name"".""name_pcode_cf"" BETWEEN 'A254' AND 'Z6565' AND ""name"".""surname_pcode"" BETWEEN 'A32' AND 'Z656';"
+q29.sql,7,62126010,aka_name|complete_cast|info_type|movie_info|movie_link|name|person_info|title,8,c724e4b2,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""note"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""person_info"" ON ""info_type"".""id"" = ""person_info"".""info_type_id"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""name"" ON ""person_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""aka_name"".""name_pcode_cf"" BETWEEN 'A254' AND 'Z6565' AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565' AND ""title"".""title"" BETWEEN '(#1.10964)' AND 'üç' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q30.sql,2,2856847,aka_title|kind_type|title,3,3e1d0804,ok,"SELECT DISTINCT ON(""aka_title"".""id"") ""aka_title"".""production_year"" FROM ""aka_title"" LEFT JOIN ""kind_type"" ON ""aka_title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""title"" ON ""kind_type"".""id"" = ""title"".""kind_id"" WHERE ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""aka_title"".""phonetic_code"" BETWEEN 'A1652' AND 'Z6564' AND ""title"".""md5sum"" BETWEEN '0296d2b20235be36849d015e34d80f2c' AND 'fffffec1b13bc6af69f56864884364e4';"
+q31.sql,2,39656232,info_type|movie_info|title,3,5a866a95,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info_type_id"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""title"".""phonetic_code"" BETWEEN 'A2352' AND 'Z6565' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q32.sql,2,22092652,aka_name|cast_info|name,3,bf57269e,ok,"SELECT DISTINCT ON(""name"".""id"") ""name"".""surname_pcode"" FROM ""name"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" WHERE ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""aka_name"".""md5sum"" BETWEEN '0292cac958e7ccf97eb657f38ec21ee0' AND 'ffffe722e6e7c1a8ba1f66032fef9762' AND ""name"".""md5sum"" BETWEEN '028f683477b8a4c79a33ff63cdc44581' AND 'fffff98a09c03b80a33d5f7ebc83006e';"
+q33.sql,3,40106232,aka_title|movie_info|movie_keyword|title,4,7424528e,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""aka_title"".""episode_of_id"" BETWEEN 465 AND 25391 AND ""title"".""production_year"" BETWEEN 1910 AND 2019;"
+q34.sql,5,1506260,aka_name|cast_info|char_name|name|person_info|title,6,6f53ea32,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""name_pcode_cf"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""char_name"" ON ""cast_info"".""person_role_id"" = ""char_name"".""id"" WHERE ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""name"".""name_pcode_nf"" BETWEEN 'A2621' AND 'Z6565' AND ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""aka_name"".""name_pcode_nf"" BETWEEN 'A3415' AND 'Z6565' AND ""char_name"".""name_pcode_nf"" BETWEEN 'A252' AND 'Z6565';"
+q35.sql,2,13874800,movie_info|movie_info_idx|title,3,72abeda4,ok,"SELECT DISTINCT ON(""title"".""id"") ""title"".""episode_of_id"" FROM ""title"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" WHERE ""title"".""episode_nr"" BETWEEN 1 AND 91821 AND ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997';"
+q36.sql,3,39356712,cast_info|movie_info|movie_info_idx|title,4,4711bd5a,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info_type_id"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" WHERE ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""title"".""imdb_index"" BETWEEN 'IV' AND 'XXIV';"
+q37.sql,3,57327652,comp_cast_type|complete_cast|movie_companies|title,4,cc7b268f,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""id"" FROM ""complete_cast"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" WHERE ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"
+q38.sql,4,3076980,aka_name|cast_info|name|person_info|title,5,10002a65,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""name_pcode_nf"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" WHERE ""title"".""series_years"" BETWEEN '1991-????' AND '????' AND ""name"".""name"" BETWEEN 'Akhurst, Veronica' AND 'þórhallsson, Þórhallur' AND ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""aka_name"".""md5sum"" BETWEEN '0292cac958e7ccf97eb657f38ec21ee0' AND 'ffffe722e6e7c1a8ba1f66032fef9762';"
+q39.sql,8,1951080,aka_title|comp_cast_type|complete_cast|info_type|kind_type|link_type|movie_info_idx|movie_link|title,9,3f7d51e5,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""movie_id"" FROM ""complete_cast"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""kind_type"" ON ""aka_title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""info_type"" ON ""movie_info_idx"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""link_type"" ON ""movie_link"".""link_type_id"" = ""link_type"".""id"" WHERE ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""link_type"".""link"" BETWEEN 'alternate language version of' AND 'version of' AND ""aka_title"".""note"" BETWEEN '(Australia) (rerun title)' AND '(working ttitle)' AND ""title"".""production_year"" BETWEEN 1910 AND 2019 AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q40.sql,1,21478275,company_name|movie_companies,2,c060ef67,ok,"SELECT DISTINCT ON(""movie_companies"".""id"") ""movie_companies"".""id"" FROM ""movie_companies"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" WHERE ""company_name"".""md5sum"" BETWEEN '0297e5ec22db809e0ff2b2ac09985ab9' AND 'ffff4e2362f22b10d3ac911e2f963b2a' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"
+q41.sql,0,450000,complete_cast,1,bd45a2e3,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""movie_id"" FROM ""complete_cast"" WHERE ""complete_cast"".""status_id"" BETWEEN 3 AND 4;"
+q42.sql,2,39356232,aka_name|name|person_info,3,baf58881,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""imdb_index"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" WHERE ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""aka_name"".""surname_pcode"" BETWEEN 'A362' AND 'Z656' AND ""name"".""name_pcode_nf"" BETWEEN 'A2621' AND 'Z6565';"
+q43.sql,2,38906712,aka_name|cast_info|name,3,598311d6,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""name_pcode_nf"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" WHERE ""aka_name"".""imdb_index"" BETWEEN 'IV' AND 'IV' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""name"".""name"" BETWEEN 'Akhurst, Veronica' AND 'þórhallsson, Þórhallur';"
+q44.sql,1,8000,aka_name|name,2,82615d68,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""person_id"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" WHERE ""aka_name"".""name"" BETWEEN 'Afzelius, Kick' AND 'üNal, Emre' AND ""name"".""name"" BETWEEN 'Akhurst, Veronica' AND 'þórhallsson, Þórhallur';"
+q45.sql,4,14332356,aka_title|cast_info|char_name|movie_companies|title,5,825211d0,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""name_pcode_nf"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" WHERE ""aka_title"".""note"" BETWEEN '(Australia) (rerun title)' AND '(working ttitle)' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""char_name"".""name"" BETWEEN 'Abe Tyson' AND 'üzletember' AND ""title"".""series_years"" BETWEEN '1991-????' AND '????' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"
+q46.sql,8,2264260,aka_name|cast_info|char_name|info_type|movie_keyword|name|person_info|role_type|title,9,bd163016,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""name_pcode_cf"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""char_name"" ON ""cast_info"".""person_role_id"" = ""char_name"".""id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" WHERE ""name"".""gender"" BETWEEN 'f' AND 'm' AND ""title"".""title"" BETWEEN '(#1.10964)' AND 'üç' AND ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""aka_name"".""surname_pcode"" BETWEEN 'A362' AND 'Z656' AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""char_name"".""name"" BETWEEN 'Abe Tyson' AND 'üzletember';"
+q47.sql,3,39356712,cast_info|complete_cast|role_type|title,4,4685e917,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""status_id"" FROM ""complete_cast"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" WHERE ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165;"
+q48.sql,4,51181512,info_type|movie_info|movie_info_idx|movie_keyword|title,5,15a9f375,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""movie_id"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""title"".""production_year"" BETWEEN 1910 AND 2019 AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997';"
+q49.sql,10,4562096,aka_title|cast_info|char_name|company_name|company_type|kind_type|movie_companies|movie_info|movie_link|role_type|title,11,c84d56b7,ok,"SELECT DISTINCT ON(""aka_title"".""id"") ""aka_title"".""imdb_index"" FROM ""aka_title"" LEFT JOIN ""kind_type"" ON ""aka_title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""title"" ON ""kind_type"".""id"" = ""title"".""kind_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" LEFT JOIN ""company_type"" ON ""movie_companies"".""company_type_id"" = ""company_type"".""id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""char_name"" ON ""cast_info"".""person_role_id"" = ""char_name"".""id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""aka_title"".""phonetic_code"" BETWEEN 'A1652' AND 'Z6564' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""company_name"".""country_code"" BETWEEN '[at]' AND '[zw]' AND ""char_name"".""name_pcode_nf"" BETWEEN 'A252' AND 'Z6565' AND ""title"".""episode_nr"" BETWEEN 1 AND 91821 AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q50.sql,4,41494338,movie_companies|movie_info|movie_info_idx|movie_link|title,5,a66e3627,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""movie_id"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""title"".""phonetic_code"" BETWEEN 'A2352' AND 'Z6565' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q51.sql,2,11540356,cast_info|char_name|role_type,3,40559fda,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""surname_pcode"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" WHERE ""char_name"".""surname_pcode"" BETWEEN 'A2514' AND 'Z6562' AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)';"
+q52.sql,2,39356232,aka_name|name|person_info,3,af147623,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""md5sum"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" WHERE ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""aka_name"".""name_pcode_cf"" BETWEEN 'A254' AND 'Z6565' AND ""name"".""name_pcode_nf"" BETWEEN 'A2621' AND 'Z6565';"
+q53.sql,5,38922712,info_type|kind_type|movie_info|movie_info_idx|movie_link|title,6,5e930fee,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info_type_id"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""title"".""imdb_index"" BETWEEN 'IV' AND 'XXIV' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q54.sql,7,3542980,cast_info|comp_cast_type|complete_cast|info_type|movie_info|movie_info_idx|movie_link|title,8,5345d949,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""id"" FROM ""complete_cast"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""title"".""series_years"" BETWEEN '1991-????' AND '????' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q55.sql,2,39356232,aka_name|cast_info|name,3,80593e34,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""person_id"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" WHERE ""aka_name"".""imdb_index"" BETWEEN 'IV' AND 'IV' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""name"".""gender"" BETWEEN 'f' AND 'm';"
+q56.sql,3,40106232,info_type|movie_info|movie_info_idx|title,4,edf6932f,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info_type_id"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""title"" ON ""movie_info_idx"".""movie_id"" = ""title"".""id"" WHERE ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""title"".""series_years"" BETWEEN '1991-????' AND '????';"
+q57.sql,3,22100652,comp_cast_type|complete_cast|kind_type|title,4,dae2b3b7,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""id"" FROM ""complete_cast"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" WHERE ""title"".""production_year"" BETWEEN 1910 AND 2019 AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie';"
+q58.sql,2,39356232,info_type|movie_info|title,3,2740f9a8,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""movie_id"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""title"".""season_nr"" BETWEEN 1 AND 2013;"
+q59.sql,1,38906232,info_type|movie_info,2,e2457294,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""id"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q60.sql,3,40106232,kind_type|movie_info|movie_link|title,4,43b07e0e,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" WHERE ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""title"".""production_year"" BETWEEN 1910 AND 2019 AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q61.sql,6,4270460,aka_title|company_name|company_type|info_type|movie_companies|movie_info_idx|title,7,5bf32139,ok,"SELECT DISTINCT ON(""company_type"".""id"") ""company_type"".""kind"" FROM ""company_type"" LEFT JOIN ""movie_companies"" ON ""company_type"".""id"" = ""movie_companies"".""company_type_id"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" LEFT JOIN ""title"" ON ""movie_companies"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""info_type"" ON ""movie_info_idx"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" WHERE ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""company_name"".""name_pcode_sf"" BETWEEN 'A2145' AND 'Z6543' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""aka_title"".""episode_nr"" BETWEEN 1 AND 4315 AND ""title"".""md5sum"" BETWEEN '0296d2b20235be36849d015e34d80f2c' AND 'fffffec1b13bc6af69f56864884364e4' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q62.sql,7,11533416,aka_title|cast_info|char_name|complete_cast|movie_info|movie_info_idx|movie_link|title,8,4ea2a659,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""md5sum"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""aka_title"".""season_nr"" BETWEEN 1 AND 63 AND ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994 AND ""char_name"".""imdb_index"" BETWEEN 'M' AND 'M';"
+q63.sql,5,38922712,cast_info|movie_info|movie_info_idx|movie_keyword|movie_link|title,6,a59b491b,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""movie_id"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q64.sql,1,21478275,cast_info|name,2,090951d5,ok,"SELECT DISTINCT ON(""name"".""id"") ""name"".""id"" FROM ""name"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" WHERE ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""name"".""name"" BETWEEN 'Akhurst, Veronica' AND 'þórhallsson, Þórhallur';"
+q65.sql,6,1935460,company_name|company_type|info_type|kind_type|movie_companies|movie_info|title,7,a53f59f6,ok,"SELECT DISTINCT ON(""company_type"".""id"") ""company_type"".""kind"" FROM ""company_type"" LEFT JOIN ""movie_companies"" ON ""company_type"".""id"" = ""movie_companies"".""company_type_id"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" LEFT JOIN ""title"" ON ""movie_companies"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""company_name"".""country_code"" BETWEEN '[at]' AND '[zw]' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""title"".""episode_nr"" BETWEEN 1 AND 91821 AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q66.sql,36,2043640,aka_name|aka_title|cast_info|char_name|comp_cast_type|company_name|company_type|complete_cast|info_type|keyword|kind_type|link_type|movie_companies|movie_info|movie_info_idx|movie_keyword|movie_link|name|person_info|role_type|title,21,88b4bed0,ok,"SELECT DISTINCT ON(""company_type"".""id"") ""company_type"".""id"" FROM ""company_type"" LEFT JOIN ""movie_companies"" ON ""company_type"".""id"" = ""movie_companies"".""company_type_id"" LEFT JOIN ""title"" ON ""movie_companies"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""link_type"" ON ""movie_link"".""link_type_id"" = ""link_type"".""id"" LEFT JOIN ""aka_title"" ON ""kind_type"".""id"" = ""aka_title"".""kind_id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""info_type"" ON ""movie_info_idx"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""char_name"" ON ""cast_info"".""person_role_id"" = ""char_name"".""id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" LEFT JOIN ""person_info"" ON ""info_type"".""id"" = ""person_info"".""info_type_id"" LEFT JOIN ""keyword"" ON ""movie_keyword"".""keyword_id"" = ""keyword"".""id"" LEFT JOIN ""name"" ON ""cast_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" WHERE ""company_name"".""md5sum"" BETWEEN '0297e5ec22db809e0ff2b2ac09985ab9' AND 'ffff4e2362f22b10d3ac911e2f963b2a' AND ""title"".""title"" BETWEEN '(#1.10964)' AND 'üç' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565' AND ""keyword"".""phonetic_code"" BETWEEN 'A2364' AND 'Z653' AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""aka_title"".""note"" BETWEEN '(Australia) (rerun title)' AND '(working ttitle)' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""char_name"".""imdb_index"" BETWEEN 'M' AND 'M' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""link_type"".""link"" BETWEEN 'alternate language version of' AND 'version of' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""aka_name"".""surname_pcode"" BETWEEN 'A362' AND 'Z656' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q67.sql,9,72000,aka_name|aka_title|cast_info|info_type|kind_type|link_type|movie_link|name|person_info|title,10,52bd96e6,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""md5sum"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""link_type"" ON ""movie_link"".""link_type_id"" = ""link_type"".""id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""aka_title"" ON ""kind_type"".""id"" = ""aka_title"".""kind_id"" WHERE ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""link_type"".""link"" BETWEEN 'alternate language version of' AND 'version of' AND ""aka_title"".""episode_nr"" BETWEEN 1 AND 4315 AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""aka_name"".""md5sum"" BETWEEN '0292cac958e7ccf97eb657f38ec21ee0' AND 'ffffe722e6e7c1a8ba1f66032fef9762' AND ""name"".""gender"" BETWEEN 'f' AND 'm' AND ""title"".""episode_nr"" BETWEEN 1 AND 91821 AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q68.sql,9,2264260,aka_name|cast_info|info_type|kind_type|movie_info|movie_info_idx|name|person_info|role_type|title,10,8d7ed32e,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""surname_pcode"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_info"" ON ""info_type"".""id"" = ""movie_info"".""info_type_id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" LEFT JOIN ""title"" ON ""movie_info_idx"".""movie_id"" = ""title"".""id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" WHERE ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""name"".""md5sum"" BETWEEN '028f683477b8a4c79a33ff63cdc44581' AND 'fffff98a09c03b80a33d5f7ebc83006e' AND ""title"".""episode_nr"" BETWEEN 1 AND 91821 AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""aka_name"".""md5sum"" BETWEEN '0292cac958e7ccf97eb657f38ec21ee0' AND 'ffffe722e6e7c1a8ba1f66032fef9762' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer';"
+q69.sql,2,13874800,info_type|movie_info|title,3,004f669d,ok,"SELECT DISTINCT ON(""title"".""id"") ""title"".""md5sum"" FROM ""title"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" WHERE ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q70.sql,2,38906712,movie_info|movie_link|title,3,ab2d6850,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info_type_id"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" WHERE ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994 AND ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""title"".""episode_nr"" BETWEEN 1 AND 91821;"
+q71.sql,5,1934980,comp_cast_type|complete_cast|movie_companies|movie_info_idx|movie_link|title,6,995b9889,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""subject_id"" FROM ""complete_cast"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" WHERE ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""title"".""title"" BETWEEN '(#1.10964)' AND 'üç' AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q72.sql,10,70186955,cast_info|comp_cast_type|company_type|complete_cast|info_type|link_type|movie_companies|movie_info_idx|movie_keyword|movie_link|title,11,e9c24f91,ok,"SELECT DISTINCT ON(""cast_info"".""id"") ""cast_info"".""movie_id"" FROM ""cast_info"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""link_type"" ON ""movie_link"".""link_type_id"" = ""link_type"".""id"" LEFT JOIN ""company_type"" ON ""movie_companies"".""company_type_id"" = ""company_type"".""id"" LEFT JOIN ""info_type"" ON ""movie_info_idx"".""info_type_id"" = ""info_type"".""id"" WHERE ""title"".""episode_nr"" BETWEEN 1 AND 91821 AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""link_type"".""link"" BETWEEN 'alternate language version of' AND 'version of' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q73.sql,5,1506260,aka_name|cast_info|info_type|name|person_info|title,6,cbfe6104,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""name"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" WHERE ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""aka_name"".""md5sum"" BETWEEN '0292cac958e7ccf97eb657f38ec21ee0' AND 'ffffe722e6e7c1a8ba1f66032fef9762' AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565' AND ""title"".""episode_nr"" BETWEEN 1 AND 91821 AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q74.sql,2,40506232,movie_info_idx|movie_link|title,3,802f8e03,ok,"SELECT DISTINCT ON(""title"".""id"") ""title"".""imdb_id"" FROM ""title"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" WHERE ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994 AND ""title"".""imdb_index"" BETWEEN 'IV' AND 'XXIV';"
+q75.sql,17,6489076,aka_name|aka_title|cast_info|char_name|comp_cast_type|company_type|complete_cast|kind_type|link_type|movie_companies|movie_info|movie_info_idx|movie_keyword|movie_link|name|person_info|role_type|title,18,76a4eda9,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""id"" FROM ""complete_cast"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""company_type"" ON ""movie_companies"".""company_type_id"" = ""company_type"".""id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" LEFT JOIN ""name"" ON ""cast_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""kind_type"" ON ""aka_title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""char_name"" ON ""cast_info"".""person_role_id"" = ""char_name"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""link_type"" ON ""movie_link"".""link_type_id"" = ""link_type"".""id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""link_type"".""link"" BETWEEN 'alternate language version of' AND 'version of' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""aka_title"".""imdb_index"" BETWEEN 'XII' AND 'XII' AND ""char_name"".""surname_pcode"" BETWEEN 'A2514' AND 'Z6562' AND ""aka_name"".""md5sum"" BETWEEN '0292cac958e7ccf97eb657f38ec21ee0' AND 'ffffe722e6e7c1a8ba1f66032fef9762' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""name"".""gender"" BETWEEN 'f' AND 'm' AND ""title"".""md5sum"" BETWEEN '0296d2b20235be36849d015e34d80f2c' AND 'fffffec1b13bc6af69f56864884364e4' AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q76.sql,7,1942980,aka_title|cast_info|complete_cast|movie_info_idx|movie_keyword|movie_link|role_type|title,8,536185f5,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""status_id"" FROM ""complete_cast"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" WHERE ""aka_title"".""episode_nr"" BETWEEN 1 AND 4315 AND ""title"".""production_year"" BETWEEN 1910 AND 2019 AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q77.sql,4,38922712,aka_title|kind_type|movie_info|movie_keyword|title,5,8c55d0a7,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""aka_title"".""note"" BETWEEN '(Australia) (rerun title)' AND '(working ttitle)' AND ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186;"
+q78.sql,8,16078452,aka_title|company_name|complete_cast|keyword|kind_type|movie_companies|movie_info|movie_keyword|title,9,b3f9b001,ok,"SELECT DISTINCT ON(""aka_title"".""id"") ""aka_title"".""phonetic_code"" FROM ""aka_title"" LEFT JOIN ""title"" ON ""aka_title"".""movie_id"" = ""title"".""id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" LEFT JOIN ""kind_type"" ON ""aka_title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""keyword"" ON ""movie_keyword"".""keyword_id"" = ""keyword"".""id"" WHERE ""company_name"".""name_pcode_sf"" BETWEEN 'A2145' AND 'Z6543' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""aka_title"".""imdb_index"" BETWEEN 'XII' AND 'XII' AND ""title"".""episode_nr"" BETWEEN 1 AND 91821 AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""keyword"".""phonetic_code"" BETWEEN 'A2364' AND 'Z653' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"
+q79.sql,7,1506260,aka_title|company_name|company_type|complete_cast|kind_type|movie_companies|movie_info|title,8,e7339fc5,ok,"SELECT DISTINCT ON(""company_type"".""id"") ""company_type"".""kind"" FROM ""company_type"" LEFT JOIN ""movie_companies"" ON ""company_type"".""id"" = ""movie_companies"".""company_type_id"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" LEFT JOIN ""title"" ON ""movie_companies"".""movie_id"" = ""title"".""id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""company_name"".""name"" BETWEEN '6 {ft} 1 Productions' AND 'ö Filmproduktion' AND ""aka_title"".""phonetic_code"" BETWEEN 'A1652' AND 'Z6564' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""title"".""imdb_index"" BETWEEN 'IV' AND 'XXIV' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"
+q80.sql,3,41975348,aka_name|info_type|name|person_info,4,b917f7e6,ok,"SELECT DISTINCT ON(""person_info"".""id"") ""person_info"".""person_id"" FROM ""person_info"" LEFT JOIN ""name"" ON ""person_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" WHERE ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""aka_name"".""surname_pcode"" BETWEEN 'A362' AND 'Z656' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""name"".""md5sum"" BETWEEN '028f683477b8a4c79a33ff63cdc44581' AND 'fffff98a09c03b80a33d5f7ebc83006e';"
+q81.sql,2,3507583,company_name|company_type|movie_companies,3,f94a8d73,ok,"SELECT DISTINCT ON(""movie_companies"".""id"") ""movie_companies"".""company_id"" FROM ""movie_companies"" LEFT JOIN ""company_type"" ON ""movie_companies"".""company_type_id"" = ""company_type"".""id"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" WHERE ""company_name"".""md5sum"" BETWEEN '0297e5ec22db809e0ff2b2ac09985ab9' AND 'ffff4e2362f22b10d3ac911e2f963b2a' AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"
+q82.sql,3,74591232,cast_info|complete_cast|movie_info_idx|title,4,2fe75df8,ok,"SELECT DISTINCT ON(""complete_cast"".""id"") ""complete_cast"".""status_id"" FROM ""complete_cast"" LEFT JOIN ""title"" ON ""complete_cast"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" WHERE ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4;"
+q83.sql,2,4498606,info_type|movie_info|person_info,3,6105b07c,ok,"SELECT DISTINCT ON(""person_info"".""id"") ""person_info"".""info_type_id"" FROM ""person_info"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""movie_info"" ON ""info_type"".""id"" = ""movie_info"".""info_type_id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q84.sql,5,16491286,keyword|kind_type|movie_info|movie_keyword|movie_link|title,6,e33ae82b,ok,"SELECT DISTINCT ON(""title"".""id"") ""title"".""episode_nr"" FROM ""title"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""keyword"" ON ""movie_keyword"".""keyword_id"" = ""keyword"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""movie_info"" ON ""title"".""id"" = ""movie_info"".""movie_id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" WHERE ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""title"".""episode_of_id"" BETWEEN 15711 AND 2528186 AND ""keyword"".""keyword"" BETWEEN 'acidosis' AND 'øresund' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q85.sql,7,24454203,cast_info|char_name|complete_cast|info_type|kind_type|movie_info_idx|name|title,8,acb1829f,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""name_pcode_nf"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""name"" ON ""cast_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" LEFT JOIN ""info_type"" ON ""movie_info_idx"".""info_type_id"" = ""info_type"".""id"" WHERE ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""char_name"".""name"" BETWEEN 'Abe Tyson' AND 'üzletember' AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565' AND ""title"".""series_years"" BETWEEN '1991-????' AND '????' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q86.sql,2,11982356,cast_info|char_name|role_type,3,aa45d03d,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""name"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" WHERE ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""char_name"".""surname_pcode"" BETWEEN 'A2514' AND 'Z6562';"
+q87.sql,4,3076980,aka_name|cast_info|info_type|name|person_info,5,3f8b7cc1,ok,"SELECT DISTINCT ON(""aka_name"".""id"") ""aka_name"".""surname_pcode"" FROM ""aka_name"" LEFT JOIN ""name"" ON ""aka_name"".""person_id"" = ""name"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" WHERE ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""aka_name"".""surname_pcode"" BETWEEN 'A362' AND 'Z656' AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q88.sql,3,547680,complete_cast|link_type|movie_link|title,4,aad2f56d,ok,"SELECT DISTINCT ON(""movie_link"".""id"") ""movie_link"".""linked_movie_id"" FROM ""movie_link"" LEFT JOIN ""link_type"" ON ""movie_link"".""link_type_id"" = ""link_type"".""id"" LEFT JOIN ""title"" ON ""movie_link"".""movie_id"" = ""title"".""id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" WHERE ""link_type"".""link"" BETWEEN 'alternate language version of' AND 'version of' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994 AND ""title"".""series_years"" BETWEEN '1991-????' AND '????' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4;"
+q89.sql,13,38962712,aka_title|cast_info|comp_cast_type|complete_cast|info_type|kind_type|link_type|movie_info|movie_info_idx|movie_keyword|movie_link|name|person_info|title,14,bdd86826,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""note"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""person_info"" ON ""info_type"".""id"" = ""person_info"".""info_type_id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""aka_title"" ON ""title"".""id"" = ""aka_title"".""movie_id"" LEFT JOIN ""kind_type"" ON ""aka_title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""movie_link"" ON ""title"".""id"" = ""movie_link"".""movie_id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" LEFT JOIN ""comp_cast_type"" ON ""complete_cast"".""subject_id"" = ""comp_cast_type"".""id"" LEFT JOIN ""movie_keyword"" ON ""title"".""id"" = ""movie_keyword"".""movie_id"" LEFT JOIN ""link_type"" ON ""movie_link"".""link_type_id"" = ""link_type"".""id"" LEFT JOIN ""name"" ON ""person_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" WHERE ""movie_info"".""info"" BETWEEN '$25,000' AND '€ 999,554 (Belgium) (25 March 2007)' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""link_type"".""link"" BETWEEN 'alternate language version of' AND 'version of' AND ""aka_title"".""phonetic_code"" BETWEEN 'A1652' AND 'Z6564' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""name"".""gender"" BETWEEN 'f' AND 'm' AND ""title"".""title"" BETWEEN '(#1.10964)' AND 'üç' AND ""comp_cast_type"".""kind"" BETWEEN 'cast' AND 'crew' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now' AND ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994;"
+q90.sql,3,548100,kind_type|movie_companies|movie_link|title,4,5ef880e6,ok,"SELECT DISTINCT ON(""movie_link"".""id"") ""movie_link"".""linked_movie_id"" FROM ""movie_link"" LEFT JOIN ""title"" ON ""movie_link"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" WHERE ""movie_link"".""linked_movie_id"" BETWEEN 11104 AND 2524994 AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)' AND ""title"".""series_years"" BETWEEN '1991-????' AND '????' AND ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie';"
+q91.sql,6,16669183,cast_info|company_name|company_type|complete_cast|movie_companies|name|title,7,9c8218b7,ok,"SELECT DISTINCT ON(""movie_companies"".""id"") ""movie_companies"".""company_id"" FROM ""movie_companies"" LEFT JOIN ""company_name"" ON ""movie_companies"".""company_id"" = ""company_name"".""id"" LEFT JOIN ""company_type"" ON ""movie_companies"".""company_type_id"" = ""company_type"".""id"" LEFT JOIN ""title"" ON ""movie_companies"".""movie_id"" = ""title"".""id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" LEFT JOIN ""name"" ON ""cast_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" WHERE ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""company_name"".""md5sum"" BETWEEN '0297e5ec22db809e0ff2b2ac09985ab9' AND 'ffff4e2362f22b10d3ac911e2f963b2a' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""company_type"".""kind"" BETWEEN 'distributors' AND 'special effects companies' AND ""name"".""name_pcode_nf"" BETWEEN 'A2621' AND 'Z6565' AND ""title"".""phonetic_code"" BETWEEN 'A2352' AND 'Z6565' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"
+q92.sql,2,11982356,cast_info|char_name|role_type,3,99527613,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""imdb_index"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" WHERE ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""char_name"".""surname_pcode"" BETWEEN 'A2514' AND 'Z6562';"
+q93.sql,4,2611626,info_type|movie_info_idx|name|person_info|title,5,213da414,ok,"SELECT DISTINCT ON(""person_info"".""id"") ""person_info"".""id"" FROM ""person_info"" LEFT JOIN ""info_type"" ON ""person_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""name"" ON ""person_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""movie_info_idx"" ON ""info_type"".""id"" = ""movie_info_idx"".""info_type_id"" LEFT JOIN ""title"" ON ""movie_info_idx"".""movie_id"" = ""title"".""id"" WHERE ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""name"".""gender"" BETWEEN 'f' AND 'm' AND ""title"".""imdb_index"" BETWEEN 'IV' AND 'XXIV' AND ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q94.sql,3,12283256,aka_name|cast_info|char_name|name,4,1bc93655,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""name_pcode_nf"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" LEFT JOIN ""name"" ON ""cast_info"".""person_id"" = ""name"".""id"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" WHERE ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165 AND ""aka_name"".""name"" BETWEEN 'Afzelius, Kick' AND 'üNal, Emre' AND ""char_name"".""md5sum"" BETWEEN '02915d50d5e08da33b86102ae812b444' AND 'fffffa526fd5c372942d57a412a9a4fe' AND ""name"".""name_pcode_nf"" BETWEEN 'A2621' AND 'Z6565';"
+q95.sql,1,10071376,cast_info|char_name,2,43d983ab,ok,"SELECT DISTINCT ON(""char_name"".""id"") ""char_name"".""imdb_id"" FROM ""char_name"" LEFT JOIN ""cast_info"" ON ""char_name"".""id"" = ""cast_info"".""person_role_id"" WHERE ""char_name"".""imdb_index"" BETWEEN 'M' AND 'M' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)';"
+q96.sql,3,37992932,cast_info|kind_type|movie_info|title,4,33e8520f,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""movie_id"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""kind_type"" ON ""title"".""kind_id"" = ""kind_type"".""id"" LEFT JOIN ""cast_info"" ON ""title"".""id"" = ""cast_info"".""movie_id"" WHERE ""kind_type"".""kind"" BETWEEN 'episode' AND 'video movie' AND ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""title"".""phonetic_code"" BETWEEN 'A2352' AND 'Z6565' AND ""cast_info"".""nr_order"" BETWEEN 0 AND 1115798165;"
+q97.sql,2,38914232,complete_cast|movie_info|title,3,26bd9ecb,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""note"" FROM ""movie_info"" LEFT JOIN ""title"" ON ""movie_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""complete_cast"" ON ""title"".""id"" = ""complete_cast"".""movie_id"" WHERE ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""complete_cast"".""status_id"" BETWEEN 3 AND 4 AND ""title"".""series_years"" BETWEEN '1991-????' AND '????';"
+q98.sql,2,39356232,info_type|movie_info|person_info,3,b2f129dc,ok,"SELECT DISTINCT ON(""movie_info"".""id"") ""movie_info"".""info"" FROM ""movie_info"" LEFT JOIN ""info_type"" ON ""movie_info"".""info_type_id"" = ""info_type"".""id"" LEFT JOIN ""person_info"" ON ""info_type"".""id"" = ""person_info"".""info_type_id"" WHERE ""person_info"".""info"" BETWEEN '""Celebrity Sleuth"" (USA), 2004, Iss. 35' AND 'Þórsson, Sindri Eldon' AND ""movie_info"".""note"" BETWEEN '(Berlin International Film Festival)' AND 'ôtre k''ôtre' AND ""info_type"".""info"" BETWEEN 'LD additional information' AND 'where now';"
+q99.sql,7,21650812,aka_name|cast_info|movie_companies|movie_info_idx|name|person_info|role_type|title,8,35b00ff3,ok,"SELECT DISTINCT ON(""name"".""id"") ""name"".""imdb_index"" FROM ""name"" LEFT JOIN ""aka_name"" ON ""name"".""id"" = ""aka_name"".""person_id"" LEFT JOIN ""cast_info"" ON ""name"".""id"" = ""cast_info"".""person_id"" LEFT JOIN ""role_type"" ON ""cast_info"".""role_id"" = ""role_type"".""id"" LEFT JOIN ""person_info"" ON ""name"".""id"" = ""person_info"".""person_id"" LEFT JOIN ""title"" ON ""cast_info"".""movie_id"" = ""title"".""id"" LEFT JOIN ""movie_companies"" ON ""title"".""id"" = ""movie_companies"".""movie_id"" LEFT JOIN ""movie_info_idx"" ON ""title"".""id"" = ""movie_info_idx"".""movie_id"" WHERE ""movie_info_idx"".""info"" BETWEEN '.....23010' AND '9997' AND ""cast_info"".""note"" BETWEEN '(advisor) (as Dan Carter)' AND '(épouse de Raymond)' AND ""person_info"".""note"" BETWEEN 'Gary Brumburgh / gr-home@pacbell.net' AND 'Ünsal Babayigit' AND ""aka_name"".""name_pcode_nf"" BETWEEN 'A3415' AND 'Z6565' AND ""name"".""name_pcode_cf"" BETWEEN 'A2526' AND 'Z6565' AND ""title"".""production_year"" BETWEEN 1910 AND 2019 AND ""role_type"".""role"" BETWEEN 'actor' AND 'writer' AND ""movie_companies"".""note"" BETWEEN '(1911) (USA) (theatrical)' AND 'co-production)';"

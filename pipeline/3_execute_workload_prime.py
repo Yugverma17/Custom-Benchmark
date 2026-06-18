@@ -11,8 +11,8 @@ from pipeline.utils import (
 )
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--db',  required=True, help='target DB: imdb | tpch | tpcds')
-parser.add_argument('--exp', required=True, help='experiment name, e.g. imdb_to_tpch')
+parser.add_argument('--db',  required=True)
+parser.add_argument('--exp', required=True)
 args = parser.parse_args()
 
 db_path    = DB_PATHS[args.db]
@@ -76,8 +76,8 @@ for i, wp in enumerate(wp_rows, 1):
         'rows_returned'   : result['rows_returned'],
         'status'          : result['status'],
         'error_msg'       : result['error_msg'],
-        'src_join_count'  : wp['source_join_count'],
-        'src_bytes_read'  : wp['source_bytes_read'],
+        'src_join_count'  : wp.get('source_join_count', wp.get('join_count', 0)),
+        'src_bytes_read'  : wp.get('source_bytes_read', wp.get('bytes_read', 0)),
     }
     tp_rows.append(row)
 

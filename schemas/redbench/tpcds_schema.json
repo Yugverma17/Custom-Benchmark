@@ -1,0 +1,2024 @@
+{
+  "table_col_info": {
+    "call_center": {
+      "cc_call_center_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "cc_call_center_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_rec_start_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "cc_rec_end_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "cc_closed_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cc_open_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cc_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_class": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_employees": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cc_sq_ft": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cc_hours": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_manager": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_mkt_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cc_mkt_class": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_mkt_desc": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_market_manager": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_division": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cc_division_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_company": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cc_company_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_street_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_street_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_street_type": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_suite_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_city": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_county": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_state": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_zip": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_country": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cc_gmt_offset": {
+        "type": "DECIMAL(5,2)",
+        "pk": false
+      },
+      "cc_tax_percentage": {
+        "type": "DECIMAL(5,2)",
+        "pk": false
+      }
+    },
+    "catalog_page": {
+      "cp_catalog_page_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "cp_catalog_page_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cp_start_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cp_end_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cp_department": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cp_catalog_number": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cp_catalog_page_number": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cp_description": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cp_type": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "catalog_returns": {
+      "cr_returned_date_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "cr_returned_time_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_item_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_refunded_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_refunded_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_refunded_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_refunded_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_returning_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_returning_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_returning_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_returning_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_call_center_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_catalog_page_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_ship_mode_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_warehouse_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_reason_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_order_number": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_return_quantity": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cr_return_amount": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cr_return_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cr_return_amt_inc_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cr_fee": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cr_return_ship_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cr_refunded_cash": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cr_reversed_charge": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cr_store_credit": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cr_net_loss": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      }
+    },
+    "catalog_sales": {
+      "cs_sold_date_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "cs_sold_time_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_ship_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_bill_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_bill_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_bill_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_bill_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_ship_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_ship_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_ship_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_ship_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_call_center_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_catalog_page_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_ship_mode_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_warehouse_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_item_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_promo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_order_number": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_quantity": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cs_wholesale_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_list_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_sales_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_ext_discount_amt": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_ext_sales_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_ext_wholesale_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_ext_list_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_ext_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_coupon_amt": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_ext_ship_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_net_paid": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_net_paid_inc_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_net_paid_inc_ship": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_net_paid_inc_ship_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "cs_net_profit": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      }
+    },
+    "customer": {
+      "c_customer_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "c_customer_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_current_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "c_current_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "c_current_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "c_first_shipto_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "c_first_sales_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "c_salutation": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_first_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_last_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_preferred_cust_flag": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_birth_day": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "c_birth_month": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "c_birth_year": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "c_birth_country": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_login": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_email_address": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_last_review_date_sk": {
+        "type": "INTEGER",
+        "pk": false
+      }
+    },
+    "customer_address": {
+      "ca_address_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "ca_address_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_street_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_street_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_street_type": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_suite_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_city": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_county": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_state": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_zip": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_country": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "ca_gmt_offset": {
+        "type": "DECIMAL(5,2)",
+        "pk": false
+      },
+      "ca_location_type": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "customer_demographics": {
+      "cd_demo_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "cd_gender": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cd_marital_status": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cd_education_status": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cd_purchase_estimate": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cd_credit_rating": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "cd_dep_count": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cd_dep_employed_count": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "cd_dep_college_count": {
+        "type": "INTEGER",
+        "pk": false
+      }
+    },
+    "date_dim": {
+      "d_date_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "d_date_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "d_month_seq": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_week_seq": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_quarter_seq": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_year": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_dow": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_moy": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_dom": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_qoy": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_fy_year": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_fy_quarter_seq": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_fy_week_seq": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_day_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_quarter_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_holiday": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_weekend": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_following_holiday": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_first_dom": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_last_dom": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_same_day_ly": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_same_day_lq": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "d_current_day": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_current_week": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_current_month": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_current_quarter": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "d_current_year": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "household_demographics": {
+      "hd_demo_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "hd_income_band_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "hd_buy_potential": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "hd_dep_count": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "hd_vehicle_count": {
+        "type": "INTEGER",
+        "pk": false
+      }
+    },
+    "income_band": {
+      "ib_income_band_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "ib_lower_bound": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ib_upper_bound": {
+        "type": "INTEGER",
+        "pk": false
+      }
+    },
+    "inventory": {
+      "inv_date_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "inv_item_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "inv_warehouse_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "inv_quantity_on_hand": {
+        "type": "INTEGER",
+        "pk": false
+      }
+    },
+    "item": {
+      "i_item_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "i_item_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_rec_start_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "i_rec_end_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "i_item_desc": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_current_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "i_wholesale_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "i_brand_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "i_brand": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_class_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "i_class": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_category_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "i_category": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_manufact_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "i_manufact": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_size": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_formulation": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_color": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_units": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_container": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "i_manager_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "i_product_name": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "promotion": {
+      "p_promo_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "p_promo_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_start_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "p_end_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "p_item_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "p_cost": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "p_response_target": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "p_promo_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_channel_dmail": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_channel_email": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_channel_catalog": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_channel_tv": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_channel_radio": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_channel_press": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_channel_event": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_channel_demo": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_channel_details": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_purpose": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_discount_active": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "reason": {
+      "r_reason_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "r_reason_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "r_reason_desc": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "ship_mode": {
+      "sm_ship_mode_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "sm_ship_mode_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "sm_type": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "sm_code": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "sm_carrier": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "sm_contract": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "store": {
+      "s_store_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "s_store_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_rec_start_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "s_rec_end_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "s_closed_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "s_store_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_number_employees": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "s_floor_space": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "s_hours": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_manager": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_market_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "s_geography_class": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_market_desc": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_market_manager": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_division_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "s_division_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_company_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "s_company_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_street_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_street_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_street_type": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_suite_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_city": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_county": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_state": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_zip": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_country": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_gmt_offset": {
+        "type": "DECIMAL(5,2)",
+        "pk": false
+      },
+      "s_tax_percentage": {
+        "type": "DECIMAL(5,2)",
+        "pk": false
+      }
+    },
+    "store_returns": {
+      "sr_returned_date_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "sr_return_time_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_item_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_store_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_reason_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_ticket_number": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_return_quantity": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "sr_return_amt": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "sr_return_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "sr_return_amt_inc_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "sr_fee": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "sr_return_ship_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "sr_refunded_cash": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "sr_reversed_charge": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "sr_store_credit": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "sr_net_loss": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      }
+    },
+    "store_sales": {
+      "ss_sold_date_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "ss_sold_time_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_item_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_store_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_promo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_ticket_number": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_quantity": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ss_wholesale_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_list_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_sales_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_ext_discount_amt": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_ext_sales_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_ext_wholesale_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_ext_list_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_ext_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_coupon_amt": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_net_paid": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_net_paid_inc_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ss_net_profit": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      }
+    },
+    "time_dim": {
+      "t_time_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "t_time_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "t_time": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "t_hour": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "t_minute": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "t_second": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "t_am_pm": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "t_shift": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "t_sub_shift": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "t_meal_time": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "warehouse": {
+      "w_warehouse_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "w_warehouse_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_warehouse_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_warehouse_sq_ft": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "w_street_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_street_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_street_type": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_suite_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_city": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_county": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_state": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_zip": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_country": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "w_gmt_offset": {
+        "type": "DECIMAL(5,2)",
+        "pk": false
+      }
+    },
+    "web_page": {
+      "wp_web_page_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "wp_web_page_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "wp_rec_start_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "wp_rec_end_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "wp_creation_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wp_access_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wp_autogen_flag": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "wp_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wp_url": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "wp_type": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "wp_char_count": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wp_link_count": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wp_image_count": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wp_max_ad_count": {
+        "type": "INTEGER",
+        "pk": false
+      }
+    },
+    "web_returns": {
+      "wr_returned_date_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "wr_returned_time_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_item_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_refunded_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_refunded_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_refunded_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_refunded_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_returning_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_returning_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_returning_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_returning_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_web_page_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_reason_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_order_number": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_return_quantity": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "wr_return_amt": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "wr_return_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "wr_return_amt_inc_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "wr_fee": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "wr_return_ship_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "wr_refunded_cash": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "wr_reversed_charge": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "wr_account_credit": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "wr_net_loss": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      }
+    },
+    "web_sales": {
+      "ws_sold_date_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "ws_sold_time_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_ship_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_item_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_bill_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_bill_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_bill_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_bill_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_ship_customer_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_ship_cdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_ship_hdemo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_ship_addr_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_web_page_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_web_site_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_ship_mode_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_warehouse_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_promo_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_order_number": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_quantity": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ws_wholesale_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_list_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_sales_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_ext_discount_amt": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_ext_sales_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_ext_wholesale_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_ext_list_price": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_ext_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_coupon_amt": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_ext_ship_cost": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_net_paid": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_net_paid_inc_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_net_paid_inc_ship": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_net_paid_inc_ship_tax": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      },
+      "ws_net_profit": {
+        "type": "DECIMAL(7,2)",
+        "pk": false
+      }
+    },
+    "web_site": {
+      "web_site_sk": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "web_site_id": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_rec_start_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "web_rec_end_date": {
+        "type": "DATE",
+        "pk": false
+      },
+      "web_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_open_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "web_close_date_sk": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "web_class": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_manager": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_mkt_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "web_mkt_class": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_mkt_desc": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_market_manager": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_company_id": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "web_company_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_street_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_street_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_street_type": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_suite_number": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_city": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_county": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_state": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_zip": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_country": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "web_gmt_offset": {
+        "type": "DECIMAL(5,2)",
+        "pk": false
+      },
+      "web_tax_percentage": {
+        "type": "DECIMAL(5,2)",
+        "pk": false
+      }
+    }
+  },
+  "relationships": [
+    [
+      "store_sales",
+      "ss_sold_date_sk",
+      "date_dim",
+      "d_date_sk"
+    ],
+    [
+      "store_sales",
+      "ss_sold_time_sk",
+      "time_dim",
+      "t_time_sk"
+    ],
+    [
+      "store_sales",
+      "ss_item_sk",
+      "item",
+      "i_item_sk"
+    ],
+    [
+      "store_sales",
+      "ss_customer_sk",
+      "customer",
+      "c_customer_sk"
+    ],
+    [
+      "store_sales",
+      "ss_cdemo_sk",
+      "customer_demographics",
+      "cd_demo_sk"
+    ],
+    [
+      "store_sales",
+      "ss_hdemo_sk",
+      "household_demographics",
+      "hd_demo_sk"
+    ],
+    [
+      "store_sales",
+      "ss_addr_sk",
+      "customer_address",
+      "ca_address_sk"
+    ],
+    [
+      "store_sales",
+      "ss_store_sk",
+      "store",
+      "s_store_sk"
+    ],
+    [
+      "store_sales",
+      "ss_promo_sk",
+      "promotion",
+      "p_promo_sk"
+    ],
+    [
+      "web_sales",
+      "ws_sold_date_sk",
+      "date_dim",
+      "d_date_sk"
+    ],
+    [
+      "web_sales",
+      "ws_item_sk",
+      "item",
+      "i_item_sk"
+    ],
+    [
+      "web_sales",
+      "ws_bill_customer_sk",
+      "customer",
+      "c_customer_sk"
+    ],
+    [
+      "web_sales",
+      "ws_bill_cdemo_sk",
+      "customer_demographics",
+      "cd_demo_sk"
+    ],
+    [
+      "web_sales",
+      "ws_bill_hdemo_sk",
+      "household_demographics",
+      "hd_demo_sk"
+    ],
+    [
+      "web_sales",
+      "ws_bill_addr_sk",
+      "customer_address",
+      "ca_address_sk"
+    ],
+    [
+      "web_sales",
+      "ws_web_site_sk",
+      "web_site",
+      "web_site_sk"
+    ],
+    [
+      "web_sales",
+      "ws_web_page_sk",
+      "web_page",
+      "wp_web_page_sk"
+    ],
+    [
+      "web_sales",
+      "ws_promo_sk",
+      "promotion",
+      "p_promo_sk"
+    ],
+    [
+      "catalog_sales",
+      "cs_sold_date_sk",
+      "date_dim",
+      "d_date_sk"
+    ],
+    [
+      "catalog_sales",
+      "cs_item_sk",
+      "item",
+      "i_item_sk"
+    ],
+    [
+      "catalog_sales",
+      "cs_bill_customer_sk",
+      "customer",
+      "c_customer_sk"
+    ],
+    [
+      "catalog_sales",
+      "cs_bill_cdemo_sk",
+      "customer_demographics",
+      "cd_demo_sk"
+    ],
+    [
+      "catalog_sales",
+      "cs_bill_hdemo_sk",
+      "household_demographics",
+      "hd_demo_sk"
+    ],
+    [
+      "catalog_sales",
+      "cs_bill_addr_sk",
+      "customer_address",
+      "ca_address_sk"
+    ],
+    [
+      "catalog_sales",
+      "cs_catalog_page_sk",
+      "catalog_page",
+      "cp_catalog_page_sk"
+    ],
+    [
+      "catalog_sales",
+      "cs_promo_sk",
+      "promotion",
+      "p_promo_sk"
+    ],
+    [
+      "store_returns",
+      "sr_returned_date_sk",
+      "date_dim",
+      "d_date_sk"
+    ],
+    [
+      "store_returns",
+      "sr_item_sk",
+      "item",
+      "i_item_sk"
+    ],
+    [
+      "store_returns",
+      "sr_customer_sk",
+      "customer",
+      "c_customer_sk"
+    ],
+    [
+      "store_returns",
+      "sr_store_sk",
+      "store",
+      "s_store_sk"
+    ],
+    [
+      "web_returns",
+      "wr_returned_date_sk",
+      "date_dim",
+      "d_date_sk"
+    ],
+    [
+      "web_returns",
+      "wr_item_sk",
+      "item",
+      "i_item_sk"
+    ],
+    [
+      "web_returns",
+      "wr_refunded_customer_sk",
+      "customer",
+      "c_customer_sk"
+    ],
+    [
+      "web_returns",
+      "wr_web_page_sk",
+      "web_page",
+      "wp_web_page_sk"
+    ],
+    [
+      "catalog_returns",
+      "cr_returned_date_sk",
+      "date_dim",
+      "d_date_sk"
+    ],
+    [
+      "catalog_returns",
+      "cr_item_sk",
+      "item",
+      "i_item_sk"
+    ],
+    [
+      "catalog_returns",
+      "cr_refunded_customer_sk",
+      "customer",
+      "c_customer_sk"
+    ],
+    [
+      "catalog_returns",
+      "cr_catalog_page_sk",
+      "catalog_page",
+      "cp_catalog_page_sk"
+    ],
+    [
+      "inventory",
+      "inv_date_sk",
+      "date_dim",
+      "d_date_sk"
+    ],
+    [
+      "inventory",
+      "inv_item_sk",
+      "item",
+      "i_item_sk"
+    ],
+    [
+      "inventory",
+      "inv_warehouse_sk",
+      "warehouse",
+      "w_warehouse_sk"
+    ],
+    [
+      "customer",
+      "c_current_addr_sk",
+      "customer_address",
+      "ca_address_sk"
+    ],
+    [
+      "customer",
+      "c_current_cdemo_sk",
+      "customer_demographics",
+      "cd_demo_sk"
+    ],
+    [
+      "customer",
+      "c_current_hdemo_sk",
+      "household_demographics",
+      "hd_demo_sk"
+    ],
+    [
+      "household_demographics",
+      "hd_income_band_sk",
+      "income_band",
+      "ib_income_band_sk"
+    ]
+  ]
+}

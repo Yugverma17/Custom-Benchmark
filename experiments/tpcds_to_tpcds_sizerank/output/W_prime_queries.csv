@@ -1,895 +1,100 @@
-query_file,source_join_count,source_bytes_read,relative_selectivity,target_tables,n_tables,query_hash,gen_status,sql
-q01.sql,1,4048606,0.1,store_returns|date_dim,2,17c7780e,ok,"SELECT MIN(s0.sr_return_amt) AS result
-FROM store_returns AS s0
-JOIN date_dim AS d1 ON d1.d_date_sk = s0.sr_returned_date_sk
-WHERE d1.d_year >= 1940 AND d1.d_year <= 1980"
-q02.sql,11,1492980,0.1,date_dim|catalog_returns|catalog_page|item|customer|store_sales|promotion|catalog_sales|web_sales|household_demographics|income_band|inventory,12,ea99996f,timeout,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s5 ON s5.ss_sold_date_sk = d0.d_date_sk
-JOIN web_sales AS w8 ON w8.ws_sold_date_sk = d0.d_date_sk
-JOIN catalog_sales AS c7 ON c7.cs_sold_date_sk = d0.d_date_sk
-JOIN catalog_returns AS c1 ON c1.cr_returned_date_sk = d0.d_date_sk
-JOIN inventory AS i11 ON i11.inv_date_sk = d0.d_date_sk
-JOIN item AS i3 ON i3.i_item_sk = s5.ss_item_sk
-JOIN customer AS c4 ON c4.c_customer_sk = s5.ss_customer_sk
-JOIN household_demographics AS h9 ON h9.hd_demo_sk = s5.ss_hdemo_sk
-JOIN promotion AS p6 ON p6.p_promo_sk = s5.ss_promo_sk
-JOIN catalog_page AS c2 ON c2.cp_catalog_page_sk = c7.cs_catalog_page_sk
-JOIN income_band AS i10 ON i10.ib_income_band_sk = h9.hd_income_band_sk
-WHERE d0.d_year >= 1910 AND d0.d_year <= 2089
-AND s5.ss_quantity >= 5 AND s5.ss_quantity <= 96
-AND w8.ws_quantity >= 5 AND w8.ws_quantity <= 95"
-q03.sql,2,39356232,0.1,store_sales|time_dim|item,3,83808bc4,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
-JOIN item AS i2 ON i2.i_item_sk = s0.ss_item_sk
-WHERE s0.ss_quantity >= 20 AND s0.ss_quantity <= 31
-AND i2.i_category IN ('Music', 'Electronics', 'Men')"
-q04.sql,2,40506232,0.1,store_sales|date_dim|catalog_sales,3,8ae00bbe,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d1 ON d1.d_date_sk = s0.ss_sold_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
-WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 61
-AND d1.d_year >= 1940 AND d1.d_year <= 1980
-AND c2.cs_quantity >= 40 AND c2.cs_quantity <= 50"
-q05.sql,17,11588836,0.1,web_sales|promotion|store_sales|web_site|catalog_sales|customer_demographics|date_dim|store_returns|item|inventory|warehouse|store|customer|household_demographics|income_band|time_dim|web_page|catalog_page,18,abd35730,timeout,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN date_dim AS d6 ON d6.d_date_sk = w0.ws_sold_date_sk
-JOIN item AS i8 ON i8.i_item_sk = w0.ws_item_sk
-JOIN customer AS c12 ON c12.c_customer_sk = w0.ws_bill_customer_sk
-JOIN customer_demographics AS c5 ON c5.cd_demo_sk = w0.ws_bill_cdemo_sk
-JOIN household_demographics AS h13 ON h13.hd_demo_sk = w0.ws_bill_hdemo_sk
-JOIN web_site AS w3 ON w3.web_site_sk = w0.ws_web_site_sk
-JOIN web_page AS w16 ON w16.wp_web_page_sk = w0.ws_web_page_sk
-JOIN promotion AS p1 ON p1.p_promo_sk = w0.ws_promo_sk
-JOIN store_sales AS s2 ON s2.ss_sold_date_sk = d6.d_date_sk
-JOIN catalog_sales AS c4 ON c4.cs_sold_date_sk = d6.d_date_sk
-JOIN store_returns AS s7 ON s7.sr_returned_date_sk = d6.d_date_sk
-JOIN inventory AS i9 ON i9.inv_date_sk = d6.d_date_sk
-JOIN income_band AS i14 ON i14.ib_income_band_sk = h13.hd_income_band_sk
-JOIN time_dim AS t15 ON t15.t_time_sk = s2.ss_sold_time_sk
-JOIN store AS s11 ON s11.s_store_sk = s2.ss_store_sk
-JOIN catalog_page AS c17 ON c17.cp_catalog_page_sk = c4.cs_catalog_page_sk
-JOIN warehouse AS w10 ON w10.w_warehouse_sk = i9.inv_warehouse_sk
-WHERE w0.ws_quantity >= 5 AND w0.ws_quantity <= 95
-AND d6.d_year >= 1910 AND d6.d_year <= 2089
-AND i8.i_category IN ('Books', 'Sports', 'Shoes', 'Music', 'Home', 'Children', 'Jewelry', 'Men', 'Women', 'Electronics')"
-q06.sql,4,41706232,0.1,store_sales|item|web_sales|customer|promotion,5,e48508c5,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN item AS i1 ON i1.i_item_sk = s0.ss_item_sk
-JOIN customer AS c3 ON c3.c_customer_sk = s0.ss_customer_sk
-JOIN promotion AS p4 ON p4.p_promo_sk = s0.ss_promo_sk
-JOIN web_sales AS w2 ON w2.ws_item_sk = i1.i_item_sk
-WHERE s0.ss_quantity >= 71 AND s0.ss_quantity <= 81
-AND i1.i_category IN ('Home', 'Shoes', 'Women')
-AND p4.p_channel_tv = 'N'"
-q07.sql,4,50890032,0.1,store_sales|item|web_returns|customer|customer_demographics,5,f5374233,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN item AS i1 ON i1.i_item_sk = s0.ss_item_sk
-JOIN customer AS c3 ON c3.c_customer_sk = s0.ss_customer_sk
-JOIN customer_demographics AS c4 ON c4.cd_demo_sk = s0.ss_cdemo_sk
-JOIN web_returns AS w2 ON w2.wr_item_sk = i1.i_item_sk
-WHERE s0.ss_quantity >= 20 AND s0.ss_quantity <= 31
-AND i1.i_category IN ('Men', 'Electronics', 'Sports')
-AND c4.cd_gender = 'M'"
-q08.sql,5,38906712,0.1,store_sales|store|store_returns|date_dim|customer_address|catalog_sales,6,bd9d31bd,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
-JOIN customer_address AS c4 ON c4.ca_address_sk = s0.ss_addr_sk
-JOIN store AS s1 ON s1.s_store_sk = s0.ss_store_sk
-JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d3.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d3.d_date_sk
-WHERE s0.ss_quantity >= 10 AND s0.ss_quantity <= 31
-AND d3.d_year >= 2040 AND d3.d_year <= 2080
-AND c4.ca_state IN ('NE', 'NJ', 'DE', 'UT', 'WY', 'NV', 'NM', 'CO', 'SC', 'MI', 'OK', 'GA', 'WI', 'AZ', 'PA')"
-q09.sql,0,37445252,0.1,store_sales,1,cc0cb2d4,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-WHERE s0.ss_quantity >= 20 AND s0.ss_quantity <= 41"
-q10.sql,2,13874800,0.1,customer_demographics|customer|web_sales,3,845b4122,ok,"SELECT MIN(c0.cd_demo_sk) AS result
-FROM customer_demographics AS c0
-JOIN web_sales AS w2 ON w2.ws_bill_cdemo_sk = c0.cd_demo_sk
-JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
-WHERE c0.cd_gender = 'M'
-AND w2.ws_quantity >= 40 AND w2.ws_quantity <= 50"
-q11.sql,2,40506232,0.1,store_sales|time_dim|item,3,2b9c1845,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
-JOIN item AS i2 ON i2.i_item_sk = s0.ss_item_sk
-WHERE s0.ss_quantity >= 71 AND s0.ss_quantity <= 91
-AND i2.i_category IN ('Music', 'Men', 'Home')"
-q12.sql,2,11982356,0.1,web_sales|item|inventory,3,79c4adb0,ok,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN item AS i1 ON i1.i_item_sk = w0.ws_item_sk
-JOIN inventory AS i2 ON i2.inv_item_sk = i1.i_item_sk
-WHERE w0.ws_quantity >= 40 AND w0.ws_quantity <= 60
-AND i1.i_category IN ('Children', 'Men', 'Books')"
-q13.sql,5,51210312,0.1,store_sales|date_dim|inventory|warehouse|store_returns|store,6,db04b40f,timeout,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d1 ON d1.d_date_sk = s0.ss_sold_date_sk
-JOIN store AS s5 ON s5.s_store_sk = s0.ss_store_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d1.d_date_sk
-JOIN inventory AS i2 ON i2.inv_date_sk = d1.d_date_sk
-JOIN warehouse AS w3 ON w3.w_warehouse_sk = i2.inv_warehouse_sk
-WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
-AND d1.d_year >= 1910 AND d1.d_year <= 2089
-AND s5.s_state = 'TN'"
-q14.sql,5,1918980,0.1,date_dim|store_returns|item|catalog_sales|customer_demographics|store_sales,6,23e1d52d,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s5 ON s5.ss_sold_date_sk = d0.d_date_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d0.d_date_sk
-JOIN store_returns AS s1 ON s1.sr_returned_date_sk = d0.d_date_sk
-JOIN item AS i2 ON i2.i_item_sk = s5.ss_item_sk
-JOIN customer_demographics AS c4 ON c4.cd_demo_sk = s5.ss_cdemo_sk
-WHERE d0.d_year >= 1960 AND d0.d_year <= 1980
-AND s5.ss_quantity >= 71 AND s5.ss_quantity <= 91
-AND c3.cs_quantity >= 60 AND c3.cs_quantity <= 80"
-q15.sql,3,23992652,0.1,catalog_sales|customer_demographics|customer|web_returns,4,44f2d9e0,ok,"SELECT MIN(c0.cs_quantity) AS result
-FROM catalog_sales AS c0
-JOIN customer AS c2 ON c2.c_customer_sk = c0.cs_bill_customer_sk
-JOIN customer_demographics AS c1 ON c1.cd_demo_sk = c0.cs_bill_cdemo_sk
-JOIN web_returns AS w3 ON w3.wr_refunded_customer_sk = c2.c_customer_sk
-WHERE c0.cs_quantity >= 80 AND c0.cs_quantity <= 95
-AND c1.cd_gender = 'M'"
-q16.sql,3,22400652,0.1,catalog_sales|date_dim|web_sales|customer_address,4,de3a6c64,ok,"SELECT MIN(c0.cs_quantity) AS result
-FROM catalog_sales AS c0
-JOIN date_dim AS d1 ON d1.d_date_sk = c0.cs_sold_date_sk
-JOIN customer_address AS c3 ON c3.ca_address_sk = c0.cs_bill_addr_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d1.d_date_sk
-WHERE c0.cs_quantity >= 60 AND c0.cs_quantity <= 80
-AND d1.d_year >= 1980 AND d1.d_year <= 2000
-AND c3.ca_state IN ('CO', 'IA', 'NE', 'IN', 'VT', 'MS', 'NH', 'OH', 'UT', 'NC', 'LA', 'AR', 'KS', 'MA', 'WA')"
-q17.sql,7,62126010,0.1,store_sales|customer|item|store_returns|store|date_dim|catalog_returns|catalog_page,8,08eaf47f,timeout,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d5 ON d5.d_date_sk = s0.ss_sold_date_sk
-JOIN item AS i2 ON i2.i_item_sk = s0.ss_item_sk
-JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
-JOIN store AS s4 ON s4.s_store_sk = s0.ss_store_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d5.d_date_sk
-JOIN catalog_page AS c7 ON c7.cp_catalog_page_sk = c6.cr_catalog_page_sk
-WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
-AND d5.d_year >= 1910 AND d5.d_year <= 2089
-AND i2.i_category IN ('Books', 'Men', 'Children', 'Music', 'Electronics', 'Home', 'Shoes', 'Women', 'Jewelry', 'Sports')"
-q18.sql,6,35967452,0.1,customer_demographics|catalog_sales|date_dim|web_sales|customer_address|customer|store_returns,7,defb54fd,ok,"SELECT MIN(c0.cd_demo_sk) AS result
-FROM customer_demographics AS c0
-JOIN web_sales AS w3 ON w3.ws_bill_cdemo_sk = c0.cd_demo_sk
-JOIN catalog_sales AS c1 ON c1.cs_bill_cdemo_sk = c0.cd_demo_sk
-JOIN customer AS c5 ON c5.c_current_cdemo_sk = c0.cd_demo_sk
-JOIN date_dim AS d2 ON d2.d_date_sk = w3.ws_sold_date_sk
-JOIN customer_address AS c4 ON c4.ca_address_sk = w3.ws_bill_addr_sk
-JOIN store_returns AS s6 ON s6.sr_customer_sk = c5.c_customer_sk
-WHERE c0.cd_gender = 'M'
-AND w3.ws_quantity >= 30 AND w3.ws_quantity <= 40
-AND c1.cs_quantity >= 50 AND c1.cs_quantity <= 70"
-q19.sql,5,41706712,0.1,store_sales|item|catalog_sales|date_dim|inventory|warehouse,6,5867e593,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
-JOIN item AS i1 ON i1.i_item_sk = s0.ss_item_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d3.d_date_sk
-JOIN inventory AS i4 ON i4.inv_date_sk = d3.d_date_sk
-JOIN warehouse AS w5 ON w5.w_warehouse_sk = i4.inv_warehouse_sk
-WHERE s0.ss_quantity >= 41 AND s0.ss_quantity <= 51
-AND d3.d_year >= 2040 AND d3.d_year <= 2080
-AND i1.i_category IN ('Jewelry', 'Electronics', 'Shoes')"
-q20.sql,2,22092652,0.1,catalog_sales|date_dim|store_sales,3,cc3f4f85,ok,"SELECT MIN(c0.cs_quantity) AS result
-FROM catalog_sales AS c0
-JOIN date_dim AS d1 ON d1.d_date_sk = c0.cs_sold_date_sk
-JOIN store_sales AS s2 ON s2.ss_sold_date_sk = d1.d_date_sk
-WHERE c0.cs_quantity >= 60 AND c0.cs_quantity <= 80
-AND d1.d_year >= 1940 AND d1.d_year <= 1980
-AND s2.ss_quantity >= 71 AND s2.ss_quantity <= 81"
-q21.sql,6,1927080,0.1,date_dim|store_returns|store_sales|customer_address|catalog_sales|catalog_page|catalog_returns,7,ce93c951,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s2 ON s2.ss_sold_date_sk = d0.d_date_sk
-JOIN catalog_sales AS c4 ON c4.cs_sold_date_sk = d0.d_date_sk
-JOIN store_returns AS s1 ON s1.sr_returned_date_sk = d0.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d0.d_date_sk
-JOIN customer_address AS c3 ON c3.ca_address_sk = s2.ss_addr_sk
-JOIN catalog_page AS c5 ON c5.cp_catalog_page_sk = c4.cs_catalog_page_sk
-WHERE d0.d_year >= 2040 AND d0.d_year <= 2080
-AND s2.ss_quantity >= 61 AND s2.ss_quantity <= 81
-AND c4.cs_quantity >= 40 AND c4.cs_quantity <= 60"
-q22.sql,2,37145980,0.1,inventory|item|web_returns,3,620b499a,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
-JOIN web_returns AS w2 ON w2.wr_item_sk = i1.i_item_sk
-WHERE i1.i_category IN ('Women', 'Electronics', 'Men')"
-q23.sql,5,38906232,0.1,store_sales|customer|customer_address|web_sales|catalog_returns|date_dim,6,a8e75d5d,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d5 ON d5.d_date_sk = s0.ss_sold_date_sk
-JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
-JOIN customer_address AS c2 ON c2.ca_address_sk = s0.ss_addr_sk
-JOIN web_sales AS w3 ON w3.ws_sold_date_sk = d5.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d5.d_date_sk
-WHERE s0.ss_quantity >= 41 AND s0.ss_quantity <= 51
-AND d5.d_year >= 1960 AND d5.d_year <= 1980
-AND c2.ca_state IN ('KS', 'NM', 'ME', 'AZ', 'SC', 'OH', 'NJ', 'CA', 'MI', 'IL', 'NC', 'SD', 'MA', 'WA', 'VA')"
-q24.sql,5,42833358,0.1,store_sales|customer_address|customer|store_returns|store|date_dim,6,c888d1fa,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d5 ON d5.d_date_sk = s0.ss_sold_date_sk
-JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
-JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
-JOIN store AS s4 ON s4.s_store_sk = s0.ss_store_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d5.d_date_sk
-WHERE s0.ss_quantity >= 10 AND s0.ss_quantity <= 31
-AND d5.d_year >= 1980 AND d5.d_year <= 2000
-AND c1.ca_state IN ('KS', 'FL', 'ME', 'WI', 'OH', 'GA', 'AZ', 'ND', 'IL', 'CT', 'PA', 'IN', 'NM', 'IA', 'NV')"
-q25.sql,7,62126010,0.1,store_sales|date_dim|catalog_sales|item|store_returns|store|customer|household_demographics,8,0454ec7d,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d1 ON d1.d_date_sk = s0.ss_sold_date_sk
-JOIN item AS i3 ON i3.i_item_sk = s0.ss_item_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s0.ss_customer_sk
-JOIN household_demographics AS h7 ON h7.hd_demo_sk = s0.ss_hdemo_sk
-JOIN store AS s5 ON s5.s_store_sk = s0.ss_store_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
-JOIN store_returns AS s4 ON s4.sr_returned_date_sk = d1.d_date_sk
-WHERE s0.ss_quantity >= 61 AND s0.ss_quantity <= 71
-AND d1.d_year >= 2020 AND d1.d_year <= 2060
-AND i3.i_category IN ('Home', 'Men', 'Books')"
-q26.sql,4,33626452,0.1,customer_demographics|customer|web_sales|item|web_page,5,074170f5,ok,"SELECT MIN(c0.cd_demo_sk) AS result
-FROM customer_demographics AS c0
-JOIN web_sales AS w2 ON w2.ws_bill_cdemo_sk = c0.cd_demo_sk
-JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
-JOIN item AS i3 ON i3.i_item_sk = w2.ws_item_sk
-JOIN web_page AS w4 ON w4.wp_web_page_sk = w2.ws_web_page_sk
-WHERE c0.cd_gender = 'M'
-AND w2.ws_quantity >= 60 AND w2.ws_quantity <= 80
-AND i3.i_category IN ('Jewelry', 'Sports', 'Music')"
-q27.sql,4,50881512,0.1,store_sales|date_dim|store_returns|catalog_returns|store,5,ce035858,timeout,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d1 ON d1.d_date_sk = s0.ss_sold_date_sk
-JOIN store AS s4 ON s4.s_store_sk = s0.ss_store_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d1.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d1.d_date_sk
-WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
-AND d1.d_year >= 1910 AND d1.d_year <= 2089
-AND s4.s_state = 'TN'"
-q28.sql,2,8000,0.1,inventory|warehouse|date_dim,3,16100450,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
-WHERE d2.d_year >= 1940 AND d2.d_year <= 1960
-AND w1.w_warehouse_sq_ft >= 231946 AND w1.w_warehouse_sq_ft <= 359640"
-q29.sql,7,62126010,0.1,store_sales|store|store_returns|date_dim|catalog_sales|item|web_sales|inventory,8,f0a0c2ae,timeout,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
-JOIN item AS i5 ON i5.i_item_sk = s0.ss_item_sk
-JOIN store AS s1 ON s1.s_store_sk = s0.ss_store_sk
-JOIN web_sales AS w6 ON w6.ws_sold_date_sk = d3.d_date_sk
-JOIN catalog_sales AS c4 ON c4.cs_sold_date_sk = d3.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d3.d_date_sk
-JOIN inventory AS i7 ON i7.inv_date_sk = d3.d_date_sk
-WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
-AND d3.d_year >= 1910 AND d3.d_year <= 2089
-AND i5.i_category IN ('Home', 'Electronics', 'Children', 'Music', 'Women', 'Jewelry', 'Men', 'Sports', 'Shoes', 'Books')"
-q30.sql,2,2856847,0.1,date_dim|web_returns|item,3,4a06631e,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN web_returns AS w1 ON w1.wr_returned_date_sk = d0.d_date_sk
-JOIN item AS i2 ON i2.i_item_sk = w1.wr_item_sk
-WHERE d0.d_year >= 2000 AND d0.d_year <= 2020
-AND i2.i_category IN ('Home', 'Women', 'Books')"
-q31.sql,2,39656232,0.1,store_sales|customer_address|catalog_sales,3,f063a4a2,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
-JOIN catalog_sales AS c2 ON c2.cs_bill_addr_sk = c1.ca_address_sk
-WHERE s0.ss_quantity >= 20 AND s0.ss_quantity <= 31
-AND c1.ca_state IN ('ME', 'WI', 'NC', 'AK', 'KY', 'DC', 'MN', 'PA', 'MI', 'NY', 'ND', 'WV', 'WY', 'CO', 'WA')
-AND c2.cs_quantity >= 11 AND c2.cs_quantity <= 30"
-q32.sql,2,22092652,0.1,catalog_sales|date_dim|web_returns,3,f8cda48e,ok,"SELECT MIN(c0.cs_quantity) AS result
-FROM catalog_sales AS c0
-JOIN date_dim AS d1 ON d1.d_date_sk = c0.cs_sold_date_sk
-JOIN web_returns AS w2 ON w2.wr_returned_date_sk = d1.d_date_sk
-WHERE c0.cs_quantity >= 40 AND c0.cs_quantity <= 50
-AND d1.d_year >= 1980 AND d1.d_year <= 2000"
-q33.sql,3,40106232,0.1,store_sales|customer_demographics|web_sales|household_demographics,4,6ac1ca21,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN customer_demographics AS c1 ON c1.cd_demo_sk = s0.ss_cdemo_sk
-JOIN household_demographics AS h3 ON h3.hd_demo_sk = s0.ss_hdemo_sk
-JOIN web_sales AS w2 ON w2.ws_bill_cdemo_sk = c1.cd_demo_sk
-WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 71
-AND c1.cd_gender = 'F'
-AND h3.hd_dep_count >= 4 AND h3.hd_dep_count <= 6"
-q34.sql,5,1506260,0.1,date_dim|web_returns|store_returns|store|customer|household_demographics,6,e2f81b08,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d0.d_date_sk
-JOIN web_returns AS w1 ON w1.wr_returned_date_sk = d0.d_date_sk
-JOIN customer AS c4 ON c4.c_customer_sk = s2.sr_customer_sk
-JOIN store AS s3 ON s3.s_store_sk = s2.sr_store_sk
-JOIN household_demographics AS h5 ON h5.hd_demo_sk = c4.c_current_hdemo_sk
-WHERE d0.d_year >= 2040 AND d0.d_year <= 2080
-AND s3.s_state = 'TN'
-AND h5.hd_dep_count >= 3 AND h5.hd_dep_count <= 4"
-q35.sql,2,13874800,0.1,customer_demographics|customer|customer_address,3,efddb0ef,ok,"SELECT MIN(c0.cd_demo_sk) AS result
-FROM customer_demographics AS c0
-JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
-JOIN customer_address AS c2 ON c2.ca_address_sk = c1.c_current_addr_sk
-WHERE c0.cd_gender = 'F'
-AND c2.ca_state IN ('DE', 'IA', 'MI', 'HI', 'OR', 'AK', 'KS', 'WA', 'DC', 'IN', 'ID', 'AL', 'MN', 'PA', 'NV')"
-q36.sql,3,39356712,0.1,store_sales|household_demographics|web_sales|date_dim,4,7200a60e,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
-JOIN household_demographics AS h1 ON h1.hd_demo_sk = s0.ss_hdemo_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d3.d_date_sk
-WHERE s0.ss_quantity >= 81 AND s0.ss_quantity <= 96
-AND d3.d_year >= 2020 AND d3.d_year <= 2040
-AND h1.hd_dep_count >= 2 AND h1.hd_dep_count <= 3"
-q37.sql,3,57327652,0.1,inventory|item|catalog_sales|date_dim,4,b6d203a4,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 1980 AND d3.d_year <= 2020
-AND i1.i_category IN ('Shoes', 'Music', 'Children')
-AND c2.cs_quantity >= 60 AND c2.cs_quantity <= 70"
-q38.sql,4,3076980,0.1,customer|catalog_returns|date_dim|web_returns|catalog_sales,5,e6c234c3,ok,"SELECT MIN(c0.c_customer_id) AS result
-FROM customer AS c0
-JOIN catalog_sales AS c4 ON c4.cs_bill_customer_sk = c0.c_customer_sk
-JOIN web_returns AS w3 ON w3.wr_refunded_customer_sk = c0.c_customer_sk
-JOIN catalog_returns AS c1 ON c1.cr_refunded_customer_sk = c0.c_customer_sk
-JOIN date_dim AS d2 ON d2.d_date_sk = c4.cs_sold_date_sk
-WHERE c4.cs_quantity >= 21 AND c4.cs_quantity <= 40
-AND d2.d_year >= 1920 AND d2.d_year <= 1960"
-q39.sql,8,1951080,0.1,date_dim|inventory|warehouse|catalog_returns|item|catalog_sales|promotion|store_sales|customer_address,9,460f4306,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s7 ON s7.ss_sold_date_sk = d0.d_date_sk
-JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d0.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d0.d_date_sk
-JOIN inventory AS i1 ON i1.inv_date_sk = d0.d_date_sk
-JOIN item AS i4 ON i4.i_item_sk = s7.ss_item_sk
-JOIN customer_address AS c8 ON c8.ca_address_sk = s7.ss_addr_sk
-JOIN promotion AS p6 ON p6.p_promo_sk = s7.ss_promo_sk
-JOIN warehouse AS w2 ON w2.w_warehouse_sk = i1.inv_warehouse_sk
-WHERE d0.d_year >= 2020 AND d0.d_year <= 2060
-AND s7.ss_quantity >= 61 AND s7.ss_quantity <= 71
-AND c5.cs_quantity >= 30 AND c5.cs_quantity <= 40"
-q40.sql,1,21478275,0.1,catalog_sales|item,2,96a8c0c2,ok,"SELECT MIN(c0.cs_quantity) AS result
-FROM catalog_sales AS c0
-JOIN item AS i1 ON i1.i_item_sk = c0.cs_item_sk
-WHERE c0.cs_quantity >= 21 AND c0.cs_quantity <= 40
-AND i1.i_category IN ('Books', 'Women', 'Jewelry')"
-q41.sql,0,450000,0.1,item,1,36d0f500,ok,"SELECT MIN(i0.i_item_id) AS result
-FROM item AS i0
-WHERE i0.i_category IN ('Home', 'Women', 'Men')"
-q42.sql,2,39356232,0.1,store_sales|item|catalog_sales,3,f23beb65,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN item AS i1 ON i1.i_item_sk = s0.ss_item_sk
-JOIN catalog_sales AS c2 ON c2.cs_item_sk = i1.i_item_sk
-WHERE s0.ss_quantity >= 41 AND s0.ss_quantity <= 51
-AND i1.i_category IN ('Home', 'Shoes', 'Electronics')
-AND c2.cs_quantity >= 70 AND c2.cs_quantity <= 90"
-q43.sql,2,38906712,0.1,store_sales|time_dim|household_demographics,3,abf05d6d,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
-JOIN household_demographics AS h2 ON h2.hd_demo_sk = s0.ss_hdemo_sk
-WHERE s0.ss_quantity >= 71 AND s0.ss_quantity <= 81
-AND h2.hd_dep_count >= 2 AND h2.hd_dep_count <= 3"
-q44.sql,1,8000,0.1,inventory|date_dim,2,e5146960,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d1 ON d1.d_date_sk = i0.inv_date_sk
-WHERE d1.d_year >= 1960 AND d1.d_year <= 2000"
-q45.sql,4,14332356,0.1,web_sales|customer_address|customer|store_sales|item,5,3d4a88f9,ok,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN item AS i4 ON i4.i_item_sk = w0.ws_item_sk
-JOIN customer AS c2 ON c2.c_customer_sk = w0.ws_bill_customer_sk
-JOIN customer_address AS c1 ON c1.ca_address_sk = w0.ws_bill_addr_sk
-JOIN store_sales AS s3 ON s3.ss_item_sk = i4.i_item_sk
-WHERE w0.ws_quantity >= 60 AND w0.ws_quantity <= 80
-AND i4.i_category IN ('Shoes', 'Jewelry', 'Home')
-AND c1.ca_state IN ('MN', 'UT', 'TX', 'ID', 'NJ', 'CT', 'NH', 'OR', 'MS', 'OK', 'KS', 'SD', 'WV', 'NM', 'DE')"
-q46.sql,8,2264260,0.1,date_dim|catalog_sales|household_demographics|income_band|store_sales|item|catalog_returns|customer|customer_address,9,4a798f77,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s4 ON s4.ss_sold_date_sk = d0.d_date_sk
-JOIN catalog_sales AS c1 ON c1.cs_sold_date_sk = d0.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d0.d_date_sk
-JOIN item AS i5 ON i5.i_item_sk = s4.ss_item_sk
-JOIN customer AS c7 ON c7.c_customer_sk = s4.ss_customer_sk
-JOIN household_demographics AS h2 ON h2.hd_demo_sk = s4.ss_hdemo_sk
-JOIN customer_address AS c8 ON c8.ca_address_sk = s4.ss_addr_sk
-JOIN income_band AS i3 ON i3.ib_income_band_sk = h2.hd_income_band_sk
-WHERE d0.d_year >= 1910 AND d0.d_year <= 1940
-AND s4.ss_quantity >= 61 AND s4.ss_quantity <= 81
-AND c1.cs_quantity >= 30 AND c1.cs_quantity <= 40"
-q47.sql,3,39356712,0.1,store_sales|store|store_returns|item,4,0a82ab45,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN item AS i3 ON i3.i_item_sk = s0.ss_item_sk
-JOIN store AS s1 ON s1.s_store_sk = s0.ss_store_sk
-JOIN store_returns AS s2 ON s2.sr_item_sk = i3.i_item_sk
-WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 71
-AND i3.i_category IN ('Electronics', 'Women', 'Home')
-AND s1.s_state = 'TN'"
-q48.sql,4,51181512,0.1,store_sales|customer_address|catalog_sales|date_dim|customer_demographics,5,b663ddbe,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
-JOIN customer_demographics AS c4 ON c4.cd_demo_sk = s0.ss_cdemo_sk
-JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d3.d_date_sk
-WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 71
-AND d3.d_year >= 1980 AND d3.d_year <= 2000
-AND c4.cd_gender = 'F'"
-q49.sql,10,4562096,0.1,store_returns|customer|web_sales|web_site|date_dim|web_returns|web_page|customer_demographics|store_sales|customer_address|item,11,806acf07,ok,"SELECT MIN(s0.sr_return_amt) AS result
-FROM store_returns AS s0
-JOIN date_dim AS d4 ON d4.d_date_sk = s0.sr_returned_date_sk
-JOIN item AS i10 ON i10.i_item_sk = s0.sr_item_sk
-JOIN customer AS c1 ON c1.c_customer_sk = s0.sr_customer_sk
-JOIN store_sales AS s8 ON s8.ss_sold_date_sk = d4.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d4.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d4.d_date_sk
-JOIN customer_address AS c9 ON c9.ca_address_sk = c1.c_current_addr_sk
-JOIN customer_demographics AS c7 ON c7.cd_demo_sk = c1.c_current_cdemo_sk
-JOIN web_site AS w3 ON w3.web_site_sk = w2.ws_web_site_sk
-JOIN web_page AS w6 ON w6.wp_web_page_sk = w2.ws_web_page_sk
-WHERE d4.d_year >= 1920 AND d4.d_year <= 1960
-AND i10.i_category IN ('Men', 'Music', 'Shoes')
-AND s8.ss_quantity >= 20 AND s8.ss_quantity <= 31"
-q50.sql,4,41494338,0.1,store_sales|store|store_returns|date_dim|catalog_returns,5,8280b1f6,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
-JOIN store AS s1 ON s1.s_store_sk = s0.ss_store_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d3.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d3.d_date_sk
-WHERE s0.ss_quantity >= 81 AND s0.ss_quantity <= 96
-AND d3.d_year >= 1940 AND d3.d_year <= 1960
-AND s1.s_state = 'TN'"
-q51.sql,2,11540356,0.1,web_sales|web_site|date_dim,3,e256bfbd,ok,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN date_dim AS d2 ON d2.d_date_sk = w0.ws_sold_date_sk
-JOIN web_site AS w1 ON w1.web_site_sk = w0.ws_web_site_sk
-WHERE w0.ws_quantity >= 20 AND w0.ws_quantity <= 40
-AND d2.d_year >= 1920 AND d2.d_year <= 1960"
-q52.sql,2,39356232,0.1,store_sales|customer_demographics|customer,3,59a94aa8,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
-JOIN customer_demographics AS c1 ON c1.cd_demo_sk = s0.ss_cdemo_sk
-WHERE s0.ss_quantity >= 81 AND s0.ss_quantity <= 96
-AND c1.cd_gender = 'M'"
-q53.sql,5,38922712,0.1,store_sales|store|store_returns|date_dim|web_returns|item,6,a8790c6f,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
-JOIN item AS i5 ON i5.i_item_sk = s0.ss_item_sk
-JOIN store AS s1 ON s1.s_store_sk = s0.ss_store_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d3.d_date_sk
-JOIN web_returns AS w4 ON w4.wr_returned_date_sk = d3.d_date_sk
-WHERE s0.ss_quantity >= 20 AND s0.ss_quantity <= 31
-AND d3.d_year >= 2060 AND d3.d_year <= 2089
-AND i5.i_category IN ('Men', 'Women', 'Books')"
-q54.sql,7,3542980,0.1,customer|customer_address|catalog_sales|item|inventory|store_sales|date_dim|household_demographics,8,977e09e7,ok,"SELECT MIN(c0.c_customer_id) AS result
-FROM customer AS c0
-JOIN store_sales AS s5 ON s5.ss_customer_sk = c0.c_customer_sk
-JOIN catalog_sales AS c2 ON c2.cs_bill_customer_sk = c0.c_customer_sk
-JOIN customer_address AS c1 ON c1.ca_address_sk = c0.c_current_addr_sk
-JOIN household_demographics AS h7 ON h7.hd_demo_sk = c0.c_current_hdemo_sk
-JOIN date_dim AS d6 ON d6.d_date_sk = s5.ss_sold_date_sk
-JOIN item AS i3 ON i3.i_item_sk = s5.ss_item_sk
-JOIN inventory AS i4 ON i4.inv_date_sk = d6.d_date_sk
-WHERE s5.ss_quantity >= 41 AND s5.ss_quantity <= 51
-AND c2.cs_quantity >= 80 AND c2.cs_quantity <= 95
-AND c1.ca_state IN ('RI', 'NH', 'MD', 'ND', 'AL', 'VA', 'MA', 'ME', 'DC', 'IN', 'AR', 'AK', 'KS', 'NV', 'AZ')"
-q55.sql,2,39356232,0.1,store_sales|date_dim|catalog_sales,3,cf861823,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d1 ON d1.d_date_sk = s0.ss_sold_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
-WHERE s0.ss_quantity >= 81 AND s0.ss_quantity <= 96
-AND d1.d_year >= 2020 AND d1.d_year <= 2060
-AND c2.cs_quantity >= 21 AND c2.cs_quantity <= 40"
-q56.sql,3,40106232,0.1,store_sales|customer_address|date_dim|catalog_returns,4,f285a792,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d2 ON d2.d_date_sk = s0.ss_sold_date_sk
-JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d2.d_date_sk
-WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 20
-AND d2.d_year >= 2040 AND d2.d_year <= 2060
-AND c1.ca_state IN ('WV', 'TX', 'AL', 'WI', 'FL', 'AK', 'CO', 'CA', 'SC', 'SD', 'MA', 'NE', 'NJ', 'GA', 'MD')"
-q57.sql,3,22100652,0.1,catalog_sales|item|inventory|store_returns,4,d7c9551e,ok,"SELECT MIN(c0.cs_quantity) AS result
-FROM catalog_sales AS c0
-JOIN item AS i1 ON i1.i_item_sk = c0.cs_item_sk
-JOIN store_returns AS s3 ON s3.sr_item_sk = i1.i_item_sk
-JOIN inventory AS i2 ON i2.inv_item_sk = i1.i_item_sk
-WHERE c0.cs_quantity >= 40 AND c0.cs_quantity <= 60
-AND i1.i_category IN ('Books', 'Women', 'Electronics')"
-q58.sql,2,39356232,0.1,store_sales|item|web_sales,3,176d90b2,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN item AS i1 ON i1.i_item_sk = s0.ss_item_sk
-JOIN web_sales AS w2 ON w2.ws_item_sk = i1.i_item_sk
-WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 20
-AND i1.i_category IN ('Women', 'Shoes', 'Children')
-AND w2.ws_quantity >= 60 AND w2.ws_quantity <= 70"
-q59.sql,1,38906232,0.1,store_sales|time_dim,2,7f716fe2,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN time_dim AS t1 ON t1.t_time_sk = s0.ss_sold_time_sk
-WHERE s0.ss_quantity >= 71 AND s0.ss_quantity <= 91"
-q60.sql,3,40106232,0.1,store_sales|date_dim|inventory|warehouse,4,ded78f9e,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d1 ON d1.d_date_sk = s0.ss_sold_date_sk
-JOIN inventory AS i2 ON i2.inv_date_sk = d1.d_date_sk
-JOIN warehouse AS w3 ON w3.w_warehouse_sk = i2.inv_warehouse_sk
-WHERE s0.ss_quantity >= 81 AND s0.ss_quantity <= 96
-AND d1.d_year >= 1980 AND d1.d_year <= 2020
-AND w3.w_warehouse_sq_ft >= 359640 AND w3.w_warehouse_sq_ft <= 457738"
-q61.sql,6,4270460,0.1,customer|customer_address|catalog_sales|date_dim|web_sales|web_site|store_returns,7,d5a291bc,ok,"SELECT MIN(c0.c_customer_id) AS result
-FROM customer AS c0
-JOIN web_sales AS w4 ON w4.ws_bill_customer_sk = c0.c_customer_sk
-JOIN catalog_sales AS c2 ON c2.cs_bill_customer_sk = c0.c_customer_sk
-JOIN store_returns AS s6 ON s6.sr_customer_sk = c0.c_customer_sk
-JOIN customer_address AS c1 ON c1.ca_address_sk = c0.c_current_addr_sk
-JOIN date_dim AS d3 ON d3.d_date_sk = w4.ws_sold_date_sk
-JOIN web_site AS w5 ON w5.web_site_sk = w4.ws_web_site_sk
-WHERE w4.ws_quantity >= 60 AND w4.ws_quantity <= 70
-AND c2.cs_quantity >= 40 AND c2.cs_quantity <= 60
-AND c1.ca_state IN ('NV', 'ND', 'SC', 'MO', 'NH', 'RI', 'TX', 'MT', 'ME', 'NJ', 'MD', 'NY', 'CT', 'AK', 'NM')"
-q62.sql,7,11533416,0.1,web_sales|web_site|date_dim|catalog_sales|customer|web_returns|web_page|store_returns,8,e1d17647,ok,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN date_dim AS d2 ON d2.d_date_sk = w0.ws_sold_date_sk
-JOIN customer AS c4 ON c4.c_customer_sk = w0.ws_bill_customer_sk
-JOIN web_site AS w1 ON w1.web_site_sk = w0.ws_web_site_sk
-JOIN web_page AS w6 ON w6.wp_web_page_sk = w0.ws_web_page_sk
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d2.d_date_sk
-JOIN store_returns AS s7 ON s7.sr_returned_date_sk = d2.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d2.d_date_sk
-WHERE w0.ws_quantity >= 70 AND w0.ws_quantity <= 80
-AND d2.d_year >= 2040 AND d2.d_year <= 2060
-AND c3.cs_quantity >= 80 AND c3.cs_quantity <= 95"
-q63.sql,5,38922712,0.1,store_sales|date_dim|inventory|warehouse|item|store_returns,6,b4283f6a,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d1 ON d1.d_date_sk = s0.ss_sold_date_sk
-JOIN item AS i4 ON i4.i_item_sk = s0.ss_item_sk
-JOIN store_returns AS s5 ON s5.sr_returned_date_sk = d1.d_date_sk
-JOIN inventory AS i2 ON i2.inv_date_sk = d1.d_date_sk
-JOIN warehouse AS w3 ON w3.w_warehouse_sk = i2.inv_warehouse_sk
-WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 20
-AND d1.d_year >= 2040 AND d1.d_year <= 2080
-AND i4.i_category IN ('Jewelry', 'Shoes', 'Books')"
-q64.sql,1,21478275,0.1,catalog_sales|item,2,1f57b56d,ok,"SELECT MIN(c0.cs_quantity) AS result
-FROM catalog_sales AS c0
-JOIN item AS i1 ON i1.i_item_sk = c0.cs_item_sk
-WHERE c0.cs_quantity >= 60 AND c0.cs_quantity <= 80
-AND i1.i_category IN ('Electronics', 'Shoes', 'Children')"
-q65.sql,6,1935460,0.1,date_dim|web_sales|customer|store_returns|store_sales|store|item,7,a4aa3ed6,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s4 ON s4.ss_sold_date_sk = d0.d_date_sk
-JOIN web_sales AS w1 ON w1.ws_sold_date_sk = d0.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d0.d_date_sk
-JOIN item AS i6 ON i6.i_item_sk = s4.ss_item_sk
-JOIN customer AS c2 ON c2.c_customer_sk = s4.ss_customer_sk
-JOIN store AS s5 ON s5.s_store_sk = s4.ss_store_sk
-WHERE d0.d_year >= 2020 AND d0.d_year <= 2040
-AND s4.ss_quantity >= 51 AND s4.ss_quantity <= 61
-AND w1.ws_quantity >= 40 AND w1.ws_quantity <= 60"
-q66.sql,36,2043640,0.1,time_dim|store_sales|date_dim|customer_demographics|customer|catalog_sales|household_demographics|income_band|web_sales|web_page|customer_address|web_returns|item|store_returns|store|inventory|warehouse|catalog_returns|catalog_page|promotion|web_site,21,f0065816,timeout,"SELECT MIN(t0.t_time_id) AS result
-FROM time_dim AS t0
-JOIN store_sales AS s1 ON s1.ss_sold_time_sk = t0.t_time_sk
-JOIN date_dim AS d2 ON d2.d_date_sk = s1.ss_sold_date_sk
-JOIN item AS i12 ON i12.i_item_sk = s1.ss_item_sk
-JOIN customer AS c4 ON c4.c_customer_sk = s1.ss_customer_sk
-JOIN customer_demographics AS c3 ON c3.cd_demo_sk = s1.ss_cdemo_sk
-JOIN household_demographics AS h6 ON h6.hd_demo_sk = s1.ss_hdemo_sk
-JOIN customer_address AS c10 ON c10.ca_address_sk = s1.ss_addr_sk
-JOIN store AS s14 ON s14.s_store_sk = s1.ss_store_sk
-JOIN promotion AS p19 ON p19.p_promo_sk = s1.ss_promo_sk
-JOIN web_sales AS w8 ON w8.ws_sold_date_sk = d2.d_date_sk
-JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d2.d_date_sk
-JOIN store_returns AS s13 ON s13.sr_returned_date_sk = d2.d_date_sk
-JOIN web_returns AS w11 ON w11.wr_returned_date_sk = d2.d_date_sk
-JOIN catalog_returns AS c17 ON c17.cr_returned_date_sk = d2.d_date_sk
-JOIN inventory AS i15 ON i15.inv_date_sk = d2.d_date_sk
-JOIN income_band AS i7 ON i7.ib_income_band_sk = h6.hd_income_band_sk
-JOIN web_site AS w20 ON w20.web_site_sk = w8.ws_web_site_sk
-JOIN web_page AS w9 ON w9.wp_web_page_sk = w8.ws_web_page_sk
-JOIN catalog_page AS c18 ON c18.cp_catalog_page_sk = c5.cs_catalog_page_sk
-JOIN warehouse AS w16 ON w16.w_warehouse_sk = i15.inv_warehouse_sk
-WHERE s1.ss_quantity >= 5 AND s1.ss_quantity <= 96
-AND d2.d_year >= 1910 AND d2.d_year <= 2089
-AND i12.i_category IN ('Women', 'Men', 'Jewelry', 'Books', 'Children', 'Shoes', 'Home', 'Music', 'Sports', 'Electronics')"
-q67.sql,9,72000,0.1,inventory|warehouse|date_dim|store_sales|household_demographics|catalog_sales|item|store_returns|catalog_page|catalog_returns,10,28d29349,timeout,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d2 ON d2.d_date_sk = i0.inv_date_sk
-JOIN item AS i6 ON i6.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN store_sales AS s3 ON s3.ss_sold_date_sk = d2.d_date_sk
-JOIN catalog_sales AS c5 ON c5.cs_sold_date_sk = d2.d_date_sk
-JOIN store_returns AS s7 ON s7.sr_returned_date_sk = d2.d_date_sk
-JOIN catalog_returns AS c9 ON c9.cr_returned_date_sk = d2.d_date_sk
-JOIN household_demographics AS h4 ON h4.hd_demo_sk = s3.ss_hdemo_sk
-JOIN catalog_page AS c8 ON c8.cp_catalog_page_sk = c5.cs_catalog_page_sk
-WHERE d2.d_year >= 1910 AND d2.d_year <= 2089
-AND i6.i_category IN ('Women', 'Children', 'Sports', 'Music', 'Men', 'Shoes', 'Books', 'Home', 'Jewelry', 'Electronics')
-AND w1.w_warehouse_sq_ft >= 161864 AND w1.w_warehouse_sq_ft <= 924304"
-q68.sql,9,2264260,0.1,date_dim|web_sales|household_demographics|customer|web_returns|item|store_returns|store|store_sales|customer_address,10,41313368,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s8 ON s8.ss_sold_date_sk = d0.d_date_sk
-JOIN web_sales AS w1 ON w1.ws_sold_date_sk = d0.d_date_sk
-JOIN store_returns AS s6 ON s6.sr_returned_date_sk = d0.d_date_sk
-JOIN web_returns AS w4 ON w4.wr_returned_date_sk = d0.d_date_sk
-JOIN item AS i5 ON i5.i_item_sk = s8.ss_item_sk
-JOIN customer AS c3 ON c3.c_customer_sk = s8.ss_customer_sk
-JOIN household_demographics AS h2 ON h2.hd_demo_sk = s8.ss_hdemo_sk
-JOIN customer_address AS c9 ON c9.ca_address_sk = s8.ss_addr_sk
-JOIN store AS s7 ON s7.s_store_sk = s8.ss_store_sk
-WHERE d0.d_year >= 1940 AND d0.d_year <= 1960
-AND s8.ss_quantity >= 31 AND s8.ss_quantity <= 51
-AND w1.ws_quantity >= 30 AND w1.ws_quantity <= 50"
-q69.sql,2,13874800,0.1,customer_demographics|customer|customer_address,3,740b8e68,ok,"SELECT MIN(c0.cd_demo_sk) AS result
-FROM customer_demographics AS c0
-JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
-JOIN customer_address AS c2 ON c2.ca_address_sk = c1.c_current_addr_sk
-WHERE c0.cd_gender = 'M'
-AND c2.ca_state IN ('KY', 'IL', 'KS', 'UT', 'HI', 'AR', 'IA', 'SC', 'MS', 'GA', 'WA', 'ID', 'DC', 'AL', 'NC')"
-q70.sql,2,38906712,0.1,store_sales|customer|web_sales,3,ded2a356,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
-JOIN web_sales AS w2 ON w2.ws_bill_customer_sk = c1.c_customer_sk
-WHERE s0.ss_quantity >= 71 AND s0.ss_quantity <= 81
-AND w2.ws_quantity >= 30 AND w2.ws_quantity <= 40"
-q71.sql,5,1934980,0.1,date_dim|store_returns|customer|catalog_sales|item|catalog_returns,6,9411b8bb,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN catalog_sales AS c3 ON c3.cs_sold_date_sk = d0.d_date_sk
-JOIN store_returns AS s1 ON s1.sr_returned_date_sk = d0.d_date_sk
-JOIN catalog_returns AS c5 ON c5.cr_returned_date_sk = d0.d_date_sk
-JOIN item AS i4 ON i4.i_item_sk = c3.cs_item_sk
-JOIN customer AS c2 ON c2.c_customer_sk = c3.cs_bill_customer_sk
-WHERE d0.d_year >= 1920 AND d0.d_year <= 1960
-AND c3.cs_quantity >= 50 AND c3.cs_quantity <= 70
-AND i4.i_category IN ('Home', 'Children', 'Men')"
-q72.sql,10,70186955,0.1,inventory|warehouse|item|catalog_returns|date_dim|catalog_page|catalog_sales|promotion|web_sales|customer|customer_demographics,11,0bac64e1,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d4 ON d4.d_date_sk = i0.inv_date_sk
-JOIN item AS i2 ON i2.i_item_sk = i0.inv_item_sk
-JOIN warehouse AS w1 ON w1.w_warehouse_sk = i0.inv_warehouse_sk
-JOIN web_sales AS w8 ON w8.ws_sold_date_sk = d4.d_date_sk
-JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d4.d_date_sk
-JOIN catalog_returns AS c3 ON c3.cr_returned_date_sk = d4.d_date_sk
-JOIN customer AS c9 ON c9.c_customer_sk = w8.ws_bill_customer_sk
-JOIN customer_demographics AS c10 ON c10.cd_demo_sk = w8.ws_bill_cdemo_sk
-JOIN promotion AS p7 ON p7.p_promo_sk = w8.ws_promo_sk
-JOIN catalog_page AS c5 ON c5.cp_catalog_page_sk = c6.cs_catalog_page_sk
-WHERE d4.d_year >= 1940 AND d4.d_year <= 1960
-AND i2.i_category IN ('Music', 'Shoes', 'Jewelry')
-AND w1.w_warehouse_sq_ft >= 457738 AND w1.w_warehouse_sq_ft <= 656889"
-q73.sql,5,1506260,0.1,date_dim|store_sales|store|store_returns|customer|household_demographics,6,c44e5ad0,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s1 ON s1.ss_sold_date_sk = d0.d_date_sk
-JOIN store_returns AS s3 ON s3.sr_returned_date_sk = d0.d_date_sk
-JOIN customer AS c4 ON c4.c_customer_sk = s1.ss_customer_sk
-JOIN household_demographics AS h5 ON h5.hd_demo_sk = s1.ss_hdemo_sk
-JOIN store AS s2 ON s2.s_store_sk = s1.ss_store_sk
-WHERE d0.d_year >= 2020 AND d0.d_year <= 2040
-AND s1.ss_quantity >= 81 AND s1.ss_quantity <= 96
-AND h5.hd_dep_count >= 1 AND h5.hd_dep_count <= 3"
-q74.sql,2,40506232,0.1,store_sales|customer|customer_address,3,c90fda5e,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
-JOIN customer_address AS c2 ON c2.ca_address_sk = s0.ss_addr_sk
-WHERE s0.ss_quantity >= 61 AND s0.ss_quantity <= 71
-AND c2.ca_state IN ('IL', 'KY', 'MT', 'AL', 'HI', 'WA', 'VT', 'NY', 'FL', 'RI', 'ID', 'LA', 'AK', 'AR', 'TX')"
-q75.sql,17,6489076,0.1,store_returns|item|web_sales|date_dim|catalog_returns|catalog_page|catalog_sales|web_page|web_returns|customer|customer_address|store_sales|promotion|customer_demographics|store|household_demographics|income_band|inventory,18,ac1cc94a,timeout,"SELECT MIN(s0.sr_return_amt) AS result
-FROM store_returns AS s0
-JOIN date_dim AS d3 ON d3.d_date_sk = s0.sr_returned_date_sk
-JOIN item AS i1 ON i1.i_item_sk = s0.sr_item_sk
-JOIN customer AS c9 ON c9.c_customer_sk = s0.sr_customer_sk
-JOIN store AS s14 ON s14.s_store_sk = s0.sr_store_sk
-JOIN store_sales AS s11 ON s11.ss_sold_date_sk = d3.d_date_sk
-JOIN web_sales AS w2 ON w2.ws_sold_date_sk = d3.d_date_sk
-JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d3.d_date_sk
-JOIN web_returns AS w8 ON w8.wr_returned_date_sk = d3.d_date_sk
-JOIN catalog_returns AS c4 ON c4.cr_returned_date_sk = d3.d_date_sk
-JOIN inventory AS i17 ON i17.inv_date_sk = d3.d_date_sk
-JOIN customer_address AS c10 ON c10.ca_address_sk = c9.c_current_addr_sk
-JOIN customer_demographics AS c13 ON c13.cd_demo_sk = c9.c_current_cdemo_sk
-JOIN household_demographics AS h15 ON h15.hd_demo_sk = c9.c_current_hdemo_sk
-JOIN promotion AS p12 ON p12.p_promo_sk = s11.ss_promo_sk
-JOIN web_page AS w7 ON w7.wp_web_page_sk = w2.ws_web_page_sk
-JOIN catalog_page AS c5 ON c5.cp_catalog_page_sk = c6.cs_catalog_page_sk
-JOIN income_band AS i16 ON i16.ib_income_band_sk = h15.hd_income_band_sk
-WHERE d3.d_year >= 1910 AND d3.d_year <= 2089
-AND i1.i_category IN ('Electronics', 'Home', 'Books', 'Sports', 'Children', 'Jewelry', 'Men', 'Shoes', 'Music', 'Women')
-AND s14.s_state = 'TN'"
-q76.sql,7,1942980,0.1,date_dim|store_returns|item|store_sales|customer_address|web_sales|catalog_sales|store,8,ee27e348,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s3 ON s3.ss_sold_date_sk = d0.d_date_sk
-JOIN web_sales AS w5 ON w5.ws_sold_date_sk = d0.d_date_sk
-JOIN catalog_sales AS c6 ON c6.cs_sold_date_sk = d0.d_date_sk
-JOIN store_returns AS s1 ON s1.sr_returned_date_sk = d0.d_date_sk
-JOIN item AS i2 ON i2.i_item_sk = s3.ss_item_sk
-JOIN customer_address AS c4 ON c4.ca_address_sk = s3.ss_addr_sk
-JOIN store AS s7 ON s7.s_store_sk = s3.ss_store_sk
-WHERE d0.d_year >= 2040 AND d0.d_year <= 2080
-AND s3.ss_quantity >= 51 AND s3.ss_quantity <= 71
-AND w5.ws_quantity >= 40 AND w5.ws_quantity <= 60"
-q77.sql,4,38922712,0.1,store_sales|customer_address|customer|web_returns|date_dim,5,46ec8146,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d4 ON d4.d_date_sk = s0.ss_sold_date_sk
-JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
-JOIN customer_address AS c1 ON c1.ca_address_sk = s0.ss_addr_sk
-JOIN web_returns AS w3 ON w3.wr_returned_date_sk = d4.d_date_sk
-WHERE s0.ss_quantity >= 31 AND s0.ss_quantity <= 51
-AND d4.d_year >= 1960 AND d4.d_year <= 1980
-AND c1.ca_state IN ('OH', 'ID', 'OR', 'MT', 'IN', 'WY', 'MD', 'IL', 'AK', 'TX', 'NH', 'DC', 'RI', 'CT', 'IA')"
-q78.sql,8,16078452,0.1,web_sales|customer_demographics|catalog_sales|date_dim|inventory|item|store_returns|store|store_sales,9,4d969506,ok,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN date_dim AS d3 ON d3.d_date_sk = w0.ws_sold_date_sk
-JOIN item AS i5 ON i5.i_item_sk = w0.ws_item_sk
-JOIN customer_demographics AS c1 ON c1.cd_demo_sk = w0.ws_bill_cdemo_sk
-JOIN store_sales AS s8 ON s8.ss_sold_date_sk = d3.d_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d3.d_date_sk
-JOIN store_returns AS s6 ON s6.sr_returned_date_sk = d3.d_date_sk
-JOIN inventory AS i4 ON i4.inv_date_sk = d3.d_date_sk
-JOIN store AS s7 ON s7.s_store_sk = s8.ss_store_sk
-WHERE w0.ws_quantity >= 60 AND w0.ws_quantity <= 70
-AND d3.d_year >= 1960 AND d3.d_year <= 1980
-AND i5.i_category IN ('Sports', 'Music', 'Children')"
-q79.sql,7,1506260,0.1,date_dim|store_returns|store|store_sales|household_demographics|income_band|customer|web_sales,8,35aef0f5,ok,"SELECT MIN(d0.d_date_id) AS result
-FROM date_dim AS d0
-JOIN store_sales AS s3 ON s3.ss_sold_date_sk = d0.d_date_sk
-JOIN web_sales AS w7 ON w7.ws_sold_date_sk = d0.d_date_sk
-JOIN store_returns AS s1 ON s1.sr_returned_date_sk = d0.d_date_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s3.ss_customer_sk
-JOIN household_demographics AS h4 ON h4.hd_demo_sk = s3.ss_hdemo_sk
-JOIN store AS s2 ON s2.s_store_sk = s3.ss_store_sk
-JOIN income_band AS i5 ON i5.ib_income_band_sk = h4.hd_income_band_sk
-WHERE d0.d_year >= 1940 AND d0.d_year <= 1960
-AND s3.ss_quantity >= 41 AND s3.ss_quantity <= 51
-AND w7.ws_quantity >= 40 AND w7.ws_quantity <= 50"
-q80.sql,3,41975348,0.1,store_sales|customer|household_demographics|income_band,4,9a46c4eb,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN customer AS c1 ON c1.c_customer_sk = s0.ss_customer_sk
-JOIN household_demographics AS h2 ON h2.hd_demo_sk = s0.ss_hdemo_sk
-JOIN income_band AS i3 ON i3.ib_income_band_sk = h2.hd_income_band_sk
-WHERE s0.ss_quantity >= 61 AND s0.ss_quantity <= 71
-AND h2.hd_dep_count >= 5 AND h2.hd_dep_count <= 6"
-q81.sql,2,3507583,0.1,catalog_returns|date_dim|catalog_sales,3,b4677a6e,ok,"SELECT MIN(c0.cr_return_amount) AS result
-FROM catalog_returns AS c0
-JOIN date_dim AS d1 ON d1.d_date_sk = c0.cr_returned_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
-WHERE d1.d_year >= 2060 AND d1.d_year <= 2089
-AND c2.cs_quantity >= 40 AND c2.cs_quantity <= 50"
-q82.sql,3,74591232,0.1,inventory|item|store_sales|date_dim,4,92a72e9d,ok,"SELECT MIN(i0.inv_quantity_on_hand) AS result
-FROM inventory AS i0
-JOIN date_dim AS d3 ON d3.d_date_sk = i0.inv_date_sk
-JOIN item AS i1 ON i1.i_item_sk = i0.inv_item_sk
-JOIN store_sales AS s2 ON s2.ss_sold_date_sk = d3.d_date_sk
-WHERE d3.d_year >= 2020 AND d3.d_year <= 2060
-AND i1.i_category IN ('Electronics', 'Women', 'Music')
-AND s2.ss_quantity >= 41 AND s2.ss_quantity <= 61"
-q83.sql,2,4498606,0.1,store_returns|customer|customer_demographics,3,ba37c72f,ok,"SELECT MIN(s0.sr_return_amt) AS result
-FROM store_returns AS s0
-JOIN customer AS c1 ON c1.c_customer_sk = s0.sr_customer_sk
-JOIN customer_demographics AS c2 ON c2.cd_demo_sk = c1.c_current_cdemo_sk
-WHERE c2.cd_gender = 'F'"
-q84.sql,5,16491286,0.1,customer_demographics|web_sales|customer_address|household_demographics|customer|store_returns,6,c3d887e5,ok,"SELECT MIN(c0.cd_demo_sk) AS result
-FROM customer_demographics AS c0
-JOIN web_sales AS w1 ON w1.ws_bill_cdemo_sk = c0.cd_demo_sk
-JOIN customer AS c4 ON c4.c_current_cdemo_sk = c0.cd_demo_sk
-JOIN household_demographics AS h3 ON h3.hd_demo_sk = w1.ws_bill_hdemo_sk
-JOIN customer_address AS c2 ON c2.ca_address_sk = w1.ws_bill_addr_sk
-JOIN store_returns AS s5 ON s5.sr_customer_sk = c4.c_customer_sk
-WHERE c0.cd_gender = 'M'
-AND w1.ws_quantity >= 5 AND w1.ws_quantity <= 20
-AND h3.hd_dep_count >= 6 AND h3.hd_dep_count <= 8"
-q85.sql,7,24454203,0.1,customer_demographics|web_sales|web_page|web_returns|item|catalog_sales|customer_address|store_sales,8,5f405a7d,ok,"SELECT MIN(c0.cd_demo_sk) AS result
-FROM customer_demographics AS c0
-JOIN store_sales AS s7 ON s7.ss_cdemo_sk = c0.cd_demo_sk
-JOIN web_sales AS w1 ON w1.ws_bill_cdemo_sk = c0.cd_demo_sk
-JOIN catalog_sales AS c5 ON c5.cs_bill_cdemo_sk = c0.cd_demo_sk
-JOIN item AS i4 ON i4.i_item_sk = s7.ss_item_sk
-JOIN customer_address AS c6 ON c6.ca_address_sk = s7.ss_addr_sk
-JOIN web_page AS w2 ON w2.wp_web_page_sk = w1.ws_web_page_sk
-JOIN web_returns AS w3 ON w3.wr_item_sk = i4.i_item_sk
-WHERE c0.cd_gender = 'M'
-AND s7.ss_quantity >= 51 AND s7.ss_quantity <= 61
-AND w1.ws_quantity >= 60 AND w1.ws_quantity <= 70"
-q86.sql,2,11982356,0.1,web_sales|customer|store_returns,3,98e0cb83,ok,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN customer AS c1 ON c1.c_customer_sk = w0.ws_bill_customer_sk
-JOIN store_returns AS s2 ON s2.sr_customer_sk = c1.c_customer_sk
-WHERE w0.ws_quantity >= 80 AND w0.ws_quantity <= 95"
-q87.sql,4,3076980,0.1,customer|customer_demographics|store_sales|date_dim|inventory,5,b57be6b5,ok,"SELECT MIN(c0.c_customer_id) AS result
-FROM customer AS c0
-JOIN store_sales AS s2 ON s2.ss_customer_sk = c0.c_customer_sk
-JOIN customer_demographics AS c1 ON c1.cd_demo_sk = c0.c_current_cdemo_sk
-JOIN date_dim AS d3 ON d3.d_date_sk = s2.ss_sold_date_sk
-JOIN inventory AS i4 ON i4.inv_date_sk = d3.d_date_sk
-WHERE s2.ss_quantity >= 51 AND s2.ss_quantity <= 61
-AND c1.cd_gender = 'F'
-AND d3.d_year >= 2040 AND d3.d_year <= 2080"
-q88.sql,3,547680,0.1,time_dim|store_sales|household_demographics|web_sales,4,e4a69834,ok,"SELECT MIN(t0.t_time_id) AS result
-FROM time_dim AS t0
-JOIN store_sales AS s1 ON s1.ss_sold_time_sk = t0.t_time_sk
-JOIN household_demographics AS h2 ON h2.hd_demo_sk = s1.ss_hdemo_sk
-JOIN web_sales AS w3 ON w3.ws_bill_hdemo_sk = h2.hd_demo_sk
-WHERE s1.ss_quantity >= 61 AND s1.ss_quantity <= 81
-AND h2.hd_dep_count >= 5 AND h2.hd_dep_count <= 7
-AND w3.ws_quantity >= 50 AND w3.ws_quantity <= 60"
-q89.sql,13,38962712,0.1,store_sales|store|store_returns|date_dim|catalog_sales|web_returns|customer|customer_address|web_sales|household_demographics|income_band|customer_demographics|item|web_page,14,294c1b1b,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d3 ON d3.d_date_sk = s0.ss_sold_date_sk
-JOIN item AS i12 ON i12.i_item_sk = s0.ss_item_sk
-JOIN customer AS c6 ON c6.c_customer_sk = s0.ss_customer_sk
-JOIN customer_demographics AS c11 ON c11.cd_demo_sk = s0.ss_cdemo_sk
-JOIN household_demographics AS h9 ON h9.hd_demo_sk = s0.ss_hdemo_sk
-JOIN customer_address AS c7 ON c7.ca_address_sk = s0.ss_addr_sk
-JOIN store AS s1 ON s1.s_store_sk = s0.ss_store_sk
-JOIN web_sales AS w8 ON w8.ws_sold_date_sk = d3.d_date_sk
-JOIN catalog_sales AS c4 ON c4.cs_sold_date_sk = d3.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d3.d_date_sk
-JOIN web_returns AS w5 ON w5.wr_returned_date_sk = d3.d_date_sk
-JOIN income_band AS i10 ON i10.ib_income_band_sk = h9.hd_income_band_sk
-JOIN web_page AS w13 ON w13.wp_web_page_sk = w8.ws_web_page_sk
-WHERE s0.ss_quantity >= 71 AND s0.ss_quantity <= 91
-AND d3.d_year >= 1920 AND d3.d_year <= 1960
-AND i12.i_category IN ('Children', 'Jewelry', 'Electronics')"
-q90.sql,3,548100,0.1,time_dim|store_sales|household_demographics|income_band,4,40f8b931,ok,"SELECT MIN(t0.t_time_id) AS result
-FROM time_dim AS t0
-JOIN store_sales AS s1 ON s1.ss_sold_time_sk = t0.t_time_sk
-JOIN household_demographics AS h2 ON h2.hd_demo_sk = s1.ss_hdemo_sk
-JOIN income_band AS i3 ON i3.ib_income_band_sk = h2.hd_income_band_sk
-WHERE s1.ss_quantity >= 10 AND s1.ss_quantity <= 31
-AND h2.hd_dep_count >= 3 AND h2.hd_dep_count <= 5"
-q91.sql,6,16669183,0.1,customer_demographics|customer|customer_address|web_sales|date_dim|catalog_returns|item,7,f4da154b,ok,"SELECT MIN(c0.cd_demo_sk) AS result
-FROM customer_demographics AS c0
-JOIN web_sales AS w3 ON w3.ws_bill_cdemo_sk = c0.cd_demo_sk
-JOIN customer AS c1 ON c1.c_current_cdemo_sk = c0.cd_demo_sk
-JOIN date_dim AS d4 ON d4.d_date_sk = w3.ws_sold_date_sk
-JOIN item AS i6 ON i6.i_item_sk = w3.ws_item_sk
-JOIN customer_address AS c2 ON c2.ca_address_sk = w3.ws_bill_addr_sk
-JOIN catalog_returns AS c5 ON c5.cr_refunded_customer_sk = c1.c_customer_sk
-WHERE c0.cd_gender = 'M'
-AND w3.ws_quantity >= 80 AND w3.ws_quantity <= 95
-AND d4.d_year >= 1920 AND d4.d_year <= 1960"
-q92.sql,2,11982356,0.1,web_sales|item|web_page,3,a6114c43,ok,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN item AS i1 ON i1.i_item_sk = w0.ws_item_sk
-JOIN web_page AS w2 ON w2.wp_web_page_sk = w0.ws_web_page_sk
-WHERE w0.ws_quantity >= 30 AND w0.ws_quantity <= 50
-AND i1.i_category IN ('Shoes', 'Women', 'Jewelry')"
-q93.sql,4,2611626,0.1,store_returns|item|catalog_sales|household_demographics|web_sales,5,776d1e4c,ok,"SELECT MIN(s0.sr_return_amt) AS result
-FROM store_returns AS s0
-JOIN item AS i1 ON i1.i_item_sk = s0.sr_item_sk
-JOIN web_sales AS w4 ON w4.ws_item_sk = i1.i_item_sk
-JOIN catalog_sales AS c2 ON c2.cs_item_sk = i1.i_item_sk
-JOIN household_demographics AS h3 ON h3.hd_demo_sk = w4.ws_bill_hdemo_sk
-WHERE i1.i_category IN ('Sports', 'Jewelry', 'Men')
-AND w4.ws_quantity >= 40 AND w4.ws_quantity <= 50
-AND c2.cs_quantity >= 60 AND c2.cs_quantity <= 70"
-q94.sql,3,12283256,0.1,web_sales|date_dim|catalog_sales|catalog_page,4,af707ab5,ok,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN date_dim AS d1 ON d1.d_date_sk = w0.ws_sold_date_sk
-JOIN catalog_sales AS c2 ON c2.cs_sold_date_sk = d1.d_date_sk
-JOIN catalog_page AS c3 ON c3.cp_catalog_page_sk = c2.cs_catalog_page_sk
-WHERE w0.ws_quantity >= 60 AND w0.ws_quantity <= 80
-AND d1.d_year >= 1910 AND d1.d_year <= 1940
-AND c2.cs_quantity >= 50 AND c2.cs_quantity <= 70"
-q95.sql,1,10071376,0.1,web_sales|date_dim,2,fd833f8f,ok,"SELECT MIN(w0.ws_quantity) AS result
-FROM web_sales AS w0
-JOIN date_dim AS d1 ON d1.d_date_sk = w0.ws_sold_date_sk
-WHERE w0.ws_quantity >= 20 AND w0.ws_quantity <= 40
-AND d1.d_year >= 1920 AND d1.d_year <= 1960"
-q96.sql,3,37992932,0.1,store_sales|store|store_returns|time_dim,4,cd014775,timeout,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN time_dim AS t3 ON t3.t_time_sk = s0.ss_sold_time_sk
-JOIN store AS s1 ON s1.s_store_sk = s0.ss_store_sk
-JOIN store_returns AS s2 ON s2.sr_store_sk = s1.s_store_sk
-WHERE s0.ss_quantity >= 5 AND s0.ss_quantity <= 96
-AND s1.s_state = 'TN'"
-q97.sql,2,38914232,0.1,store_sales|household_demographics|customer,3,b4186e76,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN customer AS c2 ON c2.c_customer_sk = s0.ss_customer_sk
-JOIN household_demographics AS h1 ON h1.hd_demo_sk = s0.ss_hdemo_sk
-WHERE s0.ss_quantity >= 41 AND s0.ss_quantity <= 51
-AND h1.hd_dep_count >= 2 AND h1.hd_dep_count <= 3"
-q98.sql,2,39356232,0.1,store_sales|date_dim|web_returns,3,cc07a5e8,ok,"SELECT MIN(s0.ss_quantity) AS result
-FROM store_sales AS s0
-JOIN date_dim AS d1 ON d1.d_date_sk = s0.ss_sold_date_sk
-JOIN web_returns AS w2 ON w2.wr_returned_date_sk = d1.d_date_sk
-WHERE s0.ss_quantity >= 51 AND s0.ss_quantity <= 61
-AND d1.d_year >= 1910 AND d1.d_year <= 1940"
-q99.sql,7,21650812,0.1,catalog_sales|date_dim|store_returns|customer|web_sales|customer_address|catalog_returns|item,8,fd2ab02a,ok,"SELECT MIN(c0.cs_quantity) AS result
-FROM catalog_sales AS c0
-JOIN date_dim AS d1 ON d1.d_date_sk = c0.cs_sold_date_sk
-JOIN item AS i7 ON i7.i_item_sk = c0.cs_item_sk
-JOIN customer AS c3 ON c3.c_customer_sk = c0.cs_bill_customer_sk
-JOIN customer_address AS c5 ON c5.ca_address_sk = c0.cs_bill_addr_sk
-JOIN web_sales AS w4 ON w4.ws_sold_date_sk = d1.d_date_sk
-JOIN store_returns AS s2 ON s2.sr_returned_date_sk = d1.d_date_sk
-JOIN catalog_returns AS c6 ON c6.cr_returned_date_sk = d1.d_date_sk
-WHERE c0.cs_quantity >= 70 AND c0.cs_quantity <= 80
-AND d1.d_year >= 2040 AND d1.d_year <= 2080
-AND i7.i_category IN ('Children', 'Shoes', 'Jewelry')"
+query_file,join_count,bytes_read,target_tables,n_tables,query_hash,gen_status,sql
+q01.sql,1,4048606,item|store_returns,2,f3bad070,ok,"SELECT DISTINCT ON(""store_returns"".""sr_returned_date_sk"") ""store_returns"".""sr_hdemo_sk"" FROM ""store_returns"" LEFT JOIN ""item"" ON ""store_returns"".""sr_item_sk"" = ""item"".""i_item_sk"" WHERE ""item"".""i_current_price"" BETWEEN 0.16 AND 99.99 AND ""store_returns"".""sr_net_loss"" BETWEEN 19.24 AND 9218.97;"
+q02.sql,11,1492980,catalog_returns|catalog_sales|customer|customer_address|customer_demographics|date_dim|item|promotion|store_sales|time_dim|web_sales|web_site,12,29db53e8,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_holiday"" FROM ""date_dim"" LEFT JOIN ""store_sales"" ON ""date_dim"".""d_date_sk"" = ""store_sales"".""ss_sold_date_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""catalog_sales"" ON ""customer_demographics"".""cd_demo_sk"" = ""catalog_sales"".""cs_bill_cdemo_sk"" LEFT JOIN ""web_sales"" ON ""date_dim"".""d_date_sk"" = ""web_sales"".""ws_sold_date_sk"" LEFT JOIN ""customer_address"" ON ""web_sales"".""ws_bill_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""promotion"" ON ""web_sales"".""ws_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""item"" ON ""web_sales"".""ws_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" LEFT JOIN ""customer"" ON ""customer_address"".""ca_address_sk"" = ""customer"".""c_current_addr_sk"" LEFT JOIN ""catalog_returns"" ON ""date_dim"".""d_date_sk"" = ""catalog_returns"".""cr_returned_date_sk"" WHERE ""catalog_returns"".""cr_return_tax"" BETWEEN 0.0 AND 2179.27 AND ""item"".""i_category"" BETWEEN 'Books' AND 'Women' AND ""store_sales"".""ss_net_paid"" BETWEEN 0.0 AND 19443.0 AND ""customer_demographics"".""cd_education_status"" BETWEEN '2 yr Degree' AND 'Unknown' AND ""web_sales"".""ws_warehouse_sk"" BETWEEN 1 AND 5 AND ""time_dim"".""t_hour"" BETWEEN 0 AND 23 AND ""web_site"".""web_market_manager"" BETWEEN 'Albert Leung' AND 'William Reyes' AND ""customer_address"".""ca_location_type"" BETWEEN 'apartment' AND 'single family' AND ""customer"".""c_birth_month"" BETWEEN 1 AND 12 AND ""catalog_sales"".""cs_ship_cdemo_sk"" BETWEEN 19330 AND 1920765 AND ""promotion"".""p_response_target"" BETWEEN 1 AND 1 AND ""date_dim"".""d_quarter_name"" BETWEEN '1902Q1' AND '2100Q1';"
+q03.sql,2,39356232,date_dim|item|web_returns,3,e74877fc,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_quarter_seq"" FROM ""date_dim"" LEFT JOIN ""web_returns"" ON ""date_dim"".""d_date_sk"" = ""web_returns"".""wr_returned_date_sk"" LEFT JOIN ""item"" ON ""web_returns"".""wr_item_sk"" = ""item"".""i_item_sk"" WHERE ""web_returns"".""wr_refunded_hdemo_sk"" BETWEEN 71 AND 7200 AND ""date_dim"".""d_quarter_name"" BETWEEN '1902Q1' AND '2100Q1' AND ""item"".""i_manufact_id"" BETWEEN 7 AND 1000;"
+q04.sql,2,40506232,customer|household_demographics|store_sales,3,bb9c16ed,ok,"SELECT DISTINCT ON(""customer"".""c_customer_sk"") ""customer"".""c_birth_month"" FROM ""customer"" LEFT JOIN ""household_demographics"" ON ""customer"".""c_current_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""store_sales"" ON ""household_demographics"".""hd_demo_sk"" = ""store_sales"".""ss_hdemo_sk"" WHERE ""store_sales"".""ss_ext_wholesale_cost"" BETWEEN 32.04 AND 10000.0 AND ""customer"".""c_login"" BETWEEN '' AND '' AND ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9;"
+q05.sql,17,11588836,catalog_page|catalog_returns|catalog_sales|customer|customer_address|customer_demographics|date_dim|household_demographics|income_band|inventory|item|store|store_returns|store_sales|time_dim|web_returns|web_sales|web_site,18,ad65ca26,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_ship_date_sk"" FROM ""web_sales"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" LEFT JOIN ""customer_address"" ON ""web_sales"".""ws_bill_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""customer_demographics"" ON ""web_sales"".""ws_bill_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""date_dim"" ON ""web_sales"".""ws_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""household_demographics"" ON ""web_sales"".""ws_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""store_sales"" ON ""household_demographics"".""hd_demo_sk"" = ""store_sales"".""ss_hdemo_sk"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" LEFT JOIN ""customer"" ON ""customer_address"".""ca_address_sk"" = ""customer"".""c_current_addr_sk"" LEFT JOIN ""catalog_sales"" ON ""date_dim"".""d_date_sk"" = ""catalog_sales"".""cs_sold_date_sk"" LEFT JOIN ""income_band"" ON ""household_demographics"".""hd_income_band_sk"" = ""income_band"".""ib_income_band_sk"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""inventory"" ON ""date_dim"".""d_date_sk"" = ""inventory"".""inv_date_sk"" LEFT JOIN ""catalog_returns"" ON ""customer"".""c_customer_sk"" = ""catalog_returns"".""cr_refunded_customer_sk"" LEFT JOIN ""item"" ON ""web_sales"".""ws_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""web_returns"" ON ""customer"".""c_customer_sk"" = ""web_returns"".""wr_refunded_customer_sk"" LEFT JOIN ""store"" ON ""store_returns"".""sr_store_sk"" = ""store"".""s_store_sk"" WHERE ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""catalog_returns"".""cr_return_amount"" BETWEEN 0.3 AND 24214.19 AND ""customer_demographics"".""cd_purchase_estimate"" BETWEEN 500 AND 10000 AND ""store_sales"".""ss_ext_wholesale_cost"" BETWEEN 32.04 AND 10000.0 AND ""item"".""i_class_id"" BETWEEN 1 AND 16 AND ""web_sales"".""ws_ship_customer_sk"" BETWEEN 1040 AND 99999 AND ""customer"".""c_customer_id"" BETWEEN 'AAAAAAAAACILAAAA' AND 'AAAAAAAAPPPPAAAA' AND ""web_returns"".""wr_return_ship_cost"" BETWEEN 0.0 AND 11690.44 AND ""catalog_sales"".""cs_ship_customer_sk"" BETWEEN 1025 AND 100000 AND ""catalog_page"".""cp_type"" BETWEEN 'bi-annual' AND 'quarterly' AND ""date_dim"".""d_current_month"" BETWEEN 'N' AND 'Y' AND ""customer_address"".""ca_street_number"" BETWEEN '107' AND '999' AND ""store"".""s_company_id"" BETWEEN 1 AND 1 AND ""income_band"".""ib_lower_bound"" BETWEEN 1900 AND 190001 AND ""time_dim"".""t_meal_time"" BETWEEN '' AND 'lunch' AND ""web_site"".""web_company_id"" BETWEEN 1 AND 6 AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""store_returns"".""sr_net_loss"" BETWEEN 19.24 AND 9218.97;"
+q06.sql,4,41706232,catalog_page|catalog_sales|customer|customer_address|household_demographics,5,b3e4776f,ok,"SELECT DISTINCT ON(""customer_address"".""ca_address_sk"") ""customer_address"".""ca_county"" FROM ""customer_address"" LEFT JOIN ""customer"" ON ""customer_address"".""ca_address_sk"" = ""customer"".""c_current_addr_sk"" LEFT JOIN ""catalog_sales"" ON ""customer_address"".""ca_address_sk"" = ""catalog_sales"".""cs_bill_addr_sk"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""household_demographics"" ON ""catalog_sales"".""cs_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" WHERE ""customer_address"".""ca_city"" BETWEEN 'Antioch' AND 'Youngstown' AND ""customer"".""c_birth_year"" BETWEEN 1924 AND 1992 AND ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""catalog_page"".""cp_description"" BETWEEN 'Acceptable, wrong years tell still on a police. On' AND 'Youngsters must provide other, intermediate clouds. Yesterday whole cars h' AND ""catalog_sales"".""cs_ship_hdemo_sk"" BETWEEN 70 AND 7200;"
+q07.sql,4,50890032,customer_address|item|promotion|store|store_sales,5,14efe0da,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_net_paid"" FROM ""store_sales"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""item"" ON ""store_sales"".""ss_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" WHERE ""promotion"".""p_channel_catalog"" BETWEEN 'N' AND 'N' AND ""store_sales"".""ss_net_profit"" BETWEEN -6524.02 AND 9407.0 AND ""item"".""i_formulation"" BETWEEN '011044snow5914895795' AND 'yellow98525476168526' AND ""customer_address"".""ca_address_id"" BETWEEN 'AAAAAAAAACIIAAAA' AND 'AAAAAAAAPPPLAAAA' AND ""store"".""s_street_number"" BETWEEN '175' AND '877';"
+q08.sql,5,38906712,customer_address|customer_demographics|promotion|store|store_sales|web_sales,6,44a1004c,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_ticket_number"" FROM ""store_sales"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""web_sales"" ON ""customer_demographics"".""cd_demo_sk"" = ""web_sales"".""ws_bill_cdemo_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""promotion"" ON ""web_sales"".""ws_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" WHERE ""store_sales"".""ss_net_paid_inc_tax"" BETWEEN 0.0 AND 20669.67 AND ""customer_demographics"".""cd_dep_college_count"" BETWEEN 0 AND 6 AND ""web_sales"".""ws_ship_addr_sk"" BETWEEN 504 AND 50000 AND ""store"".""s_tax_percentage"" BETWEEN 0.01 AND 0.11 AND ""customer_address"".""ca_street_number"" BETWEEN '107' AND '999' AND ""promotion"".""p_channel_dmail"" BETWEEN 'N' AND 'Y';"
+q09.sql,0,37445252,store_sales,1,9f4e37d3,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_customer_sk"" FROM ""store_sales"" WHERE ""store_sales"".""ss_net_paid"" BETWEEN 0.0 AND 19443.0;"
+q10.sql,2,13874800,catalog_returns|catalog_sales|customer,3,16897afc,ok,"SELECT DISTINCT ON(""customer"".""c_customer_sk"") ""customer"".""c_birth_day"" FROM ""customer"" LEFT JOIN ""catalog_returns"" ON ""customer"".""c_customer_sk"" = ""catalog_returns"".""cr_refunded_customer_sk"" LEFT JOIN ""catalog_sales"" ON ""customer"".""c_customer_sk"" = ""catalog_sales"".""cs_bill_customer_sk"" WHERE ""catalog_returns"".""cr_refunded_cdemo_sk"" BETWEEN 19467 AND 1920765 AND ""customer"".""c_birth_country"" BETWEEN 'ALBANIA' AND 'ZIMBABWE' AND ""catalog_sales"".""cs_net_paid_inc_tax"" BETWEEN 0.0 AND 30261.56;"
+q11.sql,2,40506232,customer|store_sales|time_dim,3,15a3d0f7,ok,"SELECT DISTINCT ON(""customer"".""c_customer_sk"") ""customer"".""c_preferred_cust_flag"" FROM ""customer"" LEFT JOIN ""store_sales"" ON ""customer"".""c_customer_sk"" = ""store_sales"".""ss_customer_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" WHERE ""time_dim"".""t_time"" BETWEEN 863 AND 86399 AND ""customer"".""c_last_name"" BETWEEN 'Alfred' AND 'Zuniga' AND ""store_sales"".""ss_ext_sales_price"" BETWEEN 0.08 AND 19308.0;"
+q12.sql,2,11982356,household_demographics|item|web_sales,3,5d5f8678,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_sales_price"" FROM ""web_sales"" LEFT JOIN ""item"" ON ""web_sales"".""ws_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""household_demographics"" ON ""web_sales"".""ws_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" WHERE ""web_sales"".""ws_ship_hdemo_sk"" BETWEEN 71 AND 7200 AND ""item"".""i_product_name"" BETWEEN 'ableablepripri' AND 'pripripripriought' AND ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9;"
+q13.sql,5,51210312,household_demographics|item|store_sales|web_returns|web_sales|web_site,6,b6549b32,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_item_sk"" FROM ""store_sales"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""web_sales"" ON ""household_demographics"".""hd_demo_sk"" = ""web_sales"".""ws_bill_hdemo_sk"" LEFT JOIN ""item"" ON ""web_sales"".""ws_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" LEFT JOIN ""web_returns"" ON ""item"".""i_item_sk"" = ""web_returns"".""wr_item_sk"" WHERE ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4 AND ""store_sales"".""ss_list_price"" BETWEEN 2.85 AND 200.0 AND ""item"".""i_class"" BETWEEN 'accessories' AND 'womens watch' AND ""web_sales"".""ws_sales_price"" BETWEEN 0.03 AND 299.16 AND ""web_returns"".""wr_reversed_charge"" BETWEEN 0.0 AND 14901.4 AND ""web_site"".""web_rec_start_date"" BETWEEN '1997-08-16T00:00:00' AND '2001-08-16';"
+q14.sql,5,1918980,catalog_sales|customer_address|household_demographics|income_band|item|store_sales,6,41cfa8c1,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_container"" FROM ""item"" LEFT JOIN ""store_sales"" ON ""item"".""i_item_sk"" = ""store_sales"".""ss_item_sk"" LEFT JOIN ""catalog_sales"" ON ""item"".""i_item_sk"" = ""catalog_sales"".""cs_item_sk"" LEFT JOIN ""household_demographics"" ON ""catalog_sales"".""cs_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""income_band"" ON ""household_demographics"".""hd_income_band_sk"" = ""income_band"".""ib_income_band_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" WHERE ""item"".""i_units"" BETWEEN 'Box' AND 'Unknown' AND ""store_sales"".""ss_net_paid_inc_tax"" BETWEEN 0.0 AND 20669.67 AND ""customer_address"".""ca_zip"" BETWEEN '04736' AND '99981' AND ""income_band"".""ib_lower_bound"" BETWEEN 1900 AND 190001 AND ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""catalog_sales"".""cs_ext_list_price"" BETWEEN 58.58 AND 29976.0;"
+q15.sql,3,23992652,catalog_sales|date_dim|promotion|store_returns,4,c38abdc2,ok,"SELECT DISTINCT ON(""catalog_sales"".""cs_sold_date_sk"") ""catalog_sales"".""cs_item_sk"" FROM ""catalog_sales"" LEFT JOIN ""promotion"" ON ""catalog_sales"".""cs_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""date_dim"" ON ""catalog_sales"".""cs_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" WHERE ""catalog_sales"".""cs_ship_addr_sk"" BETWEEN 479 AND 50000 AND ""date_dim"".""d_same_day_ly"" BETWEEN 2415387 AND 2487705 AND ""promotion"".""p_channel_tv"" BETWEEN 'N' AND 'N' AND ""store_returns"".""sr_ticket_number"" BETWEEN 2453 AND 240000;"
+q16.sql,3,22400652,catalog_sales|customer|household_demographics|item,4,171e7176,ok,"SELECT DISTINCT ON(""catalog_sales"".""cs_sold_date_sk"") ""catalog_sales"".""cs_net_paid"" FROM ""catalog_sales"" LEFT JOIN ""item"" ON ""catalog_sales"".""cs_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""household_demographics"" ON ""catalog_sales"".""cs_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""customer"" ON ""household_demographics"".""hd_demo_sk"" = ""customer"".""c_current_hdemo_sk"" WHERE ""catalog_sales"".""cs_net_paid"" BETWEEN 0.0 AND 28767.0 AND ""item"".""i_category"" BETWEEN 'Books' AND 'Women' AND ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4 AND ""customer"".""c_birth_month"" BETWEEN 1 AND 12;"
+q17.sql,7,62126010,customer_address|customer_demographics|date_dim|household_demographics|inventory|item|store_sales|web_sales,8,dc81484d,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_ext_wholesale_cost"" FROM ""store_sales"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""item"" ON ""store_sales"".""ss_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""web_sales"" ON ""customer_demographics"".""cd_demo_sk"" = ""web_sales"".""ws_bill_cdemo_sk"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""customer_address"" ON ""web_sales"".""ws_bill_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""inventory"" ON ""item"".""i_item_sk"" = ""inventory"".""inv_item_sk"" WHERE ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""customer_demographics"".""cd_dep_employed_count"" BETWEEN 0 AND 6 AND ""store_sales"".""ss_coupon_amt"" BETWEEN 0.0 AND 17588.25 AND ""item"".""i_brand"" BETWEEN 'amalgamalg #1' AND 'univunivamalg #9' AND ""web_sales"".""ws_ext_tax"" BETWEEN 0.0 AND 2433.41 AND ""date_dim"".""d_dow"" BETWEEN 0 AND 6 AND ""customer_address"".""ca_suite_number"" BETWEEN 'Suite 10' AND 'Suite Y' AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000;"
+q18.sql,6,35967452,catalog_page|catalog_sales|customer|customer_demographics|item|promotion|store_sales,7,521a5d76,ok,"SELECT DISTINCT ON(""catalog_sales"".""cs_sold_date_sk"") ""catalog_sales"".""cs_sold_time_sk"" FROM ""catalog_sales"" LEFT JOIN ""customer"" ON ""catalog_sales"".""cs_bill_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""promotion"" ON ""catalog_sales"".""cs_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""store_sales"" ON ""promotion"".""p_promo_sk"" = ""store_sales"".""ss_promo_sk"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""item"" ON ""catalog_sales"".""cs_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" WHERE ""item"".""i_class_id"" BETWEEN 1 AND 16 AND ""store_sales"".""ss_ext_list_price"" BETWEEN 46.0 AND 19984.0 AND ""customer_demographics"".""cd_dep_employed_count"" BETWEEN 0 AND 6 AND ""customer"".""c_customer_id"" BETWEEN 'AAAAAAAAACILAAAA' AND 'AAAAAAAAPPPPAAAA' AND ""catalog_page"".""cp_description"" BETWEEN 'Acceptable, wrong years tell still on a police. On' AND 'Youngsters must provide other, intermediate clouds. Yesterday whole cars h' AND ""catalog_sales"".""cs_ext_wholesale_cost"" BETWEEN 32.39 AND 9999.0 AND ""promotion"".""p_channel_dmail"" BETWEEN 'N' AND 'Y';"
+q19.sql,5,41706712,customer|customer_demographics|date_dim|household_demographics|store_sales|web_sales,6,bf659c70,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_quarter_name"" FROM ""date_dim"" LEFT JOIN ""web_sales"" ON ""date_dim"".""d_date_sk"" = ""web_sales"".""ws_sold_date_sk"" LEFT JOIN ""customer_demographics"" ON ""web_sales"".""ws_bill_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""household_demographics"" ON ""web_sales"".""ws_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""customer"" ON ""web_sales"".""ws_bill_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""store_sales"" ON ""date_dim"".""d_date_sk"" = ""store_sales"".""ss_sold_date_sk"" WHERE ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""customer_demographics"".""cd_dep_college_count"" BETWEEN 0 AND 6 AND ""store_sales"".""ss_ext_wholesale_cost"" BETWEEN 32.04 AND 10000.0 AND ""customer"".""c_login"" BETWEEN '' AND '' AND ""web_sales"".""ws_ship_date_sk"" BETWEEN 2450903 AND 2452762 AND ""date_dim"".""d_current_year"" BETWEEN 'N' AND 'Y';"
+q20.sql,2,22092652,catalog_page|catalog_sales|customer_demographics,3,df0916eb,ok,"SELECT DISTINCT ON(""catalog_sales"".""cs_sold_date_sk"") ""catalog_sales"".""cs_sold_date_sk"" FROM ""catalog_sales"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""customer_demographics"" ON ""catalog_sales"".""cs_bill_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" WHERE ""customer_demographics"".""cd_marital_status"" BETWEEN 'D' AND 'W' AND ""catalog_sales"".""cs_ext_sales_price"" BETWEEN 0.23 AND 28767.0 AND ""catalog_page"".""cp_catalog_page_id"" BETWEEN 'AAAAAAAAACIBAAAA' AND 'AAAAAAAAPPPBAAAA';"
+q21.sql,6,1927080,catalog_returns|customer|inventory|item|store_sales|warehouse|web_sales,7,aab312d5,ok,"SELECT DISTINCT ON(""warehouse"".""w_warehouse_sk"") ""warehouse"".""w_street_name"" FROM ""warehouse"" LEFT JOIN ""inventory"" ON ""warehouse"".""w_warehouse_sk"" = ""inventory"".""inv_warehouse_sk"" LEFT JOIN ""item"" ON ""inventory"".""inv_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""web_sales"" ON ""item"".""i_item_sk"" = ""web_sales"".""ws_item_sk"" LEFT JOIN ""catalog_returns"" ON ""item"".""i_item_sk"" = ""catalog_returns"".""cr_item_sk"" LEFT JOIN ""store_sales"" ON ""item"".""i_item_sk"" = ""store_sales"".""ss_item_sk"" LEFT JOIN ""customer"" ON ""web_sales"".""ws_bill_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""catalog_returns"".""cr_ship_mode_sk"" BETWEEN 1 AND 20 AND ""store_sales"".""ss_ext_sales_price"" BETWEEN 0.08 AND 19308.0 AND ""item"".""i_rec_start_date"" BETWEEN '1997-10-27T00:00:00' AND '2001-10-27' AND ""web_sales"".""ws_net_paid_inc_ship"" BETWEEN 24.44 AND 41222.09 AND ""customer"".""c_birth_country"" BETWEEN 'ALBANIA' AND 'ZIMBABWE' AND ""warehouse"".""w_state"" BETWEEN 'TN' AND 'TN' AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000;"
+q22.sql,2,37145980,date_dim|inventory|web_returns,3,72ef3e2a,ok,"SELECT DISTINCT ON(""inventory"".""inv_date_sk"") ""inventory"".""inv_item_sk"" FROM ""inventory"" LEFT JOIN ""date_dim"" ON ""inventory"".""inv_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""web_returns"" ON ""date_dim"".""d_date_sk"" = ""web_returns"".""wr_returned_date_sk"" WHERE ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""web_returns"".""wr_net_loss"" BETWEEN 21.28 AND 11910.44 AND ""date_dim"".""d_current_week"" BETWEEN 'N' AND 'N';"
+q23.sql,5,38906232,customer|customer_demographics|date_dim|promotion|store_sales|web_sales,6,ab386f48,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_coupon_amt"" FROM ""store_sales"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""web_sales"" ON ""promotion"".""p_promo_sk"" = ""web_sales"".""ws_promo_sk"" LEFT JOIN ""customer"" ON ""web_sales"".""ws_bill_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" WHERE ""customer_demographics"".""cd_dep_count"" BETWEEN 0 AND 6 AND ""promotion"".""p_purpose"" BETWEEN 'Unknown' AND 'Unknown' AND ""store_sales"".""ss_ext_sales_price"" BETWEEN 0.08 AND 19308.0 AND ""customer"".""c_birth_year"" BETWEEN 1924 AND 1992 AND ""web_sales"".""ws_net_paid"" BETWEEN 0.0 AND 28538.37 AND ""date_dim"".""d_following_holiday"" BETWEEN 'N' AND 'Y';"
+q24.sql,5,42833358,catalog_sales|customer_address|date_dim|promotion|store|store_sales,6,36b905bd,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_ext_sales_price"" FROM ""store_sales"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""catalog_sales"" ON ""customer_address"".""ca_address_sk"" = ""catalog_sales"".""cs_bill_addr_sk"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" WHERE ""store_sales"".""ss_coupon_amt"" BETWEEN 0.0 AND 17588.25 AND ""store"".""s_street_name"" BETWEEN '12th' AND 'Sycamore' AND ""customer_address"".""ca_street_name"" BETWEEN '10th River' AND 'Woodland Woodland' AND ""catalog_sales"".""cs_ship_addr_sk"" BETWEEN 479 AND 50000 AND ""promotion"".""p_channel_email"" BETWEEN 'N' AND 'N' AND ""date_dim"".""d_fy_year"" BETWEEN 1902 AND 2100;"
+q25.sql,7,62126010,customer|customer_address|customer_demographics|household_demographics|item|store|store_sales|web_sales,8,4439941f,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_promo_sk"" FROM ""store_sales"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""item"" ON ""store_sales"".""ss_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""customer"" ON ""customer_address"".""ca_address_sk"" = ""customer"".""c_current_addr_sk"" LEFT JOIN ""web_sales"" ON ""customer_address"".""ca_address_sk"" = ""web_sales"".""ws_bill_addr_sk"" LEFT JOIN ""customer_demographics"" ON ""web_sales"".""ws_bill_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""household_demographics"" ON ""customer"".""c_current_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" WHERE ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4 AND ""customer_demographics"".""cd_dep_employed_count"" BETWEEN 0 AND 6 AND ""store_sales"".""ss_net_paid_inc_tax"" BETWEEN 0.0 AND 20669.67 AND ""item"".""i_product_name"" BETWEEN 'ableablepripri' AND 'pripripripriought' AND ""customer"".""c_birth_year"" BETWEEN 1924 AND 1992 AND ""web_sales"".""ws_net_paid_inc_ship_tax"" BETWEEN 24.95 AND 43505.15 AND ""customer_address"".""ca_street_name"" BETWEEN '10th River' AND 'Woodland Woodland' AND ""store"".""s_zip"" BETWEEN '31904' AND '35709';"
+q26.sql,4,33626452,catalog_page|catalog_sales|customer|household_demographics|item,5,4b9370f4,ok,"SELECT DISTINCT ON(""catalog_sales"".""cs_sold_date_sk"") ""catalog_sales"".""cs_wholesale_cost"" FROM ""catalog_sales"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""customer"" ON ""catalog_sales"".""cs_bill_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""household_demographics"" ON ""customer"".""c_current_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""item"" ON ""catalog_sales"".""cs_item_sk"" = ""item"".""i_item_sk"" WHERE ""item"".""i_rec_end_date"" BETWEEN '1999-10-27T00:00:00' AND '2001-10-26' AND ""customer"".""c_email_address"" BETWEEN 'Albert.Pierce@99v1bsAFZbCLBZEV3.org' AND 'Zulma.Carter@MfvjVN43Udd95KeZ.com' AND ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4 AND ""catalog_page"".""cp_catalog_page_number"" BETWEEN 2 AND 108 AND ""catalog_sales"".""cs_order_number"" BETWEEN 1611 AND 160000;"
+q27.sql,4,50881512,date_dim|household_demographics|inventory|item|store_sales,5,736884de,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_item_sk"" FROM ""store_sales"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""inventory"" ON ""date_dim"".""d_date_sk"" = ""inventory"".""inv_date_sk"" LEFT JOIN ""item"" ON ""inventory"".""inv_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" WHERE ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""store_sales"".""ss_coupon_amt"" BETWEEN 0.0 AND 17588.25 AND ""item"".""i_category_id"" BETWEEN 1 AND 10 AND ""date_dim"".""d_quarter_seq"" BETWEEN 9 AND 801 AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000;"
+q28.sql,2,8000,call_center,1,e821bef7,ok,"SELECT DISTINCT ON(""call_center"".""cc_call_center_sk"") ""call_center"".""cc_division_name"" FROM ""call_center"" WHERE ""call_center"".""cc_mkt_id"" BETWEEN 2 AND 6;"
+q29.sql,7,62126010,catalog_sales|customer|customer_address|customer_demographics|date_dim|household_demographics|store_returns|store_sales,8,b3df7e43,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_ext_wholesale_cost"" FROM ""store_sales"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""catalog_sales"" ON ""customer"".""c_customer_sk"" = ""catalog_sales"".""cs_bill_customer_sk"" LEFT JOIN ""date_dim"" ON ""catalog_sales"".""cs_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""store_returns"" ON ""customer"".""c_customer_sk"" = ""store_returns"".""sr_customer_sk"" LEFT JOIN ""household_demographics"" ON ""customer"".""c_current_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" WHERE ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""customer_demographics"".""cd_gender"" BETWEEN 'F' AND 'M' AND ""store_sales"".""ss_ext_discount_amt"" BETWEEN 0.0 AND 17588.25 AND ""customer"".""c_customer_id"" BETWEEN 'AAAAAAAAACILAAAA' AND 'AAAAAAAAPPPPAAAA' AND ""catalog_sales"".""cs_ship_date_sk"" BETWEEN 2450891 AND 2452737 AND ""customer_address"".""ca_location_type"" BETWEEN 'apartment' AND 'single family' AND ""date_dim"".""d_dow"" BETWEEN 0 AND 6 AND ""store_returns"".""sr_ticket_number"" BETWEEN 2453 AND 240000;"
+q30.sql,2,2856847,date_dim|store_returns|web_returns,3,eb8dde9b,ok,"SELECT DISTINCT ON(""web_returns"".""wr_returned_date_sk"") ""web_returns"".""wr_return_amt_inc_tax"" FROM ""web_returns"" LEFT JOIN ""date_dim"" ON ""web_returns"".""wr_returned_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" WHERE ""web_returns"".""wr_returning_customer_sk"" BETWEEN 997 AND 99999 AND ""date_dim"".""d_current_year"" BETWEEN 'N' AND 'Y' AND ""store_returns"".""sr_store_credit"" BETWEEN 0.0 AND 11761.45;"
+q31.sql,2,39656232,date_dim|promotion|store_sales,3,46738203,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_promo_sk"" FROM ""store_sales"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" WHERE ""date_dim"".""d_fy_year"" BETWEEN 1902 AND 2100 AND ""promotion"".""p_end_date_sk"" BETWEEN 2450144 AND 2450955 AND ""store_sales"".""ss_sales_price"" BETWEEN 0.01 AND 199.56;"
+q32.sql,2,22092652,catalog_page|catalog_sales|household_demographics,3,b87178e9,ok,"SELECT DISTINCT ON(""catalog_sales"".""cs_sold_date_sk"") ""catalog_sales"".""cs_bill_hdemo_sk"" FROM ""catalog_sales"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""household_demographics"" ON ""catalog_sales"".""cs_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" WHERE ""catalog_sales"".""cs_sales_price"" BETWEEN 0.02 AND 297.83 AND ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""catalog_page"".""cp_department"" BETWEEN 'DEPARTMENT' AND 'DEPARTMENT';"
+q33.sql,3,40106232,customer|customer_demographics|store|store_sales,4,91802a4a,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_list_price"" FROM ""store_sales"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""store"".""s_manager"" BETWEEN 'Brett Yates' AND 'William Ward' AND ""customer"".""c_last_name"" BETWEEN 'Alfred' AND 'Zuniga' AND ""customer_demographics"".""cd_gender"" BETWEEN 'F' AND 'M' AND ""store_sales"".""ss_coupon_amt"" BETWEEN 0.0 AND 17588.25;"
+q34.sql,5,1506260,date_dim|inventory|item|store_sales|time_dim|web_sales,6,4b08ceea,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_holiday"" FROM ""date_dim"" LEFT JOIN ""inventory"" ON ""date_dim"".""d_date_sk"" = ""inventory"".""inv_date_sk"" LEFT JOIN ""web_sales"" ON ""date_dim"".""d_date_sk"" = ""web_sales"".""ws_sold_date_sk"" LEFT JOIN ""item"" ON ""web_sales"".""ws_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""store_sales"" ON ""date_dim"".""d_date_sk"" = ""store_sales"".""ss_sold_date_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" WHERE ""item"".""i_current_price"" BETWEEN 0.16 AND 99.99 AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""web_sales"".""ws_sold_time_sk"" BETWEEN 3651 AND 86367 AND ""store_sales"".""ss_ext_sales_price"" BETWEEN 0.08 AND 19308.0 AND ""time_dim"".""t_sub_shift"" BETWEEN 'afternoon' AND 'night' AND ""date_dim"".""d_current_day"" BETWEEN 'N' AND 'N';"
+q35.sql,2,13874800,customer|store|store_sales,3,bd6a7a0b,ok,"SELECT DISTINCT ON(""customer"".""c_customer_sk"") ""customer"".""c_first_name"" FROM ""customer"" LEFT JOIN ""store_sales"" ON ""customer"".""c_customer_sk"" = ""store_sales"".""ss_customer_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" WHERE ""store"".""s_county"" BETWEEN 'Williamson County' AND 'Williamson County' AND ""customer"".""c_last_review_date_sk"" BETWEEN 2452286 AND 2452648 AND ""store_sales"".""ss_ext_sales_price"" BETWEEN 0.08 AND 19308.0;"
+q36.sql,3,39356712,customer_address|customer_demographics|store_sales|time_dim,4,f736b96e,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_ext_wholesale_cost"" FROM ""store_sales"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" WHERE ""store_sales"".""ss_list_price"" BETWEEN 2.85 AND 200.0 AND ""time_dim"".""t_meal_time"" BETWEEN '' AND 'lunch' AND ""customer_demographics"".""cd_purchase_estimate"" BETWEEN 500 AND 10000 AND ""customer_address"".""ca_zip"" BETWEEN '04736' AND '99981';"
+q37.sql,3,57327652,customer_address|item|web_returns|web_sales,4,7b9dd633,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_brand"" FROM ""item"" LEFT JOIN ""web_returns"" ON ""item"".""i_item_sk"" = ""web_returns"".""wr_item_sk"" LEFT JOIN ""web_sales"" ON ""item"".""i_item_sk"" = ""web_sales"".""ws_item_sk"" LEFT JOIN ""customer_address"" ON ""web_sales"".""ws_bill_addr_sk"" = ""customer_address"".""ca_address_sk"" WHERE ""web_returns"".""wr_fee"" BETWEEN 1.56 AND 100.0 AND ""customer_address"".""ca_zip"" BETWEEN '04736' AND '99981' AND ""item"".""i_formulation"" BETWEEN '011044snow5914895795' AND 'yellow98525476168526' AND ""web_sales"".""ws_ext_sales_price"" BETWEEN 0.36 AND 28592.19;"
+q38.sql,4,3076980,date_dim|inventory|promotion|web_returns|web_sales,5,d604c289,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_current_month"" FROM ""date_dim"" LEFT JOIN ""web_sales"" ON ""date_dim"".""d_date_sk"" = ""web_sales"".""ws_sold_date_sk"" LEFT JOIN ""inventory"" ON ""date_dim"".""d_date_sk"" = ""inventory"".""inv_date_sk"" LEFT JOIN ""web_returns"" ON ""date_dim"".""d_date_sk"" = ""web_returns"".""wr_returned_date_sk"" LEFT JOIN ""promotion"" ON ""web_sales"".""ws_promo_sk"" = ""promotion"".""p_promo_sk"" WHERE ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""web_sales"".""ws_net_paid_inc_ship"" BETWEEN 24.44 AND 41222.09 AND ""web_returns"".""wr_return_ship_cost"" BETWEEN 0.0 AND 11690.44 AND ""promotion"".""p_end_date_sk"" BETWEEN 2450144 AND 2450955 AND ""date_dim"".""d_fy_week_seq"" BETWEEN 105 AND 10436;"
+q39.sql,8,1951080,catalog_sales|customer|customer_demographics|date_dim|household_demographics|item|store_returns|store_sales|time_dim,9,fa39ca94,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_size"" FROM ""item"" LEFT JOIN ""store_sales"" ON ""item"".""i_item_sk"" = ""store_sales"".""ss_item_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""catalog_sales"" ON ""customer_demographics"".""cd_demo_sk"" = ""catalog_sales"".""cs_bill_cdemo_sk"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""customer"" ON ""customer_demographics"".""cd_demo_sk"" = ""customer"".""c_current_cdemo_sk"" LEFT JOIN ""store_returns"" ON ""item"".""i_item_sk"" = ""store_returns"".""sr_item_sk"" LEFT JOIN ""household_demographics"" ON ""customer"".""c_current_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" WHERE ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""customer_demographics"".""cd_marital_status"" BETWEEN 'D' AND 'W' AND ""store_sales"".""ss_net_paid_inc_tax"" BETWEEN 0.0 AND 20669.67 AND ""item"".""i_product_name"" BETWEEN 'ableablepripri' AND 'pripripripriought' AND ""customer"".""c_birth_year"" BETWEEN 1924 AND 1992 AND ""catalog_sales"".""cs_ship_date_sk"" BETWEEN 2450891 AND 2452737 AND ""date_dim"".""d_current_year"" BETWEEN 'N' AND 'Y' AND ""time_dim"".""t_hour"" BETWEEN 0 AND 23 AND ""store_returns"".""sr_reversed_charge"" BETWEEN 0.0 AND 10981.28;"
+q40.sql,1,21478275,catalog_returns|customer,2,6ac46c13,ok,"SELECT DISTINCT ON(""catalog_returns"".""cr_returned_date_sk"") ""catalog_returns"".""cr_returning_addr_sk"" FROM ""catalog_returns"" LEFT JOIN ""customer"" ON ""catalog_returns"".""cr_refunded_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""catalog_returns"".""cr_return_amount"" BETWEEN 0.3 AND 24214.19 AND ""customer"".""c_email_address"" BETWEEN 'Albert.Pierce@99v1bsAFZbCLBZEV3.org' AND 'Zulma.Carter@MfvjVN43Udd95KeZ.com';"
+q41.sql,0,450000,item,1,82570e36,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_brand"" FROM ""item"" WHERE ""item"".""i_product_name"" BETWEEN 'ableablepripri' AND 'pripripripriought';"
+q42.sql,2,39356232,catalog_returns|date_dim|store_returns,3,5db483c9,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_current_year"" FROM ""date_dim"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" LEFT JOIN ""catalog_returns"" ON ""date_dim"".""d_date_sk"" = ""catalog_returns"".""cr_returned_date_sk"" WHERE ""catalog_returns"".""cr_returning_customer_sk"" BETWEEN 1038 AND 99998 AND ""date_dim"".""d_quarter_name"" BETWEEN '1902Q1' AND '2100Q1' AND ""store_returns"".""sr_addr_sk"" BETWEEN 487 AND 50000;"
+q43.sql,2,38906712,catalog_sales|date_dim|web_returns,3,c90c3014,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_quarter_seq"" FROM ""date_dim"" LEFT JOIN ""web_returns"" ON ""date_dim"".""d_date_sk"" = ""web_returns"".""wr_returned_date_sk"" LEFT JOIN ""catalog_sales"" ON ""date_dim"".""d_date_sk"" = ""catalog_sales"".""cs_sold_date_sk"" WHERE ""web_returns"".""wr_return_amt"" BETWEEN 0.55 AND 21564.8 AND ""catalog_sales"".""cs_quantity"" BETWEEN 2 AND 100 AND ""date_dim"".""d_current_day"" BETWEEN 'N' AND 'N';"
+q44.sql,1,8000,call_center,1,120d75d9,ok,"SELECT DISTINCT ON(""call_center"".""cc_call_center_sk"") ""call_center"".""cc_open_date_sk"" FROM ""call_center"" WHERE ""call_center"".""cc_gmt_offset"" BETWEEN -5.0 AND -5.0;"
+q45.sql,4,14332356,customer_address|promotion|web_page|web_sales|web_site,5,e976c7a6,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_wholesale_cost"" FROM ""web_sales"" LEFT JOIN ""web_page"" ON ""web_sales"".""ws_web_page_sk"" = ""web_page"".""wp_web_page_sk"" LEFT JOIN ""customer_address"" ON ""web_sales"".""ws_bill_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" LEFT JOIN ""promotion"" ON ""web_sales"".""ws_promo_sk"" = ""promotion"".""p_promo_sk"" WHERE ""promotion"".""p_channel_press"" BETWEEN 'N' AND 'N' AND ""web_sales"".""ws_coupon_amt"" BETWEEN 0.0 AND 26909.62 AND ""customer_address"".""ca_state"" BETWEEN 'AL' AND 'WY' AND ""web_page"".""wp_web_page_id"" BETWEEN 'AAAAAAAAABAAAAAA' AND 'AAAAAAAAPBAAAAAA' AND ""web_site"".""web_name"" BETWEEN 'site_0' AND 'site_4';"
+q46.sql,8,2264260,customer|customer_demographics|date_dim|household_demographics|item|store_returns|store_sales|time_dim|web_sales,9,990cd12a,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_weekend"" FROM ""date_dim"" LEFT JOIN ""store_sales"" ON ""date_dim"".""d_date_sk"" = ""store_sales"".""ss_sold_date_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""web_sales"" ON ""date_dim"".""d_date_sk"" = ""web_sales"".""ws_sold_date_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""item"" ON ""web_sales"".""ws_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""customer"" ON ""web_sales"".""ws_bill_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""store_returns"" ON ""customer"".""c_customer_sk"" = ""store_returns"".""sr_customer_sk"" WHERE ""item"".""i_category_id"" BETWEEN 1 AND 10 AND ""store_sales"".""ss_net_profit"" BETWEEN -6524.02 AND 9407.0 AND ""customer_demographics"".""cd_marital_status"" BETWEEN 'D' AND 'W' AND ""web_sales"".""ws_ship_date_sk"" BETWEEN 2450903 AND 2452762 AND ""time_dim"".""t_time_id"" BETWEEN 'AAAAAAAAACINAAAA' AND 'AAAAAAAAPPPPAAAA' AND ""customer"".""c_last_name"" BETWEEN 'Alfred' AND 'Zuniga' AND ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""store_returns"".""sr_ticket_number"" BETWEEN 2453 AND 240000 AND ""date_dim"".""d_date"" BETWEEN '1902-01-02T11:31:12' AND '2100-01-01';"
+q47.sql,3,39356712,catalog_sales|customer_address|item|store_sales,4,c7752788,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_rec_end_date"" FROM ""item"" LEFT JOIN ""store_sales"" ON ""item"".""i_item_sk"" = ""store_sales"".""ss_item_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""catalog_sales"" ON ""item"".""i_item_sk"" = ""catalog_sales"".""cs_item_sk"" WHERE ""customer_address"".""ca_zip"" BETWEEN '04736' AND '99981' AND ""catalog_sales"".""cs_order_number"" BETWEEN 1611 AND 160000 AND ""item"".""i_wholesale_cost"" BETWEEN 0.09 AND 87.36 AND ""store_sales"".""ss_net_profit"" BETWEEN -6524.02 AND 9407.0;"
+q48.sql,4,51181512,catalog_returns|date_dim|inventory|item|store_sales,5,9f3b9f4a,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_wholesale_cost"" FROM ""store_sales"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""inventory"" ON ""date_dim"".""d_date_sk"" = ""inventory"".""inv_date_sk"" LEFT JOIN ""catalog_returns"" ON ""date_dim"".""d_date_sk"" = ""catalog_returns"".""cr_returned_date_sk"" LEFT JOIN ""item"" ON ""store_sales"".""ss_item_sk"" = ""item"".""i_item_sk"" WHERE ""catalog_returns"".""cr_return_quantity"" BETWEEN 1 AND 100 AND ""item"".""i_rec_start_date"" BETWEEN '1997-10-27T00:00:00' AND '2001-10-27' AND ""store_sales"".""ss_net_profit"" BETWEEN -6524.02 AND 9407.0 AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""date_dim"".""d_week_seq"" BETWEEN 105 AND 10436;"
+q49.sql,10,4562096,catalog_page|catalog_sales|customer|household_demographics|inventory|item|store|store_returns|store_sales|time_dim|web_returns,11,23f590d2,ok,"SELECT DISTINCT ON(""web_returns"".""wr_returned_date_sk"") ""web_returns"".""wr_refunded_hdemo_sk"" FROM ""web_returns"" LEFT JOIN ""customer"" ON ""web_returns"".""wr_refunded_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""store_returns"" ON ""customer"".""c_customer_sk"" = ""store_returns"".""sr_customer_sk"" LEFT JOIN ""catalog_sales"" ON ""customer"".""c_customer_sk"" = ""catalog_sales"".""cs_bill_customer_sk"" LEFT JOIN ""item"" ON ""catalog_sales"".""cs_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""store"" ON ""store_returns"".""sr_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""household_demographics"" ON ""catalog_sales"".""cs_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""store_sales"" ON ""store"".""s_store_sk"" = ""store_sales"".""ss_store_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""inventory"" ON ""item"".""i_item_sk"" = ""inventory"".""inv_item_sk"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" WHERE ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""store_sales"".""ss_list_price"" BETWEEN 2.85 AND 200.0 AND ""item"".""i_manager_id"" BETWEEN 1 AND 100 AND ""customer"".""c_first_shipto_date_sk"" BETWEEN 2449062 AND 2452678 AND ""web_returns"".""wr_return_tax"" BETWEEN 0.0 AND 1833.66 AND ""catalog_sales"".""cs_ext_discount_amt"" BETWEEN 0.14 AND 28300.44 AND ""catalog_page"".""cp_type"" BETWEEN 'bi-annual' AND 'quarterly' AND ""store"".""s_gmt_offset"" BETWEEN -5.0 AND -5.0 AND ""time_dim"".""t_time"" BETWEEN 863 AND 86399 AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""store_returns"".""sr_reason_sk"" BETWEEN 1 AND 35;"
+q50.sql,4,41494338,customer|customer_demographics|household_demographics|promotion|store_sales,5,b9bc3f7f,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_hdemo_sk"" FROM ""store_sales"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""customer_demographics"" ON ""customer"".""c_current_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" WHERE ""store_sales"".""ss_net_profit"" BETWEEN -6524.02 AND 9407.0 AND ""customer_demographics"".""cd_credit_rating"" BETWEEN 'Good' AND 'Unknown' AND ""customer"".""c_salutation"" BETWEEN 'Dr.' AND 'Sir' AND ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""promotion"".""p_channel_radio"" BETWEEN 'N' AND 'N';"
+q51.sql,2,11540356,catalog_sales|customer_address|web_sales,3,92586bd1,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_ship_date_sk"" FROM ""web_sales"" LEFT JOIN ""customer_address"" ON ""web_sales"".""ws_bill_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""catalog_sales"" ON ""customer_address"".""ca_address_sk"" = ""catalog_sales"".""cs_bill_addr_sk"" WHERE ""catalog_sales"".""cs_ship_hdemo_sk"" BETWEEN 70 AND 7200 AND ""customer_address"".""ca_zip"" BETWEEN '04736' AND '99981' AND ""web_sales"".""ws_warehouse_sk"" BETWEEN 1 AND 5;"
+q52.sql,2,39356232,date_dim|item|web_returns,3,c2b466ab,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_date_id"" FROM ""date_dim"" LEFT JOIN ""web_returns"" ON ""date_dim"".""d_date_sk"" = ""web_returns"".""wr_returned_date_sk"" LEFT JOIN ""item"" ON ""web_returns"".""wr_item_sk"" = ""item"".""i_item_sk"" WHERE ""item"".""i_rec_end_date"" BETWEEN '1999-10-27T00:00:00' AND '2001-10-26' AND ""web_returns"".""wr_order_number"" BETWEEN 635 AND 59999 AND ""date_dim"".""d_dow"" BETWEEN 0 AND 6;"
+q53.sql,5,38922712,customer_address|household_demographics|store|store_returns|store_sales|time_dim,6,83f5cf4a,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_ext_discount_amt"" FROM ""store_sales"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""store_returns"" ON ""store"".""s_store_sk"" = ""store_returns"".""sr_store_sk"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" WHERE ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4 AND ""store_sales"".""ss_ext_wholesale_cost"" BETWEEN 32.04 AND 10000.0 AND ""customer_address"".""ca_address_id"" BETWEEN 'AAAAAAAAACIIAAAA' AND 'AAAAAAAAPPPLAAAA' AND ""store"".""s_country"" BETWEEN 'United States' AND 'United States' AND ""time_dim"".""t_time_id"" BETWEEN 'AAAAAAAAACINAAAA' AND 'AAAAAAAAPPPPAAAA' AND ""store_returns"".""sr_return_time_sk"" BETWEEN 29119 AND 61199;"
+q54.sql,7,3542980,catalog_returns|customer|date_dim|household_demographics|inventory|item|store_sales|time_dim,8,774a9730,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_rec_start_date"" FROM ""item"" LEFT JOIN ""inventory"" ON ""item"".""i_item_sk"" = ""inventory"".""inv_item_sk"" LEFT JOIN ""catalog_returns"" ON ""item"".""i_item_sk"" = ""catalog_returns"".""cr_item_sk"" LEFT JOIN ""date_dim"" ON ""catalog_returns"".""cr_returned_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""store_sales"" ON ""date_dim"".""d_date_sk"" = ""store_sales"".""ss_sold_date_sk"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""household_demographics"" ON ""customer"".""c_current_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" WHERE ""catalog_returns"".""cr_reason_sk"" BETWEEN 1 AND 35 AND ""item"".""i_manufact_id"" BETWEEN 7 AND 1000 AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""store_sales"".""ss_ext_wholesale_cost"" BETWEEN 32.04 AND 10000.0 AND ""time_dim"".""t_hour"" BETWEEN 0 AND 23 AND ""customer"".""c_birth_day"" BETWEEN 1 AND 31 AND ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""date_dim"".""d_weekend"" BETWEEN 'N' AND 'Y';"
+q55.sql,2,39356232,date_dim|store_returns|store_sales,3,420b81e5,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_first_dom"" FROM ""date_dim"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" LEFT JOIN ""store_sales"" ON ""date_dim"".""d_date_sk"" = ""store_sales"".""ss_sold_date_sk"" WHERE ""date_dim"".""d_current_year"" BETWEEN 'N' AND 'Y' AND ""store_returns"".""sr_return_tax"" BETWEEN 0.0 AND 1442.07 AND ""store_sales"".""ss_net_paid"" BETWEEN 0.0 AND 19443.0;"
+q56.sql,3,40106232,store|store_returns|store_sales|time_dim,4,e7173224,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_cdemo_sk"" FROM ""store_sales"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""store_returns"" ON ""store"".""s_store_sk"" = ""store_returns"".""sr_store_sk"" WHERE ""store_sales"".""ss_wholesale_cost"" BETWEEN 1.98 AND 100.0 AND ""time_dim"".""t_time_id"" BETWEEN 'AAAAAAAAACINAAAA' AND 'AAAAAAAAPPPPAAAA' AND ""store"".""s_suite_number"" BETWEEN 'Suite 100' AND 'Suite T' AND ""store_returns"".""sr_return_quantity"" BETWEEN 1 AND 100;"
+q57.sql,3,22100652,date_dim|inventory|item|web_returns,4,2e3c58a5,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_formulation"" FROM ""item"" LEFT JOIN ""inventory"" ON ""item"".""i_item_sk"" = ""inventory"".""inv_item_sk"" LEFT JOIN ""date_dim"" ON ""inventory"".""inv_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""web_returns"" ON ""item"".""i_item_sk"" = ""web_returns"".""wr_item_sk"" WHERE ""web_returns"".""wr_returned_time_sk"" BETWEEN 3618 AND 86398 AND ""date_dim"".""d_holiday"" BETWEEN 'N' AND 'Y' AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""item"".""i_manufact"" BETWEEN 'ableablepri' AND 'pripripri';"
+q58.sql,2,39356232,catalog_returns|date_dim|store_sales,3,56980901,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_net_paid_inc_tax"" FROM ""store_sales"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""catalog_returns"" ON ""date_dim"".""d_date_sk"" = ""catalog_returns"".""cr_returned_date_sk"" WHERE ""store_sales"".""ss_sales_price"" BETWEEN 0.01 AND 199.56 AND ""date_dim"".""d_moy"" BETWEEN 1 AND 12 AND ""catalog_returns"".""cr_refunded_cash"" BETWEEN 0.0 AND 20097.77;"
+q59.sql,1,38906232,promotion|store_sales,2,00f48128,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_store_sk"" FROM ""store_sales"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" WHERE ""promotion"".""p_end_date_sk"" BETWEEN 2450144 AND 2450955 AND ""store_sales"".""ss_ext_discount_amt"" BETWEEN 0.0 AND 17588.25;"
+q60.sql,3,40106232,customer|household_demographics|income_band|store_sales,4,095085a9,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_ext_list_price"" FROM ""store_sales"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""income_band"" ON ""household_demographics"".""hd_income_band_sk"" = ""income_band"".""ib_income_band_sk"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""store_sales"".""ss_ticket_number"" BETWEEN 2400 AND 240000 AND ""income_band"".""ib_lower_bound"" BETWEEN 1900 AND 190001 AND ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4 AND ""customer"".""c_customer_id"" BETWEEN 'AAAAAAAAACILAAAA' AND 'AAAAAAAAPPPPAAAA';"
+q61.sql,6,4270460,catalog_sales|customer_address|customer_demographics|household_demographics|promotion|store|store_sales,7,8dc1d743,ok,"SELECT DISTINCT ON(""store"".""s_store_sk"") ""store"".""s_gmt_offset"" FROM ""store"" LEFT JOIN ""store_sales"" ON ""store"".""s_store_sk"" = ""store_sales"".""ss_store_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""catalog_sales"" ON ""customer_demographics"".""cd_demo_sk"" = ""catalog_sales"".""cs_bill_cdemo_sk"" LEFT JOIN ""promotion"" ON ""catalog_sales"".""cs_promo_sk"" = ""promotion"".""p_promo_sk"" WHERE ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""customer_demographics"".""cd_dep_count"" BETWEEN 0 AND 6 AND ""promotion"".""p_channel_demo"" BETWEEN 'N' AND 'N' AND ""store_sales"".""ss_wholesale_cost"" BETWEEN 1.98 AND 100.0 AND ""catalog_sales"".""cs_net_paid_inc_ship"" BETWEEN 24.53 AND 40364.0 AND ""customer_address"".""ca_suite_number"" BETWEEN 'Suite 10' AND 'Suite Y' AND ""store"".""s_market_manager"" BETWEEN 'Charles Bartley' AND 'Thomas Pollack';"
+q62.sql,7,11533416,catalog_returns|customer_address|date_dim|item|store_returns|web_page|web_sales|web_site,8,b2961c9c,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_bill_addr_sk"" FROM ""web_sales"" LEFT JOIN ""web_page"" ON ""web_sales"".""ws_web_page_sk"" = ""web_page"".""wp_web_page_sk"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" LEFT JOIN ""date_dim"" ON ""web_sales"".""ws_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" LEFT JOIN ""catalog_returns"" ON ""date_dim"".""d_date_sk"" = ""catalog_returns"".""cr_returned_date_sk"" LEFT JOIN ""item"" ON ""store_returns"".""sr_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""customer_address"" ON ""web_sales"".""ws_bill_addr_sk"" = ""customer_address"".""ca_address_sk"" WHERE ""catalog_returns"".""cr_returning_addr_sk"" BETWEEN 479 AND 50000 AND ""item"".""i_class"" BETWEEN 'accessories' AND 'womens watch' AND ""web_sales"".""ws_net_paid_inc_tax"" BETWEEN 0.0 AND 30821.43 AND ""web_site"".""web_company_name"" BETWEEN 'able' AND 'pri' AND ""customer_address"".""ca_county"" BETWEEN 'Aleutians East Borough' AND 'Ziebach County' AND ""store_returns"".""sr_store_credit"" BETWEEN 0.0 AND 11761.45 AND ""web_page"".""wp_max_ad_count"" BETWEEN 0 AND 4 AND ""date_dim"".""d_qoy"" BETWEEN 1 AND 4;"
+q63.sql,5,38922712,customer|customer_demographics|store|store_sales|time_dim|web_sales,6,fdd394bb,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_net_paid_inc_tax"" FROM ""store_sales"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""web_sales"" ON ""customer_demographics"".""cd_demo_sk"" = ""web_sales"".""ws_bill_cdemo_sk"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""customer_demographics"".""cd_gender"" BETWEEN 'F' AND 'M' AND ""store_sales"".""ss_wholesale_cost"" BETWEEN 1.98 AND 100.0 AND ""web_sales"".""ws_list_price"" BETWEEN 3.63 AND 300.0 AND ""customer"".""c_first_sales_date_sk"" BETWEEN 2449032 AND 2452648 AND ""store"".""s_store_id"" BETWEEN 'AAAAAAAABAAAAAAA' AND 'AAAAAAAAKAAAAAAA' AND ""time_dim"".""t_time"" BETWEEN 863 AND 86399;"
+q64.sql,1,21478275,catalog_sales|customer,2,777f1397,ok,"SELECT DISTINCT ON(""catalog_sales"".""cs_sold_date_sk"") ""catalog_sales"".""cs_ship_cdemo_sk"" FROM ""catalog_sales"" LEFT JOIN ""customer"" ON ""catalog_sales"".""cs_bill_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""catalog_sales"".""cs_order_number"" BETWEEN 1611 AND 160000 AND ""customer"".""c_email_address"" BETWEEN 'Albert.Pierce@99v1bsAFZbCLBZEV3.org' AND 'Zulma.Carter@MfvjVN43Udd95KeZ.com';"
+q65.sql,6,1935460,customer|customer_address|household_demographics|promotion|store|store_returns|store_sales,7,54ab59b9,ok,"SELECT DISTINCT ON(""store"".""s_store_sk"") ""store"".""s_number_employees"" FROM ""store"" LEFT JOIN ""store_sales"" ON ""store"".""s_store_sk"" = ""store_sales"".""ss_store_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""store_returns"" ON ""store"".""s_store_sk"" = ""store_returns"".""sr_store_sk"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""promotion"".""p_channel_dmail"" BETWEEN 'N' AND 'Y' AND ""store_sales"".""ss_quantity"" BETWEEN 1 AND 100 AND ""customer"".""c_customer_id"" BETWEEN 'AAAAAAAAACILAAAA' AND 'AAAAAAAAPPPPAAAA' AND ""customer_address"".""ca_zip"" BETWEEN '04736' AND '99981' AND ""store"".""s_tax_percentage"" BETWEEN 0.01 AND 0.11 AND ""store_returns"".""sr_return_time_sk"" BETWEEN 29119 AND 61199;"
+q66.sql,36,2043640,catalog_page|catalog_returns|catalog_sales|customer|customer_address|customer_demographics|date_dim|household_demographics|income_band|inventory|item|promotion|store|store_returns|store_sales|time_dim|warehouse|web_page|web_returns|web_sales|web_site,21,847a4295,ok,"SELECT DISTINCT ON(""warehouse"".""w_warehouse_sk"") ""warehouse"".""w_warehouse_id"" FROM ""warehouse"" LEFT JOIN ""inventory"" ON ""warehouse"".""w_warehouse_sk"" = ""inventory"".""inv_warehouse_sk"" LEFT JOIN ""item"" ON ""inventory"".""inv_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""date_dim"" ON ""inventory"".""inv_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""catalog_sales"" ON ""item"".""i_item_sk"" = ""catalog_sales"".""cs_item_sk"" LEFT JOIN ""web_sales"" ON ""item"".""i_item_sk"" = ""web_sales"".""ws_item_sk"" LEFT JOIN ""promotion"" ON ""catalog_sales"".""cs_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""store_sales"" ON ""promotion"".""p_promo_sk"" = ""store_sales"".""ss_promo_sk"" LEFT JOIN ""customer_address"" ON ""web_sales"".""ws_bill_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""catalog_returns"" ON ""date_dim"".""d_date_sk"" = ""catalog_returns"".""cr_returned_date_sk"" LEFT JOIN ""customer_demographics"" ON ""catalog_sales"".""cs_bill_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" LEFT JOIN ""customer"" ON ""catalog_sales"".""cs_bill_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""web_returns"" ON ""item"".""i_item_sk"" = ""web_returns"".""wr_item_sk"" LEFT JOIN ""store_returns"" ON ""customer"".""c_customer_sk"" = ""store_returns"".""sr_customer_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""web_page"" ON ""web_returns"".""wr_web_page_sk"" = ""web_page"".""wp_web_page_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""household_demographics"" ON ""customer"".""c_current_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""income_band"" ON ""household_demographics"".""hd_income_band_sk"" = ""income_band"".""ib_income_band_sk"" WHERE ""item"".""i_color"" BETWEEN 'azure' AND 'yellow' AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""web_sales"".""ws_ext_discount_amt"" BETWEEN 0.1 AND 29317.0 AND ""customer_demographics"".""cd_education_status"" BETWEEN '2 yr Degree' AND 'Unknown' AND ""web_site"".""web_name"" BETWEEN 'site_0' AND 'site_4' AND ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""promotion"".""p_channel_catalog"" BETWEEN 'N' AND 'N' AND ""store"".""s_geography_class"" BETWEEN 'Unknown' AND 'Unknown' AND ""customer_address"".""ca_gmt_offset"" BETWEEN -8.0 AND -5.0 AND ""income_band"".""ib_lower_bound"" BETWEEN 1900 AND 190001 AND ""warehouse"".""w_warehouse_sq_ft"" BETWEEN 143176 AND 977787 AND ""store_returns"".""sr_return_ship_cost"" BETWEEN 0.0 AND 8710.98 AND ""catalog_sales"".""cs_ship_cdemo_sk"" BETWEEN 19330 AND 1920765 AND ""catalog_returns"".""cr_refunded_cdemo_sk"" BETWEEN 19467 AND 1920765 AND ""store_sales"".""ss_quantity"" BETWEEN 1 AND 100 AND ""web_returns"".""wr_order_number"" BETWEEN 635 AND 59999 AND ""date_dim"".""d_first_dom"" BETWEEN 2415751 AND 2488070 AND ""time_dim"".""t_hour"" BETWEEN 0 AND 23 AND ""customer"".""c_preferred_cust_flag"" BETWEEN 'N' AND 'Y' AND ""catalog_page"".""cp_department"" BETWEEN 'DEPARTMENT' AND 'DEPARTMENT' AND ""web_page"".""wp_link_count"" BETWEEN 2 AND 25;"
+q67.sql,9,72000,call_center,1,56f03954,ok,"SELECT DISTINCT ON(""call_center"".""cc_call_center_sk"") ""call_center"".""cc_division"" FROM ""call_center"" WHERE ""call_center"".""cc_gmt_offset"" BETWEEN -5.0 AND -5.0;"
+q68.sql,9,2264260,catalog_sales|customer|customer_address|customer_demographics|date_dim|household_demographics|promotion|store_returns|store_sales|web_returns,10,f2b081c3,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_dow"" FROM ""date_dim"" LEFT JOIN ""catalog_sales"" ON ""date_dim"".""d_date_sk"" = ""catalog_sales"".""cs_sold_date_sk"" LEFT JOIN ""promotion"" ON ""catalog_sales"".""cs_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""store_sales"" ON ""date_dim"".""d_date_sk"" = ""store_sales"".""ss_sold_date_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""customer"" ON ""customer_demographics"".""cd_demo_sk"" = ""customer"".""c_current_cdemo_sk"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" LEFT JOIN ""web_returns"" ON ""customer"".""c_customer_sk"" = ""web_returns"".""wr_refunded_customer_sk"" WHERE ""store_sales"".""ss_ext_discount_amt"" BETWEEN 0.0 AND 17588.25 AND ""customer_demographics"".""cd_marital_status"" BETWEEN 'D' AND 'W' AND ""customer_address"".""ca_country"" BETWEEN 'United States' AND 'United States' AND ""customer"".""c_birth_day"" BETWEEN 1 AND 31 AND ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""web_returns"".""wr_refunded_cash"" BETWEEN 0.0 AND 17806.09 AND ""store_returns"".""sr_reason_sk"" BETWEEN 1 AND 35 AND ""catalog_sales"".""cs_wholesale_cost"" BETWEEN 1.98 AND 100.0 AND ""promotion"".""p_discount_active"" BETWEEN 'N' AND 'N' AND ""date_dim"".""d_dom"" BETWEEN 1 AND 31;"
+q69.sql,2,13874800,catalog_sales|customer|customer_address,3,48266d38,ok,"SELECT DISTINCT ON(""customer"".""c_customer_sk"") ""customer"".""c_email_address"" FROM ""customer"" LEFT JOIN ""catalog_sales"" ON ""customer"".""c_customer_sk"" = ""catalog_sales"".""cs_bill_customer_sk"" LEFT JOIN ""customer_address"" ON ""customer"".""c_current_addr_sk"" = ""customer_address"".""ca_address_sk"" WHERE ""catalog_sales"".""cs_net_paid_inc_ship"" BETWEEN 24.53 AND 40364.0 AND ""customer_address"".""ca_address_id"" BETWEEN 'AAAAAAAAACIIAAAA' AND 'AAAAAAAAPPPLAAAA' AND ""customer"".""c_birth_country"" BETWEEN 'ALBANIA' AND 'ZIMBABWE';"
+q70.sql,2,38906712,date_dim|store_sales|time_dim,3,b9ef7b77,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_coupon_amt"" FROM ""store_sales"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" WHERE ""store_sales"".""ss_net_paid"" BETWEEN 0.0 AND 19443.0 AND ""time_dim"".""t_shift"" BETWEEN 'first' AND 'third' AND ""date_dim"".""d_same_day_lq"" BETWEEN 2415660 AND 2487978;"
+q71.sql,5,1934980,customer_demographics|item|promotion|store_sales|web_page|web_sales,6,e88c05f5,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_manufact_id"" FROM ""item"" LEFT JOIN ""store_sales"" ON ""item"".""i_item_sk"" = ""store_sales"".""ss_item_sk"" LEFT JOIN ""web_sales"" ON ""item"".""i_item_sk"" = ""web_sales"".""ws_item_sk"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""customer_demographics"" ON ""web_sales"".""ws_bill_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""web_page"" ON ""web_sales"".""ws_web_page_sk"" = ""web_page"".""wp_web_page_sk"" WHERE ""promotion"".""p_channel_dmail"" BETWEEN 'N' AND 'Y' AND ""customer_demographics"".""cd_credit_rating"" BETWEEN 'Good' AND 'Unknown' AND ""store_sales"".""ss_ext_sales_price"" BETWEEN 0.08 AND 19308.0 AND ""item"".""i_product_name"" BETWEEN 'ableablepripri' AND 'pripripripriought' AND ""web_sales"".""ws_net_paid_inc_ship_tax"" BETWEEN 24.95 AND 43505.15 AND ""web_page"".""wp_image_count"" BETWEEN 1 AND 7;"
+q72.sql,10,70186955,catalog_sales|customer|customer_demographics|date_dim|household_demographics|inventory|item|store|store_sales|warehouse|web_sales,11,9d9fd39b,ok,"SELECT DISTINCT ON(""inventory"".""inv_date_sk"") ""inventory"".""inv_warehouse_sk"" FROM ""inventory"" LEFT JOIN ""warehouse"" ON ""inventory"".""inv_warehouse_sk"" = ""warehouse"".""w_warehouse_sk"" LEFT JOIN ""item"" ON ""inventory"".""inv_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""store_sales"" ON ""item"".""i_item_sk"" = ""store_sales"".""ss_item_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""date_dim"" ON ""inventory"".""inv_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""web_sales"" ON ""date_dim"".""d_date_sk"" = ""web_sales"".""ws_sold_date_sk"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""catalog_sales"" ON ""customer_demographics"".""cd_demo_sk"" = ""catalog_sales"".""cs_bill_cdemo_sk"" LEFT JOIN ""customer"" ON ""household_demographics"".""hd_demo_sk"" = ""customer"".""c_current_hdemo_sk"" WHERE ""item"".""i_item_id"" BETWEEN 'AAAAAAAAABHAAAAA' AND 'AAAAAAAAPPPBAAAA' AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""customer_demographics"".""cd_credit_rating"" BETWEEN 'Good' AND 'Unknown' AND ""store_sales"".""ss_ext_tax"" BETWEEN 0.0 AND 1749.87 AND ""store"".""s_division_name"" BETWEEN 'Unknown' AND 'Unknown' AND ""web_sales"".""ws_order_number"" BETWEEN 599 AND 60000 AND ""customer"".""c_preferred_cust_flag"" BETWEEN 'N' AND 'Y' AND ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""warehouse"".""w_state"" BETWEEN 'TN' AND 'TN' AND ""catalog_sales"".""cs_ext_discount_amt"" BETWEEN 0.14 AND 28300.44 AND ""date_dim"".""d_current_day"" BETWEEN 'N' AND 'N';"
+q73.sql,5,1506260,customer|date_dim|store_returns|store_sales|web_returns|web_sales,6,e7eda5db,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_year"" FROM ""date_dim"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" LEFT JOIN ""store_sales"" ON ""date_dim"".""d_date_sk"" = ""store_sales"".""ss_sold_date_sk"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""web_returns"" ON ""customer"".""c_customer_sk"" = ""web_returns"".""wr_refunded_customer_sk"" LEFT JOIN ""web_sales"" ON ""customer"".""c_customer_sk"" = ""web_sales"".""ws_bill_customer_sk"" WHERE ""store_sales"".""ss_wholesale_cost"" BETWEEN 1.98 AND 100.0 AND ""customer"".""c_first_shipto_date_sk"" BETWEEN 2449062 AND 2452678 AND ""web_sales"".""ws_net_paid_inc_ship_tax"" BETWEEN 24.95 AND 43505.15 AND ""web_returns"".""wr_refunded_addr_sk"" BETWEEN 505 AND 50000 AND ""date_dim"".""d_moy"" BETWEEN 1 AND 12 AND ""store_returns"".""sr_return_ship_cost"" BETWEEN 0.0 AND 8710.98;"
+q74.sql,2,40506232,customer|customer_address|household_demographics,3,8ffb1e87,ok,"SELECT DISTINCT ON(""customer"".""c_customer_sk"") ""customer"".""c_preferred_cust_flag"" FROM ""customer"" LEFT JOIN ""customer_address"" ON ""customer"".""c_current_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""household_demographics"" ON ""customer"".""c_current_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" WHERE ""customer"".""c_last_review_date_sk"" BETWEEN 2452286 AND 2452648 AND ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""customer_address"".""ca_address_id"" BETWEEN 'AAAAAAAAACIIAAAA' AND 'AAAAAAAAPPPLAAAA';"
+q75.sql,17,6489076,catalog_page|catalog_returns|catalog_sales|customer|customer_address|customer_demographics|date_dim|household_demographics|inventory|item|promotion|store|store_returns|store_sales|warehouse|web_returns|web_sales|web_site,18,a404d406,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_item_sk"" FROM ""item"" LEFT JOIN ""catalog_sales"" ON ""item"".""i_item_sk"" = ""catalog_sales"".""cs_item_sk"" LEFT JOIN ""catalog_returns"" ON ""item"".""i_item_sk"" = ""catalog_returns"".""cr_item_sk"" LEFT JOIN ""customer"" ON ""catalog_returns"".""cr_refunded_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""date_dim"" ON ""catalog_returns"".""cr_returned_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""web_returns"" ON ""item"".""i_item_sk"" = ""web_returns"".""wr_item_sk"" LEFT JOIN ""web_sales"" ON ""customer"".""c_customer_sk"" = ""web_sales"".""ws_bill_customer_sk"" LEFT JOIN ""customer_demographics"" ON ""customer"".""c_current_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""store_sales"" ON ""item"".""i_item_sk"" = ""store_sales"".""ss_item_sk"" LEFT JOIN ""customer_address"" ON ""customer"".""c_current_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" LEFT JOIN ""inventory"" ON ""date_dim"".""d_date_sk"" = ""inventory"".""inv_date_sk"" LEFT JOIN ""warehouse"" ON ""inventory"".""inv_warehouse_sk"" = ""warehouse"".""w_warehouse_sk"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" LEFT JOIN ""household_demographics"" ON ""customer"".""c_current_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""store"" ON ""store_returns"".""sr_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""promotion"" ON ""catalog_sales"".""cs_promo_sk"" = ""promotion"".""p_promo_sk"" WHERE ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""catalog_returns"".""cr_return_amount"" BETWEEN 0.3 AND 24214.19 AND ""customer_demographics"".""cd_dep_employed_count"" BETWEEN 0 AND 6 AND ""promotion"".""p_channel_tv"" BETWEEN 'N' AND 'N' AND ""store_sales"".""ss_net_profit"" BETWEEN -6524.02 AND 9407.0 AND ""item"".""i_current_price"" BETWEEN 0.16 AND 99.99 AND ""customer"".""c_last_name"" BETWEEN 'Alfred' AND 'Zuniga' AND ""web_sales"".""ws_net_paid_inc_tax"" BETWEEN 0.0 AND 30821.43 AND ""web_returns"".""wr_return_ship_cost"" BETWEEN 0.0 AND 11690.44 AND ""catalog_sales"".""cs_sold_time_sk"" BETWEEN 3623 AND 86399 AND ""catalog_page"".""cp_type"" BETWEEN 'bi-annual' AND 'quarterly' AND ""warehouse"".""w_gmt_offset"" BETWEEN -5.0 AND -5.0 AND ""date_dim"".""d_current_quarter"" BETWEEN 'N' AND 'Y' AND ""customer_address"".""ca_street_number"" BETWEEN '107' AND '999' AND ""store"".""s_zip"" BETWEEN '31904' AND '35709' AND ""web_site"".""web_market_manager"" BETWEEN 'Albert Leung' AND 'William Reyes' AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""store_returns"".""sr_return_tax"" BETWEEN 0.0 AND 1442.07;"
+q76.sql,7,1942980,customer_address|date_dim|inventory|item|store_sales|time_dim|web_page|web_returns,8,9fa5402c,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_manufact"" FROM ""item"" LEFT JOIN ""store_sales"" ON ""item"".""i_item_sk"" = ""store_sales"".""ss_item_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""web_returns"" ON ""item"".""i_item_sk"" = ""web_returns"".""wr_item_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""web_page"" ON ""web_returns"".""wr_web_page_sk"" = ""web_page"".""wp_web_page_sk"" LEFT JOIN ""inventory"" ON ""item"".""i_item_sk"" = ""inventory"".""inv_item_sk"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" WHERE ""item"".""i_item_id"" BETWEEN 'AAAAAAAAABHAAAAA' AND 'AAAAAAAAPPPBAAAA' AND ""store_sales"".""ss_coupon_amt"" BETWEEN 0.0 AND 17588.25 AND ""time_dim"".""t_shift"" BETWEEN 'first' AND 'third' AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""customer_address"".""ca_street_name"" BETWEEN '10th River' AND 'Woodland Woodland' AND ""web_returns"".""wr_returning_addr_sk"" BETWEEN 499 AND 50000 AND ""web_page"".""wp_link_count"" BETWEEN 2 AND 25 AND ""date_dim"".""d_date"" BETWEEN '1902-01-02T11:31:12' AND '2100-01-01';"
+q77.sql,4,38922712,customer|household_demographics|item|store_sales|web_sales,5,e28eef96,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_cdemo_sk"" FROM ""store_sales"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""web_sales"" ON ""household_demographics"".""hd_demo_sk"" = ""web_sales"".""ws_bill_hdemo_sk"" LEFT JOIN ""item"" ON ""web_sales"".""ws_item_sk"" = ""item"".""i_item_sk"" WHERE ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""store_sales"".""ss_net_profit"" BETWEEN -6524.02 AND 9407.0 AND ""item"".""i_size"" BETWEEN 'N/A' AND 'small' AND ""web_sales"".""ws_ship_hdemo_sk"" BETWEEN 71 AND 7200 AND ""customer"".""c_birth_month"" BETWEEN 1 AND 12;"
+q78.sql,8,16078452,catalog_returns|catalog_sales|customer|date_dim|inventory|item|promotion|store_sales|web_returns,9,f5f87718,ok,"SELECT DISTINCT ON(""web_returns"".""wr_returned_date_sk"") ""web_returns"".""wr_item_sk"" FROM ""web_returns"" LEFT JOIN ""item"" ON ""web_returns"".""wr_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""catalog_sales"" ON ""item"".""i_item_sk"" = ""catalog_sales"".""cs_item_sk"" LEFT JOIN ""store_sales"" ON ""item"".""i_item_sk"" = ""store_sales"".""ss_item_sk"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""inventory"" ON ""item"".""i_item_sk"" = ""inventory"".""inv_item_sk"" LEFT JOIN ""catalog_returns"" ON ""item"".""i_item_sk"" = ""catalog_returns"".""cr_item_sk"" LEFT JOIN ""date_dim"" ON ""catalog_returns"".""cr_returned_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""customer"" ON ""catalog_returns"".""cr_refunded_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""catalog_returns"".""cr_return_tax"" BETWEEN 0.0 AND 2179.27 AND ""item"".""i_formulation"" BETWEEN '011044snow5914895795' AND 'yellow98525476168526' AND ""store_sales"".""ss_ticket_number"" BETWEEN 2400 AND 240000 AND ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""customer"".""c_customer_id"" BETWEEN 'AAAAAAAAACILAAAA' AND 'AAAAAAAAPPPPAAAA' AND ""web_returns"".""wr_return_tax"" BETWEEN 0.0 AND 1833.66 AND ""catalog_sales"".""cs_ext_discount_amt"" BETWEEN 0.14 AND 28300.44 AND ""promotion"".""p_channel_dmail"" BETWEEN 'N' AND 'Y' AND ""date_dim"".""d_dom"" BETWEEN 1 AND 31;"
+q79.sql,7,1506260,customer|customer_address|item|store|store_sales|time_dim|web_page|web_returns,8,b15c0c11,ok,"SELECT DISTINCT ON(""store"".""s_store_sk"") ""store"".""s_division_id"" FROM ""store"" LEFT JOIN ""store_sales"" ON ""store"".""s_store_sk"" = ""store_sales"".""ss_store_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""item"" ON ""store_sales"".""ss_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""customer"" ON ""customer_address"".""ca_address_sk"" = ""customer"".""c_current_addr_sk"" LEFT JOIN ""web_returns"" ON ""item"".""i_item_sk"" = ""web_returns"".""wr_item_sk"" LEFT JOIN ""web_page"" ON ""web_returns"".""wr_web_page_sk"" = ""web_page"".""wp_web_page_sk"" WHERE ""store_sales"".""ss_wholesale_cost"" BETWEEN 1.98 AND 100.0 AND ""item"".""i_manufact_id"" BETWEEN 7 AND 1000 AND ""customer"".""c_first_shipto_date_sk"" BETWEEN 2449062 AND 2452678 AND ""web_returns"".""wr_returning_addr_sk"" BETWEEN 499 AND 50000 AND ""web_page"".""wp_creation_date_sk"" BETWEEN 2450807 AND 2450815 AND ""customer_address"".""ca_county"" BETWEEN 'Aleutians East Borough' AND 'Ziebach County' AND ""store"".""s_state"" BETWEEN 'TN' AND 'TN' AND ""time_dim"".""t_shift"" BETWEEN 'first' AND 'third';"
+q80.sql,3,41975348,customer|date_dim|inventory|store_returns,4,b0cc7f1b,ok,"SELECT DISTINCT ON(""store_returns"".""sr_returned_date_sk"") ""store_returns"".""sr_item_sk"" FROM ""store_returns"" LEFT JOIN ""date_dim"" ON ""store_returns"".""sr_returned_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""inventory"" ON ""date_dim"".""d_date_sk"" = ""inventory"".""inv_date_sk"" LEFT JOIN ""customer"" ON ""store_returns"".""sr_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""customer"".""c_birth_year"" BETWEEN 1924 AND 1992 AND ""date_dim"".""d_date"" BETWEEN '1902-01-02T11:31:12' AND '2100-01-01' AND ""store_returns"".""sr_net_loss"" BETWEEN 19.24 AND 9218.97;"
+q81.sql,2,3507583,catalog_page|catalog_returns|item,3,028a6e5c,ok,"SELECT DISTINCT ON(""catalog_returns"".""cr_returned_date_sk"") ""catalog_returns"".""cr_returning_cdemo_sk"" FROM ""catalog_returns"" LEFT JOIN ""catalog_page"" ON ""catalog_returns"".""cr_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""item"" ON ""catalog_returns"".""cr_item_sk"" = ""item"".""i_item_sk"" WHERE ""catalog_returns"".""cr_return_ship_cost"" BETWEEN 0.0 AND 12448.43 AND ""catalog_page"".""cp_catalog_page_number"" BETWEEN 2 AND 108 AND ""item"".""i_size"" BETWEEN 'N/A' AND 'small';"
+q82.sql,3,74591232,household_demographics|inventory|item|web_sales,4,5ee7ffd8,ok,"SELECT DISTINCT ON(""item"".""i_item_sk"") ""item"".""i_item_id"" FROM ""item"" LEFT JOIN ""web_sales"" ON ""item"".""i_item_sk"" = ""web_sales"".""ws_item_sk"" LEFT JOIN ""household_demographics"" ON ""web_sales"".""ws_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""inventory"" ON ""item"".""i_item_sk"" = ""inventory"".""inv_item_sk"" WHERE ""inventory"".""inv_quantity_on_hand"" BETWEEN 9 AND 1000 AND ""web_sales"".""ws_ship_cdemo_sk"" BETWEEN 18025 AND 1920761 AND ""item"".""i_rec_start_date"" BETWEEN '1997-10-27T00:00:00' AND '2001-10-27' AND ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9;"
+q83.sql,2,4498606,customer|store_returns|web_sales,3,38180f7e,ok,"SELECT DISTINCT ON(""store_returns"".""sr_returned_date_sk"") ""store_returns"".""sr_return_ship_cost"" FROM ""store_returns"" LEFT JOIN ""customer"" ON ""store_returns"".""sr_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""web_sales"" ON ""customer"".""c_customer_sk"" = ""web_sales"".""ws_bill_customer_sk"" WHERE ""web_sales"".""ws_ship_hdemo_sk"" BETWEEN 71 AND 7200 AND ""customer"".""c_last_name"" BETWEEN 'Alfred' AND 'Zuniga' AND ""store_returns"".""sr_ticket_number"" BETWEEN 2453 AND 240000;"
+q84.sql,5,16491286,catalog_sales|customer|date_dim|promotion|web_sales|web_site,6,0c61870c,ok,"SELECT DISTINCT ON(""customer"".""c_customer_sk"") ""customer"".""c_current_cdemo_sk"" FROM ""customer"" LEFT JOIN ""catalog_sales"" ON ""customer"".""c_customer_sk"" = ""catalog_sales"".""cs_bill_customer_sk"" LEFT JOIN ""date_dim"" ON ""catalog_sales"".""cs_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""promotion"" ON ""catalog_sales"".""cs_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""web_sales"" ON ""date_dim"".""d_date_sk"" = ""web_sales"".""ws_sold_date_sk"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" WHERE ""web_sales"".""ws_ship_hdemo_sk"" BETWEEN 71 AND 7200 AND ""web_site"".""web_mkt_desc"" BETWEEN 'Above possible winners shall add sure, beneficial others' AND 'Young weeks would resign. Lessons might not assess a' AND ""customer"".""c_last_review_date_sk"" BETWEEN 2452286 AND 2452648 AND ""catalog_sales"".""cs_net_paid_inc_ship"" BETWEEN 24.53 AND 40364.0 AND ""promotion"".""p_channel_radio"" BETWEEN 'N' AND 'N' AND ""date_dim"".""d_quarter_seq"" BETWEEN 9 AND 801;"
+q85.sql,7,24454203,catalog_returns|catalog_sales|customer|customer_demographics|date_dim|household_demographics|web_page|web_sales,8,0ed8efc2,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_list_price"" FROM ""web_sales"" LEFT JOIN ""customer"" ON ""web_sales"".""ws_bill_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""catalog_sales"" ON ""customer"".""c_customer_sk"" = ""catalog_sales"".""cs_bill_customer_sk"" LEFT JOIN ""customer_demographics"" ON ""customer"".""c_current_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""date_dim"" ON ""catalog_sales"".""cs_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""web_page"" ON ""web_sales"".""ws_web_page_sk"" = ""web_page"".""wp_web_page_sk"" LEFT JOIN ""household_demographics"" ON ""web_sales"".""ws_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""catalog_returns"" ON ""customer"".""c_customer_sk"" = ""catalog_returns"".""cr_refunded_customer_sk"" WHERE ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4 AND ""catalog_returns"".""cr_refunded_cash"" BETWEEN 0.0 AND 20097.77 AND ""customer_demographics"".""cd_gender"" BETWEEN 'F' AND 'M' AND ""customer"".""c_first_shipto_date_sk"" BETWEEN 2449062 AND 2452678 AND ""web_sales"".""ws_wholesale_cost"" BETWEEN 2.0 AND 100.0 AND ""catalog_sales"".""cs_ext_ship_cost"" BETWEEN 0.0 AND 14416.0 AND ""date_dim"".""d_date_id"" BETWEEN 'AAAAAAAAACIOFCAA' AND 'AAAAAAAAPPPPECAA' AND ""web_page"".""wp_type"" BETWEEN 'ad' AND 'welcome';"
+q86.sql,2,11982356,date_dim|promotion|web_sales,3,1c70c3f4,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_bill_hdemo_sk"" FROM ""web_sales"" LEFT JOIN ""promotion"" ON ""web_sales"".""ws_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""date_dim"" ON ""web_sales"".""ws_sold_date_sk"" = ""date_dim"".""d_date_sk"" WHERE ""web_sales"".""ws_quantity"" BETWEEN 2 AND 100 AND ""promotion"".""p_channel_email"" BETWEEN 'N' AND 'N' AND ""date_dim"".""d_month_seq"" BETWEEN 24 AND 2400;"
+q87.sql,4,3076980,catalog_sales|customer_demographics|date_dim|promotion|web_sales,5,258e48a8,ok,"SELECT DISTINCT ON(""date_dim"".""d_date_sk"") ""date_dim"".""d_same_day_ly"" FROM ""date_dim"" LEFT JOIN ""catalog_sales"" ON ""date_dim"".""d_date_sk"" = ""catalog_sales"".""cs_sold_date_sk"" LEFT JOIN ""customer_demographics"" ON ""catalog_sales"".""cs_bill_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""web_sales"" ON ""date_dim"".""d_date_sk"" = ""web_sales"".""ws_sold_date_sk"" LEFT JOIN ""promotion"" ON ""web_sales"".""ws_promo_sk"" = ""promotion"".""p_promo_sk"" WHERE ""promotion"".""p_start_date_sk"" BETWEEN 2450116 AND 2450913 AND ""customer_demographics"".""cd_credit_rating"" BETWEEN 'Good' AND 'Unknown' AND ""web_sales"".""ws_quantity"" BETWEEN 2 AND 100 AND ""catalog_sales"".""cs_sold_time_sk"" BETWEEN 3623 AND 86399 AND ""date_dim"".""d_dow"" BETWEEN 0 AND 6;"
+q88.sql,3,547680,catalog_sales|customer_address|household_demographics|store_sales,4,4a788c9c,ok,"SELECT DISTINCT ON(""household_demographics"".""hd_demo_sk"") ""household_demographics"".""hd_vehicle_count"" FROM ""household_demographics"" LEFT JOIN ""catalog_sales"" ON ""household_demographics"".""hd_demo_sk"" = ""catalog_sales"".""cs_bill_hdemo_sk"" LEFT JOIN ""customer_address"" ON ""catalog_sales"".""cs_bill_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""store_sales"" ON ""household_demographics"".""hd_demo_sk"" = ""store_sales"".""ss_hdemo_sk"" WHERE ""store_sales"".""ss_list_price"" BETWEEN 2.85 AND 200.0 AND ""catalog_sales"".""cs_ship_customer_sk"" BETWEEN 1025 AND 100000 AND ""household_demographics"".""hd_buy_potential"" BETWEEN '0-500' AND 'Unknown' AND ""customer_address"".""ca_gmt_offset"" BETWEEN -8.0 AND -5.0;"
+q89.sql,13,38962712,catalog_page|catalog_returns|catalog_sales|customer|customer_address|customer_demographics|date_dim|household_demographics|item|promotion|store_returns|store_sales|web_returns|web_sales,14,1d036bdc,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_sales_price"" FROM ""store_sales"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""customer_address"" ON ""store_sales"".""ss_addr_sk"" = ""customer_address"".""ca_address_sk"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""customer"" ON ""customer_demographics"".""cd_demo_sk"" = ""customer"".""c_current_cdemo_sk"" LEFT JOIN ""catalog_sales"" ON ""customer_address"".""ca_address_sk"" = ""catalog_sales"".""cs_bill_addr_sk"" LEFT JOIN ""store_returns"" ON ""date_dim"".""d_date_sk"" = ""store_returns"".""sr_returned_date_sk"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""catalog_returns"" ON ""customer"".""c_customer_sk"" = ""catalog_returns"".""cr_refunded_customer_sk"" LEFT JOIN ""promotion"" ON ""store_sales"".""ss_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""item"" ON ""catalog_returns"".""cr_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""web_sales"" ON ""customer"".""c_customer_sk"" = ""web_sales"".""ws_bill_customer_sk"" LEFT JOIN ""household_demographics"" ON ""catalog_sales"".""cs_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""web_returns"" ON ""date_dim"".""d_date_sk"" = ""web_returns"".""wr_returned_date_sk"" WHERE ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""catalog_returns"".""cr_call_center_sk"" BETWEEN 1 AND 6 AND ""customer_demographics"".""cd_dep_count"" BETWEEN 0 AND 6 AND ""promotion"".""p_channel_dmail"" BETWEEN 'N' AND 'Y' AND ""store_sales"".""ss_net_profit"" BETWEEN -6524.02 AND 9407.0 AND ""item"".""i_units"" BETWEEN 'Box' AND 'Unknown' AND ""customer"".""c_first_shipto_date_sk"" BETWEEN 2449062 AND 2452678 AND ""web_sales"".""ws_ship_addr_sk"" BETWEEN 504 AND 50000 AND ""web_returns"".""wr_return_tax"" BETWEEN 0.0 AND 1833.66 AND ""catalog_sales"".""cs_ext_wholesale_cost"" BETWEEN 32.39 AND 9999.0 AND ""catalog_page"".""cp_description"" BETWEEN 'Acceptable, wrong years tell still on a police. On' AND 'Youngsters must provide other, intermediate clouds. Yesterday whole cars h' AND ""date_dim"".""d_same_day_ly"" BETWEEN 2415387 AND 2487705 AND ""customer_address"".""ca_street_name"" BETWEEN '10th River' AND 'Woodland Woodland' AND ""store_returns"".""sr_return_ship_cost"" BETWEEN 0.0 AND 8710.98;"
+q90.sql,3,548100,customer|household_demographics|income_band|web_sales,4,10f77634,ok,"SELECT DISTINCT ON(""household_demographics"".""hd_demo_sk"") ""household_demographics"".""hd_buy_potential"" FROM ""household_demographics"" LEFT JOIN ""income_band"" ON ""household_demographics"".""hd_income_band_sk"" = ""income_band"".""ib_income_band_sk"" LEFT JOIN ""web_sales"" ON ""household_demographics"".""hd_demo_sk"" = ""web_sales"".""ws_bill_hdemo_sk"" LEFT JOIN ""customer"" ON ""web_sales"".""ws_bill_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""income_band"".""ib_lower_bound"" BETWEEN 1900 AND 190001 AND ""web_sales"".""ws_ext_ship_cost"" BETWEEN 0.0 AND 14231.25 AND ""customer"".""c_birth_day"" BETWEEN 1 AND 31 AND ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4;"
+q91.sql,6,16669183,call_center,1,281ada36,ok,"SELECT DISTINCT ON(""call_center"".""cc_call_center_sk"") ""call_center"".""cc_company"" FROM ""call_center"" WHERE ""call_center"".""cc_manager"" BETWEEN 'Bob Belcher' AND 'Mark Hightower';"
+q92.sql,2,11982356,web_page|web_sales|web_site,3,c488e911,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_net_profit"" FROM ""web_sales"" LEFT JOIN ""web_page"" ON ""web_sales"".""ws_web_page_sk"" = ""web_page"".""wp_web_page_sk"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" WHERE ""web_sales"".""ws_coupon_amt"" BETWEEN 0.0 AND 26909.62 AND ""web_site"".""web_country"" BETWEEN 'United States' AND 'United States' AND ""web_page"".""wp_max_ad_count"" BETWEEN 0 AND 4;"
+q93.sql,4,2611626,catalog_returns|customer|date_dim|store_returns|web_returns,5,63c54b11,ok,"SELECT DISTINCT ON(""store_returns"".""sr_returned_date_sk"") ""store_returns"".""sr_return_tax"" FROM ""store_returns"" LEFT JOIN ""date_dim"" ON ""store_returns"".""sr_returned_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""customer"" ON ""store_returns"".""sr_customer_sk"" = ""customer"".""c_customer_sk"" LEFT JOIN ""web_returns"" ON ""customer"".""c_customer_sk"" = ""web_returns"".""wr_refunded_customer_sk"" LEFT JOIN ""catalog_returns"" ON ""customer"".""c_customer_sk"" = ""catalog_returns"".""cr_refunded_customer_sk"" WHERE ""catalog_returns"".""cr_return_ship_cost"" BETWEEN 0.0 AND 12448.43 AND ""customer"".""c_birth_month"" BETWEEN 1 AND 12 AND ""web_returns"".""wr_reversed_charge"" BETWEEN 0.0 AND 14901.4 AND ""date_dim"".""d_date_id"" BETWEEN 'AAAAAAAAACIOFCAA' AND 'AAAAAAAAPPPPECAA' AND ""store_returns"".""sr_refunded_cash"" BETWEEN 0.0 AND 15603.05;"
+q94.sql,3,12283256,customer|household_demographics|web_sales|web_site,4,08f7e40e,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_ship_customer_sk"" FROM ""web_sales"" LEFT JOIN ""web_site"" ON ""web_sales"".""ws_web_site_sk"" = ""web_site"".""web_site_sk"" LEFT JOIN ""household_demographics"" ON ""web_sales"".""ws_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""customer"" ON ""household_demographics"".""hd_demo_sk"" = ""customer"".""c_current_hdemo_sk"" WHERE ""web_sales"".""ws_ext_wholesale_cost"" BETWEEN 32.22 AND 10000.0 AND ""web_site"".""web_city"" BETWEEN 'Fairview' AND 'Midway' AND ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4 AND ""customer"".""c_last_review_date_sk"" BETWEEN 2452286 AND 2452648;"
+q95.sql,1,10071376,household_demographics|web_sales,2,8eae7194,ok,"SELECT DISTINCT ON(""web_sales"".""ws_sold_date_sk"") ""web_sales"".""ws_bill_hdemo_sk"" FROM ""web_sales"" LEFT JOIN ""household_demographics"" ON ""web_sales"".""ws_bill_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" WHERE ""household_demographics"".""hd_dep_count"" BETWEEN 0 AND 9 AND ""web_sales"".""ws_net_paid_inc_ship_tax"" BETWEEN 24.95 AND 43505.15;"
+q96.sql,3,37992932,customer_demographics|item|store_sales|time_dim,4,455becca,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_ext_discount_amt"" FROM ""store_sales"" LEFT JOIN ""item"" ON ""store_sales"".""ss_item_sk"" = ""item"".""i_item_sk"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""customer_demographics"" ON ""store_sales"".""ss_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" WHERE ""store_sales"".""ss_ext_list_price"" BETWEEN 46.0 AND 19984.0 AND ""time_dim"".""t_meal_time"" BETWEEN '' AND 'lunch' AND ""item"".""i_wholesale_cost"" BETWEEN 0.09 AND 87.36 AND ""customer_demographics"".""cd_credit_rating"" BETWEEN 'Good' AND 'Unknown';"
+q97.sql,2,38914232,customer|store_sales|time_dim,3,d573dee8,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_item_sk"" FROM ""store_sales"" LEFT JOIN ""time_dim"" ON ""store_sales"".""ss_sold_time_sk"" = ""time_dim"".""t_time_sk"" LEFT JOIN ""customer"" ON ""store_sales"".""ss_customer_sk"" = ""customer"".""c_customer_sk"" WHERE ""time_dim"".""t_time_id"" BETWEEN 'AAAAAAAAACINAAAA' AND 'AAAAAAAAPPPPAAAA' AND ""customer"".""c_preferred_cust_flag"" BETWEEN 'N' AND 'Y' AND ""store_sales"".""ss_net_paid"" BETWEEN 0.0 AND 19443.0;"
+q98.sql,2,39356232,date_dim|household_demographics|store_sales,3,4ec36656,ok,"SELECT DISTINCT ON(""store_sales"".""ss_sold_date_sk"") ""store_sales"".""ss_cdemo_sk"" FROM ""store_sales"" LEFT JOIN ""household_demographics"" ON ""store_sales"".""ss_hdemo_sk"" = ""household_demographics"".""hd_demo_sk"" LEFT JOIN ""date_dim"" ON ""store_sales"".""ss_sold_date_sk"" = ""date_dim"".""d_date_sk"" WHERE ""store_sales"".""ss_ext_sales_price"" BETWEEN 0.08 AND 19308.0 AND ""household_demographics"".""hd_vehicle_count"" BETWEEN -1 AND 4 AND ""date_dim"".""d_quarter_seq"" BETWEEN 9 AND 801;"
+q99.sql,7,21650812,catalog_page|catalog_sales|customer_demographics|date_dim|item|promotion|store|store_sales,8,27c15696,ok,"SELECT DISTINCT ON(""catalog_sales"".""cs_sold_date_sk"") ""catalog_sales"".""cs_sales_price"" FROM ""catalog_sales"" LEFT JOIN ""customer_demographics"" ON ""catalog_sales"".""cs_bill_cdemo_sk"" = ""customer_demographics"".""cd_demo_sk"" LEFT JOIN ""catalog_page"" ON ""catalog_sales"".""cs_catalog_page_sk"" = ""catalog_page"".""cp_catalog_page_sk"" LEFT JOIN ""promotion"" ON ""catalog_sales"".""cs_promo_sk"" = ""promotion"".""p_promo_sk"" LEFT JOIN ""date_dim"" ON ""catalog_sales"".""cs_sold_date_sk"" = ""date_dim"".""d_date_sk"" LEFT JOIN ""store_sales"" ON ""customer_demographics"".""cd_demo_sk"" = ""store_sales"".""ss_cdemo_sk"" LEFT JOIN ""store"" ON ""store_sales"".""ss_store_sk"" = ""store"".""s_store_sk"" LEFT JOIN ""item"" ON ""store_sales"".""ss_item_sk"" = ""item"".""i_item_sk"" WHERE ""promotion"".""p_channel_demo"" BETWEEN 'N' AND 'N' AND ""customer_demographics"".""cd_credit_rating"" BETWEEN 'Good' AND 'Unknown' AND ""store_sales"".""ss_quantity"" BETWEEN 1 AND 100 AND ""item"".""i_class"" BETWEEN 'accessories' AND 'womens watch' AND ""catalog_sales"".""cs_net_paid_inc_ship"" BETWEEN 24.53 AND 40364.0 AND ""catalog_page"".""cp_catalog_number"" BETWEEN 2 AND 109 AND ""date_dim"".""d_same_day_lq"" BETWEEN 2415660 AND 2487978 AND ""store"".""s_company_name"" BETWEEN 'Unknown' AND 'Unknown';"

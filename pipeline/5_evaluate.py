@@ -135,6 +135,8 @@ def evaluate(exp_name, out_dir):
         return None
 
     src, tgt = exp_name.split('_to_') if '_to_' in exp_name else (exp_name, exp_name)
+    src = src.replace('_sizerank', '')
+    tgt = tgt.replace('_sizerank', '')
     wl_dir   = WORKLOAD_DIRS[DB_WORKLOAD[src]]
 
     div_W  = query_diversity(T,  'read_tables')
@@ -193,9 +195,9 @@ def evaluate(exp_name, out_dir):
     }
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--exp', default=None, help='single experiment (default: all)')
-parser.add_argument('--exps', default=None, help='comma-separated list of experiments')
-parser.add_argument('--out', default='summary_scorecard.csv', help='output filename')
+parser.add_argument('--exp', default=None)
+parser.add_argument('--exps', default=None)
+parser.add_argument('--out', default='summary_scorecard.csv')
 args = parser.parse_args()
 
 exp_root = os.path.join(BASE, 'experiments')

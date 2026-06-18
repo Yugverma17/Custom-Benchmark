@@ -1,0 +1,320 @@
+{
+  "table_col_info": {
+    "customer": {
+      "c_custkey": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "c_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_address": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_nationkey": {
+        "type": "INTEGER",
+        "pk": false
+      },
+      "c_phone": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_acctbal": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "c_mktsegment": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "c_comment": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "lineitem": {
+      "l_orderkey": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "l_partkey": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "l_suppkey": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "l_linenumber": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "l_quantity": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "l_extendedprice": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "l_discount": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "l_tax": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "l_returnflag": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "l_linestatus": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "l_shipdate": {
+        "type": "DATE",
+        "pk": false
+      },
+      "l_commitdate": {
+        "type": "DATE",
+        "pk": false
+      },
+      "l_receiptdate": {
+        "type": "DATE",
+        "pk": false
+      },
+      "l_shipinstruct": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "l_shipmode": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "l_comment": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "nation": {
+      "n_nationkey": {
+        "type": "INTEGER",
+        "pk": true
+      },
+      "n_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "n_regionkey": {
+        "type": "INTEGER",
+        "pk": false
+      },
+      "n_comment": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "orders": {
+      "o_orderkey": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "o_custkey": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "o_orderstatus": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "o_totalprice": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "o_orderdate": {
+        "type": "DATE",
+        "pk": false
+      },
+      "o_orderpriority": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "o_clerk": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "o_shippriority": {
+        "type": "INTEGER",
+        "pk": false
+      },
+      "o_comment": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "part": {
+      "p_partkey": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "p_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_mfgr": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_brand": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_type": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_size": {
+        "type": "INTEGER",
+        "pk": false
+      },
+      "p_container": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "p_retailprice": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "p_comment": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "partsupp": {
+      "ps_partkey": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "ps_suppkey": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "ps_availqty": {
+        "type": "BIGINT",
+        "pk": false
+      },
+      "ps_supplycost": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "ps_comment": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "region": {
+      "r_regionkey": {
+        "type": "INTEGER",
+        "pk": true
+      },
+      "r_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "r_comment": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    },
+    "supplier": {
+      "s_suppkey": {
+        "type": "BIGINT",
+        "pk": true
+      },
+      "s_name": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_address": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_nationkey": {
+        "type": "INTEGER",
+        "pk": false
+      },
+      "s_phone": {
+        "type": "VARCHAR",
+        "pk": false
+      },
+      "s_acctbal": {
+        "type": "DECIMAL(15,2)",
+        "pk": false
+      },
+      "s_comment": {
+        "type": "VARCHAR",
+        "pk": false
+      }
+    }
+  },
+  "relationships": [
+    [
+      "lineitem",
+      "l_orderkey",
+      "orders",
+      "o_orderkey"
+    ],
+    [
+      "lineitem",
+      "l_partkey",
+      "part",
+      "p_partkey"
+    ],
+    [
+      "lineitem",
+      "l_suppkey",
+      "supplier",
+      "s_suppkey"
+    ],
+    [
+      "orders",
+      "o_custkey",
+      "customer",
+      "c_custkey"
+    ],
+    [
+      "partsupp",
+      "ps_partkey",
+      "part",
+      "p_partkey"
+    ],
+    [
+      "partsupp",
+      "ps_suppkey",
+      "supplier",
+      "s_suppkey"
+    ],
+    [
+      "customer",
+      "c_nationkey",
+      "nation",
+      "n_nationkey"
+    ],
+    [
+      "supplier",
+      "s_nationkey",
+      "nation",
+      "n_nationkey"
+    ],
+    [
+      "nation",
+      "n_regionkey",
+      "region",
+      "r_regionkey"
+    ]
+  ]
+}

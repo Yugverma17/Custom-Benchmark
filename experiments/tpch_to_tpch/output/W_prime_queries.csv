@@ -1,147 +1,23 @@
-query_file,source_join_count,source_bytes_read,relative_selectivity,target_tables,n_tables,query_hash,gen_status,sql
-q01.sql,0,108021870,0.1,lineitem,1,bdc6a8cc,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-WHERE l0.l_quantity >= 26 AND l0.l_quantity <= 36"
-q02.sql,4,12350145,0.1,partsupp|part|lineitem|supplier|orders,5,e63148b9,error,"SELECT MIN(p0.l_quantity) AS result
-FROM partsupp AS p0
-JOIN part AS p1 ON p1.p_partkey = p0.ps_partkey
-JOIN supplier AS s3 ON s3.s_suppkey = p0.ps_suppkey
-JOIN lineitem AS l2 ON l2.l_partkey = p1.p_partkey
-JOIN orders AS o4 ON o4.o_orderkey = l2.l_orderkey
-WHERE p0.ps_availqty >= 5003 AND p0.ps_availqty <= 6004
-AND p1.p_size >= 35 AND p1.p_size <= 40
-AND s3.s_nationkey >= 1 AND s3.s_nationkey <= 4"
-q03.sql,2,127221870,0.1,lineitem|orders|customer,3,17abe3ee,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN orders AS o1 ON o1.o_orderkey = l0.l_orderkey
-JOIN customer AS c2 ON c2.c_custkey = o1.o_custkey
-WHERE l0.l_quantity >= 6 AND l0.l_quantity <= 16
-AND o1.o_orderstatus = 'F'
-AND c2.c_mktsegment = 'AUTOMOBILE'"
-q04.sql,0,16500000,0.1,orders,1,dc86ea11,ok,"SELECT MIN(o0.o_orderstatus) AS result
-FROM orders AS o0
-WHERE o0.o_orderstatus = 'F'"
-q05.sql,5,127372015,0.1,lineitem|orders|customer|nation|supplier|partsupp,6,aceaf3c9,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN orders AS o1 ON o1.o_orderkey = l0.l_orderkey
-JOIN supplier AS s4 ON s4.s_suppkey = l0.l_suppkey
-JOIN customer AS c2 ON c2.c_custkey = o1.o_custkey
-JOIN partsupp AS p5 ON p5.ps_suppkey = s4.s_suppkey
-JOIN nation AS n3 ON n3.n_nationkey = s4.s_nationkey
-WHERE l0.l_quantity >= 16 AND l0.l_quantity <= 26
-AND o1.o_orderstatus = 'F'
-AND s4.s_nationkey >= 12 AND s4.s_nationkey <= 17"
-q06.sql,0,108021870,0.1,lineitem,1,70abb366,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-WHERE l0.l_quantity >= 16 AND l0.l_quantity <= 26"
-q07.sql,8,127245995,0.1,lineitem|orders|customer|nation|region|supplier|partsupp|part,8,bf2f5195,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN orders AS o1 ON o1.o_orderkey = l0.l_orderkey
-JOIN part AS p7 ON p7.p_partkey = l0.l_partkey
-JOIN supplier AS s5 ON s5.s_suppkey = l0.l_suppkey
-JOIN customer AS c2 ON c2.c_custkey = o1.o_custkey
-JOIN partsupp AS p6 ON p6.ps_partkey = p7.p_partkey
-JOIN nation AS n3 ON n3.n_nationkey = s5.s_nationkey
-JOIN region AS r4 ON r4.r_regionkey = n3.n_regionkey
-WHERE l0.l_quantity >= 36 AND l0.l_quantity <= 45
-AND o1.o_orderstatus = 'F'
-AND p7.p_size >= 15 AND p7.p_size <= 25"
-q08.sql,9,127388015,0.1,lineitem|supplier|orders|customer|nation|region|part|partsupp,8,8a308cfb,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN orders AS o2 ON o2.o_orderkey = l0.l_orderkey
-JOIN part AS p6 ON p6.p_partkey = l0.l_partkey
-JOIN supplier AS s1 ON s1.s_suppkey = l0.l_suppkey
-JOIN customer AS c3 ON c3.c_custkey = o2.o_custkey
-JOIN partsupp AS p7 ON p7.ps_partkey = p6.p_partkey
-JOIN nation AS n4 ON n4.n_nationkey = s1.s_nationkey
-JOIN region AS r5 ON r5.r_regionkey = n4.n_regionkey
-WHERE l0.l_quantity >= 26 AND l0.l_quantity <= 31
-AND o2.o_orderstatus = 'F'
-AND p6.p_size >= 3 AND p6.p_size <= 10"
-q09.sql,7,134287995,0.1,lineitem|part|orders|partsupp|supplier|nation|customer|region,8,dfe5eb36,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN orders AS o2 ON o2.o_orderkey = l0.l_orderkey
-JOIN part AS p1 ON p1.p_partkey = l0.l_partkey
-JOIN supplier AS s4 ON s4.s_suppkey = l0.l_suppkey
-JOIN customer AS c6 ON c6.c_custkey = o2.o_custkey
-JOIN partsupp AS p3 ON p3.ps_partkey = p1.p_partkey
-JOIN nation AS n5 ON n5.n_nationkey = s4.s_nationkey
-JOIN region AS r7 ON r7.r_regionkey = n5.n_regionkey
-WHERE l0.l_quantity >= 11 AND l0.l_quantity <= 21
-AND o2.o_orderstatus = 'F'
-AND p1.p_size >= 3 AND p1.p_size <= 10"
-q10.sql,3,127221995,0.1,lineitem|orders|part|supplier,4,b9b97cf5,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN orders AS o1 ON o1.o_orderkey = l0.l_orderkey
-JOIN part AS p2 ON p2.p_partkey = l0.l_partkey
-JOIN supplier AS s3 ON s3.s_suppkey = l0.l_suppkey
-WHERE l0.l_quantity >= 6 AND l0.l_quantity <= 16
-AND o1.o_orderstatus = 'P'
-AND p2.p_size >= 15 AND p2.p_size <= 20"
-q11.sql,2,9750125,0.1,partsupp|supplier|lineitem,3,28293328,error,"SELECT MIN(p0.l_quantity) AS result
-FROM partsupp AS p0
-JOIN supplier AS s1 ON s1.s_suppkey = p0.ps_suppkey
-JOIN lineitem AS l2 ON l2.l_suppkey = s1.s_suppkey
-WHERE p0.ps_availqty >= 1004 AND p0.ps_availqty <= 3011
-AND s1.s_nationkey >= 12 AND s1.s_nationkey <= 17
-AND l2.l_quantity >= 16 AND l2.l_quantity <= 26"
-q12.sql,1,124521870,0.1,lineitem|orders,2,4c134840,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN orders AS o1 ON o1.o_orderkey = l0.l_orderkey
-WHERE l0.l_quantity >= 31 AND l0.l_quantity <= 36
-AND o1.o_orderstatus = 'O'"
-q13.sql,2,16508000,0.1,orders|customer|nation,3,33b3c1ae,ok,"SELECT MIN(o0.o_orderstatus) AS result
-FROM orders AS o0
-JOIN customer AS c1 ON c1.c_custkey = o0.o_custkey
-JOIN nation AS n2 ON n2.n_nationkey = c1.c_nationkey
-WHERE o0.o_orderstatus = 'P'
-AND c1.c_mktsegment = 'HOUSEHOLD'
-AND n2.n_regionkey >= 0 AND n2.n_regionkey <= 1"
-q14.sql,1,110621870,0.1,lineitem|part,2,5e3e435b,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN part AS p1 ON p1.p_partkey = l0.l_partkey
-WHERE l0.l_quantity >= 21 AND l0.l_quantity <= 26
-AND p1.p_size >= 35 AND p1.p_size <= 45"
-q15.sql,0,108021870,0.1,lineitem,1,0242f360,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-WHERE l0.l_quantity >= 6 AND l0.l_quantity <= 16"
-q16.sql,1,12200000,0.1,partsupp|part,2,8fa30bd7,error,"SELECT MIN(p0.l_quantity) AS result
-FROM partsupp AS p0
-JOIN part AS p1 ON p1.p_partkey = p0.ps_partkey
-WHERE p0.ps_availqty >= 501 AND p0.ps_availqty <= 2003
-AND p1.p_size >= 40 AND p1.p_size <= 48"
-q17.sql,1,110621870,0.1,lineitem|orders,2,ee419295,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN orders AS o1 ON o1.o_orderkey = l0.l_orderkey
-WHERE l0.l_quantity >= 11 AND l0.l_quantity <= 16
-AND o1.o_orderstatus = 'F'"
-q18.sql,2,127221870,0.1,lineitem|orders|supplier,3,14a04e6d,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN orders AS o1 ON o1.o_orderkey = l0.l_orderkey
-JOIN supplier AS s2 ON s2.s_suppkey = l0.l_suppkey
-WHERE l0.l_quantity >= 11 AND l0.l_quantity <= 21
-AND o1.o_orderstatus = 'F'
-AND s2.s_nationkey >= 7 AND s2.s_nationkey <= 9"
-q19.sql,1,110621870,0.1,lineitem|supplier,2,acb54fe1,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN supplier AS s1 ON s1.s_suppkey = l0.l_suppkey
-WHERE l0.l_quantity >= 26 AND l0.l_quantity <= 36
-AND s1.s_nationkey >= 9 AND s1.s_nationkey <= 14"
-q20.sql,1,150125,0.1,supplier|nation,2,efd3e67c,ok,"SELECT MIN(s0.s_name) AS result
-FROM supplier AS s0
-JOIN nation AS n1 ON n1.n_nationkey = s0.s_nationkey
-WHERE s0.s_nationkey >= 14 AND s0.s_nationkey <= 19
-AND n1.n_regionkey >= 0 AND n1.n_regionkey <= 0"
-q21.sql,3,124671995,0.1,lineitem|supplier|partsupp|part,4,d8797246,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN part AS p3 ON p3.p_partkey = l0.l_partkey
-JOIN supplier AS s1 ON s1.s_suppkey = l0.l_suppkey
-JOIN partsupp AS p2 ON p2.ps_partkey = p3.p_partkey
-WHERE l0.l_quantity >= 36 AND l0.l_quantity <= 41
-AND p3.p_size >= 5 AND p3.p_size <= 15
-AND s1.s_nationkey >= 2 AND s1.s_nationkey <= 7"
-q22.sql,1,8000,0.1,lineitem|supplier,2,e36cd18e,ok,"SELECT MIN(l0.l_quantity) AS result
-FROM lineitem AS l0
-JOIN supplier AS s1 ON s1.s_suppkey = l0.l_suppkey
-WHERE l0.l_quantity >= 26 AND l0.l_quantity <= 36
-AND s1.s_nationkey >= 9 AND s1.s_nationkey <= 12"
+query_file,join_count,bytes_read,target_tables,n_tables,query_hash,gen_status,sql
+q01.sql,0,108021870,lineitem,1,8889faba,ok,"SELECT DISTINCT ON(""lineitem"".""l_orderkey"", ""lineitem"".""l_linenumber"") ""lineitem"".""l_partkey"" FROM ""lineitem"" WHERE ""lineitem"".""l_comment"" BETWEEN 'against the ironic, regular theodo' AND 'zzle? furiously iro';"
+q02.sql,4,12350145,lineitem|orders|part|partsupp|supplier,5,dee1764b,ok,"SELECT DISTINCT ON(""part"".""p_partkey"") ""part"".""p_type"" FROM ""part"" LEFT JOIN ""partsupp"" ON ""part"".""p_partkey"" = ""partsupp"".""ps_partkey"" LEFT JOIN ""lineitem"" ON ""part"".""p_partkey"" = ""lineitem"".""l_partkey"" LEFT JOIN ""supplier"" ON ""partsupp"".""ps_suppkey"" = ""supplier"".""s_suppkey"" LEFT JOIN ""orders"" ON ""lineitem"".""l_orderkey"" = ""orders"".""o_orderkey"" WHERE ""lineitem"".""l_shipinstruct"" BETWEEN 'COLLECT COD' AND 'TAKE BACK RETURN' AND ""part"".""p_brand"" BETWEEN 'Brand#11' AND 'Brand#55' AND ""supplier"".""s_comment"" BETWEEN 'against the ironic accounts. blithely express theodolites nag careful' AND 'zzle-- final, unusual platelets above the c' AND ""orders"".""o_clerk"" BETWEEN 'Clerk#000000011' AND 'Clerk#000001000' AND ""partsupp"".""ps_supplycost"" BETWEEN 11.01 AND 1000.0;"
+q03.sql,2,127221870,customer|nation|orders,3,ae5ac2a9,ok,"SELECT DISTINCT ON(""customer"".""c_custkey"") ""customer"".""c_address"" FROM ""customer"" LEFT JOIN ""nation"" ON ""customer"".""c_nationkey"" = ""nation"".""n_nationkey"" LEFT JOIN ""orders"" ON ""customer"".""c_custkey"" = ""orders"".""o_custkey"" WHERE ""customer"".""c_comment"" BETWEEN 'against the deposits sleep above the blithely ironic realms. blithely ironic c' AND 'zzle. quickly bold accounts according to the ironic ideas affix' AND ""nation"".""n_comment"" BETWEEN 'beans after the carefully regular accounts r' AND 'usly ironic, pending foxes. even, special instructions nag. sly, final foxes detect slyly fluffily' AND ""orders"".""o_comment"" BETWEEN 'against the quickly regular instructions. slyly thin acco' AND 'zzle? furiously ironic packages are sil';"
+q04.sql,0,16500000,orders,1,b6ab92de,ok,"SELECT DISTINCT ON(""orders"".""o_orderkey"") ""orders"".""o_shippriority"" FROM ""orders"" WHERE ""orders"".""o_shippriority"" BETWEEN 0 AND 0;"
+q05.sql,5,127372015,customer|lineitem|orders|part|partsupp|supplier,6,b18541ed,ok,"SELECT DISTINCT ON(""customer"".""c_custkey"") ""customer"".""c_custkey"" FROM ""customer"" LEFT JOIN ""orders"" ON ""customer"".""c_custkey"" = ""orders"".""o_custkey"" LEFT JOIN ""lineitem"" ON ""orders"".""o_orderkey"" = ""lineitem"".""l_orderkey"" LEFT JOIN ""part"" ON ""lineitem"".""l_partkey"" = ""part"".""p_partkey"" LEFT JOIN ""partsupp"" ON ""part"".""p_partkey"" = ""partsupp"".""ps_partkey"" LEFT JOIN ""supplier"" ON ""lineitem"".""l_suppkey"" = ""supplier"".""s_suppkey"" WHERE ""customer"".""c_mktsegment"" BETWEEN 'AUTOMOBILE' AND 'MACHINERY' AND ""lineitem"".""l_comment"" BETWEEN 'against the ironic, regular theodo' AND 'zzle? furiously iro' AND ""partsupp"".""ps_availqty"" BETWEEN 99 AND 9999 AND ""orders"".""o_totalprice"" BETWEEN 5535.98 AND 555285.16 AND ""supplier"".""s_phone"" BETWEEN '10-306-516-3320' AND '34-998-900-4911' AND ""part"".""p_type"" BETWEEN 'ECONOMY ANODIZED COPPER' AND 'STANDARD POLISHED TIN';"
+q06.sql,0,108021870,lineitem,1,e5d7d99d,ok,"SELECT DISTINCT ON(""lineitem"".""l_orderkey"", ""lineitem"".""l_linenumber"") ""lineitem"".""l_suppkey"" FROM ""lineitem"" WHERE ""lineitem"".""l_shipinstruct"" BETWEEN 'COLLECT COD' AND 'TAKE BACK RETURN';"
+q07.sql,8,127245995,customer|lineitem|nation|orders|part|partsupp|region|supplier,8,0d213d49,ok,"SELECT DISTINCT ON(""lineitem"".""l_orderkey"", ""lineitem"".""l_linenumber"") ""lineitem"".""l_discount"" FROM ""lineitem"" LEFT JOIN ""supplier"" ON ""lineitem"".""l_suppkey"" = ""supplier"".""s_suppkey"" LEFT JOIN ""nation"" ON ""supplier"".""s_nationkey"" = ""nation"".""n_nationkey"" LEFT JOIN ""customer"" ON ""nation"".""n_nationkey"" = ""customer"".""c_nationkey"" LEFT JOIN ""partsupp"" ON ""supplier"".""s_suppkey"" = ""partsupp"".""ps_suppkey"" LEFT JOIN ""orders"" ON ""customer"".""c_custkey"" = ""orders"".""o_custkey"" LEFT JOIN ""part"" ON ""partsupp"".""ps_partkey"" = ""part"".""p_partkey"" LEFT JOIN ""region"" ON ""nation"".""n_regionkey"" = ""region"".""r_regionkey"" WHERE ""customer"".""c_comment"" BETWEEN 'against the deposits sleep above the blithely ironic realms. blithely ironic c' AND 'zzle. quickly bold accounts according to the ironic ideas affix' AND ""lineitem"".""l_tax"" BETWEEN 0.0 AND 0.08 AND ""partsupp"".""ps_comment"" BETWEEN 'against the slyly ironic platelets. ironic accounts detect among the regular ideas. final pearls among the fluffily iron' AND 'zzle. thinly regular deposits haggle blithely regular, regular instructions. carefully special instructions haggle final accounts. blithely special accoun' AND ""orders"".""o_orderpriority"" BETWEEN '1-URGENT' AND '5-LOW' AND ""supplier"".""s_name"" BETWEEN 'Supplier#000000100' AND 'Supplier#000010000' AND ""part"".""p_retailprice"" BETWEEN 962.04 AND 2098.99 AND ""nation"".""n_name"" BETWEEN 'ALGERIA' AND 'VIETNAM' AND ""region"".""r_name"" BETWEEN 'AFRICA' AND 'MIDDLE EAST';"
+q08.sql,9,127388015,customer|lineitem|nation|orders|part|partsupp|region|supplier,8,45e769fa,ok,"SELECT DISTINCT ON(""supplier"".""s_suppkey"") ""supplier"".""s_phone"" FROM ""supplier"" LEFT JOIN ""partsupp"" ON ""supplier"".""s_suppkey"" = ""partsupp"".""ps_suppkey"" LEFT JOIN ""lineitem"" ON ""supplier"".""s_suppkey"" = ""lineitem"".""l_suppkey"" LEFT JOIN ""orders"" ON ""lineitem"".""l_orderkey"" = ""orders"".""o_orderkey"" LEFT JOIN ""customer"" ON ""orders"".""o_custkey"" = ""customer"".""c_custkey"" LEFT JOIN ""nation"" ON ""supplier"".""s_nationkey"" = ""nation"".""n_nationkey"" LEFT JOIN ""part"" ON ""partsupp"".""ps_partkey"" = ""part"".""p_partkey"" LEFT JOIN ""region"" ON ""nation"".""n_regionkey"" = ""region"".""r_regionkey"" WHERE ""nation"".""n_comment"" BETWEEN 'beans after the carefully regular accounts r' AND 'usly ironic, pending foxes. even, special instructions nag. sly, final foxes detect slyly fluffily' AND ""region"".""r_name"" BETWEEN 'AFRICA' AND 'MIDDLE EAST' AND ""lineitem"".""l_shipinstruct"" BETWEEN 'COLLECT COD' AND 'TAKE BACK RETURN' AND ""customer"".""c_acctbal"" BETWEEN -890.83 AND 9999.99 AND ""part"".""p_brand"" BETWEEN 'Brand#11' AND 'Brand#55' AND ""supplier"".""s_comment"" BETWEEN 'against the ironic accounts. blithely express theodolites nag careful' AND 'zzle-- final, unusual platelets above the c' AND ""orders"".""o_orderstatus"" BETWEEN 'F' AND 'P' AND ""partsupp"".""ps_availqty"" BETWEEN 99 AND 9999;"
+q09.sql,7,134287995,customer|lineitem|nation|orders|part|partsupp|region|supplier,8,7a8b402b,ok,"SELECT DISTINCT ON(""supplier"".""s_suppkey"") ""supplier"".""s_name"" FROM ""supplier"" LEFT JOIN ""lineitem"" ON ""supplier"".""s_suppkey"" = ""lineitem"".""l_suppkey"" LEFT JOIN ""partsupp"" ON ""supplier"".""s_suppkey"" = ""partsupp"".""ps_suppkey"" LEFT JOIN ""part"" ON ""partsupp"".""ps_partkey"" = ""part"".""p_partkey"" LEFT JOIN ""orders"" ON ""lineitem"".""l_orderkey"" = ""orders"".""o_orderkey"" LEFT JOIN ""nation"" ON ""supplier"".""s_nationkey"" = ""nation"".""n_nationkey"" LEFT JOIN ""customer"" ON ""orders"".""o_custkey"" = ""customer"".""c_custkey"" LEFT JOIN ""region"" ON ""nation"".""n_regionkey"" = ""region"".""r_regionkey"" WHERE ""customer"".""c_address"" BETWEEN 'd9vNxgaHgmHSUXn2wg1BDb' AND 'zzyQcZpC50YDkK26Pglp' AND ""lineitem"".""l_shipdate"" BETWEEN '1992-03-17T00:00:00' AND '1998-12-01' AND ""partsupp"".""ps_availqty"" BETWEEN 99 AND 9999 AND ""orders"".""o_orderstatus"" BETWEEN 'F' AND 'P' AND ""supplier"".""s_address"" BETWEEN 'c7,OUKSV21G36NHYoJkloLtywU5cP I0xj' AND 'zzeiHvqsHBhiLpxcRfnNDLw2SBc5EPaWKjgzw' AND ""part"".""p_brand"" BETWEEN 'Brand#11' AND 'Brand#55' AND ""nation"".""n_comment"" BETWEEN 'beans after the carefully regular accounts r' AND 'usly ironic, pending foxes. even, special instructions nag. sly, final foxes detect slyly fluffily' AND ""region"".""r_name"" BETWEEN 'AFRICA' AND 'MIDDLE EAST';"
+q10.sql,3,127221995,customer|nation|region|supplier,4,0b858f1f,ok,"SELECT DISTINCT ON(""customer"".""c_custkey"") ""customer"".""c_phone"" FROM ""customer"" LEFT JOIN ""nation"" ON ""customer"".""c_nationkey"" = ""nation"".""n_nationkey"" LEFT JOIN ""supplier"" ON ""nation"".""n_nationkey"" = ""supplier"".""s_nationkey"" LEFT JOIN ""region"" ON ""nation"".""n_regionkey"" = ""region"".""r_regionkey"" WHERE ""customer"".""c_mktsegment"" BETWEEN 'AUTOMOBILE' AND 'MACHINERY' AND ""nation"".""n_comment"" BETWEEN 'beans after the carefully regular accounts r' AND 'usly ironic, pending foxes. even, special instructions nag. sly, final foxes detect slyly fluffily' AND ""supplier"".""s_acctbal"" BETWEEN -888.33 AND 9999.72 AND ""region"".""r_comment"" BETWEEN 'foxes boost furiously along the carefully dogged tithes. slyly regular orbits according to the special epit' AND 's are. furiously even pinto bea';"
+q11.sql,2,9750125,lineitem|part|partsupp,3,3c3df89e,ok,"SELECT DISTINCT ON(""partsupp"".""ps_partkey"", ""partsupp"".""ps_suppkey"") ""partsupp"".""ps_supplycost"" FROM ""partsupp"" LEFT JOIN ""part"" ON ""partsupp"".""ps_partkey"" = ""part"".""p_partkey"" LEFT JOIN ""lineitem"" ON ""part"".""p_partkey"" = ""lineitem"".""l_partkey"" WHERE ""part"".""p_type"" BETWEEN 'ECONOMY ANODIZED COPPER' AND 'STANDARD POLISHED TIN' AND ""lineitem"".""l_shipinstruct"" BETWEEN 'COLLECT COD' AND 'TAKE BACK RETURN' AND ""partsupp"".""ps_availqty"" BETWEEN 99 AND 9999;"
+q12.sql,1,124521870,customer|orders,2,1f242aa7,ok,"SELECT DISTINCT ON(""orders"".""o_orderkey"") ""orders"".""o_orderstatus"" FROM ""orders"" LEFT JOIN ""customer"" ON ""orders"".""o_custkey"" = ""customer"".""c_custkey"" WHERE ""customer"".""c_name"" BETWEEN 'Customer#000001500' AND 'Customer#000150000' AND ""orders"".""o_shippriority"" BETWEEN 0 AND 0;"
+q13.sql,2,16508000,customer|lineitem|orders,3,950c5c0d,ok,"SELECT DISTINCT ON(""orders"".""o_orderkey"") ""orders"".""o_comment"" FROM ""orders"" LEFT JOIN ""lineitem"" ON ""orders"".""o_orderkey"" = ""lineitem"".""l_orderkey"" LEFT JOIN ""customer"" ON ""orders"".""o_custkey"" = ""customer"".""c_custkey"" WHERE ""customer"".""c_phone"" BETWEEN '10-325-233-9271' AND '34-999-618-6881' AND ""lineitem"".""l_commitdate"" BETWEEN '1992-03-24T00:00:00' AND '1998-10-31' AND ""orders"".""o_orderpriority"" BETWEEN '1-URGENT' AND '5-LOW';"
+q14.sql,1,110621870,lineitem|orders,2,5fab35a3,ok,"SELECT DISTINCT ON(""lineitem"".""l_orderkey"", ""lineitem"".""l_linenumber"") ""lineitem"".""l_shipdate"" FROM ""lineitem"" LEFT JOIN ""orders"" ON ""lineitem"".""l_orderkey"" = ""orders"".""o_orderkey"" WHERE ""lineitem"".""l_extendedprice"" BETWEEN 1497.57 AND 104949.5 AND ""orders"".""o_clerk"" BETWEEN 'Clerk#000000011' AND 'Clerk#000001000';"
+q15.sql,0,108021870,lineitem,1,8d6a723f,ok,"SELECT DISTINCT ON(""lineitem"".""l_orderkey"", ""lineitem"".""l_linenumber"") ""lineitem"".""l_partkey"" FROM ""lineitem"" WHERE ""lineitem"".""l_receiptdate"" BETWEEN '1992-04-01T00:00:00' AND '1998-12-31';"
+q16.sql,1,12200000,partsupp|supplier,2,0954baac,ok,"SELECT DISTINCT ON(""partsupp"".""ps_partkey"", ""partsupp"".""ps_suppkey"") ""partsupp"".""ps_availqty"" FROM ""partsupp"" LEFT JOIN ""supplier"" ON ""partsupp"".""ps_suppkey"" = ""supplier"".""s_suppkey"" WHERE ""supplier"".""s_name"" BETWEEN 'Supplier#000000100' AND 'Supplier#000010000' AND ""partsupp"".""ps_supplycost"" BETWEEN 11.01 AND 1000.0;"
+q17.sql,1,110621870,lineitem|orders,2,e74f7aba,ok,"SELECT DISTINCT ON(""lineitem"".""l_orderkey"", ""lineitem"".""l_linenumber"") ""lineitem"".""l_comment"" FROM ""lineitem"" LEFT JOIN ""orders"" ON ""lineitem"".""l_orderkey"" = ""orders"".""o_orderkey"" WHERE ""lineitem"".""l_discount"" BETWEEN 0.0 AND 0.1 AND ""orders"".""o_clerk"" BETWEEN 'Clerk#000000011' AND 'Clerk#000001000';"
+q18.sql,2,127221870,customer|lineitem|orders,3,1a4e22ba,ok,"SELECT DISTINCT ON(""customer"".""c_custkey"") ""customer"".""c_address"" FROM ""customer"" LEFT JOIN ""orders"" ON ""customer"".""c_custkey"" = ""orders"".""o_custkey"" LEFT JOIN ""lineitem"" ON ""orders"".""o_orderkey"" = ""lineitem"".""l_orderkey"" WHERE ""customer"".""c_mktsegment"" BETWEEN 'AUTOMOBILE' AND 'MACHINERY' AND ""lineitem"".""l_commitdate"" BETWEEN '1992-03-24T00:00:00' AND '1998-10-31' AND ""orders"".""o_orderdate"" BETWEEN '1992-01-25T00:00:00' AND '1998-08-02';"
+q19.sql,1,110621870,lineitem|orders,2,213a5fd9,ok,"SELECT DISTINCT ON(""lineitem"".""l_orderkey"", ""lineitem"".""l_linenumber"") ""lineitem"".""l_extendedprice"" FROM ""lineitem"" LEFT JOIN ""orders"" ON ""lineitem"".""l_orderkey"" = ""orders"".""o_orderkey"" WHERE ""lineitem"".""l_returnflag"" BETWEEN 'A' AND 'R' AND ""orders"".""o_comment"" BETWEEN 'against the quickly regular instructions. slyly thin acco' AND 'zzle? furiously ironic packages are sil';"
+q20.sql,1,150125,lineitem|supplier,2,b4177333,ok,"SELECT DISTINCT ON(""supplier"".""s_suppkey"") ""supplier"".""s_name"" FROM ""supplier"" LEFT JOIN ""lineitem"" ON ""supplier"".""s_suppkey"" = ""lineitem"".""l_suppkey"" WHERE ""supplier"".""s_comment"" BETWEEN 'against the ironic accounts. blithely express theodolites nag careful' AND 'zzle-- final, unusual platelets above the c' AND ""lineitem"".""l_extendedprice"" BETWEEN 1497.57 AND 104949.5;"
+q21.sql,3,124671995,nation|partsupp|region|supplier,4,cd08c8b8,ok,"SELECT DISTINCT ON(""supplier"".""s_suppkey"") ""supplier"".""s_address"" FROM ""supplier"" LEFT JOIN ""nation"" ON ""supplier"".""s_nationkey"" = ""nation"".""n_nationkey"" LEFT JOIN ""partsupp"" ON ""supplier"".""s_suppkey"" = ""partsupp"".""ps_suppkey"" LEFT JOIN ""region"" ON ""nation"".""n_regionkey"" = ""region"".""r_regionkey"" WHERE ""supplier"".""s_name"" BETWEEN 'Supplier#000000100' AND 'Supplier#000010000' AND ""partsupp"".""ps_supplycost"" BETWEEN 11.01 AND 1000.0 AND ""nation"".""n_comment"" BETWEEN 'beans after the carefully regular accounts r' AND 'usly ironic, pending foxes. even, special instructions nag. sly, final foxes detect slyly fluffily' AND ""region"".""r_comment"" BETWEEN 'foxes boost furiously along the carefully dogged tithes. slyly regular orbits according to the special epit' AND 's are. furiously even pinto bea';"
+q22.sql,1,8000,customer|nation,2,3fc7a59e,ok,"SELECT DISTINCT ON(""customer"".""c_custkey"") ""customer"".""c_comment"" FROM ""customer"" LEFT JOIN ""nation"" ON ""customer"".""c_nationkey"" = ""nation"".""n_nationkey"" WHERE ""customer"".""c_comment"" BETWEEN 'against the deposits sleep above the blithely ironic realms. blithely ironic c' AND 'zzle. quickly bold accounts according to the ironic ideas affix' AND ""nation"".""n_name"" BETWEEN 'ALGERIA' AND 'VIETNAM';"

@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 *.pyo
 .DS_Store
+experiments/_evaluation/QUERY_FIDELITY_REPORT.md
+experiments/_evaluation/REDBENCH_EVAL_VALIDATION_REPORT.md
+experiments/redset186_to_imdb/

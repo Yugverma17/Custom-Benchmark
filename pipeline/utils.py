@@ -103,6 +103,32 @@ def select_tables_bfs(n_tables: int, schema, rng: random.Random) -> list[str]:
     return sorted(selected, key=lambda t: -schema.TABLE_SIZES.get(t, 0))
 
 
+def augment_schema(schema, factor: int = 2):
+    class AugmentedSchema:
+        pass
+    aug = AugmentedSchema()
+    suffixes = [f"_{i}" for i in range(factor)]
+    aug.TABLE_SIZES  = {f"{t}{s}": v for t, v in schema.TABLE_SIZES.items()  for s in suffixes}
+    aug.AVG_ROW_SIZE = {f"{t}{s}": v for t, v in schema.AVG_ROW_SIZE.items() for s in suffixes}
+    aug.PRED_COLS    = {f"{t}{s}": v for t, v in schema.PRED_COLS.items()    for s in suffixes}
+    aug.FK_EDGES     = [
+        (f"{tl}{s}", cl, f"{tr}{s}", cr)
+        for tl, cl, tr, cr in schema.FK_EDGES
+        for s in suffixes
+    ]
+    aug._base        = schema
+    aug._factor      = factor
+    aug._suffixes    = suffixes
+    return aug
+
+
+def base_table(augmented_name: str) -> str:
+    for sep in ('_0', '_1', '_2', '_3'):
+        if augmented_name.endswith(sep):
+            return augmented_name[:-len(sep)]
+    return augmented_name
+
+
 def build_size_rank_mapping(source_schema, target_schema) -> dict:
     src_ranked = sorted(source_schema.TABLE_SIZES, key=lambda t: -source_schema.TABLE_SIZES[t])
     tgt_ranked = sorted(target_schema.TABLE_SIZES, key=lambda t: -target_schema.TABLE_SIZES[t])
@@ -126,9 +152,15 @@ _MIN_SEL       = 0.05
 
 def compute_column_stats(con, schema) -> dict:
     stats: dict = {}
+    computed: dict = {}
 
     for table, col_defs in schema.PRED_COLS.items():
+        real_table = base_table(table)
+        if real_table in computed:
+            stats[table] = computed[real_table]
+            continue
         stats[table] = {}
+        computed[real_table] = stats[table]
         for col_def in col_defs:
             col   = col_def[0]
             dtype = col_def[1]
@@ -138,7 +170,7 @@ def compute_column_stats(con, schema) -> dict:
                         row = con.execute(
                             f"SELECT quantile_cont(CAST({col} AS DOUBLE), "
                             f"{_QUANTILE_PTS}) "
-                            f"FROM {table} WHERE {col} IS NOT NULL"
+                            f"FROM {real_table} WHERE {col} IS NOT NULL"
                         ).fetchone()
                         vals = row[0] if row else None
                         if vals and len(vals) == _N_QUANTILES:
@@ -151,7 +183,7 @@ def compute_column_stats(con, schema) -> dict:
                         pass
                     row = con.execute(
                         f"SELECT MIN(CAST({col} AS DOUBLE)), MAX(CAST({col} AS DOUBLE)) "
-                        f"FROM {table} WHERE {col} IS NOT NULL"
+                        f"FROM {real_table} WHERE {col} IS NOT NULL"
                     ).fetchone()
                     lo, hi = (row[0] or 0), (row[1] or 0)
                     q_vals = [lo + (hi - lo) * i / 100 for i in range(_N_QUANTILES)]
@@ -165,7 +197,7 @@ def compute_column_stats(con, schema) -> dict:
                         row = con.execute(
                             f"SELECT quantile_disc(CAST({col} AS VARCHAR), "
                             f"{_QUANTILE_PTS}) "
-                            f"FROM {table} WHERE {col} IS NOT NULL"
+                            f"FROM {real_table} WHERE {col} IS NOT NULL"
                         ).fetchone()
                         vals = row[0] if row else None
                         if vals and len(vals) == _N_QUANTILES:
@@ -178,7 +210,7 @@ def compute_column_stats(con, schema) -> dict:
                         pass
                     rows = con.execute(
                         f"SELECT DISTINCT CAST({col} AS VARCHAR) "
-                        f"FROM {table} WHERE {col} IS NOT NULL LIMIT 200"
+                        f"FROM {real_table} WHERE {col} IS NOT NULL LIMIT 200"
                     ).fetchall()
                     vals_list = sorted(r[0] for r in rows if r[0] is not None)
                     n = len(vals_list)
@@ -191,7 +223,7 @@ def compute_column_stats(con, schema) -> dict:
                 elif dtype == 'enum':
                     rows = con.execute(
                         f"SELECT DISTINCT CAST({col} AS VARCHAR) "
-                        f"FROM {table} WHERE {col} IS NOT NULL LIMIT 100"
+                        f"FROM {real_table} WHERE {col} IS NOT NULL LIMIT 100"
                     ).fetchall()
                     stats[table][col] = {
                         'type': 'enum',
@@ -201,7 +233,7 @@ def compute_column_stats(con, schema) -> dict:
                 elif dtype == 'like':
                     rows = con.execute(
                         f"SELECT DISTINCT SUBSTR(CAST({col} AS VARCHAR), 1, 1) "
-                        f"FROM {table} WHERE {col} IS NOT NULL LIMIT 26"
+                        f"FROM {real_table} WHERE {col} IS NOT NULL LIMIT 26"
                     ).fetchall()
                     stats[table][col] = {
                         'type': 'like',
