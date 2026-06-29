@@ -1,7 +1,0 @@
-experiment,query_count_W,query_count_Wprime,query_diversity_W,query_diversity_Wprime,srr_W,srr_Wprime,avg_scans_W,avg_joins_W,avg_aggregations_W,avg_sorts_W,avg_total_ops_W,avg_scans_Wprime,avg_joins_Wprime,avg_aggregations_Wprime,avg_sorts_Wprime,avg_total_ops_Wprime,plan_diversity_W,plan_diversity_Wprime,unique_plan_signatures_W,unique_plan_signatures_Wprime,success_rate_percent_T,success_rate_percent_Tprime,runtime_mean_ms_T,runtime_mean_ms_Tprime,runtime_90th_pct_ms_T,runtime_90th_pct_ms_Tprime,bytes_read_mean_T,bytes_read_mean_Tprime
-imdb_to_imdb,115,115,0.296,0.852,1.000,0.296,8.39,7.63,0.00,0.00,22.61,6.97,6.19,0.00,0.00,17.25,0.035,0.052,4,6,94.8,77.4,997.7,1079.0,2337.5,3031.5,347821039,459287820
-imdb_to_imdb_sizerank,115,115,0.296,0.852,1.000,0.296,8.39,7.63,0.00,0.00,22.61,0.00,0.00,0.00,0.00,0.00,0.035,0.009,4,1,94.8,77.4,997.7,1219.5,2337.5,3658.9,347821039,459287820
-tpch_to_tpch,22,22,0.773,0.727,0.364,0.455,3.77,3.14,1.27,0.82,16.64,2.86,2.00,0.00,0.00,5.82,0.773,0.182,17,4,100.0,86.4,157.8,79.0,348.8,151.0,85025056,102636112
-tpch_to_tpch_sizerank,22,22,0.773,0.727,0.364,0.455,3.77,3.14,1.27,0.82,16.64,0.00,0.00,0.00,0.00,0.00,0.773,0.045,17,1,100.0,86.4,157.8,133.8,348.8,361.1,85025056,102636112
-tpcds_to_tpcds,99,99,0.747,0.939,0.404,0.111,6.95,6.29,2.06,0.89,28.63,5.51,4.63,0.00,0.00,13.96,0.394,0.051,39,5,100.0,89.9,197.9,416.3,502.2,316.6,24629640,49983572
-tpcds_to_tpcds_sizerank,99,99,0.747,0.939,0.404,0.111,6.95,6.29,2.06,0.89,28.63,0.00,0.00,0.00,0.00,0.00,0.394,0.010,39,1,100.0,89.9,197.9,492.2,502.2,296.2,24629640,49983572
