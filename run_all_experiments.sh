@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-BASE="G:/Yug/Benchmark/Custom-Benchmark"
+BASE="D:/Benchmark/Custom-Benchmark"
 cd "$BASE"
 
 EXPERIMENTS=(

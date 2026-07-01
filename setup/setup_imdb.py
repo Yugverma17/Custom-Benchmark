@@ -21,7 +21,7 @@ DOWNLOAD_URLS = [
     "https://event.cwi.nl/da/job/imdb.tgz",
 ]
 
-# ── Schema definitions ────────────────────────────────────────────────────────
+                                                                                
 DDL = {
 "aka_name": """
     id              INTEGER NOT NULL,
@@ -175,10 +175,10 @@ DDL = {
 """,
 }
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+                                                                                
 def download_with_progress(url, dest):
     print(f"  Downloading from:\n    {url}")
-    # Bypass SSL verification (needed on some Windows systems for academic URLs)
+                                                                                
     ssl_ctx = ssl.create_default_context()
     ssl_ctx.check_hostname = False
     ssl_ctx.verify_mode = ssl.CERT_NONE
@@ -260,7 +260,7 @@ def import_tables(con):
 
     print(f"\n  Total rows imported: {total_rows:,}")
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+                                                                                
 if __name__ == "__main__":
     os.makedirs(DB_DIR, exist_ok=True)
 
@@ -273,16 +273,16 @@ if __name__ == "__main__":
     print("Setting up IMDB database for JOB benchmark")
     print("=" * 60)
 
-    # Step 1: Download
+                      
     print("\n[1/3] Downloading IMDB CSV archive (~1.8 GB) ...")
     if not download_tgz():
         sys.exit(1)
 
-    # Step 2: Extract
+                     
     print("\n[2/3] Extracting CSV files ...")
     extract_tgz()
 
-    # Step 3: Import into DuckDB
+                                
     print("\n[3/3] Importing into DuckDB ...")
     t0 = time.time()
     con = duckdb.connect(IMDB_DB)

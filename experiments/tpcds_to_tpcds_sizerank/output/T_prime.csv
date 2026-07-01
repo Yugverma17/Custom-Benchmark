@@ -1,100 +1,100 @@
 query_file,query_hash,join_count,read_tables,n_tables,bytes_read,runtime_ms,rows_returned,status,error_msg,src_join_count,src_bytes_read
-q01.sql,f3bad070,1,,0,0,18.94,2004,ok,,1,4048606
-q02.sql,29db53e8,11,,0,0,34603.52,,timeout,INTERRUPT Error: Interrupted!,11,1492980
-q03.sql,e74877fc,2,,0,0,29.51,2112,ok,,2,39356232
-q04.sql,bb9c16ed,2,,0,0,905.72,94799,ok,,2,40506232
-q05.sql,ad65ca26,17,,0,0,36348.36,,timeout,INTERRUPT Error: Interrupted!,17,11588836
-q06.sql,b3e4776f,4,,0,0,190.76,39662,ok,,4,41706232
-q07.sql,14efe0da,4,,0,0,414.29,1824,ok,,4,50890032
-q08.sql,44a1004c,5,,0,0,340.56,1729,ok,,5,38906712
-q09.sql,9f4e37d3,0,,0,0,63.53,1824,ok,,0,37445252
-q10.sql,16897afc,2,,0,0,143.37,57235,ok,,2,13874800
-q11.sql,15a3d0f7,2,,0,0,151.72,86765,ok,,2,40506232
-q12.sql,5d5f8678,2,,0,0,26.45,1824,ok,,2,11982356
-q13.sql,b6549b32,5,,0,0,25438.86,1824,ok,,5,51210312
-q14.sql,41cfa8c1,5,,0,0,11685.6,17957,ok,,5,1918980
-q15.sql,c38abdc2,3,,0,0,4540.54,1825,ok,,3,23992652
-q16.sql,171e7176,3,,0,0,380.33,1831,ok,,3,22400652
-q17.sql,dc81484d,7,,0,0,18706.82,1728,ok,,7,62126010
-q18.sql,521a5d76,6,,0,0,30019.19,,timeout,INTERRUPT Error: Interrupted!,6,35967452
-q19.sql,bf659c70,5,,0,0,30005.27,,timeout,INTERRUPT Error: Interrupted!,5,41706712
-q20.sql,df0916eb,2,,0,0,202.55,1831,ok,,2,22092652
-q21.sql,aab312d5,6,,0,0,30033.14,,timeout,INTERRUPT Error: Interrupted!,6,1927080
-q22.sql,72ef3e2a,2,,0,0,3298.09,250,ok,,2,37145980
-q23.sql,ab386f48,5,,0,0,30016.05,,timeout,INTERRUPT Error: Interrupted!,5,38906232
-q24.sql,36b905bd,5,,0,0,1521.05,1823,ok,,5,42833358
-q25.sql,4439941f,7,,0,0,11738.18,1824,ok,,7,62126010
-q26.sql,4b9370f4,4,,0,0,70.73,1428,ok,,4,33626452
-q27.sql,736884de,4,,0,0,30017.35,,timeout,INTERRUPT Error: Interrupted!,4,50881512
-q28.sql,e821bef7,0,,0,0,3.04,6,ok,,2,8000
-q29.sql,b3df7e43,7,,0,0,18683.02,1824,ok,,7,62126010
-q30.sql,eb8dde9b,2,,0,0,214.39,1955,ok,,2,2856847
-q31.sql,46738203,2,,0,0,88.16,1823,ok,,2,39656232
-q32.sql,b87178e9,2,,0,0,82.52,1831,ok,,2,22092652
-q33.sql,91802a4a,3,,0,0,342.5,1824,ok,,3,40106232
-q34.sql,4b08ceea,5,,0,0,36840.45,,timeout,INTERRUPT Error: Interrupted!,5,1506260
-q35.sql,bd6a7a0b,2,,0,0,183.48,86962,ok,,2,13874800
-q36.sql,f736b96e,3,,0,0,324.12,1824,ok,,3,39356712
-q37.sql,7b9dd633,3,,0,0,146.11,16645,ok,,3,57327652
-q38.sql,d604c289,4,,0,0,30346.8,,timeout,INTERRUPT Error: Interrupted!,4,3076980
-q39.sql,fa39ca94,8,,0,0,236.38,6964,ok,,8,1951080
-q40.sql,6ac46c13,1,,0,0,27.5,2054,ok,,1,21478275
-q41.sql,82570e36,0,,0,0,27.8,17785,ok,,0,450000
-q42.sql,5db483c9,2,,0,0,459.24,1976,ok,,2,39356232
-q43.sql,c90c3014,2,,0,0,653.58,1777,ok,,2,38906712
-q44.sql,120d75d9,0,,0,0,4.92,6,ok,,1,8000
-q45.sql,e976c7a6,4,,0,0,117.13,1824,ok,,4,14332356
-q46.sql,990cd12a,8,,0,0,37665.59,,timeout,INTERRUPT Error: Interrupted!,8,2264260
-q47.sql,c7752788,3,,0,0,7976.95,17783,ok,,3,39356712
-q48.sql,9f3b9f4a,4,,0,0,32746.38,,timeout,INTERRUPT Error: Interrupted!,4,51181512
-q49.sql,23f590d2,10,,0,0,36961.7,,timeout,INTERRUPT Error: Interrupted!,10,4562096
-q50.sql,b9bc3f7f,4,,0,0,164.03,1824,ok,,4,41494338
-q51.sql,92586bd1,2,,0,0,541.09,1824,ok,,2,11540356
-q52.sql,c2b466ab,2,,0,0,18.02,1719,ok,,2,39356232
-q53.sql,83f5cf4a,5,,0,0,30019.81,,timeout,INTERRUPT Error: Interrupted!,5,38922712
-q54.sql,774a9730,7,,0,0,40283.82,,timeout,INTERRUPT Error: Interrupted!,7,3542980
-q55.sql,420b81e5,2,,0,0,6119.75,1819,ok,,2,39356232
-q56.sql,e7173224,3,,0,0,30014.76,,timeout,INTERRUPT Error: Interrupted!,3,40106232
-q57.sql,2e3c58a5,3,,0,0,1515.82,16639,ok,,3,22100652
-q58.sql,56980901,2,,0,0,2992.4,1792,ok,,2,39356232
-q59.sql,00f48128,1,,0,0,120.37,1824,ok,,1,38906232
-q60.sql,095085a9,3,,0,0,105.83,1824,ok,,3,40106232
-q61.sql,8dc1d743,6,,0,0,722.03,6,ok,,6,4270460
-q62.sql,b2961c9c,7,,0,0,36255.93,,timeout,INTERRUPT Error: Interrupted!,7,11533416
-q63.sql,fdd394bb,5,,0,0,513.89,1730,ok,,5,38922712
-q64.sql,777f1397,1,,0,0,56.61,1800,ok,,1,21478275
-q65.sql,54ab59b9,6,,0,0,30011.79,,timeout,INTERRUPT Error: Interrupted!,6,1935460
-q66.sql,847a4295,20,,0,0,36563.12,,timeout,INTERRUPT Error: Interrupted!,36,2043640
-q67.sql,56f03954,0,,0,0,4.08,6,ok,,9,72000
-q68.sql,f2b081c3,9,,0,0,37331.63,,timeout,INTERRUPT Error: Interrupted!,9,2264260
-q69.sql,48266d38,2,,0,0,151.36,75452,ok,,2,13874800
-q70.sql,b9ef7b77,2,,0,0,105.78,1823,ok,,2,38906712
-q71.sql,e88c05f5,5,,0,0,4148.74,17785,ok,,5,1934980
-q72.sql,9d9fd39b,10,,0,0,37021.38,,timeout,INTERRUPT Error: Interrupted!,10,70186955
-q73.sql,e7eda5db,5,,0,0,34838.9,,timeout,INTERRUPT Error: Interrupted!,5,1506260
-q74.sql,8ffb1e87,2,,0,0,89.38,93080,ok,,2,40506232
-q75.sql,a404d406,17,,0,0,32869.32,,timeout,INTERRUPT Error: Interrupted!,17,6489076
-q76.sql,9fa5402c,7,,0,0,30149.47,,timeout,INTERRUPT Error: Interrupted!,7,1942980
-q77.sql,e28eef96,4,,0,0,4785.42,1824,ok,,4,38922712
-q78.sql,f5f87718,8,,0,0,36702.98,,timeout,INTERRUPT Error: Interrupted!,8,16078452
-q79.sql,b15c0c11,7,,0,0,6205.36,6,ok,,7,1506260
-q80.sql,b0cc7f1b,3,,0,0,16648.65,259,ok,,3,41975348
-q81.sql,028a6e5c,2,,0,0,13.92,2054,ok,,2,3507583
-q82.sql,5ee7ffd8,3,,0,0,14254.49,17954,ok,,3,74591232
-q83.sql,38180f7e,2,,0,0,94.58,1998,ok,,2,4498606
-q84.sql,0c61870c,5,,0,0,37937.03,,timeout,INTERRUPT Error: Interrupted!,5,16491286
-q85.sql,0ed8efc2,7,,0,0,2834.38,1824,ok,,7,24454203
-q86.sql,1c70c3f4,2,,0,0,25.18,1823,ok,,2,11982356
-q87.sql,258e48a8,4,,0,0,38309.28,,timeout,INTERRUPT Error: Interrupted!,4,3076980
-q88.sql,4a788c9c,3,,0,0,7920.38,7200,ok,,3,547680
-q89.sql,1d036bdc,13,,0,0,30372.98,,timeout,INTERRUPT Error: Interrupted!,13,38962712
-q90.sql,10f77634,3,,0,0,133.48,6836,ok,,3,548100
-q91.sql,281ada36,0,,0,0,2.7,6,ok,,6,16669183
-q92.sql,c488e911,2,,0,0,27.41,1824,ok,,2,11982356
-q93.sql,63c54b11,4,,0,0,80.7,1975,ok,,4,2611626
-q94.sql,08f7e40e,3,,0,0,205.61,1824,ok,,3,12283256
-q95.sql,8eae7194,1,,0,0,20.09,1824,ok,,1,10071376
-q96.sql,455becca,3,,0,0,243.88,1824,ok,,3,37992932
-q97.sql,d573dee8,2,,0,0,92.91,1824,ok,,2,38914232
-q98.sql,4ec36656,2,,0,0,70.83,1823,ok,,2,39356232
-q99.sql,27c15696,7,,0,0,624.29,1796,ok,,7,21650812
+q01.sql,f3bad070,1,item|store_returns,2,3037626,24.39,2004,ok,,1,4048606
+q02.sql,e29a404f,11,store_sales|customer_demographics|store|household_demographics|inventory|item|customer|catalog_returns|catalog_sales|web_sales|catalog_page|date_dim,12,119435579,35002.96,,timeout,INTERRUPT Error: Interrupted!,11,1492980
+q03.sql,94912a42,2,store_sales|household_demographics|date_dim,3,38935032,74.37,1806,ok,,2,39356232
+q04.sql,79640243,2,customer_demographics|store_returns|customer,3,15712426,98.28,82158,ok,,2,40506232
+q05.sql,6b245004,17,web_site|customer|web_returns|household_demographics|store_sales|catalog_sales|item|catalog_returns|customer_demographics|promotion|store_returns|inventory|date_dim|income_band|store|web_page|catalog_page|web_sales,18,122679932,33178.98,,timeout,INTERRUPT Error: Interrupted!,17,11588836
+q06.sql,511de67c,4,catalog_sales|catalog_page|household_demographics|date_dim|customer_address,5,22562068,250.38,46030,ok,,4,41706232
+q07.sql,5eaa05b5,4,household_demographics|item|promotion|catalog_sales|store_sales,5,58114724,9798.02,1824,ok,,4,50890032
+q08.sql,87315f19,5,promotion|store|customer|household_demographics|income_band|store_sales,6,39083592,408.37,1824,ok,,5,38906712
+q09.sql,45922117,0,store_sales,1,37445252,87.99,1824,ok,,0,37445252
+q10.sql,02574e51,2,store_returns|store_sales|customer,3,41632878,325.81,78662,ok,,2,13874800
+q11.sql,5120e41d,2,store_returns|household_demographics|customer,3,4216426,64.06,81930,ok,,2,40506232
+q12.sql,5e56a3df,2,web_page|promotion|web_sales,3,10081276,27.72,1824,ok,,2,11982356
+q13.sql,2dd6b19c,5,item|promotion|time_dim|customer|web_returns|store_sales,6,40668519,367.06,1824,ok,,5,51210312
+q14.sql,40613fcb,5,catalog_returns|catalog_page|web_sales|store_returns|household_demographics|item,6,14575021,7492.07,17799,ok,,5,1918980
+q15.sql,606df0ca,3,customer_address|customer|web_returns|catalog_sales,4,23177539,111.13,1831,ok,,3,23992652
+q16.sql,70cd22bf,3,catalog_page|date_dim|promotion|catalog_sales,4,21792268,58.82,1830,ok,,3,22400652
+q17.sql,b04f841b,7,time_dim|date_dim|catalog_sales|customer_address|household_demographics|web_sales|customer|store_sales,8,72056480,34925.52,,timeout,INTERRUPT Error: Interrupted!,7,62126010
+q18.sql,bbf7940b,6,promotion|catalog_page|date_dim|store_sales|item|web_sales|catalog_sales,7,69758896,31225.89,,timeout,INTERRUPT Error: Interrupted!,6,35967452
+q19.sql,83a5e67f,5,web_sales|customer_demographics|web_page|catalog_sales|promotion|date_dim,6,43248728,305.52,1577,ok,,5,41706712
+q20.sql,48718e9e,2,household_demographics|customer|catalog_sales,3,21810472,430.07,1831,ok,,2,22092652
+q21.sql,f83c4590,6,inventory|date_dim|catalog_sales|catalog_returns|web_sales|item|warehouse,7,68695731,35115.13,,timeout,INTERRUPT Error: Interrupted!,6,1927080
+q22.sql,3f74dc57,2,item|store_sales|inventory,3,73130252,30024.69,,timeout,INTERRUPT Error: Interrupted!,2,37145980
+q23.sql,541f35b1,5,store|customer_address|date_dim|catalog_sales|customer|store_sales,6,61438384,30018.82,,timeout,INTERRUPT Error: Interrupted!,5,38906232
+q24.sql,247f2a07,5,store|store_returns|customer|time_dim|promotion|store_sales,6,42160758,30020.17,,timeout,INTERRUPT Error: Interrupted!,5,42833358
+q25.sql,50c48495,7,time_dim|customer|catalog_returns|customer_demographics|web_returns|item|web_sales|store_sales,8,63552298,1146.36,1824,ok,,7,62126010
+q26.sql,b0827fa3,4,household_demographics|customer_address|customer|catalog_page|catalog_sales,5,22701088,146.84,1800,ok,,4,33626452
+q27.sql,dd1cb225,4,customer_demographics|time_dim|web_sales|household_demographics|store_sales,5,59588628,354.08,1738,ok,,4,50881512
+q28.sql,a2417bd3,0,call_center,1,8000,3.5,5,ok,,2,8000
+q29.sql,de96deff,7,promotion|store|web_sales|customer_address|time_dim|date_dim|household_demographics|store_sales,8,50284288,30015.19,,timeout,INTERRUPT Error: Interrupted!,7,62126010
+q30.sql,33ee1191,2,date_dim|web_page|web_returns,3,2107747,14.32,2110,ok,,2,2856847
+q31.sql,22e8e867,2,customer|store_returns|store_sales,3,41632878,338.45,1824,ok,,2,39656232
+q32.sql,d0ab0d43,2,promotion|customer|catalog_sales,3,21790672,65.36,1831,ok,,2,22092652
+q33.sql,9ab5a56c,3,customer_demographics|time_dim|item|store_sales,4,49938452,315.82,1824,ok,,3,40106232
+q34.sql,7b389144,5,catalog_sales|customer_demographics|customer|catalog_returns|catalog_page|date_dim,6,36204671,520.09,1830,ok,,5,1506260
+q35.sql,b7f9472e,2,web_sales|web_returns|customer,3,12317243,65.69,20768,ok,,2,13874800
+q36.sql,9eb22799,3,item|catalog_returns|promotion|store_sales,4,39200855,742.09,1824,ok,,3,39356712
+q37.sql,3041403f,3,catalog_sales|store_returns|promotion|item,4,23228298,1666.03,17951,ok,,3,57327652
+q38.sql,9f27431e,4,inventory|store_returns|item|web_sales|date_dim,5,49804982,30012.76,,timeout,INTERRUPT Error: Interrupted!,4,3076980
+q39.sql,d7078c0c,8,catalog_returns|customer|inventory|web_sales|customer_address|store_returns|web_site|date_dim|item,9,53452485,30016.48,,timeout,INTERRUPT Error: Interrupted!,8,1951080
+q40.sql,b31364f6,1,date_dim|catalog_returns,2,2757583,17.64,2055,ok,,1,21478275
+q41.sql,82c1e041,0,item,1,450000,13.54,17961,ok,,0,450000
+q42.sql,baa71824,2,catalog_sales|catalog_page|date_dim,3,21783268,46.08,1830,ok,,2,39356232
+q43.sql,ecaaa359,2,web_returns|customer|date_dim,3,3706847,31.3,2110,ok,,2,38906712
+q44.sql,9706d2f1,0,call_center,1,8000,3.58,6,ok,,1,8000
+q45.sql,785e315b,4,web_site|web_page|customer_demographics|item|web_sales,5,22047976,182.42,1824,ok,,4,14332356
+q46.sql,2bafb96f,8,catalog_returns|web_returns|store_returns|web_page|web_sales|catalog_page|catalog_sales|store_sales|date_dim,9,73830892,35283.48,,timeout,INTERRUPT Error: Interrupted!,8,2264260
+q47.sql,04aaadbf,3,catalog_sales|customer|inventory|item,4,57466672,30015.68,,timeout,INTERRUPT Error: Interrupted!,3,39356712
+q48.sql,6cac46c4,4,item|customer_address|web_sales|catalog_returns|store_sales,5,50013231,7965.2,1824,ok,,4,51181512
+q49.sql,718243fc,10,date_dim|catalog_sales|web_page|customer|item|promotion|catalog_returns|store_returns|store_sales|web_sales|web_returns,11,75749276,35481.79,,timeout,INTERRUPT Error: Interrupted!,10,4562096
+q50.sql,abf1952c,4,household_demographics|promotion|date_dim|income_band|store_sales,5,38944092,347.34,1823,ok,,4,41494338
+q51.sql,a6302c37,2,customer_demographics|web_page|web_sales,3,21597076,135.19,1458,ok,,2,11540356
+q52.sql,8531727d,2,catalog_sales|promotion|date_dim,3,21651652,37.55,1830,ok,,2,39356232
+q53.sql,a6376aa1,5,customer|date_dim|catalog_returns|inventory|store_returns|store_sales,6,79625461,34736.22,,timeout,INTERRUPT Error: Interrupted!,5,38922712
+q54.sql,8640d904,7,catalog_sales|date_dim|household_demographics|store_sales|customer_address|web_sales|customer|item,8,71988080,36100.18,,timeout,INTERRUPT Error: Interrupted!,7,3542980
+q55.sql,bdd8771c,2,catalog_sales|web_returns|date_dim,3,22288519,680.58,1776,ok,,2,39356232
+q56.sql,657ac707,3,item|store|catalog_returns|store_sales,4,39192335,719.98,1824,ok,,3,40106232
+q57.sql,14e28966,3,store_sales|customer_demographics|household_demographics|item,4,49448852,289.16,17778,ok,,3,22100652
+q58.sql,b995deab,2,time_dim|item|store_sales,3,38413652,100.95,1824,ok,,2,39356232
+q59.sql,d6fb2df7,1,customer|store_sales,2,39045252,117.53,1824,ok,,1,38906232
+q60.sql,59c7755d,3,customer_address|store|promotion|store_sales,4,38204732,131.35,1824,ok,,3,40106232
+q61.sql,832057f5,6,store_sales|customer_demographics|catalog_sales|customer_address|item|household_demographics|store,7,70381004,808.38,6,ok,,6,4270460
+q62.sql,cf3872c4,7,customer_demographics|customer|web_returns|store_returns|catalog_returns|customer_address|item|web_sales,8,28926272,113.83,553,ok,,7,11533416
+q63.sql,9ef957b4,5,customer|customer_demographics|store|customer_address|store_returns|store_sales,6,53908158,426.73,1824,ok,,5,38922712
+q64.sql,4e3336a4,1,customer_demographics|catalog_sales,2,31706472,172.17,1831,ok,,1,21478275
+q65.sql,1aa685f5,6,store_sales|customer|promotion|customer_demographics|catalog_sales|web_returns|store,7,71407071,305.6,2,ok,,6,1935460
+q66.sql,0f2409b3,20,inventory|item|date_dim|catalog_returns|store_sales|household_demographics|income_band|web_sales|catalog_page|catalog_sales|customer_address|promotion|customer_demographics|customer|store_returns|time_dim|web_returns|web_page|store|web_site|warehouse,21,123948432,34983.68,,timeout,INTERRUPT Error: Interrupted!,36,2043640
+q67.sql,7c74096c,0,call_center,1,8000,3.2,6,ok,,9,72000
+q68.sql,1ce5cb22,9,web_sales|customer_demographics|web_returns|catalog_sales|web_page|household_demographics|customer|customer_address|catalog_page|date_dim,10,46405011,727.63,208,ok,,9,2264260
+q69.sql,f589a5d9,2,catalog_returns|customer_address|customer,3,3646603,44.14,55245,ok,,2,13874800
+q70.sql,8451cfe5,2,household_demographics|time_dim|store_sales,3,37992452,102.17,1824,ok,,2,38906712
+q71.sql,8a1d130d,5,web_returns|inventory|catalog_returns|customer|store_returns|item,6,41815096,7845.02,8629,ok,,5,1934980
+q72.sql,e6dadb64,10,item|web_returns|web_sales|store_returns|store_sales|customer_demographics|catalog_sales|date_dim|web_site|time_dim|inventory,11,120121873,35016.29,,timeout,INTERRUPT Error: Interrupted!,10,70186955
+q73.sql,7a0b4d31,5,web_sales|store_sales|item|household_demographics|customer_demographics|date_dim,6,60981208,27028.01,1823,ok,,5,1506260
+q74.sql,fed8306c,2,customer_address|household_demographics|customer,3,2378800,69.28,90867,ok,,2,40506232
+q75.sql,4dd916ac,17,catalog_sales|web_sales|date_dim|customer|customer_demographics|store_sales|web_site|web_returns|catalog_returns|store|customer_address|store_returns|inventory|promotion|household_demographics|income_band|web_page|item,18,123289316,34572.37,,timeout,INTERRUPT Error: Interrupted!,17,6489076
+q76.sql,c26551f0,7,catalog_returns|web_sales|store_sales|store_returns|date_dim|web_page|household_demographics|item,8,53341537,35551.8,,timeout,INTERRUPT Error: Interrupted!,7,1942980
+q77.sql,d9a3071c,4,household_demographics|item|catalog_returns|inventory|store_sales,5,74455655,30291.16,,timeout,INTERRUPT Error: Interrupted!,4,38922712
+q78.sql,70e127c1,9,web_page|customer|customer_address|store_sales|household_demographics|catalog_sales|item|catalog_returns|lines|web_returns,10,62407094,3355.87,2085,ok,,8,16078452
+q79.sql,ccc4ea10,7,store_returns|item|web_sales|inventory|date_dim|promotion|warehouse|store,8,49814562,30177.83,,timeout,INTERRUPT Error: Interrupted!,7,1506260
+q80.sql,ed53da32,3,customer|web_returns|date_dim|store_returns,4,6294473,62.08,1999,ok,,3,41975348
+q81.sql,861d9743,2,customer|catalog_sales|catalog_returns,3,23078275,141.49,2055,ok,,2,3507583
+q82.sql,926e0152,3,store_sales|web_returns|date_dim|item,4,40002099,611.81,16675,ok,,3,74591232
+q83.sql,5d2e29a1,2,item|catalog_returns|store_returns,3,4334229,108.24,2004,ok,,2,4498606
+q84.sql,a1f36e23,5,customer_demographics|catalog_sales|promotion|web_sales|catalog_returns|customer,6,44683451,3701.44,4623,ok,,5,16491286
+q85.sql,08902483,7,customer_demographics|customer_address|catalog_sales|store_sales|promotion|item|time_dim|web_sales,8,80950500,507.48,461,ok,,7,24454203
+q86.sql,9461d626,2,web_site|web_page|web_sales,3,10073176,37.32,1824,ok,,2,11982356
+q87.sql,66cdf307,4,web_sales|store_returns|promotion|web_page|date_dim,5,14129882,2145.26,1819,ok,,4,3076980
+q88.sql,c6821d55,3,income_band|store_sales|customer|household_demographics,4,39074112,92.28,6840,ok,,3,547680
+q89.sql,411503b3,13,customer_demographics|customer_address|store|item|inventory|catalog_sales|warehouse|date_dim|web_sales|promotion|catalog_page|store_returns|time_dim|store_sales,14,120375302,34815.73,,timeout,INTERRUPT Error: Interrupted!,13,38962712
+q90.sql,a57f4273,3,web_sales|web_site|web_page|household_demographics,4,10101976,33.98,7197,ok,,3,548100
+q91.sql,ca974a37,0,call_center,1,8000,3.83,6,ok,,6,16669183
+q92.sql,bb95fc06,2,web_page|customer_demographics|web_sales,3,21597076,125.72,1824,ok,,2,11982356
+q93.sql,f2ea002b,4,date_dim|item|catalog_sales|store|store_returns,5,24680758,2830.66,1825,ok,,4,2611626
+q94.sql,cab183b0,3,date_dim|item|store_sales|web_sales,4,49427608,19668.69,1823,ok,,3,12283256
+q95.sql,34a4ffa5,1,promotion|web_sales,2,10080376,26.32,1824,ok,,1,10071376
+q96.sql,02c876b5,3,item|promotion|catalog_returns|store_sales,4,39200855,676.03,1824,ok,,3,37992932
+q97.sql,8d0d3f70,2,item|time_dim|store_sales,3,38413652,107.54,1824,ok,,2,38914232
+q98.sql,f4e390f2,2,promotion|date_dim|store_sales,3,38915232,98.02,1823,ok,,2,39356232
+q99.sql,8720fafa,7,promotion|web_sales|item|customer|customer_address|store_sales|web_site|catalog_sales,8,70508200,30015.07,,timeout,INTERRUPT Error: Interrupted!,7,21650812

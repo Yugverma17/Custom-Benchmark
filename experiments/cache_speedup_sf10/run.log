@@ -1,0 +1,310 @@
+[14:44:08] ============================================================
+[14:44:08]   Cache Speedup Experiment  —  TPC-H SF=10
+[14:44:08] ============================================================
+[14:44:08] 
+[1/4] Checking TPC-H SF=10 database ...
+[14:44:08] tpch_sf10.duckdb already exists, skipping build.
+[14:44:08] 
+[2/4] Loading query sets ...
+[14:44:08]   W  (original TPC-H): 22 queries
+[14:44:08]   W' (RedBench synth): 22 queries
+[14:44:08] 
+[3/4] Running W (original TPC-H) ...
+[14:44:08] 
+============================================================
+[14:44:08]   W  — original TPC-H  (22 queries)
+[14:44:08] ============================================================
+[14:44:08] 
+  PASS 1 (cold) — 22 queries ...
+[14:44:11]     [ 1/22] q01.sql       ok           1896.7 ms
+[14:44:11]     [ 2/22] q02.sql       ok            264.6 ms
+[14:44:12]     [ 3/22] q03.sql       ok           1339.5 ms
+[14:44:14]     [ 4/22] q04.sql       ok           1268.4 ms
+[14:44:15]     [ 5/22] q05.sql       ok           1412.2 ms
+[14:44:16]     [ 6/22] q06.sql       ok            720.5 ms
+[14:44:18]     [ 7/22] q07.sql       ok           1345.1 ms
+[14:44:20]     [ 8/22] q08.sql       ok           1323.8 ms
+[14:44:24]     [ 9/22] q09.sql       ok           4050.6 ms
+[14:44:26]     [10/22] q10.sql       ok           2316.6 ms
+[14:44:27]     [11/22] q11.sql       ok            223.4 ms
+[14:44:28]     [12/22] q12.sql       ok           1315.8 ms
+[14:44:32]     [13/22] q13.sql       ok           3193.4 ms
+[14:44:33]     [14/22] q14.sql       ok           1039.4 ms
+[14:44:34]     [15/22] q15.sql       ok            813.7 ms
+[14:44:34]     [16/22] q16.sql       ok            542.3 ms
+[14:44:36]     [17/22] q17.sql       ok           1161.7 ms
+[14:44:40]     [18/22] q18.sql       ok           3935.2 ms
+[14:44:42]     [19/22] q19.sql       ok           1910.8 ms
+[14:44:43]     [20/22] q20.sql       ok           1205.1 ms
+[14:44:47]     [21/22] q21.sql       ok           3145.9 ms
+[14:44:47]     [22/22] q22.sql       ok            559.3 ms
+[14:44:47] 
+  PASS 2 (warm) — 22 queries ...
+[14:44:49]     [ 1/22] q01.sql       ok           1842.8 ms  speedup=1.0292
+[14:44:50]     [ 2/22] q02.sql       ok            225.9 ms  speedup=1.1712
+[14:44:51]     [ 3/22] q03.sql       ok           1232.7 ms  speedup=1.0867
+[14:44:52]     [ 4/22] q04.sql       ok           1045.1 ms  speedup=1.2137
+[14:44:54]     [ 5/22] q05.sql       ok           1238.3 ms  speedup=1.1404
+[14:44:54]     [ 6/22] q06.sql       ok            591.1 ms  speedup=1.2188
+[14:44:56]     [ 7/22] q07.sql       ok           1281.1 ms  speedup=1.05
+[14:44:57]     [ 8/22] q08.sql       ok           1225.0 ms  speedup=1.0806
+[14:45:01]     [ 9/22] q09.sql       ok           3813.4 ms  speedup=1.0622
+[14:45:04]     [10/22] q10.sql       ok           2300.5 ms  speedup=1.007
+[14:45:04]     [11/22] q11.sql       ok            189.9 ms  speedup=1.1761
+[14:45:05]     [12/22] q12.sql       ok           1073.0 ms  speedup=1.2262
+[14:45:09]     [13/22] q13.sql       ok           2985.8 ms  speedup=1.0695
+[14:45:10]     [14/22] q14.sql       ok           1099.7 ms  speedup=0.9451
+[14:45:11]     [15/22] q15.sql       ok            694.8 ms  speedup=1.1711
+[14:45:11]     [16/22] q16.sql       ok            501.8 ms  speedup=1.0807
+[14:45:13]     [17/22] q17.sql       ok           1070.9 ms  speedup=1.0848
+[14:45:17]     [18/22] q18.sql       ok           3854.4 ms  speedup=1.0209
+[14:45:19]     [19/22] q19.sql       ok           2023.4 ms  speedup=0.9444
+[14:45:20]     [20/22] q20.sql       ok           1022.1 ms  speedup=1.179
+[14:45:23]     [21/22] q21.sql       ok           3059.4 ms  speedup=1.0283
+[14:45:24]     [22/22] q22.sql       ok            597.9 ms  speedup=0.9354
+[14:45:24] 
+[4/4] Running W' (RedBench synthetic) ...
+[14:45:24] 
+============================================================
+[14:45:24]   W' — RedBench synthetic  (22 queries)
+[14:45:24] ============================================================
+[14:45:24] 
+  PASS 1 (cold) — 22 queries ...
+[14:45:53]     [ 1/22] q01.sql       ok          28234.0 ms
+[14:46:09]     [ 2/22] q02.sql       ok          15465.0 ms
+[14:46:19]     [ 3/22] q03.sql       ok           9790.0 ms
+[17:19:40] ============================================================
+[17:19:40]   Cache Speedup Experiment  —  TPC-H SF=10
+[17:19:40] ============================================================
+[17:19:40] 
+[1/4] Checking TPC-H SF=10 database ...
+[17:19:40] tpch_sf10.duckdb already exists, skipping build.
+[17:19:40] 
+[2/4] Loading query sets ...
+[17:19:40]   W  (original TPC-H): 22 queries
+[17:19:40]   W' (RedBench synth): 22 queries
+[17:19:40] 
+[3/4] Running W (original TPC-H) ...
+[17:19:40] 
+============================================================
+[17:19:40]   W  — original TPC-H  (22 queries)
+[17:19:40] ============================================================
+[17:19:40]   Resuming: 22 already done, 0 remaining
+[17:19:40] 
+[4/4] Running W' (RedBench synthetic) ...
+[17:19:40] 
+============================================================
+[17:19:40]   W' — RedBench synthetic  (22 queries)
+[17:19:40] ============================================================
+[17:19:40] 
+  [ 1/22] q01.sql ...
+[17:20:10]     cold: ok          30052.0 ms
+[17:20:42]     warm: ok          31026.0 ms
+[17:20:42]     speedup=0.9686
+[17:20:42] 
+  [ 2/22] q02.sql ...
+[17:20:58]     cold: ok          16136.9 ms
+[17:21:14]     warm: ok          15854.2 ms
+[17:21:14]     speedup=1.0178
+[17:21:14] 
+  [ 3/22] q03.sql ...
+[17:21:24]     cold: ok           9479.0 ms
+[17:21:34]     warm: ok           9559.5 ms
+[17:21:34]     speedup=0.9916
+[17:21:34] 
+  [ 4/22] q04.sql ...
+[17:21:51]     cold: ok          16555.5 ms
+[17:22:08]     warm: ok          17023.4 ms
+[17:22:08]     speedup=0.9725
+[17:22:08] 
+  [ 5/22] q05.sql ...
+[17:22:15]     cold: ok           7207.5 ms
+[17:22:23]     warm: ok           7268.2 ms
+[17:22:23]     speedup=0.9916
+[17:22:23] 
+  [ 6/22] q06.sql ...
+[17:23:03]     cold: ok          39601.7 ms
+[17:23:42]     warm: ok          38816.8 ms
+[17:23:42]     speedup=1.0202
+[17:23:42] 
+  [ 7/22] q07.sql ...
+[17:24:05]     cold: ok          22265.6 ms
+[17:24:25]     warm: ok          19577.1 ms
+[17:24:25]     speedup=1.1373
+[17:24:25] 
+  [ 8/22] q08.sql ...
+[17:26:10]     cold: error      105290.7 ms
+[17:28:18]     warm: error      127811.2 ms
+[17:28:18]     speedup=None
+[17:28:18] 
+  [ 9/22] q09.sql ...
+[17:31:25]     cold: timeout    186872.4 ms
+[17:34:33]     warm: timeout    187913.4 ms
+[17:34:33]     speedup=None
+[17:34:33] 
+  [10/22] q10.sql ...
+[17:34:42]     cold: ok           8021.0 ms
+[17:34:50]     warm: ok           8029.2 ms
+[17:34:50]     speedup=0.999
+[17:34:50] 
+  [11/22] q11.sql ...
+[17:37:34]     cold: ok         164173.1 ms
+[17:40:16]     warm: ok         161604.2 ms
+[17:40:16]     speedup=1.0159
+[17:40:16] 
+  [12/22] q12.sql ...
+[17:40:20]     cold: ok           3316.7 ms
+[17:40:23]     warm: ok           3256.0 ms
+[17:40:23]     speedup=1.0187
+[17:40:23] 
+  [13/22] q13.sql ...
+[17:40:48]     cold: ok          23806.4 ms
+[17:41:12]     warm: ok          23667.8 ms
+[17:41:12]     speedup=1.0059
+[17:41:12] 
+  [14/22] q14.sql ...
+[17:41:46]     cold: ok          33377.1 ms
+[17:42:18]     warm: ok          32089.4 ms
+[17:42:18]     speedup=1.0401
+[17:42:18] 
+  [15/22] q15.sql ...
+[17:42:46]     cold: ok          27339.2 ms
+[17:43:14]     warm: ok          27234.9 ms
+[17:43:14]     speedup=1.0038
+[17:43:14] 
+  [16/22] q16.sql ...
+[17:43:18]     cold: ok           3393.0 ms
+[17:43:21]     warm: ok           3349.7 ms
+[17:43:21]     speedup=1.0129
+[17:43:21] 
+  [17/22] q17.sql ...
+[17:43:37]     cold: ok          15316.0 ms
+[17:43:52]     warm: ok          15001.1 ms
+[17:43:52]     speedup=1.021
+[17:43:52] 
+  [18/22] q18.sql ...
+[17:43:52]     cold: ok            230.5 ms
+[17:43:53]     warm: ok            194.0 ms
+[17:43:53]     speedup=1.1881
+[17:43:53] 
+  [19/22] q19.sql ...
+[17:44:24]     cold: ok          31295.8 ms
+[17:44:56]     warm: ok          31294.6 ms
+[17:44:56]     speedup=1.0
+[17:44:56] 
+  [20/22] q20.sql ...
+[17:44:58]     cold: ok           1638.0 ms
+[17:44:59]     warm: ok           1562.0 ms
+[17:44:59]     speedup=1.0487
+[17:44:59] 
+  [21/22] q21.sql ...
+[17:45:00]     cold: ok            638.3 ms
+[17:45:01]     warm: ok            557.5 ms
+[17:45:01]     speedup=1.145
+[17:45:01] 
+  [22/22] q22.sql ...
+[17:45:02]     cold: ok           1463.6 ms
+[17:45:04]     warm: ok           1443.9 ms
+[17:45:04]     speedup=1.0136
+[17:45:04] 
+============================================================
+[17:45:04]   RESULTS
+[17:45:04] ============================================================
+[17:45:04] 
+  W_original
+[17:45:04]     n_pairs              22
+[17:45:04]     mean_speedup         1.087
+[17:45:04]     median_speedup       1.081
+[17:45:04]     std_speedup          0.088
+[17:45:04]     cv_speedup           0.081
+[17:45:04]     min_speedup          0.935
+[17:45:04]     max_speedup          1.226
+[17:45:04]     p10_speedup          0.951
+[17:45:04]     p90_speedup          1.21
+[17:45:04] 
+  W'_synthetic
+[17:45:04]     n_pairs              20
+[17:45:04]     mean_speedup         1.031
+[17:45:04]     median_speedup       1.015
+[17:45:04]     std_speedup          0.057
+[17:45:04]     cv_speedup           0.055
+[17:45:04]     min_speedup          0.969
+[17:45:04]     max_speedup          1.188
+[17:45:04]     p10_speedup          0.99
+[17:45:04]     p90_speedup          1.138
+[17:45:04] 
+  VERDICT
+[17:45:04]   CV (W  original) : 0.081
+[17:45:04]   CV (W' synthetic): 0.055
+[17:45:04]   Speedup variance is similar (ratio 0.68x).
+[17:45:04]   -> Synthetic queries show comparable cache behaviour to originals.
+[17:45:04] 
+Done. Outputs -> D:\Benchmark\Custom-Benchmark\experiments\cache_speedup_sf10
+[10:35:44] ============================================================
+[10:35:44]   Cache Speedup Experiment  —  TPC-H SF=10
+[10:35:44] ============================================================
+[10:35:44] 
+[1/4] Checking TPC-H SF=10 database ...
+[10:35:44] tpch_sf10.duckdb already exists, skipping build.
+[10:35:44] 
+[2/4] Loading query sets ...
+[10:35:44]   W  (original TPC-H): 22 queries
+[10:35:44]   W' (RedBench synth): 22 queries
+[10:35:44] 
+[3/4] Running W (original TPC-H) ...
+[10:35:44] 
+============================================================
+[10:35:44]   W  — original TPC-H  (22 queries)
+[10:35:44] ============================================================
+[10:35:44]   Resuming: 22 already done, 0 remaining
+[10:35:44] 
+[4/4] Running W' (RedBench synthetic) ...
+[10:35:44] 
+============================================================
+[10:35:44]   W' — RedBench synthetic  (22 queries)
+[10:35:44] ============================================================
+[10:35:44]   Resuming: 20 already done, 2 remaining
+[10:35:44] 
+  [ 1/2] q08.sql ...
+[10:46:03]     cold: timeout    618939.6 ms
+[10:56:27]     warm: timeout    623372.2 ms
+[10:56:27]     speedup=None
+[10:56:27] 
+  [ 2/2] q09.sql ...
+[10:59:57]     cold: ok         210309.0 ms
+[11:03:51]     warm: ok         233830.1 ms
+[11:03:51]     speedup=0.8994
+[11:03:51] 
+============================================================
+[11:03:51]   RESULTS
+[11:03:51] ============================================================
+[11:03:51] 
+  W_original
+[11:03:51]     n_pairs              22
+[11:03:51]     mean_speedup         1.087
+[11:03:51]     median_speedup       1.081
+[11:03:51]     std_speedup          0.088
+[11:03:51]     cv_speedup           0.081
+[11:03:51]     min_speedup          0.935
+[11:03:51]     max_speedup          1.226
+[11:03:51]     p10_speedup          0.951
+[11:03:51]     p90_speedup          1.21
+[11:03:51] 
+  W'_synthetic
+[11:03:51]     n_pairs              21
+[11:03:51]     mean_speedup         1.024
+[11:03:51]     median_speedup       1.014
+[11:03:51]     std_speedup          0.062
+[11:03:51]     cv_speedup           0.061
+[11:03:51]     min_speedup          0.899
+[11:03:51]     max_speedup          1.188
+[11:03:51]     p10_speedup          0.973
+[11:03:51]     p90_speedup          1.137
+[11:03:51] 
+  VERDICT
+[11:03:51]   CV (W  original) : 0.081
+[11:03:51]   CV (W' synthetic): 0.061
+[11:03:51]   Speedup variance is similar (ratio 0.75x).
+[11:03:51]   -> Synthetic queries show comparable cache behaviour to originals.
+[11:03:51] 
+Done. Outputs -> D:\Benchmark\Custom-Benchmark\experiments\cache_speedup_sf10

@@ -142,18 +142,15 @@ bash run_all_experiments.sh
 
 ## Output — summary_scorecard.csv
 
-One row per experiment, 29 columns:
+One row per experiment:
 
 | Column group | Columns |
 |---|---|
-| Query counts | `query_count_W`, `query_count_Wprime` |
 | Query diversity | `query_diversity_W/Wprime` fraction of queries with a unique table-set |
-| Scan-Set Repetition Rate | `srr_W/Wprime` fraction of queries whose table-set appears in more than one query |
-| Operator counts (EXPLAIN) | `avg_scans/joins/aggregations/sorts/total_ops_W/Wprime` |
-| Plan diversity | `plan_diversity_W/Wprime`, `unique_plan_signatures_W/Wprime` |
 | Execution - success | `success_rate_percent_T/Tprime` |
 | Execution - runtime | `runtime_mean_ms_T/Tprime`, `runtime_90th_pct_ms_T/Tprime` |
 | Execution - data volume | `bytes_read_mean_T/Tprime` |
+| Q-error (T vs T') | `qerror_n_pairs` (queries where both T and T' succeeded), `cpu_time_qerror_mean/median/p90/max`, `bytes_qerror_mean/median/p90/max` — each is `max(x/x', x'/x)` per query, aggregated across paired queries |
 
 ---
 

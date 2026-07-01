@@ -34,7 +34,7 @@ def extract_tables(sql: str) -> list[str]:
     clean = re.sub(r'--[^\n]*', '', sql)
     clean = re.sub(r'/\*.*?\*/', '', clean, flags=re.DOTALL)
     seen, result = set(), []
-    for t in re.findall(r'\bJOIN\s+([a-zA-Z_][a-zA-Z0-9_]*)', clean, re.IGNORECASE):
+    for t in re.findall(r'\bJOIN\s+"?([a-zA-Z_][a-zA-Z0-9_]*)"?', clean, re.IGNORECASE):
         tl = t.lower()
         if tl not in seen:
             seen.add(tl); result.append(tl)
@@ -44,7 +44,7 @@ def extract_tables(sql: str) -> list[str]:
     if from_m:
         for item in from_m.group(1).split(','):
             item = item.strip()
-            m = re.match(r'([a-zA-Z_][a-zA-Z0-9_]*)', item)
+            m = re.match(r'"?([a-zA-Z_][a-zA-Z0-9_]*)"?', item)
             if m:
                 tl = m.group(1).lower()
                 if tl not in seen:

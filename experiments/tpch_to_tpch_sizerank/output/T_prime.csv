@@ -1,23 +1,23 @@
 query_file,query_hash,join_count,read_tables,n_tables,bytes_read,runtime_ms,rows_returned,status,error_msg,src_join_count,src_bytes_read
-q01.sql,8889faba,0,,0,0,2482.54,4987589,ok,,0,108021870
-q02.sql,59d27270,4,,0,0,4009.33,197847,ok,,4,12350145
-q03.sql,66c98cd0,2,,0,0,609.04,99995,ok,,2,127221870
-q04.sql,539e8538,0,,0,0,642.72,1485068,ok,,0,16500000
-q05.sql,59c0e1d6,5,,0,0,2467.13,19908,ok,,5,127372015
-q06.sql,d1d927a8,0,,0,0,2727.3,5942578,ok,,0,108021870
-q07.sql,42427575,7,,0,0,2105.05,282763,ok,,8,127245995
-q08.sql,55b94948,7,,0,0,30027.0,,timeout,INTERRUPT Error: Interrupted!,9,127388015
-q09.sql,345d3843,7,,0,0,31224.83,,timeout,INTERRUPT Error: Interrupted!,7,134287995
-q10.sql,1619f6eb,3,,0,0,30016.37,,timeout,INTERRUPT Error: Interrupted!,3,127221995
-q11.sql,5493723f,2,,0,0,22665.25,784224,ok,,2,9750125
-q12.sql,f1aa79f3,1,,0,0,1421.04,1479570,ok,,1,124521870
-q13.sql,3c0a4d89,2,,0,0,823.87,1235876,ok,,2,16508000
-q14.sql,9b51917e,1,,0,0,3822.07,5021115,ok,,1,110621870
-q15.sql,8d6a723f,0,,0,0,2652.22,5942578,ok,,0,108021870
-q16.sql,0954baac,1,,0,0,332.8,784157,ok,,1,12200000
-q17.sql,99d1d828,1,,0,0,3896.23,4146616,ok,,1,110621870
-q18.sql,e56bcb8f,2,,0,0,1225.63,124864,ok,,2,127221870
-q19.sql,1ce5e9dc,1,,0,0,19832.03,5942928,ok,,1,110621870
-q20.sql,fb824e04,1,,0,0,77.52,9900,ok,,1,150125
-q21.sql,45564e7b,3,,0,0,1094.5,9901,ok,,3,124671995
-q22.sql,9f40037e,1,,0,0,82.25,124848,ok,,1,8000
+q01.sql,8889faba,0,lineitem,1,108021870,2382.69,4987589,ok,,0,108021870
+q02.sql,928aee6f,4,partsupp|lineitem|supplier|orders|part,5,136871870,2197.67,199865,ok,,4,12350145
+q03.sql,15081da9,2,orders|nation|customer,3,19200125,69.28,35703,ok,,2,127221870
+q04.sql,c3f12beb,0,orders,1,16500000,579.56,1485068,ok,,0,16500000
+q05.sql,e6dc9545,5,orders|nation|supplier|partsupp|region|customer,6,28950145,30013.8,,timeout,INTERRUPT Error: Interrupted!,5,127372015
+q06.sql,c60fb18a,0,lineitem,1,108021870,2734.55,6001215,ok,,0,108021870
+q07.sql,b9033aac,7,supplier|partsupp|orders|part|nation|customer|region|lineitem,8,139572015,30452.58,,timeout,INTERRUPT Error: Interrupted!,8,127245995
+q08.sql,a261703a,7,partsupp|part|lineitem|nation|customer|region|orders|supplier,8,139572015,30153.12,,timeout,INTERRUPT Error: Interrupted!,9,127388015
+q09.sql,599553ba,7,partsupp|nation|customer|part|orders|region|lineitem|supplier,8,139572015,30006.3,,timeout,INTERRUPT Error: Interrupted!,7,134287995
+q10.sql,02a8e427,3,orders|nation|region|customer,4,19200145,151.15,69852,ok,,3,127221995
+q11.sql,3c2e1c5a,2,supplier|part|partsupp,3,12350000,942.11,289326,ok,,2,9750125
+q12.sql,8b3620f7,1,customer|orders,2,19200000,1057.93,1470388,ok,,1,124521870
+q13.sql,bc43d547,2,lineitem|customer|orders,3,127221870,1131.36,1248215,ok,,2,16508000
+q14.sql,e26dc59e,1,orders|lineitem,2,124521870,5253.01,6001215,ok,,1,110621870
+q15.sql,fae046ce,0,lineitem,1,108021870,26671.41,6001215,ok,,0,108021870
+q16.sql,98de6de0,1,supplier|partsupp,2,9750000,1100.6,657709,ok,,1,12200000
+q17.sql,09441c93,1,part|lineitem,2,110621870,30830.28,,timeout,INTERRUPT Error: Interrupted!,1,110621870
+q18.sql,0b2a433b,2,orders|nation|customer,3,19200125,173.8,82914,ok,,2,127221870
+q19.sql,cdfddf5f,1,supplier|lineitem,2,108171870,2980.26,5941288,ok,,1,110621870
+q20.sql,c73d94d1,1,nation|supplier,2,150125,10.93,7012,ok,,1,150125
+q21.sql,b7f341e7,3,nation|lineitem|partsupp|supplier,4,117771995,3838.26,3123,ok,,3,124671995
+q22.sql,ee2b75a2,1,nation|customer,2,2700125,398.48,124864,ok,,1,8000
