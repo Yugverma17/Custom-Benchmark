@@ -2,13 +2,15 @@
 Cache speedup experiment for TPC-H SF=10.
 
 For both the original 22 TPC-H queries (W) and the RedBench synthetic queries (W'):
-  1. Run every query once  — pass 1 (cold: OS page cache not yet hot for this DB)
-  2. Run every query again — pass 2 (warm: pages loaded by pass 1 are now in OS cache)
+  1. Evict the DB file from the Windows file cache (genuine cold read)
+  2. Run the query once  — pass 1 (cold)
+  3. Run the query again — pass 2 (warm: OS cache now hot from pass 1)
   speedup = pass1_time / pass2_time
 
-High variance in speedup across queries means unpredictable data-access patterns.
-If W' has significantly higher speedup variance than W, the synthetic workload is
-not representative of the original — supporting dropping RedBench.
+This mirrors the DBTest'26 paper's cold-vs-warm Redshift experiment (Fig. 3),
+where "cold" means fetching from a remote, uncached storage tier. On a local
+machine there is no remote tier, so we approximate "cold" by force-evicting
+the OS file cache via a memory-pressure trick before each cold run.
 
 Progress is saved after every query so the script can be safely interrupted
 and re-run — it will resume from where it left off.
@@ -20,7 +22,7 @@ Output:
   experiments/cache_speedup_sf10/run.log
 """
 
-import csv, os, sys, time, threading
+import csv, ctypes, os, sys, time, threading
 import numpy as np
 import duckdb
 
@@ -44,6 +46,115 @@ def log(msg):
 
 
                                                                                 
+
+class _MEMORYSTATUSEX(ctypes.Structure):
+    _fields_ = [
+        ("dwLength", ctypes.c_ulong),
+        ("dwMemoryLoad", ctypes.c_ulong),
+        ("ullTotalPhys", ctypes.c_ulonglong),
+        ("ullAvailPhys", ctypes.c_ulonglong),
+        ("ullTotalPageFile", ctypes.c_ulonglong),
+        ("ullAvailPageFile", ctypes.c_ulonglong),
+        ("ullTotalVirtual", ctypes.c_ulonglong),
+        ("ullAvailVirtual", ctypes.c_ulonglong),
+        ("sullAvailExtendedVirtual", ctypes.c_ulonglong),
+    ]
+
+def _available_bytes():
+    stat = _MEMORYSTATUSEX()
+    stat.dwLength = ctypes.sizeof(_MEMORYSTATUSEX)
+    ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat))
+    return stat.ullAvailPhys
+
+
+class _LUID(ctypes.Structure):
+    _fields_ = [("LowPart", ctypes.c_ulong), ("HighPart", ctypes.c_long)]
+
+class _LUID_AND_ATTRIBUTES(ctypes.Structure):
+    _fields_ = [("Luid", _LUID), ("Attributes", ctypes.c_ulong)]
+
+class _TOKEN_PRIVILEGES(ctypes.Structure):
+    _fields_ = [("PrivilegeCount", ctypes.c_ulong),
+                ("Privileges", _LUID_AND_ATTRIBUTES * 1)]
+
+SE_PRIVILEGE_ENABLED   = 0x00000002
+TOKEN_ADJUST_PRIVILEGES = 0x0020
+TOKEN_QUERY             = 0x0008
+
+_kernel32 = ctypes.WinDLL('kernel32', use_last_error=True)
+_advapi32 = ctypes.WinDLL('advapi32', use_last_error=True)
+
+_kernel32.GetCurrentProcess.restype  = ctypes.c_void_p
+_kernel32.GetCurrentProcess.argtypes = []
+
+_advapi32.OpenProcessToken.restype  = ctypes.c_int
+_advapi32.OpenProcessToken.argtypes = [ctypes.c_void_p, ctypes.c_ulong, ctypes.POINTER(ctypes.c_void_p)]
+
+_advapi32.LookupPrivilegeValueW.restype  = ctypes.c_int
+_advapi32.LookupPrivilegeValueW.argtypes = [ctypes.c_wchar_p, ctypes.c_wchar_p, ctypes.POINTER(_LUID)]
+
+_advapi32.AdjustTokenPrivileges.restype  = ctypes.c_int
+_advapi32.AdjustTokenPrivileges.argtypes = [ctypes.c_void_p, ctypes.c_int,
+                                             ctypes.POINTER(_TOKEN_PRIVILEGES), ctypes.c_ulong,
+                                             ctypes.c_void_p, ctypes.c_void_p]
+
+_kernel32.CloseHandle.restype  = ctypes.c_int
+_kernel32.CloseHandle.argtypes = [ctypes.c_void_p]
+
+def _enable_privilege(name):
+    hproc = _kernel32.GetCurrentProcess()
+    htoken = ctypes.c_void_p()
+    if not _advapi32.OpenProcessToken(
+            hproc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, ctypes.byref(htoken)):
+        raise OSError(ctypes.get_last_error(), "OpenProcessToken failed")
+    luid = _LUID()
+    if not _advapi32.LookupPrivilegeValueW(None, name, ctypes.byref(luid)):
+        raise OSError(ctypes.get_last_error(), f"LookupPrivilegeValueW failed for {name}")
+    tp = _TOKEN_PRIVILEGES()
+    tp.PrivilegeCount = 1
+    tp.Privileges[0] = _LUID_AND_ATTRIBUTES(luid, SE_PRIVILEGE_ENABLED)
+    if not _advapi32.AdjustTokenPrivileges(
+            htoken, 0, ctypes.byref(tp), 0, None, None):
+        raise OSError(ctypes.get_last_error(), f"AdjustTokenPrivileges failed for {name}")
+    err = ctypes.get_last_error()
+    if err != 0:
+        raise OSError(err, f"AdjustTokenPrivileges did not fully enable {name}; run as Administrator")
+    _kernel32.CloseHandle(htoken)
+
+_STANDBY_LIST_READY = False
+
+def _init_standby_purge():
+    global _STANDBY_LIST_READY
+    _enable_privilege("SeProfileSingleProcessPrivilege")
+    _enable_privilege("SeIncreaseQuotaPrivilege")
+    _STANDBY_LIST_READY = True
+    log("  Standby-list purge privileges enabled (running as Administrator).")
+
+SystemMemoryListInformation = 0x50
+MemoryPurgeStandbyList      = 4
+
+_ntdll = ctypes.WinDLL('ntdll', use_last_error=True)
+_ntdll.NtSetSystemInformation.restype  = ctypes.c_long
+_ntdll.NtSetSystemInformation.argtypes = [ctypes.c_int, ctypes.c_void_p, ctypes.c_ulong]
+
+def flush_os_cache():
+    """Evict the Windows file cache (standby list) via NtSetSystemInformation,
+    the same API Sysinternals RAMMap's 'Empty Standby List' uses. Requires
+    Administrator privileges — call _init_standby_purge() once at startup."""
+    before = _available_bytes()
+    t0 = time.perf_counter()
+    command = ctypes.c_ulong(MemoryPurgeStandbyList)
+    status = _ntdll.NtSetSystemInformation(
+        SystemMemoryListInformation, ctypes.byref(command), ctypes.sizeof(command))
+    dt = time.perf_counter() - t0
+    after = _available_bytes()
+    if status != 0:
+        log(f"    [flush] NtSetSystemInformation FAILED (status=0x{status:08x}) — "
+            f"not running as Administrator? Cache NOT evicted.")
+    else:
+        log(f"    [flush] standby list purged in {dt:.2f}s "
+            f"(avail before={before/1e9:.1f} GB, after={after/1e9:.1f} GB)")
+
 
 def build_sf10():
     if os.path.exists(DB_PATH):
@@ -137,6 +248,7 @@ def two_pass(queries, label, out_csv):
     for i, q in enumerate(todo, 1):
         log(f"\n  [{i:>2}/{len(todo)}] {q['name']} ...")
 
+        flush_os_cache()
         r1 = run_query(q['sql'])
         log(f"    cold: {r1['status']:<8}  {r1['runtime_ms']:>9.1f} ms")
 
@@ -191,6 +303,19 @@ def stats(values, name):
 log("=" * 60)
 log("  Cache Speedup Experiment  —  TPC-H SF=10")
 log("=" * 60)
+
+def _is_admin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin() != 0
+    except Exception:
+        return False
+
+if not _is_admin():
+    log("ERROR: not running as Administrator. Cache eviction requires admin "
+        "privileges (right-click PowerShell/Terminal -> Run as Administrator).")
+    sys.exit(1)
+
+_init_standby_purge()
 
 log("\n[1/4] Checking TPC-H SF=10 database ...")
 build_sf10()

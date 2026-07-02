@@ -1,276 +1,321 @@
-[12:18:38] ============================================================
-[12:18:38]   Cache Speedup Experiment  —  TPC-H SF=10
-[12:18:38] ============================================================
-[12:18:38] 
+[22:25:18] ============================================================
+[22:25:18]   Cache Speedup Experiment  —  TPC-H SF=10
+[22:25:18] ============================================================
+[22:25:18]   Standby-list purge privileges enabled (running as Administrator).
+[22:25:18] 
 [1/4] Checking TPC-H SF=10 database ...
-[12:18:38] tpch_sf10.duckdb already exists, skipping build.
-[12:18:38] 
+[22:25:18] tpch_sf10.duckdb already exists, skipping build.
+[22:25:18] 
 [2/4] Loading query sets ...
-[12:18:38]   W  (original TPC-H): 22 queries
-[12:18:38]   W' (RedBench synth): 22 queries
-[12:18:38] 
+[22:25:18]   W  (original TPC-H): 22 queries
+[22:25:18]   W' (RedBench synth): 22 queries
+[22:25:18] 
 [3/4] Running W (original TPC-H) ...
-[12:18:38] 
+[22:25:18] 
 ============================================================
-[12:18:38]   W  — original TPC-H  (22 queries)
-[12:18:38] ============================================================
-[12:18:38] 
+[22:25:18]   W  — original TPC-H  (22 queries)
+[22:25:18] ============================================================
+[22:25:18] 
   [ 1/22] q01.sql ...
-[12:18:40]     cold: ok           1658.7 ms
-[12:18:41]     warm: ok           1020.7 ms
-[12:18:41]     speedup=1.625
-[12:18:41] 
+[22:25:19]     [flush] standby list purged in 1.06s (avail before=49.2 GB, after=49.5 GB)
+[22:25:23]     cold: ok           2588.6 ms
+[22:25:24]     warm: ok            992.9 ms
+[22:25:24]     speedup=2.607
+[22:25:24] 
   [ 2/22] q02.sql ...
-[12:18:41]     cold: ok            236.0 ms
-[12:18:42]     warm: ok            185.2 ms
-[12:18:42]     speedup=1.2741
-[12:18:42] 
+[22:25:24]     [flush] standby list purged in 0.09s (avail before=49.4 GB, after=49.4 GB)
+[22:25:25]     cold: ok            390.5 ms
+[22:25:26]     warm: ok            187.1 ms
+[22:25:26]     speedup=2.0866
+[22:25:26] 
   [ 3/22] q03.sql ...
-[12:18:43]     cold: ok            852.4 ms
-[12:18:44]     warm: ok            833.0 ms
-[12:18:44]     speedup=1.0232
-[12:18:44] 
+[22:25:26]     [flush] standby list purged in 0.03s (avail before=49.4 GB, after=49.4 GB)
+[22:25:29]     cold: ok           2380.0 ms
+[22:25:30]     warm: ok            774.2 ms
+[22:25:30]     speedup=3.0744
+[22:25:30] 
   [ 4/22] q04.sql ...
-[12:18:45]     cold: ok           1294.7 ms
-[12:18:46]     warm: ok            673.3 ms
-[12:18:46]     speedup=1.9229
-[12:18:46] 
+[22:25:30]     [flush] standby list purged in 0.10s (avail before=49.4 GB, after=49.4 GB)
+[22:25:32]     cold: ok           1848.2 ms
+[22:25:33]     warm: ok            709.2 ms
+[22:25:33]     speedup=2.6062
+[22:25:33] 
   [ 5/22] q05.sql ...
-[12:18:47]     cold: ok            812.0 ms
-[12:18:48]     warm: ok            801.9 ms
-[12:18:48]     speedup=1.0127
-[12:18:48] 
+[22:25:33]     [flush] standby list purged in 0.08s (avail before=49.4 GB, after=49.4 GB)
+[22:25:37]     cold: ok           2445.8 ms
+[22:25:37]     warm: ok            764.1 ms
+[22:25:37]     speedup=3.2011
+[22:25:37] 
   [ 6/22] q06.sql ...
-[12:18:49]     cold: ok            358.1 ms
-[12:18:49]     warm: ok            358.2 ms
-[12:18:49]     speedup=0.9997
-[12:18:49] 
+[22:25:38]     [flush] standby list purged in 0.10s (avail before=48.9 GB, after=48.9 GB)
+[22:25:40]     cold: ok           1785.3 ms
+[22:25:41]     warm: ok            366.9 ms
+[22:25:41]     speedup=4.8656
+[22:25:41] 
   [ 7/22] q07.sql ...
-[12:18:50]     cold: ok            766.0 ms
-[12:18:51]     warm: ok            715.7 ms
-[12:18:51]     speedup=1.0702
-[12:18:51] 
+[22:25:41]     [flush] standby list purged in 0.08s (avail before=48.8 GB, after=48.8 GB)
+[22:25:44]     cold: ok           2687.3 ms
+[22:25:45]     warm: ok            704.2 ms
+[22:25:45]     speedup=3.8163
+[22:25:45] 
   [ 8/22] q08.sql ...
-[12:18:52]     cold: ok           1144.2 ms
-[12:18:53]     warm: ok            770.8 ms
-[12:18:53]     speedup=1.4844
-[12:18:53] 
+[22:25:45]     [flush] standby list purged in 0.13s (avail before=49.4 GB, after=49.4 GB)
+[22:25:50]     cold: ok           3413.1 ms
+[22:25:51]     warm: ok            768.6 ms
+[22:25:51]     speedup=4.4409
+[22:25:51] 
   [ 9/22] q09.sql ...
-[12:18:56]     cold: ok           2209.1 ms
-[12:18:58]     warm: ok           2273.4 ms
-[12:18:58]     speedup=0.9717
-[12:18:58] 
+[22:25:51]     [flush] standby list purged in 0.15s (avail before=48.7 GB, after=48.7 GB)
+[22:25:56]     cold: ok           4258.9 ms
+[22:25:59]     warm: ok           2137.5 ms
+[22:25:59]     speedup=1.9925
+[22:25:59] 
   [10/22] q10.sql ...
-[12:19:00]     cold: ok           1515.4 ms
-[12:19:02]     warm: ok           1374.6 ms
-[12:19:02]     speedup=1.1025
-[12:19:02] 
+[22:25:59]     [flush] standby list purged in 0.18s (avail before=48.5 GB, after=48.5 GB)
+[22:26:02]     cold: ok           2798.2 ms
+[22:26:04]     warm: ok           1401.8 ms
+[22:26:04]     speedup=1.9961
+[22:26:04] 
   [11/22] q11.sql ...
-[12:19:02]     cold: ok            136.4 ms
-[12:19:02]     warm: ok            131.2 ms
-[12:19:02]     speedup=1.0403
-[12:19:02] 
+[22:26:04]     [flush] standby list purged in 0.11s (avail before=48.5 GB, after=48.5 GB)
+[22:26:05]     cold: ok            297.6 ms
+[22:26:05]     warm: ok            131.8 ms
+[22:26:05]     speedup=2.2581
+[22:26:05] 
   [12/22] q12.sql ...
-[12:19:03]     cold: ok            691.0 ms
-[12:19:04]     warm: ok            664.2 ms
-[12:19:04]     speedup=1.0404
-[12:19:04] 
+[22:26:05]     [flush] standby list purged in 0.01s (avail before=48.5 GB, after=48.5 GB)
+[22:26:08]     cold: ok           2240.1 ms
+[22:26:09]     warm: ok            643.8 ms
+[22:26:09]     speedup=3.4793
+[22:26:09] 
   [13/22] q13.sql ...
-[12:19:06]     cold: ok           1934.3 ms
-[12:19:08]     warm: ok           1890.7 ms
-[12:19:08]     speedup=1.0231
-[12:19:08] 
+[22:26:09]     [flush] standby list purged in 0.12s (avail before=48.5 GB, after=48.5 GB)
+[22:26:12]     cold: ok           2180.8 ms
+[22:26:14]     warm: ok           1838.9 ms
+[22:26:14]     speedup=1.1859
+[22:26:14] 
   [14/22] q14.sql ...
-[12:19:09]     cold: ok            639.1 ms
-[12:19:10]     warm: ok            581.6 ms
-[12:19:10]     speedup=1.099
-[12:19:10] 
+[22:26:14]     [flush] standby list purged in 0.05s (avail before=49.3 GB, after=49.3 GB)
+[22:26:17]     cold: ok           2633.9 ms
+[22:26:18]     warm: ok            539.1 ms
+[22:26:18]     speedup=4.8854
+[22:26:18] 
   [15/22] q15.sql ...
-[12:19:10]     cold: ok            504.4 ms
-[12:19:11]     warm: ok            476.0 ms
-[12:19:11]     speedup=1.0596
-[12:19:11] 
+[22:26:18]     [flush] standby list purged in 0.12s (avail before=49.3 GB, after=49.3 GB)
+[22:26:21]     cold: ok           1933.6 ms
+[22:26:21]     warm: ok            451.7 ms
+[22:26:21]     speedup=4.2809
+[22:26:21] 
   [16/22] q16.sql ...
-[12:19:12]     cold: ok            409.4 ms
-[12:19:12]     warm: ok            389.1 ms
-[12:19:12]     speedup=1.0524
-[12:19:12] 
+[22:26:22]     [flush] standby list purged in 0.08s (avail before=48.7 GB, after=48.7 GB)
+[22:26:23]     cold: ok            448.0 ms
+[22:26:23]     warm: ok            387.1 ms
+[22:26:23]     speedup=1.1575
+[22:26:23] 
   [17/22] q17.sql ...
-[12:19:13]     cold: ok            662.3 ms
-[12:19:14]     warm: ok            644.2 ms
-[12:19:14]     speedup=1.0281
-[12:19:14] 
+[22:26:23]     [flush] standby list purged in 0.02s (avail before=48.7 GB, after=48.7 GB)
+[22:26:26]     cold: ok           2589.6 ms
+[22:26:27]     warm: ok            637.9 ms
+[22:26:27]     speedup=4.0595
+[22:26:27] 
   [18/22] q18.sql ...
-[12:19:16]     cold: ok           1696.0 ms
-[12:19:17]     warm: ok           1631.3 ms
-[12:19:17]     speedup=1.0397
-[12:19:17] 
+[22:26:27]     [flush] standby list purged in 0.10s (avail before=49.2 GB, after=49.2 GB)
+[22:26:30]     cold: ok           2470.7 ms
+[22:26:32]     warm: ok           1573.6 ms
+[22:26:32]     speedup=1.5701
+[22:26:32] 
   [19/22] q19.sql ...
-[12:19:19]     cold: ok           1160.1 ms
-[12:19:20]     warm: ok           1078.4 ms
-[12:19:20]     speedup=1.0758
-[12:19:20] 
+[22:26:32]     [flush] standby list purged in 0.08s (avail before=48.5 GB, after=48.5 GB)
+[22:26:37]     cold: ok           3503.1 ms
+[22:26:38]     warm: ok           1024.7 ms
+[22:26:38]     speedup=3.4186
+[22:26:38] 
   [20/22] q20.sql ...
-[12:19:21]     cold: ok            629.8 ms
-[12:19:22]     warm: ok            698.9 ms
-[12:19:22]     speedup=0.9012
-[12:19:22] 
+[22:26:38]     [flush] standby list purged in 0.15s (avail before=48.4 GB, after=48.4 GB)
+[22:26:42]     cold: ok           2697.8 ms
+[22:26:43]     warm: ok            601.7 ms
+[22:26:43]     speedup=4.484
+[22:26:43] 
   [21/22] q21.sql ...
-[12:19:24]     cold: ok           1889.6 ms
-[12:19:26]     warm: ok           1931.7 ms
-[12:19:26]     speedup=0.9782
-[12:19:26] 
+[22:26:43]     [flush] standby list purged in 0.14s (avail before=49.3 GB, after=49.3 GB)
+[22:26:47]     cold: ok           3353.7 ms
+[22:26:49]     warm: ok           1821.0 ms
+[22:26:49]     speedup=1.8417
+[22:26:49] 
   [22/22] q22.sql ...
-[12:19:27]     cold: ok            408.1 ms
-[12:19:27]     warm: ok            407.5 ms
-[12:19:27]     speedup=1.0015
-[12:19:27] 
+[22:26:49]     [flush] standby list purged in 0.14s (avail before=48.5 GB, after=48.6 GB)
+[22:26:51]     cold: ok            524.7 ms
+[22:26:51]     warm: ok            402.0 ms
+[22:26:51]     speedup=1.3052
+[22:26:51] 
 [4/4] Running W' (RedBench synthetic) ...
-[12:19:27] 
+[22:26:51] 
 ============================================================
-[12:19:27]   W' — RedBench synthetic  (22 queries)
-[12:19:27] ============================================================
-[12:19:27] 
+[22:26:51]   W' — RedBench synthetic  (22 queries)
+[22:26:51] ============================================================
+[22:26:51] 
   [ 1/22] q01.sql ...
-[12:19:52]     cold: ok          24357.8 ms
-[12:20:16]     warm: ok          23806.1 ms
-[12:20:16]     speedup=1.0232
-[12:20:16] 
+[22:26:51]     [flush] standby list purged in 0.02s (avail before=49.4 GB, after=49.4 GB)
+[22:27:16]     cold: ok          23560.5 ms
+[22:27:39]     warm: ok          22606.2 ms
+[22:27:39]     speedup=1.0422
+[22:27:39] 
   [ 2/22] q02.sql ...
-[12:20:31]     cold: ok          14249.1 ms
-[12:20:46]     warm: ok          14756.6 ms
-[12:20:46]     speedup=0.9656
-[12:20:46] 
+[22:27:39]     [flush] standby list purged in 0.20s (avail before=49.3 GB, after=49.3 GB)
+[22:27:55]     cold: ok          15054.5 ms
+[22:28:09]     warm: ok          13754.3 ms
+[22:28:09]     speedup=1.0945
+[22:28:09] 
   [ 3/22] q03.sql ...
-[12:20:54]     cold: ok           7515.5 ms
-[12:21:02]     warm: ok           7805.4 ms
-[12:21:02]     speedup=0.9628
-[12:21:02] 
+[22:28:10]     [flush] standby list purged in 0.24s (avail before=49.2 GB, after=49.3 GB)
+[22:28:19]     cold: ok           7810.0 ms
+[22:28:26]     warm: ok           7214.0 ms
+[22:28:26]     speedup=1.0826
+[22:28:26] 
   [ 4/22] q04.sql ...
-[12:21:21]     cold: ok          18979.7 ms
-[12:21:40]     warm: ok          18801.8 ms
-[12:21:40]     speedup=1.0095
-[12:21:40] 
+[22:28:26]     [flush] standby list purged in 0.06s (avail before=47.6 GB, after=47.6 GB)
+[22:28:46]     cold: ok          18677.5 ms
+[22:29:04]     warm: ok          17939.1 ms
+[22:29:04]     speedup=1.0412
+[22:29:04] 
   [ 5/22] q05.sql ...
-[12:21:48]     cold: ok           6830.7 ms
-[12:21:55]     warm: ok           7024.6 ms
-[12:21:55]     speedup=0.9724
-[12:21:55] 
+[22:29:04]     [flush] standby list purged in 0.07s (avail before=49.0 GB, after=49.0 GB)
+[22:29:14]     cold: ok           9032.9 ms
+[22:29:23]     warm: ok           7930.5 ms
+[22:29:23]     speedup=1.139
+[22:29:23] 
   [ 6/22] q06.sql ...
-[12:22:32]     cold: ok          36734.6 ms
-[12:23:09]     warm: ok          36835.2 ms
-[12:23:09]     speedup=0.9973
-[12:23:09] 
+[22:29:23]     [flush] standby list purged in 0.16s (avail before=48.9 GB, after=48.9 GB)
+[22:30:00]     cold: ok          35984.1 ms
+[22:30:36]     warm: ok          35646.8 ms
+[22:30:36]     speedup=1.0095
+[22:30:36] 
   [ 7/22] q07.sql ...
-[12:23:47]     cold: ok          37229.8 ms
-[12:24:30]     warm: ok          42595.5 ms
-[12:24:30]     speedup=0.874
-[12:24:30] 
+[22:30:36]     [flush] standby list purged in 0.13s (avail before=49.0 GB, after=49.0 GB)
+[22:31:19]     cold: ok          41715.0 ms
+[22:32:04]     warm: ok          44200.7 ms
+[22:32:04]     speedup=0.9438
+[22:32:04] 
   [ 8/22] q08.sql ...
-[12:34:53]     cold: timeout    622367.9 ms
-[12:45:24]     warm: timeout    630146.5 ms
-[12:45:24]     speedup=None
-[12:45:24] 
+[22:32:04]     [flush] standby list purged in 0.24s (avail before=48.6 GB, after=48.6 GB)
+[22:42:26]     cold: timeout    620719.9 ms
+[22:52:55]     warm: timeout    628142.4 ms
+[22:52:55]     speedup=None
+[22:52:55] 
   [ 9/22] q09.sql ...
-[12:50:05]     cold: ok         281055.6 ms
-[12:55:03]     warm: ok         297062.4 ms
-[12:55:03]     speedup=0.9461
-[12:55:03] 
+[22:52:56]     [flush] standby list purged in 1.32s (avail before=51.8 GB, after=52.0 GB)
+[22:57:44]     cold: ok         286926.3 ms
+[23:02:53]     warm: ok         308314.1 ms
+[23:02:53]     speedup=0.9306
+[23:02:53] 
   [10/22] q10.sql ...
-[12:55:11]     cold: ok           7601.3 ms
-[12:55:19]     warm: ok           7549.1 ms
-[12:55:19]     speedup=1.0069
-[12:55:19] 
+[23:02:53]     [flush] standby list purged in 0.38s (avail before=51.7 GB, after=51.8 GB)
+[23:03:03]     cold: ok           8179.9 ms
+[23:03:11]     warm: ok           7553.9 ms
+[23:03:11]     speedup=1.0829
+[23:03:11] 
   [11/22] q11.sql ...
-[13:05:28]     cold: timeout    601011.0 ms
-[13:15:47]     warm: timeout    601185.7 ms
-[13:15:47]     speedup=None
-[13:15:47] 
+[23:03:11]     [flush] standby list purged in 0.05s (avail before=50.0 GB, after=50.0 GB)
+[23:13:23]     cold: timeout    601031.4 ms
+[23:23:43]     warm: timeout    619123.7 ms
+[23:23:43]     speedup=None
+[23:23:43] 
   [12/22] q12.sql ...
-[13:15:50]     cold: ok           2650.4 ms
-[13:15:53]     warm: ok           2625.2 ms
-[13:15:53]     speedup=1.0096
-[13:15:53] 
+[23:23:43]     [flush] standby list purged in 0.27s (avail before=50.3 GB, after=50.3 GB)
+[23:23:47]     cold: ok           2998.2 ms
+[23:23:50]     warm: ok           2781.4 ms
+[23:23:50]     speedup=1.078
+[23:23:50] 
   [13/22] q13.sql ...
-[13:16:14]     cold: ok          20456.3 ms
-[13:16:35]     warm: ok          20241.2 ms
-[13:16:35]     speedup=1.0106
-[13:16:35] 
+[23:23:50]     [flush] standby list purged in 0.03s (avail before=50.1 GB, after=50.1 GB)
+[23:24:13]     cold: ok          20609.5 ms
+[23:24:34]     warm: ok          20482.2 ms
+[23:24:34]     speedup=1.0062
+[23:24:34] 
   [14/22] q14.sql ...
-[13:17:03]     cold: ok          27874.8 ms
-[13:17:32]     warm: ok          27843.8 ms
-[13:17:32]     speedup=1.0011
-[13:17:32] 
+[23:24:34]     [flush] standby list purged in 0.16s (avail before=50.3 GB, after=50.3 GB)
+[23:25:04]     cold: ok          28655.8 ms
+[23:25:32]     warm: ok          27564.2 ms
+[23:25:32]     speedup=1.0396
+[23:25:32] 
   [15/22] q15.sql ...
-[13:17:58]     cold: ok          25220.0 ms
-[13:18:24]     warm: ok          25225.2 ms
-[13:18:24]     speedup=0.9998
-[13:18:24] 
+[23:25:32]     [flush] standby list purged in 0.17s (avail before=50.3 GB, after=50.3 GB)
+[23:26:02]     cold: ok          27275.0 ms
+[23:26:28]     warm: ok          26163.2 ms
+[23:26:28]     speedup=1.0425
+[23:26:28] 
   [16/22] q16.sql ...
-[13:18:27]     cold: ok           2931.2 ms
-[13:18:30]     warm: ok           2871.1 ms
-[13:18:30]     speedup=1.0209
-[13:18:30] 
+[23:26:29]     [flush] standby list purged in 0.19s (avail before=50.3 GB, after=50.3 GB)
+[23:26:33]     cold: ok           3076.7 ms
+[23:26:36]     warm: ok           2931.4 ms
+[23:26:36]     speedup=1.0496
+[23:26:36] 
   [17/22] q17.sql ...
-[13:18:46]     cold: ok          15497.0 ms
-[13:19:02]     warm: ok          15484.9 ms
-[13:19:02]     speedup=1.0008
-[13:19:02] 
+[23:26:36]     [flush] standby list purged in 0.02s (avail before=50.1 GB, after=50.1 GB)
+[23:26:54]     cold: ok          16676.0 ms
+[23:27:11]     warm: ok          16282.7 ms
+[23:27:11]     speedup=1.0242
+[23:27:11] 
   [18/22] q18.sql ...
-[13:19:02]     cold: ok            266.1 ms
-[13:19:03]     warm: ok            257.2 ms
-[13:19:03]     speedup=1.0343
-[13:19:03] 
+[23:27:11]     [flush] standby list purged in 0.10s (avail before=50.2 GB, after=50.2 GB)
+[23:27:12]     cold: ok            285.2 ms
+[23:27:12]     warm: ok            252.9 ms
+[23:27:12]     speedup=1.1276
+[23:27:12] 
   [19/22] q19.sql ...
-[13:19:32]     cold: ok          28662.4 ms
-[13:20:01]     warm: ok          28227.7 ms
-[13:20:01]     speedup=1.0154
-[13:20:01] 
+[23:27:12]     [flush] standby list purged in 0.01s (avail before=50.1 GB, after=50.1 GB)
+[23:27:42]     cold: ok          28802.2 ms
+[23:28:12]     warm: ok          28845.3 ms
+[23:28:12]     speedup=0.9985
+[23:28:12] 
   [20/22] q20.sql ...
-[13:20:03]     cold: ok           1480.4 ms
-[13:20:05]     warm: ok           1447.5 ms
-[13:20:05]     speedup=1.0227
-[13:20:05] 
+[23:28:12]     [flush] standby list purged in 0.17s (avail before=48.8 GB, after=48.8 GB)
+[23:28:15]     cold: ok           1901.4 ms
+[23:28:16]     warm: ok           1346.2 ms
+[23:28:16]     speedup=1.4124
+[23:28:16] 
   [21/22] q21.sql ...
-[13:20:05]     cold: ok            686.3 ms
-[13:20:06]     warm: ok            733.8 ms
-[13:20:06]     speedup=0.9353
-[13:20:06] 
+[23:28:16]     [flush] standby list purged in 0.07s (avail before=48.7 GB, after=48.7 GB)
+[23:28:19]     cold: ok           1216.9 ms
+[23:28:20]     warm: ok            704.9 ms
+[23:28:20]     speedup=1.7264
+[23:28:20] 
   [22/22] q22.sql ...
-[13:20:08]     cold: ok           1789.3 ms
-[13:20:10]     warm: ok           1688.9 ms
-[13:20:10]     speedup=1.0594
-[13:20:10] 
+[23:28:20]     [flush] standby list purged in 0.10s (avail before=49.8 GB, after=49.8 GB)
+[23:28:22]     cold: ok           1677.6 ms
+[23:28:24]     warm: ok           1696.8 ms
+[23:28:24]     speedup=0.9887
+[23:28:24] 
 ============================================================
-[13:20:10]   RESULTS
-[13:20:10] ============================================================
-[13:20:10] 
+[23:28:24]   RESULTS
+[23:28:24] ============================================================
+[23:28:24] 
   W_original
-[13:20:10]     n_pairs              22
-[13:20:10]     mean_speedup         1.128
-[13:20:10]     median_speedup       1.04
-[13:20:10]     std_speedup          0.238
-[13:20:10]     cv_speedup           0.211
-[13:20:10]     min_speedup          0.901
-[13:20:10]     max_speedup          1.923
-[13:20:10]     p10_speedup          0.98
-[13:20:10]     p90_speedup          1.463
-[13:20:10] 
+[23:28:24]     n_pairs              22
+[23:28:24]     mean_speedup         2.937
+[23:28:24]     median_speedup       2.841
+[23:28:24]     std_speedup          1.202
+[23:28:24]     cv_speedup           0.409
+[23:28:24]     min_speedup          1.157
+[23:28:24]     max_speedup          4.885
+[23:28:24]     p10_speedup          1.332
+[23:28:24]     p90_speedup          4.48
+[23:28:24] 
   W'_synthetic
-[13:20:10]     n_pairs              20
-[13:20:10]     mean_speedup         0.993
-[13:20:10]     median_speedup       1.004
-[13:20:10]     std_speedup          0.04
-[13:20:10]     cv_speedup           0.04
-[13:20:10]     min_speedup          0.874
-[13:20:10]     max_speedup          1.059
-[13:20:10]     p10_speedup          0.945
-[13:20:10]     p90_speedup          1.024
-[13:20:10] 
+[23:28:24]     n_pairs              20
+[23:28:24]     mean_speedup         1.093
+[23:28:24]     median_speedup       1.042
+[23:28:24]     std_speedup          0.174
+[23:28:24]     cv_speedup           0.159
+[23:28:24]     min_speedup          0.931
+[23:28:24]     max_speedup          1.726
+[23:28:24]     p10_speedup          0.984
+[23:28:24]     p90_speedup          1.166
+[23:28:24] 
   VERDICT
-[13:20:10]   CV (W  original) : 0.211
-[13:20:10]   CV (W' synthetic): 0.040
-[13:20:10]   Speedup variance is similar (ratio 0.19x).
-[13:20:10]   -> Synthetic queries show comparable cache behaviour to originals.
-[13:20:10] 
+[23:28:24]   CV (W  original) : 0.409
+[23:28:24]   CV (W' synthetic): 0.159
+[23:28:24]   Speedup variance is similar (ratio 0.39x).
+[23:28:24]   -> Synthetic queries show comparable cache behaviour to originals.
+[23:28:24] 
 Done. Outputs -> D:\Benchmark\Custom-Benchmark\experiments\cache_speedup_sf10

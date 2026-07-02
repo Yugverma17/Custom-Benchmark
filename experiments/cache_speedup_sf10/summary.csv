@@ -1,3 +1,3 @@
 workload,n_pairs,mean_speedup,median_speedup,std_speedup,cv_speedup,min_speedup,max_speedup,p10_speedup,p90_speedup
-W_original,22,1.128,1.04,0.238,0.211,0.901,1.923,0.98,1.463
-W'_synthetic,20,0.993,1.004,0.04,0.04,0.874,1.059,0.945,1.024
+W_original,22,2.937,2.841,1.202,0.409,1.157,4.885,1.332,4.48
+W'_synthetic,20,1.093,1.042,0.174,0.159,0.931,1.726,0.984,1.166
