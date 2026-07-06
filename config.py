@@ -3,9 +3,10 @@ import os
 BASE = os.path.dirname(os.path.abspath(__file__))
 
 DB_PATHS = {
-    'imdb' : os.path.join(BASE, 'databases', 'imdb.duckdb'),
-    'tpch' : os.path.join(BASE, 'databases', 'tpch.duckdb'),
-    'tpcds': os.path.join(BASE, 'databases', 'tpcds.duckdb'),
+    'imdb'     : os.path.join(BASE, 'databases', 'imdb.duckdb'),
+    'tpch'     : os.path.join(BASE, 'databases', 'tpch.duckdb'),
+    'tpcds'    : os.path.join(BASE, 'databases', 'tpcds.duckdb'),
+    'tpch_sf10': os.path.join(BASE, 'databases', 'tpch_sf10.duckdb'),
 }
 
 WORKLOAD_DIRS = {

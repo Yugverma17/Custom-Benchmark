@@ -35,9 +35,26 @@ def get_table_row_count(con, table_name: str):
     return con.execute(query).fetchone()[0]
 
 
-def get_column_statistics(con, table_name: str, column_name: str, data_type: str):
+SAMPLE_ROW_THRESHOLD = 2_000_000
+SAMPLE_SIZE          = 1_000_000
+
+def _source_expr(table_name: str, row_count: int) -> str:
+    """For large tables, quantile computation reads from a bounded random
+    sample instead of the full table. Sorting/ordering 10s of millions of
+    rows (especially for string-column quantiles) can consume tens of GB
+    of memory since DuckDB's ORDER BY / window-function spill isn't capped
+    tightly by SET memory_limit. A 1M-row sample gives statistically
+    equivalent quantiles for predicate-generation purposes at a bounded,
+    safe memory cost."""
+    if row_count > SAMPLE_ROW_THRESHOLD:
+        return f"(SELECT * FROM {table_name} USING SAMPLE {SAMPLE_SIZE} ROWS)"
+    return table_name
+
+
+def get_column_statistics(con, table_name: str, column_name: str, data_type: str, row_count: int = 0):
     quantiles = [i / 100 for i in range(1, 101)]
     labels = ["q_0"] + [f"q_{i}" for i in range(100)] + ["q_100"]
+    source = _source_expr(table_name, row_count)
 
     if any(t in data_type for t in ("INTEGER", "BIGINT", "DOUBLE", "REAL", "DECIMAL", "NUMERIC")):
         quantile_queries = [
@@ -49,7 +66,7 @@ def get_column_statistics(con, table_name: str, column_name: str, data_type: str
                 MIN({column_name}) AS min_value,
                 {", ".join(quantile_queries)},
                 MAX({column_name}) AS max_value
-            FROM {table_name};
+            FROM {source};
         """
         result = con.execute(query).fetchone()
         assert result is not None
@@ -59,7 +76,7 @@ def get_column_statistics(con, table_name: str, column_name: str, data_type: str
         query = f"""
             WITH ordered_strings AS (
                 SELECT {column_name}, ROW_NUMBER() OVER (ORDER BY {column_name}) AS row_num, COUNT(*) OVER () AS total_rows
-                FROM {table_name}
+                FROM {source}
             )
             SELECT
                 MIN({column_name}) AS min_value,
@@ -87,7 +104,7 @@ def get_column_statistics(con, table_name: str, column_name: str, data_type: str
                 MIN({column_name}) AS min_date,
                 {", ".join(quantile_queries)},
                 MAX({column_name}) AS max_date
-            FROM {table_name};
+            FROM {source};
         """
         result = con.execute(query).fetchone()
         stats = dict(zip(labels, result))
@@ -121,16 +138,23 @@ def convert_to_serializable(stats) -> Dict[str, any]:
 
 
 def create_quantiles(db_path: str, output_file: str, force: bool = False):
-    if not force and os.path.exists(output_file):
-        print(f"Stats file already exists: {output_file}. Skipping.")
-        return
+    if force and os.path.exists(output_file):
+        os.remove(output_file)
+
+    all_stats = {}
+    if os.path.exists(output_file):
+        with open(output_file) as f:
+            all_stats = json.load(f)
 
     con = duckdb.connect(db_path, read_only=True)
     tables = list_tables(con)
-    all_stats = {}
 
     for table in tables:
-        print(f"  Computing stats for {table} ...")
+        if table in all_stats:
+            print(f"  Skipping {table} (already computed).")
+            continue
+
+        print(f"  Computing stats for {table} ...", flush=True)
         row_count = get_table_row_count(con, table)
         columns = get_table_columns(con, table)
         table_stats = TableStats(total_rows=row_count, columns={})
@@ -140,13 +164,14 @@ def create_quantiles(db_path: str, output_file: str, force: bool = False):
         def process_column(args):
             col_name, col_type = args
             dd_con = duckdb.connect(db_path, read_only=True)
-            stats = get_column_statistics(dd_con, table, col_name, col_type)
+            dd_con.execute("SET threads=2; SET memory_limit='4GB'")
+            stats = get_column_statistics(dd_con, table, col_name, col_type, row_count)
             dd_con.close()
             if stats:
                 return col_name, ColumnStats(data_type=col_type, **stats)
             return None
 
-        with concurrent.futures.ThreadPoolExecutor() as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
             results = list(executor.map(process_column, columns))
 
         for result in results:
@@ -156,10 +181,9 @@ def create_quantiles(db_path: str, output_file: str, force: bool = False):
 
         if table_stats.columns:
             all_stats[table] = asdict(table_stats)
+            with open(output_file, "w") as f:
+                json.dump(all_stats, f, indent=2)
+            print(f"  Saved progress after {table} -> {output_file}", flush=True)
 
     con.close()
-
-    with open(output_file, "w") as f:
-        json.dump(all_stats, f, indent=2)
-
     print(f"Stats written to: {output_file}")

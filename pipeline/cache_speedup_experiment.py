@@ -30,7 +30,7 @@ BASE    = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(BASE, 'experiments', 'cache_speedup_sf10')
 DB_PATH = os.path.join(BASE, 'databases', 'tpch_sf10.duckdb')
 WL_DIR  = os.path.join(BASE, 'workloads', 'tpch')
-WP_CSV  = os.path.join(BASE, 'experiments', 'tpch_to_tpch', 'output', 'W_prime_queries.csv')
+WP_CSV  = os.path.join(BASE, 'experiments', 'tpch_sf10_to_tpch_sf10', 'output', 'W_prime_queries.csv')
 TIMEOUT = 600                                          
 
 os.makedirs(OUT_DIR, exist_ok=True)

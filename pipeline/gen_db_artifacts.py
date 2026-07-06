@@ -26,9 +26,12 @@ KNOWN_PKS = {
     },
     'tpcds': {},
 }
+KNOWN_PKS['tpch_sf10'] = KNOWN_PKS['tpch']
+
+EXTENSION_NAME = {'tpch_sf10': 'tpch'}
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--db', required=True, choices=['imdb', 'tpch', 'tpcds'])
+parser.add_argument('--db', required=True, choices=['imdb', 'tpch', 'tpcds', 'tpch_sf10'])
 args = parser.parse_args()
 
 out_dir = os.path.join(BASE, 'schemas', 'redbench')
@@ -42,11 +45,11 @@ db_path = DB_PATHS[args.db]
 print(f"Connecting to {db_path} ...")
 con = duckdb.connect(db_path, read_only=True)
 
-if args.db in ('tpch', 'tpcds'):
+if args.db in ('tpch', 'tpcds', 'tpch_sf10'):
     try:
         con.close()
         con = duckdb.connect(db_path, read_only=False)
-        con.execute(f"LOAD {args.db}")
+        con.execute(f"LOAD {EXTENSION_NAME.get(args.db, args.db)}")
     except Exception:
         pass
 
